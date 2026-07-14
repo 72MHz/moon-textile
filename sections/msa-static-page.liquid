@@ -58,6 +58,24 @@
     when 'lookbook'
       assign msa_known = true
       assign msa_title = 'Lookbook'
+    when 'commitment'
+      assign msa_known = true
+      assign msa_title = 'Commitment'
+    when 'ethics'
+      assign msa_known = true
+      assign msa_title = 'Ethics'
+    when 'organic-cotton'
+      assign msa_known = true
+      assign msa_title = 'Organic cotton'
+    when 'recycled-polyester'
+      assign msa_known = true
+      assign msa_title = 'Recycled polyester'
+    when 'responsible-sourcing'
+      assign msa_known = true
+      assign msa_title = 'Responsible sourcing'
+    when 'less-waste'
+      assign msa_known = true
+      assign msa_title = 'Less waste'
   endcase
 -%}
 
@@ -132,6 +150,36 @@
       {% render 'msa-content-simple',
         title: 'Wear your style',
         body: '<p>Explore the latest Moon Style Apparel collections — from everyday essentials to seasonal favourites.</p><p><a href="/collections/mens-clothing-shop-all">Shop mens</a> · <a href="/collections/womens-clothing-shop-all">Shop womens</a></p>'
+      %}
+    {%- when 'commitment' -%}
+      {% render 'msa-content-simple',
+        title: 'Our commitment',
+        body: '<p>Moon Style Apparel is committed to making a positive impact beyond fashion. We partner with educational and community organisations to support learning opportunities for young people.</p><p><strong>Charitable partner — SAVE DC</strong><br>We are proud to support <strong>SAVE DC</strong>, helping create pathways for education, confidence, and opportunity.</p><p>Learn more about our approach to <a href="/pages/ethics">ethics</a>, <a href="/pages/responsible-sourcing">responsible sourcing</a>, and <a href="/pages/less-waste">less waste</a>.</p>'
+      %}
+    {%- when 'ethics' -%}
+      {% render 'msa-content-simple',
+        title: 'Ethics',
+        body: '<p>We hold ourselves and our manufacturing partners to high ethical standards — fair labour practices, safe working conditions, and transparent partnerships.</p><p>From product development to delivery, we work to ensure dignity and respect for everyone involved in bringing Moon Style Apparel to life.</p>'
+      %}
+    {%- when 'organic-cotton' -%}
+      {% render 'msa-content-simple',
+        title: 'Organic cotton',
+        body: '<p>Where possible, we use organic cotton grown with practices that reduce chemical impact and support healthier soil and communities.</p><p>Look for organic cotton details on product pages, and explore more of our <a href="/pages/responsible-sourcing">responsible sourcing</a> approach.</p>'
+      %}
+    {%- when 'recycled-polyester' -%}
+      {% render 'msa-content-simple',
+        title: 'Recycled polyester',
+        body: '<p>Recycled polyester helps give new life to existing materials and can reduce reliance on virgin plastics in apparel production.</p><p>We continue expanding the use of preferred fibres across key styles. See also our work toward <a href="/pages/less-waste">less waste</a>.</p>'
+      %}
+    {%- when 'responsible-sourcing' -%}
+      {% render 'msa-content-simple',
+        title: 'Responsible sourcing',
+        body: '<p>Responsible sourcing means choosing materials and partners carefully — prioritising quality, longevity, and accountable supply relationships.</p><p>Our teams work closely with vendors to improve standards over time across cotton, recycled fibres, and manufacturing practices.</p>'
+      %}
+    {%- when 'less-waste' -%}
+      {% render 'msa-content-simple',
+        title: 'Less waste',
+        body: '<p>We aim to reduce waste through thoughtful product design, better material utilisation, and longer-lasting garments you can wear season after season.</p><p>Small changes in cut, fabric choice, and production planning add up. Explore related pages on <a href="/pages/organic-cotton">organic cotton</a> and <a href="/pages/recycled-polyester">recycled polyester</a>.</p>'
       %}
   {%- endcase -%}
 {%- elsif template.name == '404' -%}

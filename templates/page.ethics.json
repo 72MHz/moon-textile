@@ -1,0 +1,35 @@
+{
+  "sections": {
+    "page-heading": {
+      "type": "page-heading",
+      "blocks": {
+        "breadcrumb": { "type": "breadcrumb", "settings": {} },
+        "heading": { "type": "heading", "settings": { "page_title": "Ethics", "header_size": "default" } }
+      },
+      "block_order": ["breadcrumb", "heading"],
+      "settings": {
+        "section_width": "fluid_container",
+        "alignment": "center",
+        "overlay_opacity": 0,
+        "height": "based_on_content",
+        "padding_top": 40,
+        "padding_bottom": 20
+      }
+    },
+    "main": {
+      "type": "msa-info-page",
+      "blocks": {
+        "content": {
+          "type": "content",
+          "settings": {
+            "title": "Ethics",
+            "body": "<p>We hold ourselves and our manufacturing partners to high ethical standards — fair labour practices, safe working conditions, and transparent partnerships.</p><p>From product development to delivery, we work to ensure dignity and respect for everyone involved in bringing Moon Style Apparel to life.</p>"
+          }
+        }
+      },
+      "block_order": ["content"],
+      "settings": { "section_width": "fluid_container", "padding_top": 20, "padding_bottom": 60 }
+    }
+  },
+  "order": ["page-heading", "main"]
+}

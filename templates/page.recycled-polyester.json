@@ -1,0 +1,35 @@
+{
+  "sections": {
+    "page-heading": {
+      "type": "page-heading",
+      "blocks": {
+        "breadcrumb": { "type": "breadcrumb", "settings": {} },
+        "heading": { "type": "heading", "settings": { "page_title": "Recycled polyester", "header_size": "default" } }
+      },
+      "block_order": ["breadcrumb", "heading"],
+      "settings": {
+        "section_width": "fluid_container",
+        "alignment": "center",
+        "overlay_opacity": 0,
+        "height": "based_on_content",
+        "padding_top": 40,
+        "padding_bottom": 20
+      }
+    },
+    "main": {
+      "type": "msa-info-page",
+      "blocks": {
+        "content": {
+          "type": "content",
+          "settings": {
+            "title": "Recycled polyester",
+            "body": "<p>Recycled polyester helps give new life to existing materials and can reduce reliance on virgin plastics in apparel production.</p><p>We continue expanding the use of preferred fibres across key styles. See also our work toward <a href=\"/pages/less-waste\">less waste</a>.</p>"
+          }
+        }
+      },
+      "block_order": ["content"],
+      "settings": { "section_width": "fluid_container", "padding_top": 20, "padding_bottom": 60 }
+    }
+  },
+  "order": ["page-heading", "main"]
+}

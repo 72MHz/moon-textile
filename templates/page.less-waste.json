@@ -1,0 +1,35 @@
+{
+  "sections": {
+    "page-heading": {
+      "type": "page-heading",
+      "blocks": {
+        "breadcrumb": { "type": "breadcrumb", "settings": {} },
+        "heading": { "type": "heading", "settings": { "page_title": "Less waste", "header_size": "default" } }
+      },
+      "block_order": ["breadcrumb", "heading"],
+      "settings": {
+        "section_width": "fluid_container",
+        "alignment": "center",
+        "overlay_opacity": 0,
+        "height": "based_on_content",
+        "padding_top": 40,
+        "padding_bottom": 20
+      }
+    },
+    "main": {
+      "type": "msa-info-page",
+      "blocks": {
+        "content": {
+          "type": "content",
+          "settings": {
+            "title": "Less waste",
+            "body": "<p>We aim to reduce waste through thoughtful product design, better material utilisation, and longer-lasting garments you can wear season after season.</p><p>Small changes in cut, fabric choice, and production planning add up. Explore related pages on <a href=\"/pages/organic-cotton\">organic cotton</a> and <a href=\"/pages/recycled-polyester\">recycled polyester</a>.</p>"
+          }
+        }
+      },
+      "block_order": ["content"],
+      "settings": { "section_width": "fluid_container", "padding_top": 20, "padding_bottom": 60 }
+    }
+  },
+  "order": ["page-heading", "main"]
+}
