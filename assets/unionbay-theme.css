@@ -1305,8 +1305,8 @@
 }
 
 .theme-unionbay .unionbay-footer__main {
-  padding-top: var(--section-pt, 5rem);
-  padding-bottom: var(--section-pb, 0);
+  padding-top: calc(var(--section-pt, 50) * 1px);
+  padding-bottom: calc(var(--section-pb, 0) * 1px);
   background: #f2f2f2;
 }
 
