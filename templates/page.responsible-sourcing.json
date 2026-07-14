@@ -1,0 +1,35 @@
+{
+  "sections": {
+    "page-heading": {
+      "type": "page-heading",
+      "blocks": {
+        "breadcrumb": { "type": "breadcrumb", "settings": {} },
+        "heading": { "type": "heading", "settings": { "page_title": "Responsible sourcing", "header_size": "default" } }
+      },
+      "block_order": ["breadcrumb", "heading"],
+      "settings": {
+        "section_width": "fluid_container",
+        "alignment": "center",
+        "overlay_opacity": 0,
+        "height": "based_on_content",
+        "padding_top": 40,
+        "padding_bottom": 20
+      }
+    },
+    "main": {
+      "type": "msa-info-page",
+      "blocks": {
+        "content": {
+          "type": "content",
+          "settings": {
+            "title": "Responsible sourcing",
+            "body": "<p>Responsible sourcing means choosing materials and partners carefully — prioritising quality, longevity, and accountable supply relationships.</p><p>Our teams work closely with vendors to improve standards over time across cotton, recycled fibres, and manufacturing practices.</p>"
+          }
+        }
+      },
+      "block_order": ["content"],
+      "settings": { "section_width": "fluid_container", "padding_top": 20, "padding_bottom": 60 }
+    }
+  },
+  "order": ["page-heading", "main"]
+}

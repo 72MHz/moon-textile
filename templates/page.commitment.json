@@ -1,0 +1,35 @@
+{
+  "sections": {
+    "page-heading": {
+      "type": "page-heading",
+      "blocks": {
+        "breadcrumb": { "type": "breadcrumb", "settings": {} },
+        "heading": { "type": "heading", "settings": { "page_title": "Commitment", "header_size": "default" } }
+      },
+      "block_order": ["breadcrumb", "heading"],
+      "settings": {
+        "section_width": "fluid_container",
+        "alignment": "center",
+        "overlay_opacity": 0,
+        "height": "based_on_content",
+        "padding_top": 40,
+        "padding_bottom": 20
+      }
+    },
+    "main": {
+      "type": "msa-info-page",
+      "blocks": {
+        "content": {
+          "type": "content",
+          "settings": {
+            "title": "Our commitment",
+            "body": "<p>Moon Style Apparel is committed to making a positive impact beyond fashion. We partner with educational and community organisations to support learning opportunities for young people.</p><p><strong>Charitable partner — SAVE DC</strong><br>We are proud to support <strong>SAVE DC</strong>, helping create pathways for education, confidence, and opportunity.</p><p>Learn more about our approach to <a href=\"/pages/ethics\">ethics</a>, <a href=\"/pages/responsible-sourcing\">responsible sourcing</a>, and <a href=\"/pages/less-waste\">less waste</a>.</p>"
+          }
+        }
+      },
+      "block_order": ["content"],
+      "settings": { "section_width": "fluid_container", "padding_top": 20, "padding_bottom": 60 }
+    }
+  },
+  "order": ["page-heading", "main"]
+}

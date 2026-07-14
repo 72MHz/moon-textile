@@ -835,6 +835,13 @@
     "rewards_bar_join_sub": "Earn 300 points when you sign up!",
     "rewards_bar_member": "Already a member?",
     "rewards_bar_login": "Log in",
+    "commitments_nav": "Our commitments",
+    "commitment": "Commitment",
+    "ethics": "Ethics",
+    "organic_cotton": "Organic cotton",
+    "recycled_polyester": "Recycled polyester",
+    "responsible_sourcing": "Responsible sourcing",
+    "less_waste": "Less waste",
     "carousel": {
       "product_list": "Featured products",
       "product_list_info": "Optional. Pick specific products to show. This overrides the collection above.",
