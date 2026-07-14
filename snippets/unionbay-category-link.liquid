@@ -1,0 +1,134 @@
+{% doc %}
+  Resolves a category tile link with correct women's / men's shop-all routing.
+
+  @param {string} [custom_link] - Optional block link override
+  @param {string} [collection_handle] - Collection handle from block settings
+  @param {string} [fallback_image] - Fallback image preset key (womens-tops, mens-shorts, etc.)
+  @param {string} [title] - Category title
+  @param {string} [department] - women or men from parent section
+  @param {string} [block_department] - women or men from block setting
+  @param {string} [category_filter] - Shop-all filter id (shirts, shorts, pants, etc.)
+{% enddoc %}
+
+{%- liquid
+  assign resolved_link = custom_link | default: ''
+  assign fallback_key = fallback_image | default: ''
+  assign title_down = title | downcase
+  assign shop_type = 'women'
+  assign category_id = category_filter | default: ''
+  assign route_via_shop_all = false
+
+  if block_department == 'men' or block_department == 'women'
+    assign shop_type = block_department
+    assign route_via_shop_all = true
+  elsif department == 'men' or department == 'women'
+    assign shop_type = department
+    assign route_via_shop_all = true
+  endif
+
+  if fallback_key contains 'mens-'
+    assign shop_type = 'men'
+    assign route_via_shop_all = true
+  elsif fallback_key contains 'womens-'
+    assign shop_type = 'women'
+    assign route_via_shop_all = true
+  endif
+
+  if title_down contains 'women'
+    assign shop_type = 'women'
+    assign route_via_shop_all = true
+  elsif title_down contains 'mens' or title_down contains "men's"
+    assign shop_type = 'men'
+    assign route_via_shop_all = true
+  elsif title_down contains 'men'
+    assign shop_type = 'men'
+    assign route_via_shop_all = true
+  endif
+
+  if category_id != blank
+    assign route_via_shop_all = true
+  endif
+
+  if category_id == blank
+    case fallback_key
+      when 'womens-tops', 'mens-tops'
+        assign category_id = 'tops'
+      when 'womens-shirts', 'mens-shirts'
+        assign category_id = 'shirts'
+      when 'womens-shorts', 'mens-shorts'
+        assign category_id = 'shorts'
+      when 'womens-pants', 'mens-pants'
+        assign category_id = 'pants'
+      when 'womens-shoes'
+        assign category_id = 'shoes'
+      when 'womens-bestseller', 'mens-bestseller', 'bestseller'
+        assign category_id = 'best-sellers'
+    endcase
+  endif
+
+  if category_id == blank and title != blank
+    if title_down contains 'shirt'
+      assign category_id = 'shirts'
+    elsif title_down contains 'short'
+      assign category_id = 'shorts'
+    elsif title_down contains 'pant'
+      assign category_id = 'pants'
+    elsif title_down contains 'shoe'
+      assign category_id = 'shoes'
+    elsif title_down contains 'jacket'
+      assign category_id = 'jackets'
+    elsif title_down contains 'best'
+      assign category_id = 'best-sellers'
+    elsif title_down contains 'top'
+      assign category_id = 'tops'
+    endif
+  endif
+
+  if resolved_link != blank
+    if resolved_link contains 'womens-clothing-shop-all' and collections['womens-clothing-shop-all'] == blank
+      assign resolved_link = ''
+    endif
+    if resolved_link contains 'mens-clothing-shop-all' and collections['mens-clothing-shop-all'] == blank
+      assign resolved_link = ''
+    endif
+  endif
+
+  if route_via_shop_all
+    assign resolved_link = ''
+  elsif resolved_link == blank or resolved_link == '#' or resolved_link == '/'
+    assign mapped_collection = collections[collection_handle]
+    if mapped_collection != blank
+      assign resolved_link = mapped_collection.url
+    endif
+  endif
+-%}
+
+{%- if resolved_link == blank or resolved_link == '#' or resolved_link == '/' -%}
+  {%- liquid
+    if shop_type == 'men'
+      if collections['mens-clothing-shop-all'] != blank
+        assign shop_base = collections['mens-clothing-shop-all'].url
+      elsif collections['t-shirts'] != blank
+        assign shop_base = collections['t-shirts'].url
+      else
+        assign shop_base = '/collections/t-shirts'
+      endif
+    else
+      if collections['womens-clothing-shop-all'] != blank
+        assign shop_base = collections['womens-clothing-shop-all'].url
+      elsif collections['dress'] != blank
+        assign shop_base = collections['dress'].url
+      else
+        assign shop_base = '/collections/dress'
+      endif
+    endif
+
+    if category_id != blank
+      assign resolved_link = shop_base | append: '?ub_cat=' | append: category_id
+    else
+      assign resolved_link = shop_base
+    endif
+  -%}
+{%- endif -%}
+
+{{- resolved_link -}}

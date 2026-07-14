@@ -1,0 +1,407 @@
+{
+  "sections": {
+    "scrolling_marquee": {
+      "type": "scrolling-text",
+      "blocks": {
+        "marquee_1": {
+          "type": "scrolling_text",
+          "settings": {
+            "content": "4TH OF JULY SALE! EXTRA 20% OFF ➡ CODE: JULY2026"
+          }
+        },
+        "marquee_2": {
+          "type": "scrolling_text",
+          "settings": {
+            "content": "4TH OF JULY SALE! EXTRA 20% OFF ➡ CODE: JULY2026"
+          }
+        }
+      },
+      "block_order": ["marquee_1", "marquee_2"],
+      "settings": {
+        "section_width": "full_width",
+        "color_scheme": "scheme-unionbay-red",
+        "direction": "left",
+        "icon_between_item": "none",
+        "speed": 30,
+        "space_between_text": 50,
+        "font_size": 13,
+        "font_weight": "heading_weight",
+        "uppercase": true,
+        "use_heading_font": false,
+        "padding_top": 10,
+        "padding_bottom": 10,
+        "reset_spacing": true
+      }
+    },
+    "hero": {
+      "type": "unionbay-hero",
+      "settings": {
+        "section_width": "full_width",
+        "color_scheme": "",
+        "overlay_opacity": 20,
+        "desktop_height": 650,
+        "mobile_height": 420,
+        "heading": "The Summer Drop",
+        "first_button_label": "SHOP WOMENS",
+        "first_button_link": "shopify://collections/womens-clothing-shop-all",
+        "second_button_label": "SHOP MENS",
+        "second_button_link": "shopify://collections/mens-clothing-shop-all",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "womens_category_row": {
+      "type": "unionbay-category-row",
+      "blocks": {
+        "cat_tops": {
+          "type": "category",
+          "settings": {
+            "collection": "crop-top",
+            "title": "Women's Tops",
+            "fallback_image": "womens-tops"
+          }
+        },
+        "cat_shorts": {
+          "type": "category",
+          "settings": {
+            "collection": "activewear",
+            "title": "Women's Shorts",
+            "fallback_image": "womens-shorts"
+          }
+        },
+        "cat_best": {
+          "type": "category",
+          "settings": {
+            "collection": "best-seller",
+            "title": "Best-Sellers",
+            "fallback_image": "womens-bestseller"
+          }
+        }
+      },
+      "block_order": ["cat_tops", "cat_shorts", "cat_best"],
+      "settings": {
+        "section_width": "full_width",
+        "color_scheme": "",
+        "department": "women",
+        "column_gap": 10,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "womens_carousel": {
+      "type": "unionbay-product-carousel",
+      "settings": {
+        "section_width": "full_width",
+        "color_scheme": "default",
+        "collection": "dress",
+        "department": "women",
+        "heading": "Shop All Womens",
+        "shop_all_label": "SHOP ALL",
+        "shop_all_link": "shopify://collections/womens-clothing-shop-all",
+        "sort_by": "newest",
+        "items_to_show": 24,
+        "items_per_row": 4,
+        "items_per_row_mobile": 1,
+        "column_gap": 10,
+        "show_arrow": true,
+        "padding_top": 43,
+        "padding_bottom": 37
+      }
+    },
+    "mens_category_row": {
+      "type": "unionbay-category-row",
+      "blocks": {
+        "cat_tops": {
+          "type": "category",
+          "settings": {
+            "collection": "t-shirts",
+            "title": "Men's Tops",
+            "fallback_image": "mens-tops"
+          }
+        },
+        "cat_shorts": {
+          "type": "category",
+          "settings": {
+            "collection": "activewear",
+            "title": "Men's Shorts",
+            "fallback_image": "mens-shorts"
+          }
+        },
+        "cat_best": {
+          "type": "category",
+          "settings": {
+            "collection": "best-seller",
+            "title": "Best-Sellers",
+            "fallback_image": "mens-bestseller"
+          }
+        }
+      },
+      "block_order": ["cat_tops", "cat_shorts", "cat_best"],
+      "settings": {
+        "section_width": "full_width",
+        "color_scheme": "",
+        "department": "men",
+        "column_gap": 10,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "mens_carousel": {
+      "type": "unionbay-product-carousel",
+      "settings": {
+        "section_width": "full_width",
+        "color_scheme": "default",
+        "collection": "t-shirts",
+        "department": "men",
+        "heading": "Shop All Mens",
+        "shop_all_label": "SHOP ALL",
+        "shop_all_link": "shopify://collections/mens-clothing-shop-all",
+        "filter_tag": "",
+        "sort_by": "newest",
+        "items_to_show": 24,
+        "items_per_row": 4,
+        "items_per_row_mobile": 1,
+        "column_gap": 10,
+        "show_arrow": true,
+        "padding_top": 43,
+        "padding_bottom": 37
+      }
+    },
+    "rewards_banner": {
+      "type": "unionbay-rewards",
+      "settings": {
+        "section_width": "full_width",
+        "color_scheme": "",
+        "overlay_opacity": 35,
+        "desktop_height": 420,
+        "mobile_height": 360,
+        "subheading": "Earn Rewards!",
+        "heading": "Earn points for every $1 spent!",
+        "description": "Based on your tier, you will get 5-10 points on every dollar spent. Plus, special birthday rewards!",
+        "button_label": "JOIN THE CLUB",
+        "button_link": "/account/register",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "category_grid": {
+      "type": "unionbay-category-circles",
+      "blocks": {
+        "cat_1": {
+          "type": "category",
+          "settings": {
+            "collection": "crop-top",
+            "title": "Women's Shirts",
+            "department": "women",
+            "category_filter": "shirts",
+            "fallback_image": "womens-shirts"
+          }
+        },
+        "cat_2": {
+          "type": "category",
+          "settings": {
+            "collection": "activewear",
+            "title": "Women's Shorts",
+            "department": "women",
+            "category_filter": "shorts",
+            "fallback_image": "womens-shorts"
+          }
+        },
+        "cat_3": {
+          "type": "category",
+          "settings": {
+            "collection": "blazers",
+            "title": "Women's Pants",
+            "department": "women",
+            "category_filter": "pants",
+            "fallback_image": "womens-pants"
+          }
+        },
+        "cat_4": {
+          "type": "category",
+          "settings": {
+            "collection": "handbags",
+            "title": "Women's Shoes",
+            "department": "women",
+            "category_filter": "shoes",
+            "fallback_image": "womens-shoes"
+          }
+        },
+        "cat_5": {
+          "type": "category",
+          "settings": {
+            "collection": "hoodies",
+            "title": "Men's Shirts",
+            "department": "men",
+            "category_filter": "shirts",
+            "fallback_image": "mens-shirts"
+          }
+        },
+        "cat_6": {
+          "type": "category",
+          "settings": {
+            "collection": "activewear",
+            "title": "Men's Shorts",
+            "department": "men",
+            "category_filter": "shorts",
+            "fallback_image": "mens-shorts"
+          }
+        },
+        "cat_7": {
+          "type": "category",
+          "settings": {
+            "collection": "sweaters",
+            "title": "Men's Pants",
+            "department": "men",
+            "category_filter": "pants",
+            "fallback_image": "mens-pants"
+          }
+        }
+      },
+      "block_order": ["cat_1", "cat_2", "cat_3", "cat_4", "cat_5", "cat_6", "cat_7"],
+      "settings": {
+        "section_width": "full_width",
+        "color_scheme": "",
+        "column_gap": 15,
+        "padding_top": 43,
+        "padding_bottom": 58
+      }
+    },
+    "instagram_section": {
+      "type": "instagram-shop",
+      "blocks": {
+        "insta_1": {
+          "type": "instagram_manual_upload",
+          "settings": {
+            "image": "shopify://shop_images/h1-in-1.jpg",
+            "more_info": "",
+            "instagram_post_name": "moonstyleapparel",
+            "link": "#",
+            "product__1": "",
+            "offset_top__1": 50,
+            "offset_left__1": 50,
+            "product__2": "",
+            "offset_top__2": 50,
+            "offset_left__2": 50,
+            "product__3": "",
+            "offset_top__3": 50,
+            "offset_left__3": 50,
+            "product__4": "",
+            "offset_top__4": 50,
+            "offset_left__4": 50,
+            "product__5": "",
+            "offset_top__5": 50,
+            "offset_left__5": 50
+          }
+        },
+        "insta_2": {
+          "type": "instagram_manual_upload",
+          "settings": {
+            "image": "shopify://shop_images/h1-in-2.jpg",
+            "more_info": "",
+            "instagram_post_name": "moonstyleapparel",
+            "link": "#",
+            "product__1": "",
+            "offset_top__1": 50,
+            "offset_left__1": 50,
+            "product__2": "",
+            "offset_top__2": 50,
+            "offset_left__2": 50,
+            "product__3": "",
+            "offset_top__3": 50,
+            "offset_left__3": 50,
+            "product__4": "",
+            "offset_top__4": 50,
+            "offset_left__4": 50,
+            "product__5": "",
+            "offset_top__5": 50,
+            "offset_left__5": 50
+          }
+        },
+        "insta_3": {
+          "type": "instagram_manual_upload",
+          "settings": {
+            "image": "shopify://shop_images/h1-in-3.jpg",
+            "more_info": "",
+            "instagram_post_name": "moonstyleapparel",
+            "link": "#",
+            "product__1": "",
+            "offset_top__1": 50,
+            "offset_left__1": 50,
+            "product__2": "",
+            "offset_top__2": 50,
+            "offset_left__2": 50,
+            "product__3": "",
+            "offset_top__3": 50,
+            "offset_left__3": 50,
+            "product__4": "",
+            "offset_top__4": 50,
+            "offset_left__4": 50,
+            "product__5": "",
+            "offset_top__5": 50,
+            "offset_left__5": 50
+          }
+        },
+        "insta_4": {
+          "type": "instagram_manual_upload",
+          "settings": {
+            "image": "shopify://shop_images/h1-in-4.jpg",
+            "more_info": "",
+            "instagram_post_name": "moonstyleapparel",
+            "link": "#",
+            "product__1": "",
+            "offset_top__1": 50,
+            "offset_left__1": 50,
+            "product__2": "",
+            "offset_top__2": 50,
+            "offset_left__2": 50,
+            "product__3": "",
+            "offset_top__3": 50,
+            "offset_left__3": 50,
+            "product__4": "",
+            "offset_top__4": 50,
+            "offset_left__4": 50,
+            "product__5": "",
+            "offset_top__5": 50,
+            "offset_left__5": 50
+          }
+        }
+      },
+      "block_order": ["insta_1", "insta_2", "insta_3", "insta_4"],
+      "settings": {
+        "section_width": "fluid_container",
+        "color_scheme": "",
+        "heading": "Show us how you wear it",
+        "description": "<p><strong>@moonstyleapparel</strong></p>",
+        "header_size": "medium",
+        "header_alignment": "center",
+        "image_ratio": "square",
+        "custom_ratio": "",
+        "hotspot_style": "dot",
+        "items_per_row": 4,
+        "column_gap": 10,
+        "show_arrow": true,
+        "carousel_pagination": "show_dots_on_mobile",
+        "infinite": false,
+        "autoplay": false,
+        "autorotate_speed": 5,
+        "reveal": false,
+        "items_per_row_mobile": 2,
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "reset_spacing": false
+      }
+    }
+  },
+  "order": [
+    "scrolling_marquee",
+    "hero",
+    "womens_category_row",
+    "womens_carousel",
+    "mens_category_row",
+    "mens_carousel",
+    "rewards_banner",
+    "category_grid",
+    "instagram_section"
+  ]
+}

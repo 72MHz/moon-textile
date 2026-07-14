@@ -1,0 +1,99 @@
+{% doc %}
+  Renders a local Union Bay lifestyle fallback image from theme assets.
+
+  @param {string} [context] - Preset key: womens-tops, womens-shirts, womens-shorts, mens-tops, etc.
+  @param {string} [title] - Optional title used to auto-detect context
+  @param {string} [alt] - Alt text
+  @param {string} [class] - CSS classes for the img element
+  @param {number} [width] - Width attribute for the img element
+  @param {string} [sizes] - Responsive sizes attribute
+{% enddoc %}
+
+{%- liquid
+  assign image_key = context | default: 'default'
+  assign title_down = title | downcase
+
+  if image_key == 'default' and title != blank
+    if title_down contains 'women' and title_down contains 'shoe'
+      assign image_key = 'womens-shoes'
+    elsif title_down contains 'women' and title_down contains 'shirt'
+      assign image_key = 'womens-shirts'
+    elsif title_down contains 'women' and title_down contains 'top'
+      assign image_key = 'womens-tops'
+    elsif title_down contains 'women' and title_down contains 'short'
+      assign image_key = 'womens-shorts'
+    elsif title_down contains 'women' and title_down contains 'pant'
+      assign image_key = 'womens-pants'
+    elsif title_down contains 'men' and title_down contains 'shirt'
+      assign image_key = 'mens-shirts'
+    elsif title_down contains 'men' and title_down contains 'top'
+      assign image_key = 'mens-tops'
+    elsif title_down contains 'men' and title_down contains 'short'
+      assign image_key = 'mens-shorts'
+    elsif title_down contains 'men' and title_down contains 'pant'
+      assign image_key = 'mens-pants'
+    elsif title_down contains 'best'
+      if title_down contains 'women'
+        assign image_key = 'womens-bestseller'
+      elsif title_down contains 'men'
+        assign image_key = 'mens-bestseller'
+      else
+        assign image_key = 'womens-bestseller'
+      endif
+    elsif title_down contains 'summer'
+      assign image_key = 'hero'
+    endif
+  endif
+
+  case image_key
+    when 'womens-tops'
+      assign asset_name = 'ub-womens-tops.jpg'
+    when 'womens-shirts'
+      assign asset_name = 'ub-womens-shirts.jpg'
+    when 'womens-shorts'
+      assign asset_name = 'ub-womens-shorts.jpg'
+    when 'womens-pants'
+      assign asset_name = 'ub-womens-pants.jpg'
+    when 'womens-shoes'
+      assign asset_name = 'ub-womens-shoes.jpg'
+    when 'mens-tops'
+      assign asset_name = 'ub-mens-tops.jpg'
+    when 'mens-shirts'
+      assign asset_name = 'ub-mens-shirts.jpg'
+    when 'mens-shorts'
+      assign asset_name = 'ub-mens-shorts.jpg'
+    when 'mens-pants'
+      assign asset_name = 'ub-mens-pants.jpg'
+    when 'womens-bestseller'
+      assign asset_name = 'ub-womens-bestseller.jpg'
+    when 'mens-bestseller'
+      assign asset_name = 'ub-mens-bestseller.jpg'
+    when 'bestseller'
+      assign asset_name = 'ub-womens-bestseller.jpg'
+    when 'hero'
+      assign asset_name = 'ub-hero-winter-women.jpg'
+    when 'hero-mobile'
+      assign asset_name = 'ub-hero-winter-mobile.jpg'
+    when 'rewards'
+      assign asset_name = 'ub-rewards.jpg'
+    else
+      assign asset_name = 'ub-default.jpg'
+  endcase
+
+  assign image_width = width | default: 1200
+  assign image_alt = alt | default: title | default: 'Moon Style Apparel'
+  assign image_class = class | default: 'unionbay-fallback-image'
+  assign image_url = asset_name | asset_url
+-%}
+
+<img
+  src="{{ image_url }}"
+  alt="{{ image_alt | escape }}"
+  class="{{ image_class }}"
+  loading="lazy"
+  decoding="async"
+  width="{{ image_width }}"
+  {% if sizes != blank %}
+    sizes="{{ sizes }}"
+  {% endif %}
+>

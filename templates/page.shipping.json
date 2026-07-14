@@ -1,0 +1,35 @@
+{
+  "sections": {
+    "page-heading": {
+      "type": "page-heading",
+      "blocks": {
+        "breadcrumb": { "type": "breadcrumb", "settings": {} },
+        "heading": { "type": "heading", "settings": { "page_title": "Shipping", "header_size": "default" } }
+      },
+      "block_order": ["breadcrumb", "heading"],
+      "settings": {
+        "section_width": "fluid_container",
+        "alignment": "center",
+        "overlay_opacity": 0,
+        "height": "based_on_content",
+        "padding_top": 40,
+        "padding_bottom": 20
+      }
+    },
+    "main": {
+      "type": "msa-info-page",
+      "blocks": {
+        "content": {
+          "type": "content",
+          "settings": {
+            "title": "Shipping information",
+            "body": "<p>We work with trusted logistics partners to deliver your orders safely and on time. Shipping timelines vary by destination and product availability.</p><p><strong>Processing time:</strong> Orders are typically processed within 1–3 business days.</p><p><strong>Domestic delivery:</strong> Standard shipping usually arrives within 5–7 business days.</p><p><strong>International delivery:</strong> International orders may take 10–21 business days depending on customs and carrier schedules.</p><p>For sourcing and wholesale enquiries, please <a href=\"/pages/contact-us\">contact us</a> for tailored shipping arrangements.</p>"
+          }
+        }
+      },
+      "block_order": ["content"],
+      "settings": { "section_width": "fluid_container", "padding_top": 20, "padding_bottom": 60 }
+    }
+  },
+  "order": ["page-heading", "main"]
+}

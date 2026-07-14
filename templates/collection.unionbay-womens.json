@@ -1,0 +1,227 @@
+{
+  "sections": {
+    "main": {
+      "type": "unionbay-collection-shop-all",
+      "blocks": {
+        "cat_tops": {
+          "type": "category",
+          "settings": {
+            "category_id": "tops",
+            "title": "Tops",
+            "filter_tag": "women-tops",
+            "match_keywords": "",
+            "child_category_ids": "shirts,tank-tops,sweaters",
+            "collection": "crop-top"
+          }
+        },
+        "cat_shirts": {
+          "type": "category",
+          "settings": {
+            "category_id": "shirts",
+            "title": "Shirts",
+            "filter_tag": "women-shirts",
+            "match_keywords": "shirt,blouse,button-down,button down,tee",
+            "collection": "t-shirts"
+          }
+        },
+        "cat_tank_tops": {
+          "type": "category",
+          "settings": {
+            "category_id": "tank-tops",
+            "title": "Tank tops",
+            "filter_tag": "women-tank-tops",
+            "match_keywords": "tank,crop",
+            "collection": "crop-top"
+          }
+        },
+        "cat_sweaters": {
+          "type": "category",
+          "settings": {
+            "category_id": "sweaters",
+            "title": "Sweaters",
+            "filter_tag": "women-sweaters",
+            "match_keywords": "sweater,pullover,cardigan,knit",
+            "collection": "sweaters"
+          }
+        },
+        "cat_jackets": {
+          "type": "category",
+          "settings": {
+            "category_id": "jackets",
+            "title": "Jackets",
+            "filter_tag": "women-jackets",
+            "match_keywords": "jacket,coat,vest,windbreaker",
+            "collection": "hoodies"
+          }
+        },
+        "cat_bottoms": {
+          "type": "category",
+          "settings": {
+            "category_id": "bottoms",
+            "title": "Bottoms",
+            "filter_tag": "women-bottoms",
+            "match_keywords": "",
+            "child_category_ids": "pants,cargo-pants,jogger-pants,uniform-pants,pull-on-pants,jeans,shorts,pull-on-shorts,denim-shorts",
+            "collection": "activewear"
+          }
+        },
+        "cat_pants": {
+          "type": "category",
+          "settings": {
+            "category_id": "pants",
+            "title": "Pants",
+            "filter_tag": "women-pants",
+            "match_keywords": "",
+            "child_category_ids": "cargo-pants,jogger-pants,uniform-pants,pull-on-pants",
+            "collection": "activewear"
+          }
+        },
+        "cat_cargo_pants": {
+          "type": "category",
+          "settings": {
+            "category_id": "cargo-pants",
+            "title": "Cargo pants",
+            "filter_tag": "women-cargo-pants",
+            "match_keywords": "cargo pant",
+            "collection": "activewear"
+          }
+        },
+        "cat_jogger_pants": {
+          "type": "category",
+          "settings": {
+            "category_id": "jogger-pants",
+            "title": "Jogger pants",
+            "filter_tag": "women-jogger-pants",
+            "match_keywords": "jogger",
+            "collection": "activewear"
+          }
+        },
+        "cat_uniform_pants": {
+          "type": "category",
+          "settings": {
+            "category_id": "uniform-pants",
+            "title": "Uniform pants",
+            "filter_tag": "women-uniform-pants",
+            "match_keywords": "uniform pant",
+            "collection": "activewear"
+          }
+        },
+        "cat_pull_on_pants": {
+          "type": "category",
+          "settings": {
+            "category_id": "pull-on-pants",
+            "title": "Pull-on pants",
+            "filter_tag": "women-pull-on-pants",
+            "match_keywords": "pull-on pant,pull on pant",
+            "collection": "activewear"
+          }
+        },
+        "cat_jeans": {
+          "type": "category",
+          "settings": {
+            "category_id": "jeans",
+            "title": "Jeans",
+            "filter_tag": "women-jeans",
+            "match_keywords": "jean,denim",
+            "collection": "dress"
+          }
+        },
+        "cat_shorts": {
+          "type": "category",
+          "settings": {
+            "category_id": "shorts",
+            "title": "Shorts",
+            "filter_tag": "women-shorts",
+            "match_keywords": "",
+            "child_category_ids": "pull-on-shorts,denim-shorts",
+            "collection": "activewear"
+          }
+        },
+        "cat_pull_on_shorts": {
+          "type": "category",
+          "settings": {
+            "category_id": "pull-on-shorts",
+            "title": "Pull-on shorts",
+            "filter_tag": "women-pull-on-shorts",
+            "match_keywords": "pull-on short,pull on short",
+            "collection": "activewear"
+          }
+        },
+        "cat_denim_shorts": {
+          "type": "category",
+          "settings": {
+            "category_id": "denim-shorts",
+            "title": "Denim shorts",
+            "filter_tag": "women-denim-shorts",
+            "match_keywords": "denim short",
+            "collection": "activewear"
+          }
+        },
+        "cat_shoes": {
+          "type": "category",
+          "settings": {
+            "category_id": "shoes",
+            "title": "Shoes",
+            "filter_tag": "women-shoes",
+            "match_keywords": "shoe,sneaker,sandal,footwear",
+            "collection": "handbags"
+          }
+        },
+        "cat_new": {
+          "type": "category",
+          "settings": {
+            "category_id": "new-arrivals",
+            "title": "New arrivals",
+            "filter_tag": "women-new-arrivals,new",
+            "match_keywords": "new arrival",
+            "collection": "best-seller"
+          }
+        },
+        "cat_best": {
+          "type": "category",
+          "settings": {
+            "category_id": "best-sellers",
+            "title": "Best sellers",
+            "filter_tag": "women-best-sellers,bestseller",
+            "match_keywords": "bestseller,best seller",
+            "collection": "best-seller"
+          }
+        }
+      },
+      "block_order": [
+        "cat_tops",
+        "cat_shirts",
+        "cat_tank_tops",
+        "cat_sweaters",
+        "cat_jackets",
+        "cat_bottoms",
+        "cat_pants",
+        "cat_cargo_pants",
+        "cat_jogger_pants",
+        "cat_uniform_pants",
+        "cat_pull_on_pants",
+        "cat_jeans",
+        "cat_shorts",
+        "cat_pull_on_shorts",
+        "cat_denim_shorts",
+        "cat_shoes",
+        "cat_new",
+        "cat_best"
+      ],
+      "settings": {
+        "shop_type": "women",
+        "heading": "Women's clothing",
+        "section_width": "fluid_container",
+        "items_per_page": 48,
+        "items_per_row": 4,
+        "items_per_row_mobile": "2",
+        "column_gap": 10,
+        "show_sort": true,
+        "load_more_label": "Load more",
+        "padding_top": 24,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": ["main"]
+}

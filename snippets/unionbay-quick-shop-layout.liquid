@@ -1,0 +1,257 @@
+{% doc %}
+  Union Bay Quick Shop modal content — gallery, variants, accordions, sticky footer.
+
+  @param {product} product - Product object
+  @param {object} section - Section object
+{% enddoc %}
+
+{%- liquid
+  assign theme_st = settings
+  assign product_form_id = 'unionbay-quick-shop-' | append: section.id
+  assign variant_block = nil
+
+  for block in section.blocks
+    if block.type == 'variant_picker'
+      assign variant_block = block
+    endif
+  endfor
+
+  if variant_block == nil
+    assign variant_block = section.blocks.first
+  endif
+-%}
+
+<div
+  class="unionbay-quick-shop__content hidden bls-image-js product__item-js"
+  data-color-trigger="{{ settings.color_swatch_trigger }}"
+  data-section="{{ section.id }}"
+  data-zoom="no_zoom"
+  data-type-element="feature_product"
+  data-desktop-layout="thumbnail_left"
+>
+  <div class="unionbay-quick-shop__body">
+    <div class="unionbay-quick-shop__gallery-col">
+      {%- if product.media.size > 0 -%}
+        {% render 'media-gallery',
+          images: product.media,
+          section_st: section.settings,
+          theme_st: theme_st,
+          product: product,
+          section: section,
+          desktop_layout: 'thumbnail_left',
+          type: 'unionbay-quick-shop'
+        %}
+      {%- endif -%}
+    </div>
+
+    <div class="unionbay-quick-shop__info-col">
+      {%- form 'product', product, id: product_form_id, class: 'unionbay-quick-shop__form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+        <input
+          type="hidden"
+          name="id"
+          value="{{ product.selected_or_first_available_variant.id }}"
+          class="product-variant-id"
+          disabled
+        >
+
+        {%- if form.payment_terms -%}
+          <div class="unionbay-quick-shop__installments">
+            {{ form | payment_terms }}
+          </div>
+        {%- endif -%}
+
+        <h2 class="unionbay-quick-shop__title mt-0">{{ product.title | escape }}</h2>
+
+        <div id="price-{{ section.id }}" class="unionbay-quick-shop__price">
+          {% render 'unionbay-price', product: product %}
+        </div>
+
+        {%- unless product.has_only_default_variant -%}
+          <div class="unionbay-quick-shop__variants">
+            {%- render 'color-swatches',
+              product: product,
+              type: 'detail',
+              block: variant_block,
+              update_url: false
+            -%}
+          </div>
+          <p
+            class="unionbay-quick-shop__low-stock"
+            data-unionbay-low-stock
+            data-template="{{ 'unionbay.low_stock' | t: count: '[[count]]' }}"
+            hidden
+          ></p>
+        {%- endunless -%}
+
+        <div class="unionbay-quick-shop__accordions">
+          <collapsible-block class="unionbay-quick-shop__accordion bls-toggle relative border-bottom block" tabindex="0">
+            <h3 class="unionbay-quick-shop__accordion-heading my-0 pointer py-17 relative collapsible-heading">
+              {{ 'unionbay.quick_shop_details' | t }}
+              <span class="open-children-toggle absolute inset-0 flex flex-end pointer">
+                <span class="icon_plus-animation"></span>
+              </span>
+            </h3>
+            <div class="overflow-hidden collapsible-content" style="display: none;">
+              <div class="collapsible-content_inner mb-12 rich__text-mt-0">
+                {{ product.description }}
+              </div>
+            </div>
+          </collapsible-block>
+
+          <collapsible-block class="unionbay-quick-shop__accordion bls-toggle relative border-bottom block" tabindex="0">
+            <h3 class="unionbay-quick-shop__accordion-heading my-0 pointer py-17 relative collapsible-heading">
+              {{ 'unionbay.quick_shop_shipping' | t }}
+              <span class="open-children-toggle absolute inset-0 flex flex-end pointer">
+                <span class="icon_plus-animation"></span>
+              </span>
+            </h3>
+            <div class="overflow-hidden collapsible-content" style="display: none;">
+              <div class="collapsible-content_inner mb-12 rich__text-mt-0">
+                {{ 'unionbay.quick_shop_shipping_content' | t }}
+              </div>
+            </div>
+          </collapsible-block>
+
+          <collapsible-block class="unionbay-quick-shop__accordion bls-toggle relative border-bottom block" tabindex="0">
+            <h3 class="unionbay-quick-shop__accordion-heading my-0 pointer py-17 relative collapsible-heading">
+              {{ 'unionbay.quick_shop_rewards' | t }}
+              <span class="open-children-toggle absolute inset-0 flex flex-end pointer">
+                <span class="icon_plus-animation"></span>
+              </span>
+            </h3>
+            <div class="overflow-hidden collapsible-content" style="display: none;">
+              <div class="collapsible-content_inner mb-12 rich__text-mt-0">
+                {{ 'unionbay.quick_shop_rewards_content' | t }}
+              </div>
+            </div>
+          </collapsible-block>
+
+          <collapsible-block class="unionbay-quick-shop__accordion bls-toggle relative border-bottom block" tabindex="0">
+            <h3 class="unionbay-quick-shop__accordion-heading my-0 pointer py-17 relative collapsible-heading">
+              {{ 'unionbay.quick_shop_at_a_glance' | t }}
+              <span class="open-children-toggle absolute inset-0 flex flex-end pointer">
+                <span class="icon_plus-animation"></span>
+              </span>
+            </h3>
+            <div class="overflow-hidden collapsible-content" style="display: none;">
+              <div class="collapsible-content_inner mb-12 rich__text-mt-0">
+                {%- if product.type != blank -%}
+                  <p><strong>{{ 'products.product.general.type' | t }}:</strong> {{ product.type }}</p>
+                {%- endif -%}
+                {%- if product.vendor != blank -%}
+                  <p><strong>{{ 'products.product.general.vendor' | t }}:</strong> {{ product.vendor }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+          </collapsible-block>
+        </div>
+
+        <a href="{{ product.url }}" class="unionbay-quick-shop__view-all">
+          {{ 'unionbay.view_all_product_info' | t }}
+        </a>
+      {%- endform -%}
+    </div>
+  </div>
+
+  <div class="unionbay-quick-shop__footer">
+    {%- if theme_st.enable_catalog_mode == false -%}
+      <product-form class="unionbay-quick-shop__footer-form" data-section-id="{{ section.id }}">
+        <div class="unionbay-quick-shop__footer-inner flex align-center gap-15">
+          <button
+            type="submit"
+            name="add"
+            form="{{ product_form_id }}"
+            class="unionbay-quick-shop__add-btn btn flex-1"
+            {% if product.selected_or_first_available_variant.available == false %}
+              disabled
+            {% endif %}
+          >
+            <span
+              class="btn-label hidden-on-load unionbay-quick-shop__add-label"
+              data-add-to-cart="{{ 'unionbay.add_to_cart' | t }}"
+              data-sold-out="{{ 'products.product.general.outstock' | t }}"
+              data-select-size="{{ 'unionbay.select_size' | t }}"
+            >
+              {%- if product.has_only_default_variant -%}
+                {{ 'unionbay.add_to_cart' | t }}
+              {%- else -%}
+                {{ 'unionbay.select_size' | t }}
+              {%- endif -%}
+            </span>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="spin opacity-0 icon-load">
+              <use href="#icon-load"></use>
+            </svg>
+          </button>
+
+          <quantity-input class="quantity unionbay-quick-shop__quantity border inline-flex text-center">
+            <button
+              class="quantity__button inline-flex content-center pointer border-0 no-js-hidden"
+              name="minus"
+              type="button"
+              form="{{ product_form_id }}"
+            >
+              <span class="visually-hidden">{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}</span>
+              {% render 'icon-minus' %}
+            </button>
+            <input
+              class="quantity-input bg-unset text-center appearance-none p-0-important unionbay-quick-shop__qty-input"
+              type="number"
+              name="quantity"
+              form="{{ product_form_id }}"
+              min="{{ product.selected_or_first_available_variant.quantity_rule.min | default: 1 }}"
+              {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
+                max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+              {% endif %}
+              step="{{ product.selected_or_first_available_variant.quantity_rule.increment | default: 1 }}"
+              value="{{ product.selected_or_first_available_variant.quantity_rule.min | default: 1 }}"
+              id="Quantity-{{ section.id }}"
+            >
+            <button
+              class="quantity__button inline-flex content-center pointer border-0 no-js-hidden"
+              name="plus"
+              type="button"
+              form="{{ product_form_id }}"
+            >
+              <span class="visually-hidden">{{ 'products.product.quantity.increase' | t: product: product.title | escape }}</span>
+              {% render 'icon-plus' %}
+            </button>
+          </quantity-input>
+        </div>
+      </product-form>
+    {%- endif -%}
+  </div>
+
+  {%- unless product.has_only_default_variant -%}
+    <script type="application/json" class="productVariantsQty">
+      [
+      {%- for variant in product.variants -%}
+        {%- assign op = variant.option1 | replace: '"', '\"' -%}
+        {%- liquid
+          assign id_json = '"id":' | append: variant.id
+          assign option_json = '"option":"' | append: op | append: '"'
+          assign quantity_json = '"qty":' | append: variant.inventory_quantity
+          assign available_json = '"available":' | append: variant.available
+          assign mamagement_json = '"mamagement":"' | append: variant.inventory_management | append: '"'
+        -%}
+        { {{ id_json }},{{ option_json }},{{ quantity_json }},{{ available_json }},{{ mamagement_json }}}
+        {%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+      ]
+    </script>
+    <script type="application/json" class="productItemVariantsQty">
+      [
+      {%- for variant in product.variants -%}
+        {%- assign op = variant.option1 | replace: '"', '\"' -%}
+        {%- liquid
+          assign option_json = '"option":"' | append: op | append: '"'
+          assign quantity_json = '"qty":' | append: variant.inventory_quantity
+          assign available_json = '"available":' | append: variant.available
+          assign mamagement_json = '"mamagement":"' | append: variant.inventory_management | append: '"'
+        -%}
+        { {{ option_json }},{{ quantity_json }},{{ available_json }},{{ mamagement_json }}}
+        {%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+      ]
+    </script>
+  {%- endunless -%}
+</div>

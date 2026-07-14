@@ -1,0 +1,159 @@
+{%- liquid
+  capture msa_handle_raw
+    render 'msa-get-handle'
+  endcapture
+  assign msa_handle = msa_handle_raw | strip | downcase
+
+  assign msa_title = ''
+  assign msa_description = ''
+  assign msa_known = false
+
+  case msa_handle
+    when 'about'
+      assign msa_known = true
+      assign msa_title = 'About us'
+    when 'services'
+      assign msa_known = true
+      assign msa_title = 'MSA sourcing services'
+    when 'vendors'
+      assign msa_known = true
+      assign msa_title = 'Vendors'
+    when 'contact', 'contact-us'
+      assign msa_known = true
+      assign msa_title = 'Contact us'
+      assign msa_description = '<p>Whether you are looking to partner with us, have questions about our services, or simply want to learn more, fill out the form below. Our team will contact you as soon as possible.</p>'
+    when 'beliefs'
+      assign msa_known = true
+      assign msa_title = 'Our beliefs'
+    when 'careers'
+      assign msa_known = true
+      assign msa_title = 'Careers'
+    when 'rewards'
+      assign msa_known = true
+      assign msa_title = 'Rewards club'
+    when 'faqs'
+      assign msa_known = true
+      assign msa_title = 'FAQ'
+    when 'size-charts'
+      assign msa_known = true
+      assign msa_title = 'Size charts'
+    when 'shipping'
+      assign msa_known = true
+      assign msa_title = 'Shipping'
+    when 'returns'
+      assign msa_known = true
+      assign msa_title = 'Returns'
+    when 'accessibility-statement'
+      assign msa_known = true
+      assign msa_title = 'Accessibility'
+    when 'privacy-policy'
+      assign msa_known = true
+      assign msa_title = 'Privacy policy'
+    when 'terms-and-conditions'
+      assign msa_known = true
+      assign msa_title = 'Terms & conditions'
+    when 'affiliate-program'
+      assign msa_known = true
+      assign msa_title = 'Affiliate program'
+    when 'lookbook'
+      assign msa_known = true
+      assign msa_title = 'Lookbook'
+  endcase
+-%}
+
+{%- if msa_known -%}
+  {% render 'msa-page-heading', title: msa_title, description: msa_description %}
+
+  {%- case msa_handle -%}
+    {%- when 'about' -%}
+      {% render 'msa-content-about' %}
+    {%- when 'services' -%}
+      {% render 'msa-content-services' %}
+    {%- when 'vendors' -%}
+      {% render 'msa-content-vendors' %}
+    {%- when 'contact', 'contact-us' -%}
+      {% render 'msa-content-contact' %}
+    {%- when 'beliefs' -%}
+      {% render 'msa-content-simple',
+        title: 'What we stand for',
+        body: '<p>At Moon Style Apparel, we believe in quality craftsmanship, ethical manufacturing, and building lasting partnerships with buyers and vendors worldwide.</p><p>We are committed to fair labor practices, sustainable sourcing where possible, and giving back to our community through education initiatives with SAVE DC.</p><p><a href="/pages/about">Learn more about us</a>.</p>'
+      %}
+    {%- when 'careers' -%}
+      {% render 'msa-content-simple',
+        title: 'Join our team',
+        body: '<p>Moon Style Apparel is always looking for talented people passionate about apparel, sourcing, and quality manufacturing.</p><p>We offer opportunities in merchandising, quality assurance, logistics, design development, and customer support across our Pakistan and UK operations.</p><p>To apply, send your CV and cover letter via our <a href="/pages/contact-us">contact form</a>.</p>'
+      %}
+    {%- when 'rewards' -%}
+      {% render 'msa-content-simple',
+        title: 'Moon SA rewards',
+        body: '<p>Earn points on every purchase and unlock exclusive perks as a Moon Style Apparel rewards member.</p><p><strong>How it works:</strong> Create an account, shop your favourite styles, and earn points for every dollar spent.</p><p><a href="/account/register">Join now</a> or <a href="/account/login">log in</a> to your existing account.</p>'
+      %}
+    {%- when 'faqs' -%}
+      {% render 'msa-content-simple',
+        title: 'Frequently asked questions',
+        body: '<p><strong>How do I place an order?</strong><br>Browse our collections, add items to cart, and checkout securely online.</p><p><strong>What is your return policy?</strong><br>See our <a href="/pages/returns">returns page</a> for full details.</p><p><strong>How can I contact MSA?</strong><br>Visit our <a href="/pages/contact-us">contact page</a> or use the form to send a message.</p>'
+      %}
+    {%- when 'size-charts' -%}
+      {% render 'msa-content-simple',
+        title: 'Find your fit',
+        body: '<p>Use the size chart on each product page for the most accurate measurements. If you are between sizes, we recommend sizing up for a relaxed fit.</p><p>Need help? <a href="/pages/contact-us">Contact us</a> and our team will assist you.</p>'
+      %}
+    {%- when 'shipping' -%}
+      {% render 'msa-content-simple',
+        title: 'Shipping information',
+        body: '<p>We work with trusted logistics partners to deliver your orders safely and on time.</p><p><strong>Processing time:</strong> Orders are typically processed within 1–3 business days.</p><p><strong>Domestic delivery:</strong> Standard shipping usually arrives within 5–7 business days.</p><p><strong>International delivery:</strong> International orders may take 10–21 business days depending on customs and carrier schedules.</p>'
+      %}
+    {%- when 'returns' -%}
+      {% render 'msa-content-simple',
+        title: 'Returns & exchanges',
+        body: '<p>We want you to be completely satisfied with your purchase.</p><p><strong>Return window:</strong> Items may be returned within 30 days of delivery in unused condition with original tags attached.</p><p><strong>How to start a return:</strong> Contact our team via the <a href="/pages/contact-us">contact page</a> with your order number.</p>'
+      %}
+    {%- when 'accessibility-statement' -%}
+      {% render 'msa-content-simple',
+        title: 'Accessibility statement',
+        body: '<p>Moon Style Apparel is committed to ensuring digital accessibility for people with disabilities. We continually improve the user experience and apply relevant accessibility standards.</p><p>If you experience difficulty accessing any part of our website, please <a href="/pages/contact-us">contact us</a>.</p>'
+      %}
+    {%- when 'privacy-policy' -%}
+      {% render 'msa-content-simple',
+        title: 'Your privacy matters',
+        body: '<p>Moon Style Apparel (MSA) respects your privacy and is committed to protecting your personal information.</p><p>We collect information you provide when placing orders, creating an account, or contacting us. We use this information to process orders, communicate with you, and improve our services. We do not sell your personal data to third parties.</p>'
+      %}
+    {%- when 'terms-and-conditions' -%}
+      {% render 'msa-content-simple',
+        title: 'Terms of use',
+        body: '<p>By using the Moon Style Apparel website, you agree to these terms and conditions.</p><p>All products, prices, and availability are subject to change without notice. Content on this site is owned by Moon Style Apparel and may not be reproduced without permission.</p>'
+      %}
+    {%- when 'affiliate-program' -%}
+      {% render 'msa-content-simple',
+        title: 'Partner with Moon Style Apparel',
+        body: '<p>Join our affiliate program and earn commission by sharing Moon Style Apparel with your audience.</p><p>Apply through our <a href="/pages/contact-us">contact form</a> with details about your platform and audience.</p>'
+      %}
+    {%- when 'lookbook' -%}
+      {% render 'msa-content-simple',
+        title: 'Wear your style',
+        body: '<p>Explore the latest Moon Style Apparel collections — from everyday essentials to seasonal favourites.</p><p><a href="/collections/mens-clothing-shop-all">Shop mens</a> · <a href="/collections/womens-clothing-shop-all">Shop womens</a></p>'
+      %}
+  {%- endcase -%}
+{%- elsif template.name == '404' -%}
+  <div class="section sec__collection-list" style="--section-pt: 40px; --section-pb: 60px;">
+    <div class="fluid_container flex justify-center align-center flex-column text-center">
+      <h2 class="sec__content-heading heading-letter-spacing mt-0 mb-20" style="font-size: 3.6rem;">Oops...That link is broken.</h2>
+      <p class="mb-40" style="font-size: 1.5rem;">Sorry for the inconvenience. Go to our homepage or check out our latest collections.</p>
+      <a href="{{ routes.root_url }}" class="btn btn-primary">Back to homepage</a>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "MSA static page",
+  "tag": "section",
+  "class": "section-msa-static-page",
+  "settings": [],
+  "presets": [
+    {
+      "name": "MSA static page"
+    }
+  ]
+}
+{% endschema %}

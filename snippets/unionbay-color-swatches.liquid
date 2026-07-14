@@ -1,0 +1,126 @@
+{% doc %}
+  Union Bay product card color swatches — circular variant-image swatches below the product image.
+
+  @param {product} product - Product to render swatches for
+
+  @example
+  {% render 'unionbay-color-swatches', product: card_product %}
+{% enddoc %}
+
+{%- liquid
+  assign theme_st = settings
+  assign swatch_item_type = theme_st.swatch_item_type | default: 'variant_images'
+  assign color_triggers = 'Color,Colour,color,colour' | split: ','
+
+  if theme_st.color_swatch_trigger != blank
+    assign color_triggers = theme_st.color_swatch_trigger | split: ','
+  endif
+
+  assign color_option = nil
+  assign size_triggers = 'Size,Taille,Größe' | split: ','
+
+  if theme_st.size_trigger != blank
+    assign size_triggers = theme_st.size_trigger | replace: ' ', '' | split: ','
+  endif
+
+  for opt in product.options_with_values
+    for trigger in color_triggers
+      assign trigger_stripped = trigger | strip
+      if opt.name == trigger_stripped
+        assign color_option = opt
+        break
+      endif
+    endfor
+    if color_option != nil
+      break
+    endif
+  endfor
+
+  if color_option == nil and product.options_with_values.size > 0
+    for opt in product.options_with_values
+      assign is_size_option = false
+      for size_name in size_triggers
+        assign size_stripped = size_name | strip
+        if opt.name == size_stripped
+          assign is_size_option = true
+        endif
+      endfor
+      if is_size_option == false and opt.values.size > 1
+        assign color_option = opt
+        break
+      endif
+    endfor
+  endif
+-%}
+
+{%- if color_option != nil and color_option.values.size > 1 -%}
+  <variant-radios
+    class="unionbay-card-swatches product__color-swatches flex flex-wrap"
+    style="--col-gap: 8px;"
+  >
+    {%- for value in color_option.values -%}
+      {%- liquid
+        assign active = ''
+        case color_option.position
+          when 1
+            assign selected_swatch_value = product.selected_or_first_available_variant.option1
+          when 2
+            assign selected_swatch_value = product.selected_or_first_available_variant.option2
+          when 3
+            assign selected_swatch_value = product.selected_or_first_available_variant.option3
+        endcase
+        if value == selected_swatch_value
+          assign active = 'active'
+        elsif forloop.first and active == blank
+          assign active = 'active'
+        endif
+
+        assign op = 'option' | append: color_option.position
+        assign matched_variants = product.variants | where: op, value
+        assign swatch_image = ''
+        assign card_image = ''
+        for variant in matched_variants
+          if variant.featured_image
+            assign swatch_image = variant.featured_image | image_url: width: 80
+            assign card_image = variant.featured_image | image_url: width: 900
+            break
+          endif
+        endfor
+
+        assign swatch_value = nil
+        if value.swatch.image
+          assign image_url = value.swatch.image | image_url: width: 80
+          assign swatch_value = 'url(' | append: image_url | append: ')'
+        elsif value.swatch.color
+          assign swatch_value = 'rgb(' | append: value.swatch.color.rgb | append: ')'
+        endif
+      -%}
+
+      <div
+        class="product__color-swatches--js relative product__color-swatch {{ swatch_item_type }} rounded-50 pointer {{ active }}"
+        data-value="{{ value | replace: '"', "'" }}"
+        data-color="{{ value | downcase | replace: ' ', '-' | replace: '"', "'" }}"
+        data-custom-value="custom__color-swatches--{{ value | downcase | replace: ' ', '-' | replace: '"', "'" }}"
+        data-swatch-type="{{ swatch_item_type }}"
+        data-position="{{ color_option.position }}"
+        {% if card_image != blank %}
+          data-image="{{ card_image }}"
+        {% elsif swatch_image != blank %}
+          data-image="{{ swatch_image }}"
+        {% endif %}
+        {% if swatch_value != nil %}
+          data-option-swatch-value="{{ swatch_value }}"
+        {% endif %}
+        role="button"
+        tabindex="0"
+        aria-label="{{ value | escape }}"
+      >
+        <span class="tooltip-content invisible rounded-3 absolute pointer-none">{{ value }}</span>
+      </div>
+    {%- endfor -%}
+
+    <script type="application/json">
+      {{ product.variants | json }}
+    </script>
+  </variant-radios>
+{%- endif -%}

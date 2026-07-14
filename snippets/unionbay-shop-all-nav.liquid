@@ -1,0 +1,94 @@
+{% doc %}
+  Union Bay shop-all sidebar navigation.
+
+  @param {string} shop_type - women or men
+  @param {string} [active_cat] - Active category id from ub_cat query param
+  @param {string} [active_handle] - Current collection handle
+  @param {string} base_url - Shop-all collection URL
+{% enddoc %}
+
+{%- liquid
+  assign active = active_cat | default: ''
+  assign base = base_url | default: collection.url
+  assign handle = active_handle | default: collection.handle
+
+  if active == blank and handle != 'womens-clothing-shop-all' and handle != 'mens-clothing-shop-all' and handle != 'dress' and handle != 't-shirts'
+    assign active = handle
+  endif
+-%}
+
+<nav class="unionbay-shop-all__nav" aria-label="{{ 'unionbay.shop_all.category_nav' | t }}">
+  {%- if shop_type == 'men' -%}
+    <div class="unionbay-shop-all__nav-group">
+      <h3 class="unionbay-shop-all__nav-heading">{{ 'unionbay.shop_all.shop_all_label' | t: gender: 'Men' }}</h3>
+      <ul class="unionbay-shop-all__nav-list list-unstyled">
+        <li>
+          <a href="{{ base }}" class="unionbay-shop-all__nav-link no-underline{% if active == blank or active == 'shop-all' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == blank or active == 'shop-all' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.shop_all' | t }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="unionbay-shop-all__nav-group">
+      <h3 class="unionbay-shop-all__nav-heading">{{ 'unionbay.shop_all.tops' | t }}</h3>
+      <ul class="unionbay-shop-all__nav-list list-unstyled">
+        <li><a href="{{ base }}?ub_cat=tops" class="unionbay-shop-all__nav-link no-underline{% if active == 'tops' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == 'tops' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.shop_all' | t }}</a></li>
+        <li><a href="{{ base }}?ub_cat=polo-shirt" class="unionbay-shop-all__nav-link no-underline{% if active == 'polo-shirt' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == 'polo-shirt' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.polo_shirt' | t }}</a></li>
+        <li><a href="{{ base }}?ub_cat=crewneck-short-sleeve" class="unionbay-shop-all__nav-link no-underline{% if active == 'crewneck-short-sleeve' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == 'crewneck-short-sleeve' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.crewneck_short_sleeve' | t }}</a></li>
+        <li><a href="{{ base }}?ub_cat=long-sleeve-crewneck" class="unionbay-shop-all__nav-link no-underline{% if active == 'long-sleeve-crewneck' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == 'long-sleeve-crewneck' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.long_sleeve_crewneck' | t }}</a></li>
+        <li><a href="{{ base }}?ub_cat=shirts" class="unionbay-shop-all__nav-link no-underline{% if active == 'shirts' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == 'shirts' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.shirts' | t }}</a></li>
+        <li><a href="{{ base }}?ub_cat=sweaters" class="unionbay-shop-all__nav-link no-underline{% if active == 'sweaters' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == 'sweaters' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.sweaters' | t }}</a></li>
+      </ul>
+    </div>
+    <div class="unionbay-shop-all__nav-group">
+      <h3 class="unionbay-shop-all__nav-heading">{{ 'unionbay.shop_all.sweatshirts' | t }}</h3>
+      <ul class="unionbay-shop-all__nav-list list-unstyled">
+        <li><a href="{{ base }}?ub_cat=thermal-waffle-ls-sweatshirt" class="unionbay-shop-all__nav-link no-underline{% if active == 'thermal-waffle-ls-sweatshirt' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == 'thermal-waffle-ls-sweatshirt' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.thermal_waffle_ls_sweatshirt' | t }}</a></li>
+        <li><a href="{{ base }}?ub_cat=fleece-sweatshirt" class="unionbay-shop-all__nav-link no-underline{% if active == 'fleece-sweatshirt' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == 'fleece-sweatshirt' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.fleece_sweatshirt' | t }}</a></li>
+        <li><a href="{{ base }}?ub_cat=hoodies" class="unionbay-shop-all__nav-link no-underline{% if active == 'hoodies' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == 'hoodies' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.sweatshirts_hoodies' | t }}</a></li>
+        <li><a href="{{ base }}?ub_cat=fleece-tracksuit" class="unionbay-shop-all__nav-link no-underline{% if active == 'fleece-tracksuit' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == 'fleece-tracksuit' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.fleece_tracksuit' | t }}</a></li>
+      </ul>
+    </div>
+    <div class="unionbay-shop-all__nav-group">
+      <h3 class="unionbay-shop-all__nav-heading">{{ 'unionbay.shop_all.jackets' | t }}</h3>
+      <ul class="unionbay-shop-all__nav-list list-unstyled">
+        <li><a href="{{ base }}?ub_cat=jackets" class="unionbay-shop-all__nav-link no-underline{% if active == 'jackets' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == 'jackets' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.shop_all' | t }}</a></li>
+        <li><a href="{{ base }}?ub_cat=interlock-jacket" class="unionbay-shop-all__nav-link no-underline{% if active == 'interlock-jacket' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == 'interlock-jacket' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.interlock_jacket' | t }}</a></li>
+      </ul>
+    </div>
+    <div class="unionbay-shop-all__nav-group">
+      <h3 class="unionbay-shop-all__nav-heading">{{ 'unionbay.shop_all.bottoms' | t }}</h3>
+      <ul class="unionbay-shop-all__nav-list list-unstyled">
+        <li><a href="{{ base }}?ub_cat=bottoms" class="unionbay-shop-all__nav-link no-underline{% if active == 'bottoms' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == 'bottoms' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.shop_all' | t }}</a></li>
+        <li><a href="{{ base }}?ub_cat=trousers" class="unionbay-shop-all__nav-link no-underline{% if active == 'trousers' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == 'trousers' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.trousers' | t }}</a></li>
+        <li><a href="{{ base }}?ub_cat=pants" class="unionbay-shop-all__nav-link no-underline{% if active == 'pants' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == 'pants' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.pants' | t }}</a></li>
+        <li><a href="{{ base }}?ub_cat=shorts" class="unionbay-shop-all__nav-link no-underline{% if active == 'shorts' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == 'shorts' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.shorts' | t }}</a></li>
+      </ul>
+    </div>
+  {%- else -%}
+    <div class="unionbay-shop-all__nav-group">
+      <h3 class="unionbay-shop-all__nav-heading">{{ 'unionbay.shop_all.shop_all_label' | t: gender: 'Women' }}</h3>
+      <ul class="unionbay-shop-all__nav-list list-unstyled">
+        <li>
+          <a href="{{ base }}" class="unionbay-shop-all__nav-link no-underline{% if active == blank or active == 'shop-all' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == blank or active == 'shop-all' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.shop_all' | t }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="unionbay-shop-all__nav-group">
+      <h3 class="unionbay-shop-all__nav-heading">{{ 'unionbay.shop_all.tops' | t }}</h3>
+      <ul class="unionbay-shop-all__nav-list list-unstyled">
+        <li><a href="{{ base }}?ub_cat=tops" class="unionbay-shop-all__nav-link no-underline{% if active == 'tops' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == 'tops' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.shop_all' | t }}</a></li>
+        <li><a href="{{ base }}?ub_cat=shirts" class="unionbay-shop-all__nav-link no-underline{% if active == 'shirts' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == 'shirts' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.shirts' | t }}</a></li>
+        <li><a href="{{ base }}?ub_cat=jackets" class="unionbay-shop-all__nav-link no-underline{% if active == 'jackets' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == 'jackets' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.jackets' | t }}</a></li>
+        <li><a href="{{ base }}?ub_cat=sweaters" class="unionbay-shop-all__nav-link no-underline{% if active == 'sweaters' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == 'sweaters' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.sweaters' | t }}</a></li>
+      </ul>
+    </div>
+    <div class="unionbay-shop-all__nav-group">
+      <h3 class="unionbay-shop-all__nav-heading">{{ 'unionbay.shop_all.bottoms' | t }}</h3>
+      <ul class="unionbay-shop-all__nav-list list-unstyled">
+        <li><a href="{{ base }}?ub_cat=bottoms" class="unionbay-shop-all__nav-link no-underline{% if active == 'bottoms' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == 'bottoms' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.shop_all' | t }}</a></li>
+        <li><a href="{{ base }}?ub_cat=pants" class="unionbay-shop-all__nav-link no-underline{% if active == 'pants' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == 'pants' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.pants' | t }}</a></li>
+        <li><a href="{{ base }}?ub_cat=jeans" class="unionbay-shop-all__nav-link no-underline{% if active == 'jeans' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == 'jeans' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.jeans' | t }}</a></li>
+        <li><a href="{{ base }}?ub_cat=shorts" class="unionbay-shop-all__nav-link no-underline{% if active == 'shorts' %} unionbay-shop-all__nav-link--active{% endif %}"{% if active == 'shorts' %} aria-current="page"{% endif %}>{{ 'unionbay.shop_all.shorts' | t }}</a></li>
+      </ul>
+    </div>
+  {%- endif -%}
+</nav>

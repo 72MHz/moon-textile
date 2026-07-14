@@ -1,0 +1,118 @@
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "unionbay_utility": {
+      "type": "unionbay-utility-bar",
+      "blocks": {
+        "announcement": {
+          "type": "announcement",
+          "settings": {
+            "text1": "Extra 20% Off Sitewide! Use Code: JULY2026",
+            "text2": "Free Shipping on Orders $75+!",
+            "text3": "Join Moon SA Rewards and earn points when you shop.",
+            "change_every": 5
+          }
+        }
+      },
+      "block_order": ["announcement"],
+      "settings": {
+        "section_width": "stretch_width",
+        "brand_label_1": "",
+        "brand_link_1": "/",
+        "brand_label_2": "",
+        "brand_link_2": "",
+        "fallback_message": "Extra 20% Off Sitewide! Use Code: JULY2026",
+        "padding_top": 10,
+        "padding_bottom": 10
+      }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "mega_women": {
+          "type": "menu_promotion",
+          "settings": {
+            "text": "women",
+            "item_label": "unset",
+            "promotion_menu_column": 4,
+            "mega_custom_width": 1200,
+            "center_submenu": false,
+            "full_width": true,
+            "promotion_image_width": 0,
+            "promotion_position": "right"
+          }
+        },
+        "mega_men": {
+          "type": "menu_promotion",
+          "settings": {
+            "text": "men",
+            "item_label": "unset",
+            "promotion_menu_column": 4,
+            "mega_custom_width": 1200,
+            "center_submenu": false,
+            "full_width": true,
+            "promotion_image_width": 0,
+            "promotion_position": "right"
+          }
+        }
+      },
+      "block_order": ["mega_women", "mega_men"],
+      "settings": {
+        "section_width": "stretch_width",
+        "color_scheme": "",
+        "logo_position": "left",
+        "separator_line": "unset",
+        "enable_login_popup": true,
+        "sticky_header_type": "always",
+        "sticky_header_mobile": true,
+        "transparent_header": false,
+        "transparent_mobile": false,
+        "transparent_text_icon_color": "#000000",
+        "mega_menu": "main-menu",
+        "use_navigation_menu": false,
+        "dropdowns_animation": "down-to-up",
+        "uppercase_first": true,
+        "hot": "Hot",
+        "label_color_hot": "#ffffff",
+        "label_background_hot": "#e31b23",
+        "new": "New",
+        "label_color_new": "#ffffff",
+        "label_background_new": "#000000",
+        "sale": "Sale",
+        "label_color_sale": "#ffffff",
+        "label_background_sale": "#e31b23",
+        "popular": "Popular",
+        "label_color_popular": "#ffffff",
+        "label_background_popular": "#000000",
+        "redirect_to_link": true,
+        "menu_tab": "custom-collections",
+        "collection_list": [
+          "best-seller",
+          "crop-top",
+          "t-shirts",
+          "dress",
+          "hoodies",
+          "activewear",
+          "sweaters"
+        ],
+        "menu_mobile_color": "#ffffff",
+        "menu_mobile_background": "#e31b23",
+        "show_search": true,
+        "show_account_icon": true,
+        "account_label": "Sign in or join",
+        "show_wishlist_icon": false,
+        "show_shopping_cart": true,
+        "show_currency": false,
+        "show_language": false,
+        "show_recently_viewed": false,
+        "padding_top": 16,
+        "padding_bottom": 16
+      }
+    }
+  },
+  "order": [
+    "unionbay_utility",
+    "header"
+  ]
+}

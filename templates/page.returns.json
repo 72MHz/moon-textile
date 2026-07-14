@@ -1,0 +1,35 @@
+{
+  "sections": {
+    "page-heading": {
+      "type": "page-heading",
+      "blocks": {
+        "breadcrumb": { "type": "breadcrumb", "settings": {} },
+        "heading": { "type": "heading", "settings": { "page_title": "Returns", "header_size": "default" } }
+      },
+      "block_order": ["breadcrumb", "heading"],
+      "settings": {
+        "section_width": "fluid_container",
+        "alignment": "center",
+        "overlay_opacity": 0,
+        "height": "based_on_content",
+        "padding_top": 40,
+        "padding_bottom": 20
+      }
+    },
+    "main": {
+      "type": "msa-info-page",
+      "blocks": {
+        "content": {
+          "type": "content",
+          "settings": {
+            "title": "Returns & exchanges",
+            "body": "<p>We want you to be completely satisfied with your purchase. If something isn't right, we're here to help.</p><p><strong>Return window:</strong> Items may be returned within 30 days of delivery in unused condition with original tags attached.</p><p><strong>How to start a return:</strong> Contact our team at <a href=\"/pages/contact-us\">Contact us</a> with your order number and reason for return.</p><p><strong>Refunds:</strong> Approved returns are refunded to the original payment method within 5–10 business days after we receive the item.</p>"
+          }
+        }
+      },
+      "block_order": ["content"],
+      "settings": { "section_width": "fluid_container", "padding_top": 20, "padding_bottom": 60 }
+    }
+  },
+  "order": ["page-heading", "main"]
+}

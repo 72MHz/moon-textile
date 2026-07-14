@@ -1,0 +1,55 @@
+{% # theme-check-disable ContentForHeaderModification %}
+{%- capture content_for_query_string -%}
+  {{ content_for_header }}
+{%- endcapture -%}
+{%- assign page_url = content_for_query_string
+  | split: '"pageurl":"'
+  | last
+  | split: '"'
+  | first
+  | split: request.host
+  | last
+  | replace: '\/', '/'
+  | replace: '%20', ' '
+  | replace: '\u0026', '&'
+-%}
+{%- if page_url contains 'ajax=1' -%}
+  {% render 'unionbay-quick-shop-layout', product: product, section: section %}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Unionbay quick shop",
+  "tag": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "variant_picker",
+      "name": "Variant picker",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "variant_type",
+          "label": "Variant type",
+          "default": "swatches",
+          "options": [
+            { "value": "swatches", "label": "Swatches" },
+            { "value": "dropdown", "label": "Dropdown" }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Unionbay quick shop",
+      "blocks": [
+        {
+          "type": "variant_picker"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

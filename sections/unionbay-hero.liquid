@@ -1,0 +1,283 @@
+{{ 'banner.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign section_st = section.settings
+  assign section_width = section_st.section_width
+  assign color_scheme = section_st.color_scheme
+  assign image = section_st.image
+  assign image_mobile = section_st.image_mobile | default: image
+
+  if collections['womens-clothing-shop-all'] != blank
+    assign women_shop = collections['womens-clothing-shop-all'].url
+  elsif collections['dress'] != blank
+    assign women_shop = collections['dress'].url
+  else
+    assign women_shop = '/collections/womens-clothing-shop-all'
+  endif
+
+  if collections['mens-clothing-shop-all'] != blank
+    assign men_shop = collections['mens-clothing-shop-all'].url
+  elsif collections['t-shirts'] != blank
+    assign men_shop = collections['t-shirts'].url
+  else
+    assign men_shop = '/collections/mens-clothing-shop-all'
+  endif
+
+  assign first_button_href = women_shop
+  assign second_button_href = men_shop
+
+  assign custom_women_link = section_st.first_button_link | default: ''
+  assign custom_men_link = section_st.second_button_link | default: ''
+
+  if custom_women_link contains 'womens-clothing-shop-all' and collections['womens-clothing-shop-all'] != blank
+    assign first_button_href = collections['womens-clothing-shop-all'].url
+  endif
+
+  if custom_men_link contains 'mens-clothing-shop-all' and collections['mens-clothing-shop-all'] != blank
+    assign second_button_href = collections['mens-clothing-shop-all'].url
+  endif
+-%}
+{%- capture style -%}
+  --section-pt: {{ section_st.padding_top }};
+  --section-pb: {{ section_st.padding_bottom }};
+  --overlay-opacity: {{ section_st.overlay_opacity }}%;
+  --height: {{ section_st.mobile_height }}px;
+  --height-desktop: {{ section_st.desktop_height }}px;
+{%- endcapture -%}
+<section
+  class="section{% if section_st.padding_top < 30 %} pt-min{% endif %}{% if section_st.padding_bottom < 30 %} pb-min{% endif %} unionbay-hero sec__iwto color-{{ color_scheme }} gradient"
+  style="{{ style | strip | strip_newlines }}"
+>
+  <div class="{{ section_width }}">
+    <div class="unionbay-hero__inner sec__inner flex relative h-custom overflow-hidden">
+      <div class="banner__media w-full overlay-bg absolute inset-0">
+        {%- if image != blank or image_mobile != blank -%}
+          {% render 'responsive-image',
+            type: 'banner',
+            container: section_width,
+            image: image,
+            image_mobile: image_mobile,
+            image_alt: image.alt | default: section_st.heading,
+            no_animate: true
+          %}
+        {%- else -%}
+          {% render 'unionbay-hero-image', heading: section_st.heading %}
+        {%- endif -%}
+      </div>
+      <div class="sec__content relative z-1 w-full flex bottom-right text-end">
+        <div class="unionbay-hero__content sec__content-inner">
+          {%- if section_st.heading != blank -%}
+            <h2 class="unionbay-hero__heading sec__content-heading heading-letter-spacing mt-0 mb-15 fs-big heading_weight">
+              {{ section_st.heading }}
+            </h2>
+          {%- endif -%}
+          <div class="unionbay-hero__actions flex flex-wrap gap-20 justify-content-end">
+            {%- if section_st.first_button_label != blank -%}
+              <a
+                href="{{ first_button_href }}"
+                class="unionbay-hero__link no-underline"
+              >
+                {{ section_st.first_button_label }}
+              </a>
+            {%- endif -%}
+            {%- if section_st.second_button_label != blank -%}
+              <a
+                href="{{ second_button_href }}"
+                class="unionbay-hero__link no-underline"
+              >
+                {{ section_st.second_button_label }}
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .unionbay-hero__inner {
+    min-height: var(--height);
+  }
+
+  @media (min-width: 768px) {
+    .unionbay-hero__inner {
+      min-height: var(--height-desktop);
+    }
+  }
+
+  .unionbay-hero .sec__content {
+    min-height: 100%;
+    align-self: stretch;
+    padding: 2.5rem 2rem 3.5rem;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .unionbay-hero .sec__content-inner,
+  .unionbay-hero__link {
+    pointer-events: auto;
+  }
+
+  @media (min-width: 768px) {
+    .unionbay-hero .sec__content {
+      padding: 3rem 5rem 6rem;
+    }
+  }
+
+  .unionbay-hero__content {
+    max-width: 100%;
+    margin-left: auto;
+  }
+
+  .unionbay-hero__heading {
+    color: #fff;
+    font-size: clamp(3.6rem, 5.5vw, 6.4rem);
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: 0.01em;
+    line-height: 1.05;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+  }
+
+  .unionbay-hero__actions {
+    margin-top: 0.5rem;
+  }
+
+  .unionbay-hero__link {
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: 1.3rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 2px;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 3;
+  }
+
+  .unionbay-hero__link:hover {
+    opacity: 0.85;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Unionbay hero",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:sections.all.section_width.label",
+      "default": "full_width",
+      "options": [
+        { "value": "full_width", "label": "t:sections.all.section_width.full_width.label" }
+      ]
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.all.image.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "t:sections.all.image_mobile.label"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "t:sections.all.overlay_opacity.label",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "min": 300,
+      "max": 900,
+      "step": 10,
+      "unit": "px",
+      "label": "Desktop height",
+      "default": 650
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "min": 200,
+      "max": 600,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile height",
+      "default": 420
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.all.section_header.heading.label",
+      "default": "The Summer Drop"
+    },
+    {
+      "type": "text",
+      "id": "first_button_label",
+      "label": "First button label",
+      "default": "Shop womens"
+    },
+    {
+      "type": "url",
+      "id": "first_button_link",
+      "label": "First button link"
+    },
+    {
+      "type": "text",
+      "id": "second_button_label",
+      "label": "Second button label",
+      "default": "Shop mens"
+    },
+    {
+      "type": "url",
+      "id": "second_button_link",
+      "label": "Second button link"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Unionbay hero"
+    }
+  ]
+}
+{% endschema %}

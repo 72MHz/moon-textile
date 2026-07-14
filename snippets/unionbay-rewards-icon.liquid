@@ -1,0 +1,27 @@
+{% doc %}
+  Renders Union Bay rewards icon in the main header.
+
+  Only visible when the theme uses the Unionbay body class.
+{% enddoc %}
+
+<a
+  href="{{ pages['rewards-club'].url | default: '/account/register' }}"
+  class="unionbay-rewards-icon header-icon header-color w-44 h-44 inline-flex content-center no-underline"
+  aria-label="Rewards"
+>
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M12 2C9.5 2 7.5 3.5 6.5 5.5C4.5 5.8 3 7.5 3 9.5C3 11.8 4.8 13.6 7.1 13.6H7.3L8.5 20.2C8.7 21.3 9.7 22.1 10.9 22.1H13.1C14.3 22.1 15.3 21.3 15.5 20.2L16.7 13.6H16.9C19.2 13.6 21 11.8 21 9.5C21 7.5 19.5 5.8 17.5 5.5C16.5 3.5 14.5 2 12 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M9 9.5H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M10 12H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+</a>
+
+{% stylesheet %}
+  .unionbay-rewards-icon {
+    display: none;
+  }
+
+  .theme-unionbay .unionbay-rewards-icon {
+    display: inline-flex;
+  }
+{% endstylesheet %}

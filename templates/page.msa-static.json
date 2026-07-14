@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "msa-static-page",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

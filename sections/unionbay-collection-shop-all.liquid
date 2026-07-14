@@ -1,0 +1,597 @@
+{% # theme-check-disable ContentForHeaderModification %}
+{%- capture content_for_query_string -%}
+  {{ content_for_header }}
+{%- endcapture -%}
+{%- assign page_url = content_for_query_string
+  | split: '"pageurl":"'
+  | last
+  | split: '"'
+  | first
+  | split: request.host
+  | last
+  | replace: '\/', '/'
+  | replace: '%20', ' '
+  | replace: '\u0026', '&'
+-%}
+{%- assign page_query_string = page_url | split: '?' | last -%}
+{% # theme-check-enable ContentForHeaderModification %}
+
+{%- liquid
+  assign section_st = section.settings
+  assign shop_type = section_st.shop_type
+  assign section_width = section_st.section_width
+  assign items_per_page = section_st.items_per_page
+  assign items_per_row = section_st.items_per_row
+  assign items_per_row_mobile = section_st.items_per_row_mobile
+  assign column_gap = section_st.column_gap
+  assign scroll_animation = settings.scroll_animation
+
+  assign active_cat = ''
+  if page_query_string contains 'ub_cat='
+    assign active_cat = page_query_string | split: 'ub_cat=' | last | split: '&' | first | url_decode | downcase
+  endif
+
+  assign current_page = 1
+  if page_query_string contains 'page='
+    assign current_page = page_query_string | split: 'page=' | last | split: '&' | first | plus: 0
+  endif
+  if current_page < 1
+    assign current_page = 1
+  endif
+
+  assign active_filter_tags = ''
+  assign active_match_keywords = ''
+  assign filter_products = false
+  assign use_dedicated_collection = false
+  assign display_collection = collection
+  assign active_label = collection.title
+  assign active_handle = collection.handle
+  assign dept_prefix = 'womens'
+  assign dept_prefix_alt = 'women'
+
+  if shop_type == 'men'
+    assign breadcrumb_parent = 'unionbay.shop_all.men' | t
+    assign breadcrumb_parent_url = '/collections/mens-clothing-shop-all'
+    assign breadcrumb_current = 'unionbay.shop_all.mens_clothing_shop_all' | t
+    assign default_heading = 'unionbay.shop_all.mens_heading' | t
+    assign shop_all_handle = 'mens-clothing-shop-all'
+    assign shop_all_fallback = 't-shirts'
+    assign dept_prefix = 'mens'
+    assign dept_prefix_alt = 'men'
+  else
+    assign breadcrumb_parent = 'unionbay.shop_all.women' | t
+    assign breadcrumb_parent_url = '/collections/womens-clothing-shop-all'
+    assign breadcrumb_current = 'unionbay.shop_all.womens_clothing_shop_all' | t
+    assign default_heading = 'unionbay.shop_all.womens_heading' | t
+    assign shop_all_handle = 'womens-clothing-shop-all'
+    assign shop_all_fallback = 'dress'
+  endif
+
+  if collection.handle == shop_all_handle
+    assign master_collection = collection
+  elsif collections[shop_all_handle] != blank
+    assign master_collection = collections[shop_all_handle]
+  else
+    assign master_collection = collection
+  endif
+
+  if active_cat != blank
+    for block in section.blocks
+      if block.type == 'category'
+        assign block_cat = block.settings.category_id | downcase
+        if block_cat == active_cat
+          if block.settings.title != blank
+            assign active_label = block.settings.title
+          endif
+          assign active_handle = block.settings.collection
+          if block.settings.filter_tag != blank
+            assign active_filter_tags = block.settings.filter_tag | downcase
+          else
+            assign active_filter_tags = dept_prefix_alt | append: '-' | append: active_cat
+          endif
+          if block.settings.match_keywords != blank
+            assign active_match_keywords = block.settings.match_keywords | downcase
+          endif
+          if block.settings.child_category_ids != blank
+            assign child_id_list = block.settings.child_category_ids | downcase | split: ','
+            for child_block in section.blocks
+              if child_block.type == 'category'
+                assign child_block_id = child_block.settings.category_id | downcase | strip
+                for child_id_item in child_id_list
+                  assign child_id_clean = child_id_item | strip
+                  if child_id_clean != blank
+                    if child_block_id == child_id_clean
+                      if child_block.settings.filter_tag != blank
+                        if active_filter_tags != blank
+                          assign active_filter_tags = active_filter_tags | append: ','
+                        endif
+                        assign active_filter_tags = active_filter_tags | append: child_block.settings.filter_tag | downcase
+                      endif
+                      if child_block.settings.match_keywords != blank
+                        if active_match_keywords != blank
+                          assign active_match_keywords = active_match_keywords | append: ','
+                        endif
+                        assign active_match_keywords = active_match_keywords | append: child_block.settings.match_keywords | downcase
+                      endif
+                    endif
+                  endif
+                endfor
+              endif
+            endfor
+          endif
+        endif
+      endif
+    endfor
+
+    assign dedicated_handle = dept_prefix | append: '-' | append: active_cat
+    assign dedicated_handle_alt = dept_prefix_alt | append: '-' | append: active_cat
+
+    if collections[dedicated_handle] != blank and collections[dedicated_handle].products_count > 0
+      assign display_collection = collections[dedicated_handle]
+      assign use_dedicated_collection = true
+    elsif collections[dedicated_handle_alt] != blank and collections[dedicated_handle_alt].products_count > 0
+      assign display_collection = collections[dedicated_handle_alt]
+      assign use_dedicated_collection = true
+    else
+      assign filter_products = true
+    endif
+  endif
+
+  if collection.handle == shop_all_handle
+    assign shop_all_url = collection.url
+  elsif collections[shop_all_handle] != blank
+    assign shop_all_url = collections[shop_all_handle].url
+  else
+    assign shop_all_url = collections[shop_all_fallback].url
+  endif
+
+  if active_cat == blank
+    for block in section.blocks
+      if block.type == 'category' and block.settings.collection == collection.handle
+        if block.settings.title != blank
+          assign active_label = block.settings.title
+        endif
+      endif
+    endfor
+  endif
+
+  if section_st.heading != blank
+    assign page_heading = section_st.heading
+  else
+    assign page_heading = default_heading
+  endif
+-%}
+
+{%- capture style -%}
+  --section-pt: {{ section_st.padding_top }};
+  --section-pb: {{ section_st.padding_bottom }};
+  --col-gap-desktop: {{ column_gap }}px;
+  --col-desktop: {{ items_per_row }};
+  --col-number: {{ items_per_row_mobile }};
+  --col-tablet: 3;
+{%- endcapture -%}
+
+<section
+  class="section unionbay-shop-all{% if section_st.padding_top < 30 %} pt-min{% endif %}{% if section_st.padding_bottom < 30 %} pb-min{% endif %}"
+  style="{{ style | strip | strip_newlines }}"
+  data-section-id="{{ section.id }}"
+>
+  <div class="{{ section_width }}">
+    <header class="unionbay-shop-all__header">
+      <nav class="unionbay-shop-all__breadcrumb" aria-label="{{ 'general.breadcrumb.home' | t }}">
+        <a href="{{ breadcrumb_parent_url }}" class="unionbay-shop-all__breadcrumb-link no-underline">{{ breadcrumb_parent }}</a>
+        <span class="unionbay-shop-all__breadcrumb-sep" aria-hidden="true">/</span>
+        <span class="unionbay-shop-all__breadcrumb-current">{{ breadcrumb_current }}</span>
+      </nav>
+      <h1 class="unionbay-shop-all__title mt-0">{{ page_heading }}</h1>
+      <p class="unionbay-shop-all__subtitle">{{ 'unionbay.shop_all.shop_all_label' | t: gender: breadcrumb_parent }}: {{ active_label }}</p>
+    </header>
+
+    <div class="unionbay-shop-all__layout flex flex-nowrap gap">
+      <aside class="unionbay-shop-all__sidebar hidden block-1025">
+        {% render 'unionbay-shop-all-nav',
+          shop_type: shop_type,
+          active_cat: active_cat,
+          active_handle: active_handle,
+          base_url: shop_all_url
+        %}
+      </aside>
+
+      <div class="unionbay-shop-all__main col-1025-remaining w-full">
+        <div class="unionbay-shop-all__toolbar flex justify-between align-center flex-wrap gap-15 mb-20">
+          <p class="unionbay-shop-all__count mt-0 mb-0">
+            {%- if filter_products -%}
+              {%- liquid
+                assign filtered_count = 0
+                for product in master_collection.products
+                  capture product_match
+                    render 'unionbay-shop-all-product-match', product: product, filter_tags: active_filter_tags, match_keywords: active_match_keywords
+                  endcapture
+                  assign product_match = product_match | strip
+                  if product_match == 'true'
+                    assign filtered_count = filtered_count | plus: 1
+                  endif
+                endfor
+              -%}
+              {{ 'unionbay.shop_all.product_count' | t: count: filtered_count }}
+            {%- else -%}
+              {{ 'unionbay.shop_all.product_count' | t: count: display_collection.products_count }}
+            {%- endif -%}
+          </p>
+          {%- if section_st.show_sort -%}
+            <div class="unionbay-shop-all__sort">
+              <label class="visually-hidden" for="unionbay-sort-{{ section.id }}">{{ 'products.facets.sort_button' | t }}</label>
+              <select id="unionbay-sort-{{ section.id }}" class="unionbay-shop-all__sort-select" data-unionbay-sort>
+                {%- assign sort_collection = display_collection -%}
+                {%- if filter_products -%}
+                  {%- assign sort_collection = master_collection -%}
+                {%- endif -%}
+                {%- for option in sort_collection.sort_options -%}
+                  <option
+                    value="{{ option.value }}"
+                    {% if option.value == display_collection.sort_by %}selected{% endif %}
+                  >
+                    {{ option.name }}
+                  </option>
+                {%- endfor -%}
+              </select>
+            </div>
+          {%- endif -%}
+        </div>
+
+        <div class="unionbay-shop-all__mobile-nav block hidden-1025 mb-20">
+          <label class="visually-hidden" for="unionbay-mobile-cat-{{ section.id }}">{{ 'unionbay.shop_all.category_nav' | t }}</label>
+          <select id="unionbay-mobile-cat-{{ section.id }}" class="unionbay-shop-all__mobile-select" data-unionbay-mobile-cat>
+            <option value="{{ shop_all_url }}"{% if active_cat == blank and collection.handle == shop_all_handle %} selected{% endif %}>{{ 'unionbay.shop_all.shop_all' | t }}</option>
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'category' -%}
+                {%- assign cat_collection = collections[block.settings.collection] -%}
+                {%- if cat_collection != blank -%}
+                  {%- liquid
+                    assign option_url = cat_collection.url
+                    if block.settings.category_id != blank
+                      assign option_url = shop_all_url | append: '?ub_cat=' | append: block.settings.category_id
+                    endif
+                  -%}
+                  <option
+                    value="{{ option_url }}"
+                    {% if active_cat == block.settings.category_id or collection.handle == block.settings.collection %}selected{% endif %}
+                  >
+                    {{ block.settings.title | default: cat_collection.title }}
+                  </option>
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </select>
+        </div>
+
+        <div class="unionbay-shop-all__grid-wrapper">
+          {%- if filter_products -%}
+            {%- liquid
+              assign page_offset = current_page | minus: 1 | times: items_per_page
+              assign skipped_count = 0
+              assign shown_count = 0
+              assign filtered_count = 0
+              assign total_pages = 1
+
+              for product in master_collection.products
+                capture product_match
+                  render 'unionbay-shop-all-product-match', product: product, filter_tags: active_filter_tags, match_keywords: active_match_keywords
+                endcapture
+                assign product_match = product_match | strip
+                if product_match == 'true'
+                  assign filtered_count = filtered_count | plus: 1
+                endif
+              endfor
+
+              if filtered_count > 0
+                assign total_pages = filtered_count | plus: items_per_page | minus: 1 | divided_by: items_per_page
+              endif
+            -%}
+            <div
+              id="unionbay-product-grid"
+              class="unionbay-shop-all__grid grid grid-cols row-gap-custom gap"
+              style="--row-gap: 3rem; --col-gap: 15px; --col-gap-desktop: {{ column_gap }}px;"
+            >
+              {%- if filtered_count == 0 -%}
+                <div class="unionbay-shop-all__empty">
+                  <p>{{ 'unionbay.shop_all.empty' | t }}</p>
+                  <a href="{{ shop_all_url }}" class="unionbay-shop-all__empty-link">{{ 'unionbay.shop_all.view_all' | t }}</a>
+                </div>
+              {%- else -%}
+                {%- for product in master_collection.products -%}
+                  {%- capture product_match -%}
+                    {%- render 'unionbay-shop-all-product-match',
+                      product: product,
+                      filter_tags: active_filter_tags,
+                      match_keywords: active_match_keywords
+                    -%}
+                  {%- endcapture -%}
+                  {%- assign product_match = product_match | strip -%}
+                  {%- unless product_match == 'true' -%}
+                    {%- continue -%}
+                  {%- endunless -%}
+                  {%- if skipped_count < page_offset -%}
+                    {%- assign skipped_count = skipped_count | plus: 1 -%}
+                    {%- continue -%}
+                  {%- endif -%}
+                  {%- if shown_count >= items_per_page -%}
+                    {%- break -%}
+                  {%- endif -%}
+                  {%- if product.featured_image != blank -%}
+                    {%- assign shown_count = shown_count | plus: 1 -%}
+                    <div class="unionbay-shop-all__item grid__item">
+                      {% render 'product-item',
+                        card_product: product,
+                        section_id: section.id,
+                        container: section_width,
+                        colunm: items_per_row,
+                        colunm_mobile: items_per_row_mobile,
+                        padding: column_gap,
+                        template_enable_action: true,
+                        template_enable_product_vendor: false,
+                        template_enable_rate: false,
+                        template_enable_product_short_description: false,
+                        template_enable_color_swatches: true,
+                        template_enable_price: true,
+                        template_enable_add_cart: true,
+                        template_enable_product_badges: true,
+                        unionbay_mode: true,
+                        scroll_animation: 'none',
+                        collection_product: true,
+                        indexFor: shown_count
+                      %}
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
+            </div>
+
+            {%- if total_pages > current_page -%}
+              <div class="unionbay-shop-all__pagination flex justify-center mt-40">
+                <a
+                  href="{{ shop_all_url }}?ub_cat={{ active_cat }}&page={{ current_page | plus: 1 }}"
+                  class="unionbay-shop-all__load-more btn btn-primary"
+                >
+                  {{ section_st.load_more_label | default: 'unionbay.shop_all.load_more' | t }}
+                </a>
+              </div>
+            {%- endif -%}
+          {%- else -%}
+          {%- paginate display_collection.products by items_per_page -%}
+            <div
+              id="unionbay-product-grid"
+              class="unionbay-shop-all__grid grid grid-cols row-gap-custom gap"
+              style="--row-gap: 3rem; --col-gap: 15px; --col-gap-desktop: {{ column_gap }}px;"
+            >
+              {%- if display_collection.products.size == 0 -%}
+                <div class="unionbay-shop-all__empty">
+                  <p>{{ 'unionbay.shop_all.empty' | t }}</p>
+                  <a href="{{ shop_all_url }}" class="unionbay-shop-all__empty-link">{{ 'unionbay.shop_all.view_all' | t }}</a>
+                </div>
+              {%- else -%}
+                {%- for product in display_collection.products -%}
+                  {%- if product.featured_image != blank -%}
+                    <div class="unionbay-shop-all__item grid__item">
+                      {% render 'product-item',
+                        card_product: product,
+                        section_id: section.id,
+                        container: section_width,
+                        colunm: items_per_row,
+                        colunm_mobile: items_per_row_mobile,
+                        padding: column_gap,
+                        template_enable_action: true,
+                        template_enable_product_vendor: false,
+                        template_enable_rate: false,
+                        template_enable_product_short_description: false,
+                        template_enable_color_swatches: true,
+                        template_enable_price: true,
+                        template_enable_add_cart: true,
+                        template_enable_product_badges: true,
+                        unionbay_mode: true,
+                        scroll_animation: 'none',
+                        collection_product: true,
+                        indexFor: forloop.index
+                      %}
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
+            </div>
+
+            {%- if paginate.pages > 1 -%}
+              <div class="unionbay-shop-all__pagination flex justify-center mt-40">
+                {%- if paginate.next -%}
+                  <a
+                    href="{{ paginate.next.url }}{% if active_cat != blank %}&ub_cat={{ active_cat }}{% endif %}"
+                    class="unionbay-shop-all__load-more btn btn-primary"
+                  >
+                    {{ section_st.load_more_label | default: 'unionbay.shop_all.load_more' | t }}
+                  </a>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endpaginate -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% javascript %}
+  (function () {
+    const section = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!section) return;
+
+    const sortSelect = section.querySelector('[data-unionbay-sort]');
+    if (sortSelect) {
+      sortSelect.addEventListener('change', function () {
+        const url = new URL(window.location.href);
+        url.searchParams.set('sort_by', this.value);
+        url.searchParams.delete('page');
+        window.location.href = url.toString();
+      });
+    }
+
+    const mobileCat = section.querySelector('[data-unionbay-mobile-cat]');
+    if (mobileCat) {
+      mobileCat.addEventListener('change', function () {
+        if (this.value) window.location.href = this.value;
+      });
+    }
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "t:unionbay.shop_all.name",
+  "tag": "section",
+  "class": "sec__unionbay-shop-all",
+  "settings": [
+    {
+      "type": "select",
+      "id": "shop_type",
+      "label": "t:unionbay.shop_all.shop_type",
+      "default": "women",
+      "options": [
+        { "value": "women", "label": "t:unionbay.shop_all.women" },
+        { "value": "men", "label": "t:unionbay.shop_all.men" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:unionbay.shop_all.heading",
+      "info": "t:unionbay.shop_all.heading_info"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:sections.all.section_width.label",
+      "default": "fluid_container",
+      "options": [
+        { "value": "fluid_container", "label": "t:sections.all.section_width.fluid_container.label" },
+        { "value": "stretch_width", "label": "t:sections.all.section_width.stretch_width.label" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "items_per_page",
+      "label": "t:unionbay.shop_all.items_per_page",
+      "min": 12,
+      "max": 48,
+      "step": 12,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "items_per_row",
+      "label": "t:sections.all.items_per_row.label",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "items_per_row_mobile",
+      "label": "t:sections.all.items_per_row_mobile.label",
+      "default": "2",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "label": "t:sections.all.column_gap.label",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sort",
+      "label": "t:unionbay.shop_all.show_sort",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "load_more_label",
+      "label": "t:unionbay.shop_all.load_more_label",
+      "default": "Load more"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:sections.all.padding_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:sections.all.padding_bottom.label",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "t:unionbay.shop_all.category_block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category_id",
+          "label": "t:unionbay.shop_all.category_id",
+          "info": "t:unionbay.shop_all.category_id_info"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:labels.title"
+        },
+        {
+          "type": "text",
+          "id": "filter_tag",
+          "label": "t:unionbay.shop_all.filter_tag",
+          "info": "t:unionbay.shop_all.filter_tag_info"
+        },
+        {
+          "type": "text",
+          "id": "match_keywords",
+          "label": "t:unionbay.shop_all.match_keywords",
+          "info": "t:unionbay.shop_all.match_keywords_info"
+        },
+        {
+          "type": "text",
+          "id": "child_category_ids",
+          "label": "t:unionbay.shop_all.child_category_ids",
+          "info": "t:unionbay.shop_all.child_category_ids_info"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "t:sections.collection-tab.blocks.collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:unionbay.shop_all.name"
+    }
+  ]
+}
+{% endschema %}

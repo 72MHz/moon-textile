@@ -1,0 +1,81 @@
+{% doc %}
+  Renders a Moon Style Apparel footer link column from a built-in preset or custom menu.
+
+  @param {string} preset - Preset column key: about, help, privacy, affiliates, blog, shop
+  @param {string} heading - Column heading override
+  @param {object} [menu] - Optional Shopify menu when preset is blank
+{% enddoc %}
+
+{%- liquid
+  assign column_heading = heading
+-%}
+
+{%- case preset -%}
+  {%- when 'about' -%}
+    {%- assign column_heading = column_heading | default: 'About' -%}
+  {%- when 'help' -%}
+    {%- assign column_heading = column_heading | default: 'Help' -%}
+  {%- when 'privacy' -%}
+    {%- assign column_heading = column_heading | default: 'Privacy notices' -%}
+  {%- when 'affiliates' -%}
+    {%- assign column_heading = column_heading | default: 'Partners' -%}
+  {%- when 'blog' -%}
+    {%- assign column_heading = column_heading | default: 'Quick links' -%}
+  {%- when 'shop' -%}
+    {%- assign column_heading = column_heading | default: 'Shop by category' -%}
+{%- endcase -%}
+
+<div class="unionbay-footer__column-inner">
+  <h3 class="unionbay-footer__heading unionbay-footer__heading--static">
+    {{ column_heading | escape }}
+  </h3>
+  <ul class="list-unstyled unionbay-footer__links-list">
+    {%- case preset -%}
+      {%- when 'about' -%}
+        <li><a href="/pages/about" class="unionbay-footer__link">About us</a></li>
+        <li><a href="/pages/services" class="unionbay-footer__link">Services</a></li>
+        <li><a href="/pages/vendors" class="unionbay-footer__link">Vendors</a></li>
+        <li><a href="/pages/contact-us" class="unionbay-footer__link">Contact</a></li>
+        <li><a href="/pages/beliefs" class="unionbay-footer__link">Our beliefs</a></li>
+        <li><a href="/pages/careers" class="unionbay-footer__link">Careers</a></li>
+        <li><a href="/blogs/news" class="unionbay-footer__link">Blog</a></li>
+        <li><a href="/pages/rewards" class="unionbay-footer__link">Rewards club</a></li>
+        <li><a href="/sitemap.xml" class="unionbay-footer__link">Sitemap</a></li>
+      {%- when 'help' -%}
+        <li><a href="/pages/contact-us" class="unionbay-footer__link">Contact us</a></li>
+        <li><a href="/pages/faqs" class="unionbay-footer__link">FAQ</a></li>
+        <li><a href="/pages/size-charts" class="unionbay-footer__link">Size charts</a></li>
+        <li><a href="/pages/shipping" class="unionbay-footer__link">Shipping</a></li>
+        <li><a href="/pages/returns" class="unionbay-footer__link">Returns</a></li>
+        <li><a href="/pages/accessibility-statement" class="unionbay-footer__link">Accessibility</a></li>
+      {%- when 'privacy' -%}
+        <li><a href="/pages/privacy-policy" class="unionbay-footer__link">Privacy policy</a></li>
+        <li><a href="/pages/terms-and-conditions" class="unionbay-footer__link">Terms &amp; conditions</a></li>
+        <li><span class="unionbay-footer__link unionbay-footer__link--static">Do not sell or share</span></li>
+        <li><button type="button" class="unionbay-footer__link unionbay-footer__link--button">Cookie settings</button></li>
+      {%- when 'affiliates' -%}
+        <li><a href="/pages/affiliate-program" class="unionbay-footer__link">Become an affiliate</a></li>
+        <li><a href="/pages/vendors" class="unionbay-footer__link">Vendor network</a></li>
+      {%- when 'blog' -%}
+        <li><a href="/pages/about" class="unionbay-footer__link">About MSA</a></li>
+        <li><a href="/pages/services" class="unionbay-footer__link">Sourcing services</a></li>
+        <li><a href="/pages/lookbook" class="unionbay-footer__link">Lookbook</a></li>
+        <li><a href="/pages/contact-us" class="unionbay-footer__link">Get in touch</a></li>
+      {%- when 'shop' -%}
+        <li><a href="/collections/mens-clothing-shop-all" class="unionbay-footer__link">Men's clothing</a></li>
+        <li><a href="/collections/womens-clothing-shop-all" class="unionbay-footer__link">Women's clothing</a></li>
+        <li><a href="/collections/mens-clothing-shop-all?ub_cat=shirts" class="unionbay-footer__link">Men's shirts</a></li>
+        <li><a href="/collections/mens-clothing-shop-all?ub_cat=pants" class="unionbay-footer__link">Men's pants</a></li>
+        <li><a href="/collections/womens-clothing-shop-all?ub_cat=shirts" class="unionbay-footer__link">Women's shirts</a></li>
+        <li><a href="/collections/womens-clothing-shop-all?ub_cat=shorts" class="unionbay-footer__link">Women's shorts</a></li>
+      {%- else -%}
+        {%- if menu != blank -%}
+          {%- for link in menu.links -%}
+            <li>
+              <a href="{{ link.url }}" class="unionbay-footer__link">{{ link.title }}</a>
+            </li>
+          {%- endfor -%}
+        {%- endif -%}
+    {%- endcase -%}
+  </ul>
+</div>

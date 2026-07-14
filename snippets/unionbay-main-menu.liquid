@@ -1,0 +1,146 @@
+{% doc %}
+  Union Bay hardcoded main navigation (desktop + mobile).
+
+  @param {object} section - Header section
+  @param {boolean} enable_rtl
+  @param {string} section_width
+  @param {boolean} uppercase_first
+  @param {object} theme_st
+  @param {string} view - "desktop" or "mobile"
+{% enddoc %}
+
+{%- liquid
+  assign section_st = section.settings
+  assign view = view | default: 'desktop'
+  assign nav_class = 'visible-1025'
+  if view == 'mobile'
+    assign nav_class = 'block-1025'
+  endif
+
+  if collections['womens-clothing-shop-all'] != blank
+    assign women_shop = collections['womens-clothing-shop-all'].url
+  elsif collections['dress'] != blank
+    assign women_shop = collections['dress'].url
+  else
+    assign women_shop = '/collections/womens-clothing-shop-all'
+  endif
+
+  if collections['mens-clothing-shop-all'] != blank
+    assign men_shop = collections['mens-clothing-shop-all'].url
+  elsif collections['t-shirts'] != blank
+    assign men_shop = collections['t-shirts'].url
+  else
+    assign men_shop = '/collections/mens-clothing-shop-all'
+  endif
+-%}
+
+{%- comment -%} Women {%- endcomment -%}
+<li class="level0 menu-parent menu-parent__horizontal mega-menu {{ nav_class }}">
+  <menu-item class="relative static-1025 flex justify-between align-center border-bottom border-bottom-1025-0 header-color px-15">
+    <a class="no-underline py-10 relative lh-normal inline-flex min-h-55 min-h-1025-50 z-1 align-center{% if theme_st.menu_font == 'heading_font' %} heading-style{% endif %}{% if uppercase_first %} uppercase{% endif %}" href="{{ women_shop }}" aria-label="Women">
+      <span>Women</span>
+      <open-children-toggle class="inline-flex flex-end align-center ms-5 touch-target-mb">
+        <svg class="icon-down hidden block-1025" width="10" height="6"><use href="#icon-arrow-down" /></svg>
+      </open-children-toggle>
+    </a>
+    <open-children-toggle class="inline-flex flex-end align-center pointer ms-5 absolute inset-0 static-1025">
+      {%- if enable_rtl -%}
+        <svg class="icon-down block hidden-1025" width="6" height="11"><use href="#icon-back" /></svg>
+      {%- else -%}
+        <svg class="icon-down block hidden-1025" width="6" height="11"><use href="#icon-next" /></svg>
+      {%- endif -%}
+    </open-children-toggle>
+  </menu-item>
+  <div class="custom-scrollbar submenu submenu-horizontal unionbay-mega-panel invisible-1025 absolute left-0 gradient p-0 py-1025-40 full-width inset-x-0 overflow-x-hidden">
+    <div class="hidden-1025 grey-bg px-30 border-bottom flex gap-15 align-center justify-between{% if theme_st.menu_font == 'heading_font' %} heading-style{% endif %}">
+      <back-menu class="py-10 min-h-55 min-h-1025-50 inline-flex gap-20 align-center fs-big-1 heading-style" role="link">
+        {%- if enable_rtl -%}<svg width="6" height="11" fill="none"><use href="#icon-next" /></svg>{%- else -%}<svg width="6" height="11" fill="none"><use href="#icon-back" /></svg>{%- endif -%}
+        Women
+      </back-menu>
+      <close-menu class="close-menu lh-1 ms-10"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><use href="#icon-close" /></svg></close-menu>
+    </div>
+    <div class="fluid_container">
+      <div class="flex flex-column gap flex-1025-row" style="--col-mega-width: 0%; --col-gap: 30px">
+        <div class="menu-list" style="--row-gap: 40px; --col-desktop: 4;">
+          {%- render 'unionbay-mega-menu-women' -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+
+{%- comment -%} Men {%- endcomment -%}
+<li class="level0 menu-parent menu-parent__horizontal mega-menu {{ nav_class }}">
+  <menu-item class="relative static-1025 flex justify-between align-center border-bottom border-bottom-1025-0 header-color px-15">
+    <a class="no-underline py-10 relative lh-normal inline-flex min-h-55 min-h-1025-50 z-1 align-center{% if theme_st.menu_font == 'heading_font' %} heading-style{% endif %}{% if uppercase_first %} uppercase{% endif %}" href="{{ men_shop }}" aria-label="Men">
+      <span>Men</span>
+      <open-children-toggle class="inline-flex flex-end align-center ms-5 touch-target-mb">
+        <svg class="icon-down hidden block-1025" width="10" height="6"><use href="#icon-arrow-down" /></svg>
+      </open-children-toggle>
+    </a>
+    <open-children-toggle class="inline-flex flex-end align-center pointer ms-5 absolute inset-0 static-1025">
+      {%- if enable_rtl -%}<svg class="icon-down block hidden-1025" width="6" height="11"><use href="#icon-back" /></svg>{%- else -%}<svg class="icon-down block hidden-1025" width="6" height="11"><use href="#icon-next" /></svg>{%- endif -%}
+    </open-children-toggle>
+  </menu-item>
+  <div class="custom-scrollbar submenu submenu-horizontal unionbay-mega-panel invisible-1025 absolute left-0 gradient p-0 py-1025-40 full-width inset-x-0 overflow-x-hidden">
+    <div class="hidden-1025 grey-bg px-30 border-bottom flex gap-15 align-center justify-between{% if theme_st.menu_font == 'heading_font' %} heading-style{% endif %}">
+      <back-menu class="py-10 min-h-55 min-h-1025-50 inline-flex gap-20 align-center fs-big-1 heading-style" role="link">
+        {%- if enable_rtl -%}<svg width="6" height="11" fill="none"><use href="#icon-next" /></svg>{%- else -%}<svg width="6" height="11" fill="none"><use href="#icon-back" /></svg>{%- endif -%}
+        Men
+      </back-menu>
+      <close-menu class="close-menu lh-1 ms-10"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><use href="#icon-close" /></svg></close-menu>
+    </div>
+    <div class="fluid_container">
+      <div class="flex flex-column gap flex-1025-row" style="--col-mega-width: 0%; --col-gap: 30px">
+        <div class="menu-list" style="--row-gap: 40px; --col-desktop: 4;">
+          {%- render 'unionbay-mega-menu-men' -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+
+{%- liquid
+  if collections['pose'] != blank
+    assign pose_url = collections['pose'].url
+  else
+    assign pose_url = '/collections/pose'
+  endif
+  if collections['underwidsix'] != blank
+    assign underwidsix_url = collections['underwidsix'].url
+  else
+    assign underwidsix_url = '/collections/underwidsix'
+  endif
+  if collections['millionaire'] != blank
+    assign millionaire_url = collections['millionaire'].url
+  else
+    assign millionaire_url = '/collections/millionaire'
+  endif
+-%}
+
+{%- comment -%} POSE {%- endcomment -%}
+<li class="level0 single {{ nav_class }}">
+  <menu-item class="relative static-1025 flex justify-between align-center border-bottom border-bottom-1025-0 header-color px-15">
+    <a class="no-underline py-10 relative lh-normal inline-flex min-h-55 min-h-1025-50 z-1 align-center{% if theme_st.menu_font == 'heading_font' %} heading-style{% endif %}{% if uppercase_first %} uppercase{% endif %}" href="{{ pose_url }}" aria-label="POSE">
+      <span>POSE</span>
+    </a>
+  </menu-item>
+</li>
+
+{%- comment -%} UNDERWIDSIX {%- endcomment -%}
+<li class="level0 single {{ nav_class }}">
+  <menu-item class="relative static-1025 flex justify-between align-center border-bottom border-bottom-1025-0 header-color px-15">
+    <a class="no-underline py-10 relative lh-normal inline-flex min-h-55 min-h-1025-50 z-1 align-center{% if theme_st.menu_font == 'heading_font' %} heading-style{% endif %}{% if uppercase_first %} uppercase{% endif %}" href="{{ underwidsix_url }}" aria-label="UNDERWIDSIX">
+      <span>UNDERWIDSIX</span>
+    </a>
+  </menu-item>
+</li>
+
+{%- comment -%} Millionaire {%- endcomment -%}
+<li class="level0 single {{ nav_class }}">
+  <menu-item class="relative static-1025 flex justify-between align-center border-bottom border-bottom-1025-0 header-color px-15">
+    <a class="no-underline py-10 relative lh-normal inline-flex min-h-55 min-h-1025-50 z-1 align-center{% if theme_st.menu_font == 'heading_font' %} heading-style{% endif %}{% if uppercase_first %} uppercase{% endif %}" href="{{ millionaire_url }}" aria-label="Millionaire">
+      <span>Millionaire</span>
+    </a>
+  </menu-item>
+</li>

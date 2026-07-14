@@ -1,0 +1,116 @@
+{% doc %}
+  Size recommender trigger and modal form for product pages.
+
+  @param {product} [product] - Product object (omit for standalone mode)
+  @param {object} section - Section object
+  @param {object} [block] - Variant picker block settings
+  @param {string} [size_option_name] - Size option label (e.g. Size)
+  @param {array} [size_values] - Available size values for the product
+  @param {boolean} [standalone] - Show as standalone tool without applying to a product
+{% enddoc %}
+
+{%- liquid
+  assign show_recommender = true
+  if block != blank and block.settings.show_size_recommender == false
+    assign show_recommender = false
+  endif
+  if settings.show_size_recommender == false
+    assign show_recommender = false
+  endif
+
+  assign label = 'general.product.size_recommender.label' | t
+  if block != blank and block.settings.size_recommender_label != blank
+    assign label = block.settings.size_recommender_label
+  endif
+
+  assign recommender_id = 'size-recommender-' | append: section.id
+  if size_option_name != blank
+    assign recommender_id = recommender_id | append: '-' | append: size_option_name | handleize
+  endif
+-%}
+
+{%- if show_recommender -%}
+  <size-recommender
+    id="{{ recommender_id }}"
+    class="size-recommender pointer underline hover-heading-color transition"
+    data-text-header="{{ 'general.product.size_recommender.title' | t }}"
+    data-custom-class="size_recommender"
+    data-section-id="{{ section.id }}"
+    {% if size_option_name != blank %}
+      data-size-option="{{ size_option_name | escape }}"
+    {% endif %}
+    {% if standalone %}
+      data-standalone="true"
+    {% endif %}
+    {% if size_values != blank %}
+      data-sizes='{{ size_values | json }}'
+    {% endif %}
+  >
+    <button type="button" class="size-recommender__trigger btn-reset underline">
+      {{ label }}
+    </button>
+
+    <div class="size-recommender__content hidden">
+      <div class="size-recommender__form">
+        <p class="size-recommender__intro">{{ 'general.product.size_recommender.intro' | t }}</p>
+
+        <div class="size-recommender__grid">
+          <div class="size-recommender__field">
+            <label for="{{ recommender_id }}-dept">{{ 'general.product.size_recommender.department' | t }}</label>
+            <select id="{{ recommender_id }}-dept" data-msa-dept>
+              <option value="men">{{ 'general.product.size_recommender.men' | t }}</option>
+              <option value="women">{{ 'general.product.size_recommender.women' | t }}</option>
+            </select>
+          </div>
+
+          <div class="size-recommender__field">
+            <label for="{{ recommender_id }}-type">{{ 'general.product.size_recommender.product_type' | t }}</label>
+            <select id="{{ recommender_id }}-type" data-msa-type>
+              <option value="top">{{ 'general.product.size_recommender.tops' | t }}</option>
+              <option value="bottom">{{ 'general.product.size_recommender.bottoms' | t }}</option>
+            </select>
+          </div>
+
+          <div class="size-recommender__field">
+            <label for="{{ recommender_id }}-height">{{ 'general.product.size_recommender.height' | t }}</label>
+            <input id="{{ recommender_id }}-height" type="number" min="48" max="84" step="1" data-msa-height value="68" placeholder="68">
+          </div>
+
+          <div class="size-recommender__field">
+            <label for="{{ recommender_id }}-weight">{{ 'general.product.size_recommender.weight' | t }}</label>
+            <input id="{{ recommender_id }}-weight" type="number" min="80" max="350" step="1" data-msa-weight value="165" placeholder="165">
+          </div>
+
+          <div class="size-recommender__field" data-msa-chest-wrap>
+            <label for="{{ recommender_id }}-chest" data-msa-chest-label>{{ 'general.product.size_recommender.chest' | t }}</label>
+            <input id="{{ recommender_id }}-chest" type="number" min="28" max="60" step="0.5" data-msa-chest value="40" placeholder="40">
+          </div>
+
+          <div class="size-recommender__field" data-msa-waist-wrap>
+            <label for="{{ recommender_id }}-waist">{{ 'general.product.size_recommender.waist' | t }}</label>
+            <input id="{{ recommender_id }}-waist" type="number" min="22" max="50" step="0.5" data-msa-waist value="32" placeholder="32">
+          </div>
+
+          <div class="size-recommender__field size-recommender__field--full">
+            <label for="{{ recommender_id }}-fit">{{ 'general.product.size_recommender.fit' | t }}</label>
+            <select id="{{ recommender_id }}-fit" data-msa-fit>
+              <option value="slim">{{ 'general.product.size_recommender.fit_slim' | t }}</option>
+              <option value="regular" selected>{{ 'general.product.size_recommender.fit_regular' | t }}</option>
+              <option value="relaxed">{{ 'general.product.size_recommender.fit_relaxed' | t }}</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="button" class="size-recommender__submit btn btn-primary" data-msa-submit>
+          {{ 'general.product.size_recommender.submit' | t }}
+        </button>
+
+        <div class="size-recommender__result hidden" data-msa-result>
+          <p class="size-recommender__result-label">{{ 'general.product.size_recommender.result' | t }}</p>
+          <p class="size-recommender__result-size" data-msa-result-size></p>
+          <p class="size-recommender__result-note" data-msa-result-note></p>
+        </div>
+      </div>
+    </div>
+  </size-recommender>
+{%- endif -%}

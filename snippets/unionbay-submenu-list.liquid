@@ -1,0 +1,165 @@
+{% doc %}
+  Union Bay mega menu — left sidebar + multi-column grid.
+
+  Works with Shopify Admin navigation. Optional title prefixes:
+  - `[sidebar]` — force left rail
+  - `[external]` — external-link icon
+  - `[sale]` — red text
+
+  Without prefixes: items with sub-links become columns; items without sub-links go in the sidebar.
+
+  @param {link} link - Top-level menu link with children
+  @param {object} section - Header section object
+{% enddoc %}
+
+{%- liquid
+  assign has_sidebar_prefix = false
+  assign sidebar_count = 0
+  assign column_count = 0
+
+  for child_link in link.links
+    if child_link.title contains '[sidebar]'
+      assign has_sidebar_prefix = true
+    endif
+  endfor
+
+  for child_link in link.links
+    assign is_sidebar = false
+    if has_sidebar_prefix
+      if child_link.title contains '[sidebar]'
+        assign is_sidebar = true
+      endif
+    elsif child_link.links.size == 0
+      assign is_sidebar = true
+    endif
+
+    if is_sidebar
+      assign sidebar_count = sidebar_count | plus: 1
+    else
+      assign column_count = column_count | plus: 1
+    endif
+  endfor
+-%}
+
+{%- if link.links.size > 0 -%}
+  <div class="unionbay-mega-menu__layout flex flex-1025-row{% if column_count == 0 %} unionbay-mega-menu__layout--sidebar-only{% endif %}">
+    {%- if sidebar_count > 0 -%}
+      <ul class="unionbay-mega-menu__sidebar list-unstyled">
+        {%- for child_link in link.links -%}
+          {%- liquid
+            assign is_sidebar = false
+            if has_sidebar_prefix
+              if child_link.title contains '[sidebar]'
+                assign is_sidebar = true
+              endif
+            elsif child_link.links.size == 0
+              assign is_sidebar = true
+            endif
+
+            unless is_sidebar
+              continue
+            endunless
+
+            assign clean_title = child_link.title | replace: '[sidebar]', '' | replace: '[external]', '' | replace: '[sale]', '' | replace: '[hot]', '' | replace: '[new]', '' | replace: '[popular]', '' | strip
+            assign is_external = false
+            if child_link.title contains '[external]'
+              assign is_external = true
+            endif
+            assign is_sale = false
+            if child_link.title contains '[sale]'
+              assign is_sale = true
+            endif
+            if clean_title == 'Sale'
+              assign is_sale = true
+            endif
+            if child_link.url contains 'sale'
+              assign is_sale = true
+            endif
+          -%}
+          <li class="unionbay-mega-menu__sidebar-item">
+            <a
+              href="{{ child_link.url }}"
+              class="unionbay-mega-menu__sidebar-link no-underline{% if is_sale %} unionbay-mega-menu__link--sale{% endif %}"
+              {% if is_external %}target="_blank" rel="noopener"{% endif %}
+            >
+              <span>{{ clean_title }}</span>
+              {%- if is_external -%}
+                <svg class="unionbay-mega-menu__external" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                  <path d="M1.5 8.5L8.5 1.5M8.5 1.5H3.5M8.5 1.5V6.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              {%- endif -%}
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if column_count > 0 -%}
+      <ul
+        class="unionbay-mega-menu__columns subchildmenu list-unstyled grid grid-cols gap"
+        style="--col-desktop: 4; --row-gap: 2.5rem;"
+      >
+        {%- for child_link in link.links -%}
+          {%- liquid
+            assign is_sidebar = false
+            if has_sidebar_prefix
+              if child_link.title contains '[sidebar]'
+                assign is_sidebar = true
+              endif
+            elsif child_link.links.size == 0
+              assign is_sidebar = true
+            endif
+
+            if is_sidebar
+              continue
+            endif
+
+            assign clean_title = child_link.title | replace: '[sidebar]', '' | replace: '[external]', '' | replace: '[sale]', '' | replace: '[hot]', '' | replace: '[new]', '' | replace: '[popular]', '' | strip
+            assign is_sale = false
+            if child_link.title contains '[sale]'
+              assign is_sale = true
+            endif
+            if clean_title == 'Sale'
+              assign is_sale = true
+            endif
+            if child_link.url contains 'sale'
+              assign is_sale = true
+            endif
+          -%}
+          <li class="menu-link level-1 unionbay-mega-menu__column">
+            <a
+              href="{{ child_link.url }}"
+              class="unionbay-mega-menu__column-heading menu_item-link no-underline{% if is_sale %} unionbay-mega-menu__link--sale{% if child_link.links.size == 0 %} unionbay-mega-menu__column-heading--solo{% endif %}{% elsif child_link.links.size == 0 %} unionbay-mega-menu__column-heading--solo{% endif %}"
+            >
+              {{ clean_title }}
+            </a>
+            {%- if child_link.links.size > 0 -%}
+              <ul class="unionbay-mega-menu__column-links list-unstyled">
+                {%- for grandchild_link in child_link.links -%}
+                  {%- liquid
+                    assign grandchild_title = grandchild_link.title | replace: '[sale]', '' | replace: '[hot]', '' | replace: '[new]', '' | replace: '[popular]', '' | strip
+                    assign grandchild_sale = false
+                    if grandchild_link.title contains '[sale]'
+                      assign grandchild_sale = true
+                    endif
+                    if grandchild_link.url contains 'sale'
+                      assign grandchild_sale = true
+                    endif
+                  -%}
+                  <li class="menu-link level-2">
+                    <a
+                      href="{{ grandchild_link.url }}"
+                      class="unionbay-mega-menu__column-link menu_item-link no-underline{% if grandchild_sale %} unionbay-mega-menu__link--sale{% endif %}"
+                    >
+                      {{ grandchild_title }}
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+{%- endif -%}

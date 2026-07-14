@@ -1,0 +1,35 @@
+{
+  "sections": {
+    "page-heading": {
+      "type": "page-heading",
+      "blocks": {
+        "breadcrumb": { "type": "breadcrumb", "settings": {} },
+        "heading": { "type": "heading", "settings": { "page_title": "Privacy policy", "header_size": "default" } }
+      },
+      "block_order": ["breadcrumb", "heading"],
+      "settings": {
+        "section_width": "fluid_container",
+        "alignment": "center",
+        "overlay_opacity": 0,
+        "height": "based_on_content",
+        "padding_top": 40,
+        "padding_bottom": 20
+      }
+    },
+    "main": {
+      "type": "msa-info-page",
+      "blocks": {
+        "content": {
+          "type": "content",
+          "settings": {
+            "title": "Your privacy matters",
+            "body": "<p>Moon Style Apparel (MSA) respects your privacy and is committed to protecting your personal information.</p><p>We collect information you provide when placing orders, creating an account, subscribing to our newsletter, or contacting us. This may include your name, email address, shipping address, and payment details.</p><p>We use this information to process orders, communicate with you, improve our services, and comply with legal obligations. We do not sell your personal data to third parties.</p><p>For questions about this policy, please <a href=\"/pages/contact-us\">contact us</a>.</p>"
+          }
+        }
+      },
+      "block_order": ["content"],
+      "settings": { "section_width": "fluid_container", "padding_top": 20, "padding_bottom": 60 }
+    }
+  },
+  "order": ["page-heading", "main"]
+}

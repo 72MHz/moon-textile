@@ -1,0 +1,54 @@
+{% doc %}
+  Renders size guide and size recommender links for a size option row.
+
+  @param {product} product - Product object
+  @param {object} section - Section object
+  @param {object} block - Variant picker block settings
+  @param {object} option - Product option with values
+  @param {string} option_name_nospace - Option name without spaces
+  @param {string} option_size - Theme setting for size option names
+{% enddoc %}
+
+{%- if option_size contains option_name_nospace -%}
+  <div class="size-option-extras flex align-center gap-15 flex-wrap">
+    {%- if block.settings.show_size_guide -%}
+      {%- liquid
+        assign product_collections = product.collections
+        assign collection_size_chart = ''
+        for productCollection in product_collections
+          if productCollection.metafields.custom.size_chart != blank
+            assign collection_size_chart = productCollection.metafields.custom.size_chart
+          endif
+        endfor
+      -%}
+      {%- if block.settings.size_guide_page != blank
+        or product.metafields.custom.size_chart != blank
+        or collection_size_chart != ''
+      -%}
+        <product-addons
+          data-text-header="{{ 'general.product.size_guide' | t }}"
+          data-custom-class="size_chart"
+          class="product-addons__ask-question pointer underline hover-heading-color transition skeleton-loading"
+        >
+          {{ block.settings.size_guide_label }}
+          <div class="product-addons__content ask-question__content hidden">
+            {%- if product.metafields.custom.size_chart != blank -%}
+              {%- assign size_chart_html = product.metafields.custom.size_chart -%}
+              {{ pages[size_chart_html].content }}
+            {%- else -%}
+              {{ pages[block.settings.size_guide_page].content }}
+            {%- endif -%}
+          </div>
+        </product-addons>
+      {%- endif -%}
+    {%- endif -%}
+
+    {% render 'size-recommender',
+      product: product,
+      section: section,
+      block: block,
+      size_option_name: option.name,
+      size_values: option.values
+    %}
+  </div>
+{%- endif -%}

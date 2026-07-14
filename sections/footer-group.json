@@ -1,0 +1,86 @@
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "unionbay_footer": {
+      "type": "unionbay-footer",
+      "blocks": {
+        "link_list_about": {
+          "type": "link_list",
+          "settings": {
+            "heading": "About",
+            "preset": "about"
+          }
+        },
+        "link_list_help": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Help",
+            "preset": "help"
+          }
+        },
+        "link_list_privacy": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Privacy Notices",
+            "preset": "privacy"
+          }
+        },
+        "link_list_affiliates": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Partners",
+            "preset": "affiliates"
+          }
+        },
+        "link_list_blog": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick links",
+            "preset": "blog"
+          }
+        },
+        "link_list_shop": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Shop by Category",
+            "preset": "shop"
+          }
+        },
+        "newsletter_signup": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "Take 15% off your order when you signup!",
+            "description": "Promo code will be emailed to you.",
+            "email_placeholder": "Email address",
+            "button_label": "Submit",
+            "note": "By submitting your email address, you agree to receive email marketing notifications from us. You may opt out anytime."
+          }
+        }
+      },
+      "block_order": [
+        "link_list_about",
+        "link_list_help",
+        "link_list_privacy",
+        "link_list_affiliates",
+        "link_list_blog",
+        "link_list_shop",
+        "newsletter_signup"
+      ],
+      "settings": {
+        "section_width": "fluid_container",
+        "color_scheme": "",
+        "enable_back_top": false,
+        "show_social": true,
+        "payment_enable": true,
+        "enable_rewards_bar": true,
+        "copyright_text": "©2026 Moon Style Apparel. All rights reserved.",
+        "padding_top": 50,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "unionbay_footer"
+  ]
+}

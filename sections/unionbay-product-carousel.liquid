@@ -1,0 +1,356 @@
+{%- liquid
+  assign section_st = section.settings
+  assign section_width = section_st.section_width
+  assign color_scheme = section_st.color_scheme
+  assign items_per_row = section_st.items_per_row
+  assign items_per_row_mobile = section_st.items_per_row_mobile
+  assign column_gap = section_st.column_gap
+  assign show_arrow = section_st.show_arrow
+  assign scroll_animation = settings.scroll_animation
+  assign collection = collections[section_st.collection]
+  assign filter_tag = section_st.filter_tag | strip | downcase
+  assign product_limit = section_st.items_to_show | at_most: 50
+  assign has_product_list = false
+  if section_st.product_list != blank and section_st.product_list.size > 0
+    assign has_product_list = true
+  endif
+  assign has_collection_products = false
+  if collection != blank and collection.products.size > 0
+    assign has_collection_products = true
+  endif
+
+  assign carousel_department = 'women'
+
+  if section_st.collection == 't-shirts'
+    assign carousel_department = 'men'
+  elsif section_st.collection == 'dress'
+    assign carousel_department = 'women'
+  elsif section_st.department == 'men'
+    assign carousel_department = 'men'
+  elsif section_st.department == 'women'
+    assign carousel_department = 'women'
+  endif
+
+  assign heading_down = section_st.heading | downcase
+  if heading_down contains 'women'
+    assign carousel_department = 'women'
+  elsif heading_down contains 'mens' or heading_down contains "men's"
+    assign carousel_department = 'men'
+  endif
+
+  if carousel_department == 'men'
+    if collections['mens-clothing-shop-all'] != blank
+      assign shop_all_href = collections['mens-clothing-shop-all'].url
+    elsif collections['t-shirts'] != blank
+      assign shop_all_href = collections['t-shirts'].url
+    else
+      assign shop_all_href = '/collections/t-shirts'
+    endif
+  else
+    if collections['womens-clothing-shop-all'] != blank
+      assign shop_all_href = collections['womens-clothing-shop-all'].url
+    elsif collections['dress'] != blank
+      assign shop_all_href = collections['dress'].url
+    else
+      assign shop_all_href = '/collections/dress'
+    endif
+  endif
+-%}
+{%- capture style -%}
+  --section-pt: {{ section_st.padding_top }};
+  --section-pb: {{ section_st.padding_bottom }};
+{%- endcapture -%}
+{%- capture col_style -%}
+  --col-desktop: {{ items_per_row }};
+  --col-number: {{ items_per_row_mobile }};
+  --col-tablet: 3;
+  --col-gap: 15px;
+  --col-gap-desktop: {{ column_gap }}px;
+  --col-mobile: {{ items_per_row_mobile }};
+{%- endcapture -%}
+
+<section
+  class="section unionbay-product-carousel color-{{ color_scheme }} gradient{% if section_st.padding_top < 30 %} pt-min{% endif %}{% if section_st.padding_bottom < 30 %} pb-min{% endif %}"
+  style="{{ style | strip | strip_newlines }}"
+  {% if section_st.heading != blank %}aria-label="{{ section_st.heading | escape }}"{% endif %}
+>
+  <div class="{{ section_width }}">
+    <div class="unionbay-product-carousel__header flex justify-between align-center gap-15 flex-wrap">
+      {%- if section_st.heading != blank -%}
+        <h3 class="unionbay-product-carousel__heading mt-0 mb-0">
+          {{ section_st.heading }}
+        </h3>
+      {%- endif -%}
+      {%- if section_st.shop_all_label != blank -%}
+        <a href="{{ shop_all_href }}" class="unionbay-product-carousel__shop-all">
+          {{ section_st.shop_all_label }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="unionbay-product-carousel__slider relative">
+      {%- if has_product_list or has_collection_products -%}
+        <slide-section
+          class="swiper lazy-loading-swiper-before"
+          data-section-id="{{ section.id }}"
+          data-autoplay="false"
+          data-effect="slide"
+          data-loop="false"
+          data-speed="800"
+          data-spacing="{{ column_gap }}"
+          data-mobile="{{ items_per_row_mobile }}"
+          data-tablet="3"
+          data-desktop="{{ items_per_row }}"
+          data-arrow-centerimage="1"
+          style="{{ col_style | strip | strip_newlines }}"
+        >
+          {%- if show_arrow -%}
+            {%- render 'swiper-navigation', class: 'unionbay-carousel-nav' -%}
+          {%- endif -%}
+          <div class="swiper-wrapper">
+            {%- liquid
+              assign rendered_count = 0
+            -%}
+            {%- if has_product_list -%}
+              {%- for product in section_st.product_list limit: product_limit -%}
+                {%- if product.featured_image != blank -%}
+                  {% render 'product-item',
+                  card_product: product,
+                  section_id: section.id,
+                  container: section_width,
+                  colunm: items_per_row,
+                  colunm_mobile: items_per_row_mobile,
+                  padding: column_gap,
+                  class: ' swiper-slide unionbay-carousel-slide',
+                  template_enable_action: true,
+                  template_enable_product_vendor: false,
+                  template_enable_rate: false,
+                  template_enable_product_short_description: false,
+                  template_enable_color_swatches: true,
+                  template_enable_price: true,
+                  template_enable_add_cart: true,
+                  template_enable_product_badges: true,
+                  unionbay_mode: true,
+                  scroll_animation: 'none',
+                  collection_product: true,
+                  indexFor: forloop.index
+                %}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- else -%}
+              {%- liquid
+                if section_st.sort_by == 'newest'
+                  assign carousel_products = collection.products | sort: 'published_at' | reverse
+                else
+                  assign carousel_products = collection.products
+                endif
+              -%}
+              {%- for product in carousel_products -%}
+                {%- if rendered_count >= product_limit -%}
+                  {%- break -%}
+                {%- endif -%}
+                {%- liquid
+                  assign show_product = true
+                  if product.featured_image == blank
+                    assign show_product = false
+                  endif
+                  if filter_tag != blank
+                    assign tag_match = false
+                    for tag in product.tags
+                      assign tag_downcase = tag | downcase
+                      if tag_downcase == filter_tag
+                        assign tag_match = true
+                        break
+                      endif
+                    endfor
+                    unless tag_match
+                      assign show_product = false
+                    endunless
+                  endif
+                -%}
+                {%- if show_product -%}
+                  {%- assign rendered_count = rendered_count | plus: 1 -%}
+                  {% render 'product-item',
+                    card_product: product,
+                    section_id: section.id,
+                    container: section_width,
+                    colunm: items_per_row,
+                    colunm_mobile: items_per_row_mobile,
+                    padding: column_gap,
+                    class: ' swiper-slide unionbay-carousel-slide',
+                    template_enable_action: true,
+                    template_enable_product_vendor: false,
+                    template_enable_rate: false,
+                    template_enable_product_short_description: false,
+                    template_enable_color_swatches: true,
+                    template_enable_price: true,
+                    template_enable_add_cart: true,
+                    template_enable_product_badges: true,
+                    unionbay_mode: true,
+                    scroll_animation: 'none',
+                    collection_product: true,
+                    indexFor: rendered_count
+                  %}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+          </div>
+        </slide-section>
+      {%- else -%}
+        <p class="unionbay-product-carousel__empty">{{ 'unionbay.carousel.empty' | t }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Unionbay product carousel",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:sections.all.section_width.label",
+      "default": "full_width",
+      "options": [
+        { "value": "full_width", "label": "t:sections.all.section_width.full_width.label" },
+        { "value": "fluid_container", "label": "t:sections.all.section_width.fluid_container.label" }
+      ]
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:sections.collection-tab.blocks.collection",
+      "info": "Products must be added to this collection in Shopify admin to appear here."
+    },
+    {
+      "type": "product_list",
+      "id": "product_list",
+      "label": "t:unionbay.carousel.product_list",
+      "info": "t:unionbay.carousel.product_list_info",
+      "limit": 50
+    },
+    {
+      "type": "text",
+      "id": "filter_tag",
+      "label": "t:unionbay.carousel.filter_tag",
+      "info": "t:unionbay.carousel.filter_tag_info"
+    },
+    {
+      "type": "select",
+      "id": "sort_by",
+      "label": "t:unionbay.carousel.sort_by",
+      "default": "newest",
+      "options": [
+        { "value": "newest", "label": "t:unionbay.carousel.sort_newest" },
+        { "value": "collection", "label": "t:unionbay.carousel.sort_collection" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "department",
+      "label": "t:unionbay.shop_all.department",
+      "default": "women",
+      "options": [
+        { "value": "women", "label": "t:unionbay.shop_all.women" },
+        { "value": "men", "label": "t:unionbay.shop_all.men" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.all.section_header.heading.label",
+      "default": "Shop all womens"
+    },
+    {
+      "type": "text",
+      "id": "shop_all_label",
+      "label": "Shop all link label",
+      "default": "SHOP ALL"
+    },
+    {
+      "type": "url",
+      "id": "shop_all_link",
+      "label": "Shop all link"
+    },
+    {
+      "type": "range",
+      "id": "items_to_show",
+      "min": 4,
+      "max": 50,
+      "step": 1,
+      "default": 24,
+      "label": "t:sections.all.items.items_to_show.label"
+    },
+    {
+      "type": "range",
+      "id": "items_per_row",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4,
+      "label": "t:sections.all.items.items_per_row.label"
+    },
+    {
+      "type": "range",
+      "id": "items_per_row_mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 1,
+      "label": "t:sections.all.items.items_per_row_mobile.label"
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "default": 10,
+      "unit": "px",
+      "label": "t:sections.all.items.column_gap.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrow",
+      "label": "t:sections.all.carousel_settings.show-next-back.label",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 43
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 37
+    }
+  ],
+  "presets": [
+    {
+      "name": "Unionbay product carousel"
+    }
+  ]
+}
+{% endschema %}

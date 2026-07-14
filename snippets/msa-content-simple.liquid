@@ -1,0 +1,17 @@
+{% doc %}
+  Simple MSA info page body.
+
+  @param {string} title - Section title
+  @param {string} body - HTML body content
+{% enddoc %}
+
+<div class="section msa-page" style="--section-pt: 20px; --section-pb: 60px;">
+  <div class="fluid_container">
+    <div class="msa-page__block">
+      {%- if title != blank -%}
+        <h3 class="msa-page__title">{{ title }}</h3>
+      {%- endif -%}
+      <div class="msa-page__text rte">{{ body }}</div>
+    </div>
+  </div>
+</div>

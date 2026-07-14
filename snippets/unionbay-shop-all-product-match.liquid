@@ -1,0 +1,55 @@
+{% doc %}
+  Checks whether a product belongs to a shop-all category filter.
+
+  Matches in order: product tags, product type, product title keywords.
+
+  @param {product} product - Product to evaluate
+  @param {string} [filter_tags] - Comma-separated tags (optional custom tags)
+  @param {string} [match_keywords] - Comma-separated keywords for type/title matching
+{% enddoc %}
+
+{%- liquid
+  assign is_match = false
+
+  if filter_tags != blank
+    assign tag_list = filter_tags | downcase | split: ','
+    for product_tag in product.tags
+      assign product_tag_down = product_tag | downcase | strip
+      for filter_tag in tag_list
+        assign filter_tag_clean = filter_tag | strip
+        if filter_tag_clean != blank
+          if product_tag_down == filter_tag_clean
+            assign is_match = true
+            break
+          endif
+        endif
+      endfor
+      if is_match
+        break
+      endif
+    endfor
+  endif
+
+  if is_match == false
+    if match_keywords != blank
+      assign product_type_down = product.type | downcase
+      assign product_title_down = product.title | downcase
+      assign keyword_list = match_keywords | downcase | split: ','
+
+      for keyword in keyword_list
+        assign keyword_clean = keyword | strip
+        if keyword_clean != blank
+          if product_type_down contains keyword_clean
+            assign is_match = true
+            break
+          endif
+          if product_title_down contains keyword_clean
+            assign is_match = true
+            break
+          endif
+        endif
+      endfor
+    endif
+  endif
+-%}
+{%- if is_match -%}true{%- else -%}false{%- endif -%}

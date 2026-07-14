@@ -1,0 +1,243 @@
+{%- liquid
+  assign section_st = section.settings
+  assign color_scheme = section_st.color_scheme
+  assign column_gap = section_st.column_gap
+  assign department = section_st.department | default: 'women'
+-%}
+{%- capture style -%}
+  --section-pt: {{ section_st.padding_top }};
+  --section-pb: {{ section_st.padding_bottom }};
+  --ub-category-gap: {{ column_gap }}px;
+{%- endcapture -%}
+
+<section
+  class="section unionbay-category-row sec__unionbay-category-row color-{{ color_scheme }} gradient{% if section_st.padding_top < 30 %} pt-min{% endif %}{% if section_st.padding_bottom < 30 %} pb-min{% endif %}"
+  style="{{ style | strip | strip_newlines }}"
+>
+  <div class="unionbay-category-row__outer">
+    <div class="unionbay-category-row__scroll">
+      <div class="unionbay-category-row__grid">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign block_st = block.settings
+            assign card_collection = collections[block_st.collection]
+            assign card_title = block_st.title
+            if card_title == blank and card_collection != blank
+              assign card_title = card_collection.title
+            endif
+            assign card_image = block_st.image
+          -%}
+          {%- capture card_link -%}
+            {%- render 'unionbay-category-link',
+              custom_link: block_st.link,
+              collection_handle: block_st.collection,
+              fallback_image: block_st.fallback_image,
+              title: card_title,
+              department: department,
+              block_department: block_st.department,
+              category_filter: block_st.category_filter
+            -%}
+          {%- endcapture -%}
+          {%- assign card_link = card_link | strip -%}
+          <a
+            href="{{ card_link }}"
+            class="unionbay-category-row__item"
+            {{ block.shopify_attributes }}
+          >
+            <div class="unionbay-category-row__media">
+              {%- if card_image != blank -%}
+                {{
+                  card_image
+                  | image_url: width: 1600
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '400, 600, 800, 1000, 1200, 1600',
+                    sizes: '(min-width: 768px) 33vw, 67vw',
+                    class: 'unionbay-category-row__image',
+                    alt: card_title
+                }}
+              {%- else -%}
+                <div class="unionbay-category-row__placeholder">
+                  {% liquid
+                    assign fallback_context = block_st.fallback_image
+                    if fallback_context == 'default'
+                      assign fallback_context = ''
+                    endif
+                  %}
+                  {% render 'unionbay-fallback-image',
+                    title: card_title,
+                    context: fallback_context,
+                    alt: card_title,
+                    class: 'unionbay-category-row__image unionbay-fallback-image',
+                    width: 1600,
+                    sizes: '(min-width: 768px) 33vw, 67vw'
+                  %}
+                </div>
+              {%- endif -%}
+              <div class="unionbay-category-row__label-wrap">
+                {%- if card_title != blank -%}
+                  <span class="unionbay-category-row__label">{{ card_title }}</span>
+                {%- endif -%}
+              </div>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Unionbay category row",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:sections.all.section_width.label",
+      "default": "full_width",
+      "options": [
+        { "value": "full_width", "label": "t:sections.all.section_width.full_width.label" },
+        { "value": "fluid_container", "label": "t:sections.all.section_width.fluid_container.label" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "department",
+      "label": "t:unionbay.shop_all.department",
+      "default": "women",
+      "options": [
+        { "value": "women", "label": "t:unionbay.shop_all.women" },
+        { "value": "men", "label": "t:unionbay.shop_all.men" }
+      ]
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "min": 0,
+      "max": 30,
+      "step": 5,
+      "default": 10,
+      "unit": "px",
+      "label": "t:sections.all.items.column_gap.label"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category tile",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Upload a custom image. Product/collection images are not used automatically."
+        },
+        {
+          "type": "select",
+          "id": "department",
+          "label": "t:unionbay.shop_all.department",
+          "default": "women",
+          "options": [
+            { "value": "women", "label": "t:unionbay.shop_all.women" },
+            { "value": "men", "label": "t:unionbay.shop_all.men" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "category_filter",
+          "label": "t:unionbay.shop_all.category_filter",
+          "default": "",
+          "options": [
+            { "value": "", "label": "t:unionbay.shop_all.category_filter_auto" },
+            { "value": "tops", "label": "t:unionbay.shop_all.tops" },
+            { "value": "shirts", "label": "t:unionbay.shop_all.shirts" },
+            { "value": "shorts", "label": "t:unionbay.shop_all.shorts" },
+            { "value": "pants", "label": "t:unionbay.shop_all.pants" },
+            { "value": "shoes", "label": "t:unionbay.shop_all.shoes" },
+            { "value": "jackets", "label": "t:unionbay.shop_all.jackets" },
+            { "value": "best-sellers", "label": "t:unionbay.fallback_image.bestseller" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "fallback_image",
+          "label": "t:unionbay.fallback_image.label",
+          "default": "default",
+          "options": [
+            { "value": "default", "label": "t:unionbay.fallback_image.auto" },
+            { "value": "womens-tops", "label": "t:unionbay.fallback_image.womens_tops" },
+            { "value": "womens-shirts", "label": "t:unionbay.fallback_image.womens_shirts" },
+            { "value": "womens-shorts", "label": "t:unionbay.fallback_image.womens_shorts" },
+            { "value": "womens-pants", "label": "t:unionbay.fallback_image.womens_pants" },
+            { "value": "womens-shoes", "label": "t:unionbay.fallback_image.womens_shoes" },
+            { "value": "mens-tops", "label": "t:unionbay.fallback_image.mens_tops" },
+            { "value": "mens-shirts", "label": "t:unionbay.fallback_image.mens_shirts" },
+            { "value": "mens-shorts", "label": "t:unionbay.fallback_image.mens_shorts" },
+            { "value": "mens-pants", "label": "t:unionbay.fallback_image.mens_pants" },
+            { "value": "womens-bestseller", "label": "t:unionbay.fallback_image.womens_bestseller" },
+            { "value": "mens-bestseller", "label": "t:unionbay.fallback_image.mens_bestseller" },
+            { "value": "bestseller", "label": "t:unionbay.fallback_image.bestseller" }
+          ]
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "t:sections.collection-tab.blocks.collection"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.collection-tab.blocks.collection_title.label"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Unionbay category row",
+      "blocks": [
+        { "type": "category" },
+        { "type": "category" },
+        { "type": "category" }
+      ]
+    }
+  ]
+}
+{% endschema %}

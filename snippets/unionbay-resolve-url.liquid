@@ -1,0 +1,38 @@
+{% doc %}
+  Resolves shop-all / collection URLs that may point to missing collections.
+
+  @param {string} [url] - URL from theme settings
+  @param {string} [shop_type] - women or men
+{% enddoc %}
+
+{%- liquid
+  assign department = shop_type | default: 'women' | strip | downcase
+  assign resolved = ''
+
+  if department == 'men'
+    if collections['mens-clothing-shop-all'] != blank
+      assign resolved = collections['mens-clothing-shop-all'].url
+    elsif collections['t-shirts'] != blank
+      assign resolved = collections['t-shirts'].url
+    else
+      assign resolved = '/collections/mens-clothing-shop-all'
+    endif
+  else
+    if collections['womens-clothing-shop-all'] != blank
+      assign resolved = collections['womens-clothing-shop-all'].url
+    elsif collections['dress'] != blank
+      assign resolved = collections['dress'].url
+    else
+      assign resolved = '/collections/womens-clothing-shop-all'
+    endif
+  endif
+
+  assign custom_url = url | default: ''
+  if custom_url contains 'womens-clothing-shop-all' and collections['womens-clothing-shop-all'] != blank
+    assign resolved = collections['womens-clothing-shop-all'].url
+  endif
+  if custom_url contains 'mens-clothing-shop-all' and collections['mens-clothing-shop-all'] != blank
+    assign resolved = collections['mens-clothing-shop-all'].url
+  endif
+-%}
+{{- resolved -}}

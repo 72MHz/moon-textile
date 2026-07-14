@@ -1,0 +1,58 @@
+{% doc %}
+  Union Bay Women mega menu panel content.
+{% enddoc %}
+
+{%- liquid
+  if collections['womens-clothing-shop-all'] != blank
+    assign women_shop = collections['womens-clothing-shop-all'].url
+  else
+    assign women_shop = collections['dress'].url
+  endif
+-%}
+
+<div class="unionbay-mega-menu__layout flex flex-1025-row">
+  <ul class="unionbay-mega-menu__sidebar list-unstyled">
+    <li class="unionbay-mega-menu__sidebar-item"><a href="{{ women_shop }}" class="unionbay-mega-menu__sidebar-link no-underline"><span>Shop all</span></a></li>
+    <li class="unionbay-mega-menu__sidebar-item"><a href="{{ women_shop }}?ub_cat=tops" class="unionbay-mega-menu__sidebar-link no-underline"><span>Shop all tops</span></a></li>
+    <li class="unionbay-mega-menu__sidebar-item"><a href="{{ women_shop }}?ub_cat=bottoms" class="unionbay-mega-menu__sidebar-link no-underline"><span>Shop all bottoms</span></a></li>
+    <li class="unionbay-mega-menu__sidebar-item"><a href="{{ women_shop }}?ub_cat=new-arrivals" class="unionbay-mega-menu__sidebar-link no-underline"><span>New arrivals</span></a></li>
+    <li class="unionbay-mega-menu__sidebar-item"><a href="{{ women_shop }}?ub_cat=best-sellers" class="unionbay-mega-menu__sidebar-link no-underline"><span>Best sellers</span></a></li>
+  </ul>
+
+  <ul class="unionbay-mega-menu__columns subchildmenu list-unstyled grid grid-cols gap" style="--col-desktop: 4; --row-gap: 2.5rem;">
+    <li class="menu-link level-1 unionbay-mega-menu__column">
+      <a href="{{ women_shop }}?ub_cat=tops" class="unionbay-mega-menu__column-heading menu_item-link no-underline">Tops</a>
+      <ul class="unionbay-mega-menu__column-links list-unstyled">
+        <li class="menu-link level-2"><a href="{{ women_shop }}?ub_cat=shirts" class="unionbay-mega-menu__column-link menu_item-link no-underline">Shirts</a></li>
+        <li class="menu-link level-2"><a href="{{ women_shop }}?ub_cat=tank-tops" class="unionbay-mega-menu__column-link menu_item-link no-underline">Tank tops</a></li>
+        <li class="menu-link level-2"><a href="{{ women_shop }}?ub_cat=sweaters" class="unionbay-mega-menu__column-link menu_item-link no-underline">Sweaters</a></li>
+        <li class="menu-link level-2"><a href="{{ women_shop }}?ub_cat=tops" class="unionbay-mega-menu__column-link menu_item-link no-underline">View all</a></li>
+      </ul>
+    </li>
+    <li class="menu-link level-1 unionbay-mega-menu__column">
+      <a href="{{ women_shop }}?ub_cat=pants" class="unionbay-mega-menu__column-heading menu_item-link no-underline">Pants</a>
+      <ul class="unionbay-mega-menu__column-links list-unstyled">
+        <li class="menu-link level-2"><a href="{{ women_shop }}?ub_cat=cargo-pants" class="unionbay-mega-menu__column-link menu_item-link no-underline">Cargo pants</a></li>
+        <li class="menu-link level-2"><a href="{{ women_shop }}?ub_cat=jogger-pants" class="unionbay-mega-menu__column-link menu_item-link no-underline">Jogger pants</a></li>
+        <li class="menu-link level-2"><a href="{{ women_shop }}?ub_cat=uniform-pants" class="unionbay-mega-menu__column-link menu_item-link no-underline">Uniform pants</a></li>
+        <li class="menu-link level-2"><a href="{{ women_shop }}?ub_cat=pull-on-pants" class="unionbay-mega-menu__column-link menu_item-link no-underline">Pull-on pants</a></li>
+        <li class="menu-link level-2"><a href="{{ women_shop }}?ub_cat=pants" class="unionbay-mega-menu__column-link menu_item-link no-underline">View all</a></li>
+      </ul>
+      <a href="{{ women_shop }}?ub_cat=jeans" class="unionbay-mega-menu__column-heading menu_item-link no-underline unionbay-mega-menu__column-heading--solo">Jeans</a>
+      <a href="{{ women_shop }}?ub_cat=bottoms" class="unionbay-mega-menu__column-heading menu_item-link no-underline unionbay-mega-menu__column-heading--solo">Shortalls &amp; overalls</a>
+    </li>
+    <li class="menu-link level-1 unionbay-mega-menu__column">
+      <a href="{{ women_shop }}?ub_cat=shorts" class="unionbay-mega-menu__column-heading menu_item-link no-underline">Shorts</a>
+      <ul class="unionbay-mega-menu__column-links list-unstyled">
+        <li class="menu-link level-2"><a href="{{ women_shop }}?ub_cat=pull-on-shorts" class="unionbay-mega-menu__column-link menu_item-link no-underline">Pull-on shorts</a></li>
+        <li class="menu-link level-2"><a href="{{ women_shop }}?ub_cat=denim-shorts" class="unionbay-mega-menu__column-link menu_item-link no-underline">Denim shorts</a></li>
+        <li class="menu-link level-2"><a href="{{ women_shop }}?ub_cat=shorts" class="unionbay-mega-menu__column-link menu_item-link no-underline">View all</a></li>
+      </ul>
+      <a href="{{ women_shop }}?ub_cat=tops" class="unionbay-mega-menu__column-heading menu_item-link no-underline unionbay-mega-menu__column-heading--solo">Crops</a>
+    </li>
+    <li class="menu-link level-1 unionbay-mega-menu__column">
+      <a href="{{ women_shop }}?ub_cat=jackets" class="unionbay-mega-menu__column-heading menu_item-link no-underline">Jackets</a>
+      <a href="/collections/all" class="unionbay-mega-menu__column-heading menu_item-link no-underline unionbay-mega-menu__column-heading--solo">Accessories</a>
+    </li>
+  </ul>
+</div>

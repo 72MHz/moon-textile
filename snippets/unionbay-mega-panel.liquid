@@ -1,0 +1,34 @@
+{% doc %}
+  Union Bay mega menu dropdown panel wrapper.
+
+  @param {link} link - Top-level navigation link
+  @param {object} section - Header section
+  @param {boolean} enable_rtl
+  @param {object} theme_st
+{% enddoc %}
+
+<div class="custom-scrollbar submenu submenu-horizontal unionbay-mega-panel invisible-1025 absolute left-0 gradient p-0 py-1025-40 full-width inset-x-0 overflow-x-hidden">
+  <div class="hidden-1025 grey-bg px-30 border-bottom flex gap-15 align-center justify-between{% if theme_st.menu_font == 'heading_font' %} heading-style{% endif %}">
+    <back-menu
+      class="py-10 min-h-55 min-h-1025-50 inline-flex gap-20 align-center fs-big-1 heading-style"
+      role="link"
+    >
+      {%- if enable_rtl -%}
+        <svg width="6" height="11" fill="none"><use href="#icon-next" /></svg>
+      {%- else -%}
+        <svg width="6" height="11" fill="none"><use href="#icon-back" /></svg>
+      {%- endif -%}
+      {{ link.title | replace: '[sidebar]', '' | replace: '[external]', '' | replace: '[sale]', '' | replace: '[hot]', '' | replace: '[new]', '' | replace: '[popular]', '' | strip }}
+    </back-menu>
+    <close-menu class="close-menu lh-1 ms-10">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><use href="#icon-close" /></svg>
+    </close-menu>
+  </div>
+  <div class="fluid_container">
+    <div class="flex flex-column gap flex-1025-row" style="--col-mega-width: 0%; --col-gap: 30px">
+      <div class="menu-list" style="--row-gap: 40px; --col-desktop: 4;">
+        {%- render 'unionbay-submenu-list', link: link, section: section -%}
+      </div>
+    </div>
+  </div>
+</div>

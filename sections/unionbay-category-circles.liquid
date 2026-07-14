@@ -1,0 +1,230 @@
+{%- liquid
+  assign section_st = section.settings
+  assign section_width = section_st.section_width
+  assign color_scheme = section_st.color_scheme
+  assign column_gap = section_st.column_gap
+-%}
+{%- capture style -%}
+  --section-pt: {{ section_st.padding_top }};
+  --section-pb: {{ section_st.padding_bottom }};
+  --ub-circle-gap: {{ column_gap }}px;
+{%- endcapture -%}
+
+<section
+  class="section unionbay-category-circles color-{{ color_scheme }} gradient{% if section_st.padding_top < 30 %} pt-min{% endif %}{% if section_st.padding_bottom < 30 %} pb-min{% endif %}"
+  style="{{ style | strip | strip_newlines }}"
+>
+  <div class="{{ section_width }} unionbay-category-circles__outer">
+    <div class="unionbay-category-circles__scroll">
+      <div class="unionbay-category-circles__grid">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign block_st = block.settings
+            assign card_collection = collections[block_st.collection]
+            assign card_title = block_st.title
+            if card_title == blank and card_collection != blank
+              assign card_title = card_collection.title
+            endif
+            assign card_image = block_st.image
+          -%}
+          {%- capture card_link -%}
+            {%- render 'unionbay-category-link',
+              custom_link: block_st.link,
+              collection_handle: block_st.collection,
+              fallback_image: block_st.fallback_image,
+              title: card_title,
+              block_department: block_st.department,
+              category_filter: block_st.category_filter
+            -%}
+          {%- endcapture -%}
+          {%- assign card_link = card_link | strip -%}
+          <a
+            href="{{ card_link }}"
+            class="unionbay-category-circles__item"
+            {{ block.shopify_attributes }}
+          >
+            <div class="unionbay-category-circles__media overflow-hidden">
+              {%- if card_image != blank -%}
+                {{
+                  card_image
+                  | image_url: width: 300, height: 300, crop: 'top'
+                  | image_tag:
+                    loading: 'lazy',
+                    width: 148,
+                    height: 148,
+                    class: 'unionbay-category-circles__image w-full h-full object-cover',
+                    alt: card_title
+                }}
+              {%- else -%}
+                {% liquid
+                  assign fallback_context = block_st.fallback_image
+                  if fallback_context == 'default'
+                    assign fallback_context = ''
+                  endif
+                %}
+                {% render 'unionbay-fallback-image',
+                  title: card_title,
+                  context: fallback_context,
+                  alt: card_title,
+                  class: 'unionbay-category-circles__image w-full h-full object-cover unionbay-fallback-image',
+                  width: 300
+                %}
+              {%- endif -%}
+            </div>
+            {%- if card_title != blank -%}
+              <span class="unionbay-category-circles__label">{{ card_title }}</span>
+            {%- endif -%}
+          </a>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Unionbay category circles",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:sections.all.section_width.label",
+      "default": "full_width",
+      "options": [
+        { "value": "full_width", "label": "t:sections.all.section_width.full_width.label" },
+        { "value": "fluid_container", "label": "t:sections.all.section_width.fluid_container.label" }
+      ]
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "default": 15,
+      "unit": "px",
+      "label": "t:sections.all.items.column_gap.label"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 43
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 58
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Upload a custom image. Product/collection images are not used automatically."
+        },
+        {
+          "type": "select",
+          "id": "department",
+          "label": "t:unionbay.shop_all.department",
+          "default": "women",
+          "options": [
+            { "value": "women", "label": "t:unionbay.shop_all.women" },
+            { "value": "men", "label": "t:unionbay.shop_all.men" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "category_filter",
+          "label": "t:unionbay.shop_all.category_filter",
+          "default": "",
+          "options": [
+            { "value": "", "label": "t:unionbay.shop_all.category_filter_auto" },
+            { "value": "tops", "label": "t:unionbay.shop_all.tops" },
+            { "value": "shirts", "label": "t:unionbay.shop_all.shirts" },
+            { "value": "shorts", "label": "t:unionbay.shop_all.shorts" },
+            { "value": "pants", "label": "t:unionbay.shop_all.pants" },
+            { "value": "shoes", "label": "t:unionbay.shop_all.shoes" },
+            { "value": "jackets", "label": "t:unionbay.shop_all.jackets" },
+            { "value": "best-sellers", "label": "t:unionbay.fallback_image.bestseller" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "fallback_image",
+          "label": "t:unionbay.fallback_image.label",
+          "default": "default",
+          "options": [
+            { "value": "default", "label": "t:unionbay.fallback_image.auto" },
+            { "value": "womens-tops", "label": "t:unionbay.fallback_image.womens_tops" },
+            { "value": "womens-shirts", "label": "t:unionbay.fallback_image.womens_shirts" },
+            { "value": "womens-shorts", "label": "t:unionbay.fallback_image.womens_shorts" },
+            { "value": "womens-pants", "label": "t:unionbay.fallback_image.womens_pants" },
+            { "value": "womens-shoes", "label": "t:unionbay.fallback_image.womens_shoes" },
+            { "value": "mens-tops", "label": "t:unionbay.fallback_image.mens_tops" },
+            { "value": "mens-shirts", "label": "t:unionbay.fallback_image.mens_shirts" },
+            { "value": "mens-shorts", "label": "t:unionbay.fallback_image.mens_shorts" },
+            { "value": "mens-pants", "label": "t:unionbay.fallback_image.mens_pants" },
+            { "value": "womens-bestseller", "label": "t:unionbay.fallback_image.womens_bestseller" },
+            { "value": "mens-bestseller", "label": "t:unionbay.fallback_image.mens_bestseller" },
+            { "value": "bestseller", "label": "t:unionbay.fallback_image.bestseller" }
+          ]
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "t:sections.collection-tab.blocks.collection"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.collection-tab.blocks.collection_title.label"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Unionbay category circles",
+      "blocks": [
+        { "type": "category" },
+        { "type": "category" },
+        { "type": "category" },
+        { "type": "category" },
+        { "type": "category" },
+        { "type": "category" },
+        { "type": "category" }
+      ]
+    }
+  ]
+}
+{% endschema %}

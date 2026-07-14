@@ -1,0 +1,42 @@
+{
+  "sections": {
+    "page-heading": {
+      "type": "page-heading",
+      "blocks": {
+        "breadcrumb": { "type": "breadcrumb", "settings": {} },
+        "heading": { "type": "heading", "settings": { "page_title": "Size charts", "header_size": "default" } }
+      },
+      "block_order": ["breadcrumb", "heading"],
+      "settings": {
+        "section_width": "fluid_container",
+        "alignment": "center",
+        "overlay_opacity": 0,
+        "height": "based_on_content",
+        "padding_top": 40,
+        "padding_bottom": 20
+      }
+    },
+    "size-recommender": {
+      "type": "msa-size-recommender",
+      "settings": {
+        "heading": "Find your size",
+        "intro": "<p>Answer a few questions and we'll suggest the best size for you. For product-specific charts, use the size guide on each product page.</p>"
+      }
+    },
+    "main": {
+      "type": "msa-info-page",
+      "blocks": {
+        "content": {
+          "type": "content",
+          "settings": {
+            "title": "Size chart tips",
+            "body": "<p>Use the size chart on each product page for the most accurate measurements. If you're between sizes, we recommend sizing up for a relaxed fit.</p><p>Need help choosing a size? <a href=\"/pages/contact-us\">Contact us</a> and our team will assist you.</p>"
+          }
+        }
+      },
+      "block_order": ["content"],
+      "settings": { "section_width": "fluid_container", "padding_top": 20, "padding_bottom": 60 }
+    }
+  },
+  "order": ["page-heading", "size-recommender", "main"]
+}

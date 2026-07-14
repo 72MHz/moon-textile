@@ -1,0 +1,79 @@
+{
+  "sections": {
+    "page-heading": {
+      "type": "page-heading",
+      "blocks": {
+        "breadcrumb": { "type": "breadcrumb", "settings": {} },
+        "heading": {
+          "type": "heading",
+          "settings": { "page_title": "Vendors", "header_size": "default" }
+        }
+      },
+      "block_order": ["breadcrumb", "heading"],
+      "settings": {
+        "section_width": "fluid_container",
+        "color_scheme": "",
+        "alignment": "center",
+        "overlay_opacity": 0,
+        "height": "based_on_content",
+        "padding_top": 40,
+        "padding_bottom": 20
+      }
+    },
+    "main": {
+      "type": "msa-info-page",
+      "blocks": {
+        "intro": {
+          "type": "intro",
+          "settings": {
+            "subheading": "Our vendor network",
+            "heading": "Strategic partnerships for quality and reliability",
+            "text": "<p>Our technical expertise and extensive industry experience enable us to identify and engage the most suitable vendors for each project, ensuring that the specific requirements of every client are fully met.</p><p>Whether handling small-scale, quick-turnaround orders or managing value-added production involving diverse fabrics, styles, and accessories, we have consistently demonstrated our capability to deliver with reliability and precision.</p>"
+          }
+        },
+        "cards_heading": {
+          "type": "cards_grid",
+          "settings": {
+            "title": "Vendor excellence",
+            "subtitle": "Built on trust, performance and quality"
+          }
+        },
+        "card_evaluation": {
+          "type": "card",
+          "settings": {
+            "title": "Vendor evaluation",
+            "text": "<p>At MSA, top priority is given to vendor evaluation, selection and training. We've developed a wide and competent vendor-base through relationships based on trust and performance.</p>"
+          }
+        },
+        "card_backup": {
+          "type": "card",
+          "settings": {
+            "title": "Backup capacity",
+            "text": "<p>We maintain a second line of vendors prepared at all times for all running items, ensuring uninterrupted supply for our customers.</p>"
+          }
+        },
+        "card_qa": {
+          "type": "card",
+          "settings": {
+            "title": "Quality assurance",
+            "text": "<p>We ensure all vendors meet strict quality and delivery requirements before being considered for an order, while helping promising vendors improve to global standards.</p>"
+          }
+        },
+        "certs": {
+          "type": "certifications",
+          "settings": {
+            "title": "Vendor certifications",
+            "certs": "Global Recycled Standard, Sedex, BSCI, C-TPAT, GOTS, ISO, WRAP, OEKO-TEX, BCI"
+          }
+        }
+      },
+      "block_order": ["intro", "cards_heading", "card_evaluation", "card_backup", "card_qa", "certs"],
+      "settings": {
+        "section_width": "fluid_container",
+        "padding_top": 20,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": ["page-heading", "main"]
+}

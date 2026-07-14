@@ -1,0 +1,295 @@
+{
+  "sections": {
+    "main": {
+      "type": "unionbay-collection-shop-all",
+      "blocks": {
+        "cat_tops": {
+          "type": "category",
+          "settings": {
+            "category_id": "tops",
+            "title": "Tops",
+            "filter_tag": "men-tops",
+            "match_keywords": "",
+            "child_category_ids": "polo-shirt,crewneck-short-sleeve,long-sleeve-crewneck,shirts,sweaters",
+            "collection": "t-shirts"
+          }
+        },
+        "cat_polo": {
+          "type": "category",
+          "settings": {
+            "category_id": "polo-shirt",
+            "title": "Polo shirt",
+            "filter_tag": "men-polo-shirt",
+            "match_keywords": "polo",
+            "collection": "t-shirts"
+          }
+        },
+        "cat_crewneck_ss": {
+          "type": "category",
+          "settings": {
+            "category_id": "crewneck-short-sleeve",
+            "title": "Crewneck short sleeve",
+            "filter_tag": "men-crewneck-short-sleeve",
+            "match_keywords": "crewneck,crew neck,s/s,short sleeve tee",
+            "collection": "t-shirts"
+          }
+        },
+        "cat_crewneck_ls": {
+          "type": "category",
+          "settings": {
+            "category_id": "long-sleeve-crewneck",
+            "title": "Long sleeve crewneck",
+            "filter_tag": "men-long-sleeve-crewneck",
+            "match_keywords": "long sleeve,l/s,crewneck,crew neck",
+            "collection": "t-shirts"
+          }
+        },
+        "cat_shirts": {
+          "type": "category",
+          "settings": {
+            "category_id": "shirts",
+            "title": "Shirts",
+            "filter_tag": "men-shirts",
+            "match_keywords": "shirt,button-down,button down,oxford,flannel,rayon shirt,henley,tee",
+            "collection": "t-shirts"
+          }
+        },
+        "cat_sweaters": {
+          "type": "category",
+          "settings": {
+            "category_id": "sweaters",
+            "title": "Sweaters",
+            "filter_tag": "men-sweaters",
+            "match_keywords": "sweater,pullover,cardigan,crew sweater",
+            "collection": "sweaters"
+          }
+        },
+        "cat_sweatshirts": {
+          "type": "category",
+          "settings": {
+            "category_id": "sweatshirts",
+            "title": "Sweatshirts",
+            "filter_tag": "men-hoodies",
+            "match_keywords": "",
+            "child_category_ids": "thermal-waffle-ls-sweatshirt,fleece-sweatshirt,hoodies,fleece-tracksuit",
+            "collection": "hoodies"
+          }
+        },
+        "cat_hoodies": {
+          "type": "category",
+          "settings": {
+            "category_id": "hoodies",
+            "title": "Sweatshirts & hoodies",
+            "filter_tag": "men-hoodies",
+            "match_keywords": "hoodie,sweatshirt,fleece,terry",
+            "collection": "hoodies"
+          }
+        },
+        "cat_thermal_waffle": {
+          "type": "category",
+          "settings": {
+            "category_id": "thermal-waffle-ls-sweatshirt",
+            "title": "Thermal waffle L/S sweatshirt",
+            "filter_tag": "men-thermal-waffle-ls-sweatshirt",
+            "match_keywords": "thermal,waffle",
+            "collection": "hoodies"
+          }
+        },
+        "cat_fleece_sweatshirt": {
+          "type": "category",
+          "settings": {
+            "category_id": "fleece-sweatshirt",
+            "title": "Fleece sweatshirt",
+            "filter_tag": "men-fleece-sweatshirt",
+            "match_keywords": "fleece sweatshirt,fleece crew,fleece pullover",
+            "collection": "hoodies"
+          }
+        },
+        "cat_fleece_tracksuit": {
+          "type": "category",
+          "settings": {
+            "category_id": "fleece-tracksuit",
+            "title": "Fleece tracksuit",
+            "filter_tag": "men-fleece-tracksuit",
+            "match_keywords": "tracksuit,track suit",
+            "collection": "activewear"
+          }
+        },
+        "cat_jackets": {
+          "type": "category",
+          "settings": {
+            "category_id": "jackets",
+            "title": "Jackets",
+            "filter_tag": "men-jackets",
+            "match_keywords": "jacket,coat,windbreaker,bomber,vest,sherpa",
+            "child_category_ids": "interlock-jacket",
+            "collection": "hoodies"
+          }
+        },
+        "cat_interlock_jacket": {
+          "type": "category",
+          "settings": {
+            "category_id": "interlock-jacket",
+            "title": "Interlock jacket",
+            "filter_tag": "men-interlock-jacket",
+            "match_keywords": "interlock",
+            "collection": "hoodies"
+          }
+        },
+        "cat_bottoms": {
+          "type": "category",
+          "settings": {
+            "category_id": "bottoms",
+            "title": "Bottoms",
+            "filter_tag": "men-bottoms",
+            "match_keywords": "",
+            "child_category_ids": "pants,trousers,cargo-pants,jogger-pants,travel-pants,shorts,cargo-shorts,pull-on-shorts",
+            "collection": "hoodies"
+          }
+        },
+        "cat_pants": {
+          "type": "category",
+          "settings": {
+            "category_id": "pants",
+            "title": "Pants",
+            "filter_tag": "men-pants",
+            "match_keywords": "",
+            "child_category_ids": "trousers,cargo-pants,jogger-pants,travel-pants",
+            "collection": "hoodies"
+          }
+        },
+        "cat_trousers": {
+          "type": "category",
+          "settings": {
+            "category_id": "trousers",
+            "title": "Trousers",
+            "filter_tag": "men-trousers",
+            "match_keywords": "trouser,dress pant,chino",
+            "collection": "hoodies"
+          }
+        },
+        "cat_cargo_pants": {
+          "type": "category",
+          "settings": {
+            "category_id": "cargo-pants",
+            "title": "Cargo pants",
+            "filter_tag": "men-cargo-pants",
+            "match_keywords": "cargo pant",
+            "collection": "hoodies"
+          }
+        },
+        "cat_jogger_pants": {
+          "type": "category",
+          "settings": {
+            "category_id": "jogger-pants",
+            "title": "Jogger pants",
+            "filter_tag": "men-jogger-pants",
+            "match_keywords": "jogger",
+            "collection": "hoodies"
+          }
+        },
+        "cat_travel_pants": {
+          "type": "category",
+          "settings": {
+            "category_id": "travel-pants",
+            "title": "Travel pants",
+            "filter_tag": "men-travel-pants",
+            "match_keywords": "travel pant,tech pant",
+            "collection": "hoodies"
+          }
+        },
+        "cat_shorts": {
+          "type": "category",
+          "settings": {
+            "category_id": "shorts",
+            "title": "Shorts",
+            "filter_tag": "men-shorts",
+            "match_keywords": "",
+            "child_category_ids": "cargo-shorts,pull-on-shorts",
+            "collection": "activewear"
+          }
+        },
+        "cat_cargo_shorts": {
+          "type": "category",
+          "settings": {
+            "category_id": "cargo-shorts",
+            "title": "Cargo shorts",
+            "filter_tag": "men-cargo-shorts",
+            "match_keywords": "cargo short",
+            "collection": "activewear"
+          }
+        },
+        "cat_pull_on_shorts": {
+          "type": "category",
+          "settings": {
+            "category_id": "pull-on-shorts",
+            "title": "Pull-on shorts",
+            "filter_tag": "men-pull-on-shorts",
+            "match_keywords": "pull-on short,pull on short",
+            "collection": "activewear"
+          }
+        },
+        "cat_new": {
+          "type": "category",
+          "settings": {
+            "category_id": "new-arrivals",
+            "title": "New arrivals",
+            "filter_tag": "men-new-arrivals,new",
+            "match_keywords": "new arrival",
+            "collection": "best-seller"
+          }
+        },
+        "cat_best": {
+          "type": "category",
+          "settings": {
+            "category_id": "best-sellers",
+            "title": "Best sellers",
+            "filter_tag": "men-best-sellers,bestseller",
+            "match_keywords": "bestseller,best seller",
+            "collection": "best-seller"
+          }
+        }
+      },
+      "block_order": [
+        "cat_tops",
+        "cat_polo",
+        "cat_crewneck_ss",
+        "cat_crewneck_ls",
+        "cat_shirts",
+        "cat_sweaters",
+        "cat_sweatshirts",
+        "cat_hoodies",
+        "cat_thermal_waffle",
+        "cat_fleece_sweatshirt",
+        "cat_fleece_tracksuit",
+        "cat_jackets",
+        "cat_interlock_jacket",
+        "cat_bottoms",
+        "cat_pants",
+        "cat_trousers",
+        "cat_cargo_pants",
+        "cat_jogger_pants",
+        "cat_travel_pants",
+        "cat_shorts",
+        "cat_cargo_shorts",
+        "cat_pull_on_shorts",
+        "cat_new",
+        "cat_best"
+      ],
+      "settings": {
+        "shop_type": "men",
+        "heading": "Men's clothing",
+        "section_width": "fluid_container",
+        "items_per_page": 48,
+        "items_per_row": 4,
+        "items_per_row_mobile": "2",
+        "column_gap": 10,
+        "show_sort": true,
+        "load_more_label": "Load more",
+        "padding_top": 24,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": ["main"]
+}

@@ -1,0 +1,150 @@
+{
+  "sections": {
+    "page-heading": {
+      "type": "page-heading",
+      "blocks": {
+        "breadcrumb": { "type": "breadcrumb", "settings": {} },
+        "heading": {
+          "type": "heading",
+          "settings": { "page_title": "MSA sourcing services", "header_size": "default" }
+        }
+      },
+      "block_order": ["breadcrumb", "heading"],
+      "settings": {
+        "section_width": "fluid_container",
+        "color_scheme": "",
+        "alignment": "center",
+        "overlay_opacity": 0,
+        "height": "based_on_content",
+        "padding_top": 40,
+        "padding_bottom": 20
+      }
+    },
+    "main": {
+      "type": "msa-info-page",
+      "blocks": {
+        "intro": {
+          "type": "intro",
+          "settings": {
+            "subheading": "Our services",
+            "heading": "Complete apparel sourcing solutions",
+            "text": "<p>MSA Sourcing offers complete apparel sourcing solutions from vendor identification and product development to quality control, packaging, and shipment coordination, tailored to meet international standards and client expectations.</p>"
+          }
+        },
+        "cards_heading": {
+          "type": "cards_grid",
+          "settings": {
+            "title": "What we offer",
+            "subtitle": "End-to-end support for international buyers"
+          }
+        },
+        "card_sourcing": {
+          "type": "card",
+          "settings": {
+            "title": "MSA sourcing",
+            "text": "<p>We provide sourcing support based on buyer requirements and orders, with information on possible suppliers for specific merchandise including quality, price and ability to meet shipment schedules.</p>"
+          }
+        },
+        "card_production": {
+          "type": "card",
+          "settings": {
+            "title": "Production monitoring",
+            "text": "<p>Our merchandising staff regularly monitors production on a daily basis to ensure correctly and aesthetically made products are delivered on time.</p>"
+          }
+        },
+        "card_quality": {
+          "type": "card",
+          "settings": {
+            "title": "Quality assurance",
+            "text": "<p>Our quality assurance team conducts inline and final inspection as per international quality standards to ensure quality as specified by the buyer.</p>"
+          }
+        },
+        "card_product_dev": {
+          "type": "card",
+          "settings": {
+            "title": "Product development",
+            "text": "<p>We undertake product development at different factories to meet buyer requirements for standards, prototypes, pattern check runs, production samples and fabric development.</p>"
+          }
+        },
+        "card_communications": {
+          "type": "card",
+          "settings": {
+            "title": "Communications",
+            "text": "<p>MSA maintains an unbreakable communication network with customers and vendors, keeping them updated on their business with quick responses to any inquiry.</p>"
+          }
+        },
+        "card_design": {
+          "type": "card",
+          "settings": {
+            "title": "Design development",
+            "text": "<p>With strong support of vendors and textile professionals, MSA develops prototype patterns and samples, approval samples, grading to all requisite size ranges and size sets.</p>"
+          }
+        },
+        "card_analysis": {
+          "type": "card",
+          "settings": {
+            "title": "Product analysis",
+            "text": "<p>For each production specimen MSA analyzes and identifies the most suitable factory for the garment category, ensuring smooth production flow and timely shipping.</p>"
+          }
+        },
+        "card_labeling": {
+          "type": "card",
+          "settings": {
+            "title": "Labeling & packing",
+            "text": "<p>MSA helps production units import required labels and trims when not available locally. Our personnel ensure strict adherence to labeling, packing and carton marking instructions.</p>"
+          }
+        },
+        "card_shipping": {
+          "type": "card",
+          "settings": {
+            "title": "Shipping coordination",
+            "text": "<p>We coordinate with factories to check all shipping documents per buyer instructions and ensure dispatch of documents as per L/C dispatch instructions.</p>"
+          }
+        },
+        "card_labor": {
+          "type": "card",
+          "settings": {
+            "title": "Labor practices",
+            "text": "<p>We ensure all production units follow healthy and safe labor practices, eliminating child labor, prison labor and forced labor, and providing required living and sanitation facilities.</p>"
+          }
+        },
+        "card_fabric": {
+          "type": "card",
+          "settings": {
+            "title": "Fabric sourcing",
+            "text": "<p>Our team identifies and sources premium quality fabrics from trusted mills worldwide, ensuring materials meet your specifications for quality, sustainability and compliance.</p>"
+          }
+        },
+        "card_supply_chain": {
+          "type": "card",
+          "settings": {
+            "title": "Supply chain management",
+            "text": "<p>We optimize your entire supply chain from raw materials to finished goods delivery, managing logistics, inventory control and vendor relationships for seamless operations.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "intro",
+        "cards_heading",
+        "card_sourcing",
+        "card_production",
+        "card_quality",
+        "card_product_dev",
+        "card_communications",
+        "card_design",
+        "card_analysis",
+        "card_labeling",
+        "card_shipping",
+        "card_labor",
+        "card_fabric",
+        "card_supply_chain"
+      ],
+      "settings": {
+        "section_width": "fluid_container",
+        "padding_top": 20,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": ["page-heading", "main"]
+}

@@ -1,0 +1,24 @@
+{% doc %}
+  Renders MSA page heading breadcrumb and title.
+
+  @param {string} title - Page title
+  @param {string} [description] - Optional subtitle HTML
+{% enddoc %}
+
+<div class="section remove_spacing sec__page-heading mb-60">
+  <div class="fluid_container">
+    <div class="heading-content relative text-center">
+      <div class="page-title-breadcrumb">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="{{ routes.root_url }}" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-sep" aria-hidden="true">/</span>
+          <span class="breadcrumb-current">{{ title }}</span>
+        </nav>
+      </div>
+      <h1 class="heading-title heading-letter-spacing h2 mt-8 mb-0">{{ title }}</h1>
+      {%- if description != blank -%}
+        <div class="heading-description mt-10 rich__text-m0">{{ description }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>

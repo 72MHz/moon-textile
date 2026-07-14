@@ -1,0 +1,116 @@
+{% doc %}
+  Union Bay footer newsletter column with email signup, consent checkbox, social icons, and payment methods.
+
+  @param {object} block - Newsletter block object
+  @param {object} section - Parent section object
+  @param {boolean} show_social - Whether to show social icons
+  @param {boolean} payment_enable - Whether to show payment icons
+{% enddoc %}
+
+{%- liquid
+  assign block_st = block.settings
+  assign email_id = 'UnionbayNewsletter-' | append: section.id | append: '-' | append: block.id
+  assign checkbox_id = 'UnionbayNewsletterConsent-' | append: section.id | append: '-' | append: block.id
+-%}
+
+<div class="unionbay-footer-newsletter">
+  {%- if block_st.heading != blank -%}
+    <h3 class="unionbay-footer-newsletter__heading">{{ block_st.heading | escape }}</h3>
+  {%- endif -%}
+
+  {%- if block_st.description != blank -%}
+    <p class="unionbay-footer-newsletter__description">{{ block_st.description }}</p>
+  {%- endif -%}
+
+  {%- form 'customer', id: 'ContactUnionbayFooter', class: 'unionbay-footer-newsletter__form' -%}
+    <input type="hidden" name="contact[tags]" value="newsletter">
+
+    <div class="unionbay-footer-newsletter__field">
+      <input
+        type="email"
+        id="{{ email_id }}"
+        name="contact[email]"
+        class="unionbay-footer-newsletter__input"
+        value="{{ form.email }}"
+        autocomplete="email"
+        autocapitalize="off"
+        placeholder=" "
+        required
+        {% if form.errors %}
+          aria-invalid="true"
+          aria-describedby="ContactUnionbayFooter-error"
+        {% elsif form.posted_successfully? %}
+          aria-describedby="ContactUnionbayFooter-success"
+        {% endif %}
+      >
+      <label for="{{ email_id }}" class="unionbay-footer-newsletter__label">
+        {%- if block_st.email_placeholder != blank -%}
+          {{ block_st.email_placeholder }}
+        {%- else -%}
+          {{ 'newsletter.label' | t }}
+        {%- endif -%}
+      </label>
+      <button
+        type="submit"
+        class="unionbay-footer-newsletter__submit"
+        name="commit"
+        aria-label="{%- if block_st.button_label != blank -%}{{ block_st.button_label }}{%- else -%}{{ 'newsletter.button_label' | t }}{%- endif -%}"
+      >
+        {%- if block_st.button_label != blank -%}
+          {{ block_st.button_label }}
+        {%- else -%}
+          {{ 'newsletter.button_label' | t }}
+        {%- endif -%}
+      </button>
+    </div>
+
+    {%- if block_st.note != blank -%}
+      <div class="unionbay-footer-newsletter__consent">
+        <input
+          type="checkbox"
+          id="{{ checkbox_id }}"
+          class="unionbay-footer-newsletter__checkbox"
+          required
+        >
+        <label for="{{ checkbox_id }}" class="unionbay-footer-newsletter__consent-label">
+          {{ block_st.note }}
+        </label>
+      </div>
+    {%- endif -%}
+
+    {%- if form.errors -%}
+      <div class="unionbay-footer-newsletter__message unionbay-footer-newsletter__message--error" id="ContactUnionbayFooter-error">
+        {%- render 'icon-error' -%}
+        {{- form.errors.translated_fields.email | capitalize }}
+        {{ form.errors.messages.email -}}
+      </div>
+    {%- endif -%}
+
+    {%- if form.posted_successfully? -%}
+      <div class="unionbay-footer-newsletter__message unionbay-footer-newsletter__message--success" id="ContactUnionbayFooter-success">
+        {%- render 'icon-success' -%}
+        <span>{{ 'newsletter.success' | t }}</span>
+      </div>
+    {%- endif -%}
+  {%- endform -%}
+
+  {%- if show_social or payment_enable -%}
+    <div class="unionbay-footer-newsletter__extras">
+      {%- if show_social -%}
+        <div class="unionbay-footer-newsletter__social">
+          {% render 'unionbay-footer-social' %}
+        </div>
+      {%- endif -%}
+
+      {%- if payment_enable and shop.enabled_payment_types != empty -%}
+        <div class="unionbay-footer-newsletter__payment">
+          <ul class="list-unstyled unionbay-footer-newsletter__payment-list">
+            {%- for type in shop.enabled_payment_types -%}
+              <li>{{ type | payment_type_svg_tag: class: 'icon icon--full-color unionbay-footer-newsletter__payment-icon' }}</li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>

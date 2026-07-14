@@ -1,0 +1,44 @@
+{% doc %}
+  Union Bay inline product price — compare-at strikethrough + sale price in red.
+
+  @param {product} product - Product to render price for
+
+  @example
+  {% render 'unionbay-price', product: card_product %}
+{% enddoc %}
+
+{%- liquid
+  assign target = product.variants[0]
+  assign compare_at_price = target.compare_at_price
+  assign price = target.price | default: 1999
+  assign money_price = price | money
+  if settings.show_currency_code
+    assign money_price = price | money_with_currency
+  endif
+  if target == product and product.price_varies
+    assign money_price = 'products.product.price.from_price_html' | t: price: money_price
+  endif
+-%}
+
+<div class="unionbay-price card-product-price flex align-center flex-wrap">
+  {%- if compare_at_price > price -%}
+    <span class="unionbay-price__compare-wrap">
+      <span class="visually-hidden">{{ 'unionbay.original_price' | t }}</span>
+      <s class="unionbay-price__compare compare-price price-item dark-gray">
+        {%- if settings.show_currency_code -%}
+          {{ compare_at_price | money_with_currency }}
+        {%- else -%}
+          {{ compare_at_price | money }}
+        {%- endif -%}
+      </s>
+    </span>
+    <span class="unionbay-price__current-wrap price-regular">
+      <span class="visually-hidden">{{ 'unionbay.current_price' | t }}</span>
+      <span class="price unionbay-price__current price--special">{{ money_price }}</span>
+    </span>
+  {%- else -%}
+    <span class="unionbay-price__current-wrap price-regular">
+      <span class="price unionbay-price__current unionbay-price__current--regular">{{ money_price }}</span>
+    </span>
+  {%- endif -%}
+</div>

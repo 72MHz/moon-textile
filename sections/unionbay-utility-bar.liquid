@@ -1,0 +1,698 @@
+{%- liquid
+  assign section_st = section.settings
+  assign section_width = section_st.section_width
+-%}
+<div
+  id="unionbay-utility-bar"
+  class="unionbay-utility-bar section remove_spacing"
+  style="--section-pt: {{ section_st.padding_top }}px; --section-pb: {{ section_st.padding_bottom }}px;"
+>
+  <svg class="hidden" aria-hidden="true" focusable="false">
+    <symbol id="unionbay-icon-back" viewBox="0 0 6 11" fill="none">
+      <path d="M4.7193 10.7605C4.85965 10.9202 5.03509 11 5.24561 11C5.45614 11 5.63158 10.9202 5.77193 10.7605C5.92398 10.6131 6 10.435 6 10.2261C6 10.005 5.92398 9.81463 5.77193 9.65494L1.80702 5.49079L5.77193 1.32663C5.92398 1.17923 6 1.00112 6 0.792295C6 0.571189 5.92398 0.380793 5.77193 0.221106C5.63158 0.0737018 5.45614 0 5.24561 0C5.03509 0 4.85965 0.0737018 4.7193 0.221106L0.22807 4.93802C0.0760236 5.09771 0 5.28811 0 5.50921C0 5.71803 0.0760236 5.89615 0.22807 6.04355L4.7193 10.7605Z" fill="currentColor"/>
+    </symbol>
+    <symbol id="unionbay-icon-next" viewBox="0 0 6 11" fill="none">
+      <path fill="currentColor" d="M1.278 10.721a.688.688 0 0 1-.528.229.688.688 0 0 1-.527-.229.669.669 0 0 1-.229-.51c0-.21.077-.392.229-.544l3.973-3.973L.223 1.721a.669.669 0 0 1-.229-.51c0-.21.077-.392.229-.544C.363.527.539.456.75.456c.211 0 .387.07.528.21l4.5 4.5a.744.744 0 0 1 .228.546c0 .199-.076.369-.228.51l-4.5 4.5Z"/>
+    </symbol>
+  </svg>
+
+  <div class="{{ section_width }}">
+    <div class="unionbay-utility-bar__inner flex align-center justify-between gap-15">
+      {%- if section_st.brand_label_1 != blank or section_st.brand_label_2 != blank -%}
+        <div class="unionbay-utility-bar__brands flex align-center gap-20 hidden flex-1025">
+          {%- if section_st.brand_label_1 != blank -%}
+            <a href="{{ section_st.brand_link_1 | default: routes.root_url }}" class="unionbay-utility-bar__brand unionbay-utility-bar__brand--active no-underline">
+              {{ section_st.brand_label_1 }}
+            </a>
+          {%- endif -%}
+          {%- if section_st.brand_label_2 != blank -%}
+            <a href="{{ section_st.brand_link_2 | default: '#' }}" class="unionbay-utility-bar__brand no-underline">
+              {{ section_st.brand_label_2 }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="unionbay-utility-bar__announce flex-1 w-full">
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'announcement' -%}
+              {%- liquid
+                assign message_count = 0
+                if block.settings.text1 != blank
+                  assign message_count = message_count | plus: 1
+                endif
+                if block.settings.text2 != blank
+                  assign message_count = message_count | plus: 1
+                endif
+                if block.settings.text3 != blank
+                  assign message_count = message_count | plus: 1
+                endif
+              -%}
+              <unionbay-announcement
+                class="unionbay-utility-bar__rotator{% if message_count > 1 %} unionbay-utility-bar__rotator--multi{% endif %}"
+                data-interval="{{ block.settings.change_every | times: 1000 }}"
+                data-count="{{ message_count }}"
+                {{ block.shopify_attributes }}
+              >
+                {%- if message_count > 1 -%}
+                  <button
+                    type="button"
+                    class="unionbay-utility-bar__arrow btn-reset"
+                    data-action="prev"
+                    aria-label="Previous announcement"
+                  >
+                    <svg width="6" height="11" fill="none" aria-hidden="true"><use href="#unionbay-icon-back" /></svg>
+                  </button>
+                {%- endif -%}
+
+                <div class="unionbay-utility-bar__stage">
+                  <div class="unionbay-utility-bar__messages" role="status" aria-live="polite">
+                    {%- if block.settings.text1 != blank -%}
+                      {%- if block.settings.link1 != blank -%}
+                        <a href="{{ block.settings.link1 }}" class="unionbay-utility-bar__message is-active no-underline">{{ block.settings.text1 }}</a>
+                      {%- else -%}
+                        <p class="unionbay-utility-bar__message is-active">{{ block.settings.text1 }}</p>
+                      {%- endif -%}
+                    {%- endif -%}
+                    {%- if block.settings.text2 != blank -%}
+                      {%- if block.settings.link2 != blank -%}
+                        <a href="{{ block.settings.link2 }}" class="unionbay-utility-bar__message no-underline">{{ block.settings.text2 }}</a>
+                      {%- else -%}
+                        <p class="unionbay-utility-bar__message">{{ block.settings.text2 }}</p>
+                      {%- endif -%}
+                    {%- endif -%}
+                    {%- if block.settings.text3 != blank -%}
+                      {%- if block.settings.link3 != blank -%}
+                        <a href="{{ block.settings.link3 }}" class="unionbay-utility-bar__message no-underline">{{ block.settings.text3 }}</a>
+                      {%- else -%}
+                        <p class="unionbay-utility-bar__message">{{ block.settings.text3 }}</p>
+                      {%- endif -%}
+                    {%- endif -%}
+                  </div>
+
+                  {%- if message_count > 1 -%}
+                    <div class="unionbay-utility-bar__dots" role="tablist" aria-label="Announcement slides">
+                      {%- for i in (1..message_count) -%}
+                        <button
+                          type="button"
+                          class="unionbay-utility-bar__dot btn-reset{% if forloop.first %} is-active{% endif %}"
+                          data-index="{{ forloop.index0 }}"
+                          role="tab"
+                          aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                          aria-label="Show announcement {{ forloop.index }}"
+                        ></button>
+                      {%- endfor -%}
+                    </div>
+                    <div class="unionbay-utility-bar__progress" aria-hidden="true">
+                      <span class="unionbay-utility-bar__progress-bar"></span>
+                    </div>
+                  {%- endif -%}
+                </div>
+
+                {%- if message_count > 1 -%}
+                  <button
+                    type="button"
+                    class="unionbay-utility-bar__arrow btn-reset"
+                    data-action="next"
+                    aria-label="Next announcement"
+                  >
+                    <svg width="6" height="11" fill="none" aria-hidden="true"><use href="#unionbay-icon-next" /></svg>
+                  </button>
+                {%- endif -%}
+              </unionbay-announcement>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- else -%}
+          <p class="unionbay-utility-bar__message my-0 text-center">{{ section_st.fallback_message }}</p>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .unionbay-utility-bar {
+    --ub-bar-bg: #f2f2f2;
+    --ub-bar-text: #111;
+    --ub-bar-accent: #1a3a6b;
+    --ub-bar-border: #e6e6e6;
+    position: relative;
+    background: linear-gradient(180deg, #f7f7f7 0%, var(--ub-bar-bg) 100%);
+    color: var(--ub-bar-text);
+    padding-top: var(--section-pt, 10px);
+    padding-bottom: var(--section-pb, 10px);
+    font-size: 1.3rem;
+    border-bottom: 1px solid var(--ub-bar-border);
+    overflow: hidden;
+  }
+
+  .unionbay-utility-bar > .stretch_width {
+    padding-inline: 0.8rem;
+    max-width: none;
+    width: 100%;
+  }
+
+  .unionbay-utility-bar__inner {
+    width: 100%;
+  }
+
+  .unionbay-utility-bar__brand {
+    color: var(--ub-bar-text);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    font-size: 1.2rem;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  }
+
+  .unionbay-utility-bar__brand:hover {
+    color: var(--ub-bar-accent);
+  }
+
+  .unionbay-utility-bar__brand--active {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .unionbay-utility-bar__announce {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
+  .unionbay-utility-bar__rotator {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.2rem;
+    width: 100%;
+  }
+
+  .unionbay-utility-bar__rotator--multi {
+    padding-inline: 0.4rem;
+  }
+
+  .unionbay-utility-bar__stage {
+    position: relative;
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    text-align: center;
+  }
+
+  .unionbay-utility-bar__messages {
+    position: relative;
+    min-width: 0;
+    min-height: 1.8em;
+    width: 100%;
+    max-width: 64rem;
+    text-align: center;
+  }
+
+  .unionbay-utility-bar__message {
+    display: none;
+    margin: 0;
+    font-size: 1.3rem;
+    letter-spacing: 0.01em;
+    line-height: 1.4;
+    color: inherit;
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  .unionbay-utility-bar__message.is-active {
+    display: inline-block;
+    opacity: 1;
+    transform: translateY(0);
+    animation: ub-announce-in 0.35s ease both;
+  }
+
+  .unionbay-utility-bar__message.is-leaving {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    animation: ub-announce-out 0.25s ease both;
+    pointer-events: none;
+  }
+
+  a.unionbay-utility-bar__message {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: transparent;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  }
+
+  a.unionbay-utility-bar__message:hover,
+  a.unionbay-utility-bar__message:focus-visible {
+    color: var(--ub-bar-accent);
+    text-decoration-color: currentColor;
+  }
+
+  .unionbay-utility-bar__arrow {
+    color: var(--ub-bar-text);
+    line-height: 0;
+    width: 3.2rem;
+    height: 3.2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    cursor: pointer;
+    flex: 0 0 auto;
+    opacity: 0.55;
+    transition: opacity 0.2s ease, background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+  }
+
+  .unionbay-utility-bar__arrow[data-action="prev"] {
+    margin-inline-start: -0.4rem;
+  }
+
+  .unionbay-utility-bar__arrow[data-action="next"] {
+    margin-inline-end: -0.4rem;
+  }
+
+  .unionbay-utility-bar__arrow:hover,
+  .unionbay-utility-bar__arrow:focus-visible {
+    opacity: 1;
+    color: var(--ub-bar-accent);
+    background: rgba(26, 58, 107, 0.08);
+    transform: scale(1.06);
+    outline: none;
+  }
+
+  .unionbay-utility-bar__arrow:active {
+    transform: scale(0.96);
+  }
+
+  .unionbay-utility-bar__dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .unionbay-utility-bar__dot {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 999px;
+    background: #cfcfcf;
+    cursor: pointer;
+    transition: width 0.25s ease, background-color 0.25s ease, transform 0.2s ease;
+  }
+
+  .unionbay-utility-bar__dot:hover,
+  .unionbay-utility-bar__dot:focus-visible {
+    background: #9b9b9b;
+    outline: none;
+    transform: scale(1.15);
+  }
+
+  .unionbay-utility-bar__dot.is-active {
+    width: 1.4rem;
+    background: var(--ub-bar-accent);
+  }
+
+  .unionbay-utility-bar__progress {
+    width: min(12rem, 40vw);
+    height: 2px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .unionbay-utility-bar__progress-bar {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: var(--ub-bar-accent);
+    transform-origin: left center;
+  }
+
+  .unionbay-utility-bar.is-paused .unionbay-utility-bar__progress-bar {
+    animation-play-state: paused;
+  }
+
+  @keyframes ub-announce-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes ub-announce-out {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+  }
+
+  @keyframes ub-progress {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .unionbay-utility-bar__announce {
+      width: 100%;
+    }
+
+    .unionbay-utility-bar__rotator--multi {
+      padding-inline: 0;
+    }
+
+    .unionbay-utility-bar__arrow {
+      width: 2.8rem;
+      height: 2.8rem;
+    }
+
+    .unionbay-utility-bar__arrow[data-action="prev"] {
+      margin-inline-start: -0.2rem;
+    }
+
+    .unionbay-utility-bar__arrow[data-action="next"] {
+      margin-inline-end: -0.2rem;
+    }
+
+    .unionbay-utility-bar__message {
+      font-size: 1.2rem;
+      padding-inline: 0.4rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .unionbay-utility-bar__message.is-active,
+    .unionbay-utility-bar__message.is-leaving,
+    .unionbay-utility-bar__progress-bar,
+    .unionbay-utility-bar__arrow {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  class UnionbayAnnouncement extends HTMLElement {
+    connectedCallback() {
+      this.messages = Array.from(this.querySelectorAll('.unionbay-utility-bar__message'));
+      this.dots = Array.from(this.querySelectorAll('.unionbay-utility-bar__dot'));
+      this.progressBar = this.querySelector('.unionbay-utility-bar__progress-bar');
+      this.bar = this.closest('.unionbay-utility-bar');
+      this.interval = Math.max(Number(this.dataset.interval) || 5000, 2500);
+      this.animating = false;
+      this.touchStartX = 0;
+
+      if (!this.messages.length) return;
+
+      this.index = this.messages.findIndex((message) => message.classList.contains('is-active'));
+      if (this.index < 0) this.index = 0;
+
+      this.prevBtn = this.querySelector('[data-action="prev"]');
+      this.nextBtn = this.querySelector('[data-action="next"]');
+
+      this.prevBtn?.addEventListener('click', () => this.go(this.index - 1, true));
+      this.nextBtn?.addEventListener('click', () => this.go(this.index + 1, true));
+
+      this.dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          const nextIndex = Number(dot.dataset.index);
+          if (!Number.isNaN(nextIndex)) this.go(nextIndex, true);
+        });
+      });
+
+      this.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          this.go(this.index - 1, true);
+        }
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          this.go(this.index + 1, true);
+        }
+      });
+
+      this.addEventListener(
+        'touchstart',
+        (event) => {
+          this.touchStartX = event.changedTouches[0].screenX;
+        },
+        { passive: true }
+      );
+
+      this.addEventListener(
+        'touchend',
+        (event) => {
+          const delta = event.changedTouches[0].screenX - this.touchStartX;
+          if (Math.abs(delta) < 40 || this.messages.length < 2) return;
+          this.go(delta > 0 ? this.index - 1 : this.index + 1, true);
+        },
+        { passive: true }
+      );
+
+      this.addEventListener('mouseenter', () => this.pause());
+      this.addEventListener('mouseleave', () => this.resume());
+      this.addEventListener('focusin', () => this.pause());
+      this.addEventListener('focusout', (event) => {
+        if (!this.contains(event.relatedTarget)) this.resume();
+      });
+
+      this.setAttribute('tabindex', '0');
+      this.updateDots();
+      this.start();
+    }
+
+    disconnectedCallback() {
+      this.stop();
+    }
+
+    start() {
+      this.stop();
+      if (this.messages.length < 2) return;
+      this.restartProgress();
+      this.timer = window.setInterval(() => this.go(this.index + 1), this.interval);
+    }
+
+    stop() {
+      if (this.timer) {
+        window.clearInterval(this.timer);
+        this.timer = null;
+      }
+      if (this.progressBar) {
+        this.progressBar.style.animation = 'none';
+        this.progressBar.offsetHeight;
+        this.progressBar.style.animation = '';
+      }
+    }
+
+    pause() {
+      this.bar?.classList.add('is-paused');
+      if (this.timer) {
+        window.clearInterval(this.timer);
+        this.timer = null;
+      }
+    }
+
+    resume() {
+      this.bar?.classList.remove('is-paused');
+      this.start();
+    }
+
+    restartProgress() {
+      if (!this.progressBar || this.messages.length < 2) return;
+      this.progressBar.style.animation = 'none';
+      this.progressBar.offsetHeight;
+      this.progressBar.style.animation = `ub-progress ${this.interval}ms linear forwards`;
+    }
+
+    updateDots() {
+      this.dots.forEach((dot, i) => {
+        const active = i === this.index;
+        dot.classList.toggle('is-active', active);
+        dot.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+    }
+
+    go(nextIndex, userTriggered = false) {
+      if (this.messages.length < 2 || this.animating) return;
+
+      const normalized = (nextIndex + this.messages.length) % this.messages.length;
+      if (normalized === this.index) {
+        if (userTriggered) this.start();
+        return;
+      }
+
+      this.animating = true;
+      const current = this.messages[this.index];
+      const incoming = this.messages[normalized];
+
+      current?.classList.remove('is-active');
+      current?.classList.add('is-leaving');
+      incoming?.classList.add('is-active');
+
+      window.setTimeout(() => {
+        current?.classList.remove('is-leaving');
+        this.animating = false;
+      }, 260);
+
+      this.index = normalized;
+      this.updateDots();
+
+      if (userTriggered) {
+        this.start();
+      } else {
+        this.restartProgress();
+      }
+    }
+  }
+
+  if (!customElements.get('unionbay-announcement')) {
+    customElements.define('unionbay-announcement', UnionbayAnnouncement);
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Unionbay utility bar",
+  "class": "section-unionbay-utility",
+  "limit": 1,
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:sections.all.section_width.label",
+      "default": "stretch_width",
+      "options": [
+        { "value": "stretch_width", "label": "t:sections.all.section_width.stretch_width.label" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "brand_label_1",
+      "label": "Brand link 1 label",
+      "info": "Leave empty to hide brand links."
+    },
+    {
+      "type": "url",
+      "id": "brand_link_1",
+      "label": "Brand link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "brand_label_2",
+      "label": "Brand link 2 label",
+      "info": "Leave empty to hide this brand link."
+    },
+    {
+      "type": "url",
+      "id": "brand_link_2",
+      "label": "Brand link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "fallback_message",
+      "label": "Fallback message",
+      "default": "Extra 20% Off Sitewide! Use Code: JULY2026"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 6,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.section_padding.top.label",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 6,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.section_padding.bottom.label",
+      "default": 10
+    }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Announcement slider",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "text1",
+          "label": "Message 1",
+          "default": "Extra 20% Off Sitewide! Use Code: JULY2026"
+        },
+        {
+          "type": "url",
+          "id": "link1",
+          "label": "Message 1 link"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text2",
+          "label": "Message 2",
+          "default": "Free Shipping on Orders $75+!"
+        },
+        {
+          "type": "url",
+          "id": "link2",
+          "label": "Message 2 link"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text3",
+          "label": "Message 3",
+          "default": "Join Moon SA Rewards and earn points when you shop."
+        },
+        {
+          "type": "url",
+          "id": "link3",
+          "label": "Message 3 link"
+        },
+        {
+          "type": "range",
+          "id": "change_every",
+          "min": 3,
+          "max": 6,
+          "step": 1,
+          "unit": "s",
+          "label": "Change every",
+          "default": 5
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Unionbay utility bar",
+      "blocks": [{ "type": "announcement" }]
+    }
+  ]
+}
+{% endschema %}

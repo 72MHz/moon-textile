@@ -1,0 +1,42 @@
+{
+  "sections": {
+    "page-heading": {
+      "type": "page-heading",
+      "blocks": {
+        "breadcrumb": { "type": "breadcrumb", "settings": {} },
+        "heading": {
+          "type": "heading",
+          "settings": { "page_title": "", "header_size": "default" }
+        }
+      },
+      "block_order": ["breadcrumb", "heading"],
+      "settings": {
+        "section_width": "fluid_container",
+        "color_scheme": "",
+        "alignment": "center",
+        "overlay_opacity": 0,
+        "height": "based_on_content",
+        "padding_top": 40,
+        "padding_bottom": 20
+      }
+    },
+    "main": {
+      "type": "msa-info-page",
+      "blocks": {
+        "content": {
+          "type": "page_content",
+          "settings": {
+            "fallback": "<p>This page is being updated. Please <a href=\"/pages/contact-us\">contact us</a> if you need assistance.</p>"
+          }
+        }
+      },
+      "block_order": ["content"],
+      "settings": {
+        "section_width": "fluid_container",
+        "padding_top": 20,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": ["page-heading", "main"]
+}
