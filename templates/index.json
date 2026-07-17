@@ -169,23 +169,6 @@
         "padding_bottom": 37
       }
     },
-    "rewards_banner": {
-      "type": "unionbay-rewards",
-      "settings": {
-        "section_width": "full_width",
-        "color_scheme": "",
-        "overlay_opacity": 35,
-        "desktop_height": 420,
-        "mobile_height": 360,
-        "subheading": "Earn Rewards!",
-        "heading": "Earn points for every $1 spent!",
-        "description": "Based on your tier, you will get 5-10 points on every dollar spent. Plus, special birthday rewards!",
-        "button_label": "JOIN THE CLUB",
-        "button_link": "/account/register",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
     "category_grid": {
       "type": "unionbay-category-circles",
       "blocks": {
@@ -402,7 +385,6 @@
     "womens_carousel",
     "mens_category_row",
     "mens_carousel",
-    "rewards_banner",
     "category_grid",
     "instagram_section"
   ]
