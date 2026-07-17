@@ -1317,6 +1317,19 @@
   padding-right: 3.2rem;
 }
 
+.theme-unionbay .unionbay-footer__logo {
+  display: inline-flex;
+  margin: 0 0 2.4rem;
+  line-height: 0;
+  text-decoration: none;
+}
+
+.theme-unionbay .unionbay-footer__logo img {
+  display: block;
+  width: min(100%, 22rem);
+  height: auto;
+}
+
 .theme-unionbay .unionbay-footer__grid {
   display: block;
   width: 100%;

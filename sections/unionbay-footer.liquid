@@ -26,6 +26,16 @@
 
   <div class="unionbay-footer__main section remove_spacing">
     <div class="{{ container }} unionbay-footer__container">
+      <a href="{{ routes.root_url }}" class="unionbay-footer__logo">
+        <img
+          src="{{ 'moon-style-apparel-logo.png' | asset_url }}"
+          alt="{{ shop.name | escape }}"
+          width="220"
+          height="auto"
+          loading="lazy"
+        >
+      </a>
+
       {%- comment -%} Mobile newsletter (shown first on mobile) {%- endcomment -%}
       {%- for block in section.blocks -%}
         {%- if block.type == 'newsletter' -%}
