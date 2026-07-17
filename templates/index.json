@@ -72,9 +72,10 @@
         "cat_best": {
           "type": "category",
           "settings": {
-            "collection": "best-seller",
-            "title": "Best-Sellers",
-            "fallback_image": "womens-bestseller"
+            "collection": "activewear",
+            "title": "Women's Bottoms",
+            "category_filter": "bottoms",
+            "fallback_image": "womens-pants"
           }
         }
       },
@@ -130,9 +131,10 @@
         "cat_best": {
           "type": "category",
           "settings": {
-            "collection": "best-seller",
-            "title": "Best-Sellers",
-            "fallback_image": "mens-bestseller"
+            "collection": "activewear",
+            "title": "Men's Bottoms",
+            "category_filter": "bottoms",
+            "fallback_image": "mens-pants"
           }
         }
       },

@@ -4703,28 +4703,195 @@ customElements.define("minicart-wishlist-action", MiniCartWishlistAction);
 class CookieBar extends HTMLElement {
   constructor() {
     super();
+    this.cookieName = "cookie_bar";
+    this.storageKey = "msa_cookie_consent";
+    this.defaultPrefs = {
+      necessary: true,
+      preferences: true,
+      analytics: true,
+      marketing: true,
+    };
     this.init();
   }
+
+  getStoredConsent() {
+    try {
+      if (window.localStorage) {
+        const raw = localStorage.getItem(this.storageKey);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && parsed.decision) return parsed;
+        }
+      }
+    } catch (e) {}
+
+    const cookieVal = getCookie(this.cookieName);
+    if (cookieVal === "accepted") {
+      return { decision: "accepted", categories: { ...this.defaultPrefs } };
+    }
+    if (cookieVal === "rejected" || cookieVal === "dismiss") {
+      return {
+        decision: "rejected",
+        categories: {
+          necessary: true,
+          preferences: false,
+          analytics: false,
+          marketing: false,
+        },
+      };
+    }
+    return null;
+  }
+
+  hasConsentDecision() {
+    const stored = this.getStoredConsent();
+    return !!(stored && stored.decision);
+  }
+
+  saveConsent(decision, categories) {
+    const payload = {
+      decision: decision,
+      categories: Object.assign(
+        {
+          necessary: true,
+          preferences: false,
+          analytics: false,
+          marketing: false,
+        },
+        categories || {}
+      ),
+      updatedAt: new Date().toISOString(),
+    };
+    payload.categories.necessary = true;
+
+    setCookie(this.cookieName, decision, 365);
+    try {
+      if (window.localStorage) {
+        localStorage.setItem(this.storageKey, JSON.stringify(payload));
+      }
+    } catch (e) {}
+
+    document.dispatchEvent(
+      new CustomEvent("msa:cookie-consent", {
+        detail: payload,
+      })
+    );
+  }
+
+  clearConsent() {
+    deleteCookie(this.cookieName);
+    try {
+      if (window.localStorage) {
+        localStorage.removeItem(this.storageKey);
+      }
+    } catch (e) {}
+  }
+
+  showView(viewName) {
+    this.querySelectorAll("[data-cookie-view]").forEach((view) => {
+      const isActive = view.getAttribute("data-cookie-view") === viewName;
+      view.classList.toggle("hidden", !isActive);
+      if (isActive) {
+        view.removeAttribute("hidden");
+      } else {
+        view.setAttribute("hidden", "");
+      }
+    });
+  }
+
+  applyCategoryToggles(categories) {
+    this.querySelectorAll("[data-cookie-cat]").forEach((input) => {
+      const key = input.getAttribute("data-cookie-cat");
+      input.checked = !!(categories && categories[key]);
+    });
+  }
+
+  readCategoryToggles() {
+    const categories = {
+      necessary: true,
+      preferences: false,
+      analytics: false,
+      marketing: false,
+    };
+    this.querySelectorAll("[data-cookie-cat]").forEach((input) => {
+      categories[input.getAttribute("data-cookie-cat")] = !!input.checked;
+    });
+    return categories;
+  }
+
+  open(viewName) {
+    const stored = this.getStoredConsent();
+    if (stored && stored.categories) {
+      this.applyCategoryToggles(stored.categories);
+    } else {
+      this.applyCategoryToggles(this.defaultPrefs);
+    }
+
+    this.classList.remove("hidden");
+    this.removeAttribute("hidden");
+    this.showView(viewName || "main");
+  }
+
+  close() {
+    this.classList.add("hidden");
+    this.setAttribute("hidden", "");
+    this.showView("main");
+  }
+
+  acceptAll() {
+    this.saveConsent("accepted", { ...this.defaultPrefs });
+    this.close();
+  }
+
+  rejectAll() {
+    this.saveConsent("rejected", {
+      necessary: true,
+      preferences: false,
+      analytics: false,
+      marketing: false,
+    });
+    this.close();
+  }
+
+  savePreferences() {
+    const categories = this.readCategoryToggles();
+    const optionalEnabled =
+      categories.preferences || categories.analytics || categories.marketing;
+    this.saveConsent(optionalEnabled ? "custom" : "rejected", categories);
+    this.close();
+  }
+
   init() {
     var _this = this;
-    if (!getCookie("cookie_bar")) {
-      this.classList.remove("hidden");
+
+    if (!this.hasConsentDecision()) {
+      this.open("main");
     }
-    this.querySelectorAll(".cookie-dismiss").forEach((closeCookie) => {
-      closeCookie.addEventListener(
-        "click",
-        (e) => {
-          e.preventDefault();
-          const target = e.currentTarget;
-          _this.remove();
-          if (target.id == "cookie-refuse") {
-            setCookie("cookie_bar", "dismiss", 7);
-          } else {
-            setCookie("cookie_bar", "dismiss", 30);
-          }
-        },
-        false
-      );
+
+    this.addEventListener("click", (e) => {
+      const actionBtn = e.target.closest("[data-cookie-action]");
+      if (!actionBtn || !this.contains(actionBtn)) return;
+      e.preventDefault();
+
+      const action = actionBtn.getAttribute("data-cookie-action");
+      if (action === "accept") {
+        _this.acceptAll();
+      } else if (action === "reject") {
+        _this.rejectAll();
+      } else if (action === "preferences") {
+        _this.showView("preferences");
+      } else if (action === "back") {
+        _this.showView("main");
+      } else if (action === "save") {
+        _this.savePreferences();
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      const trigger = e.target.closest("[data-cookie-settings]");
+      if (!trigger) return;
+      e.preventDefault();
+      _this.open("preferences");
     });
   }
 }

@@ -922,6 +922,27 @@
       "product_count": "{{ count }} products",
       "empty": "No products found in this category.",
       "view_all": "View all products"
+    },
+    "cookies": {
+      "heading": "We value your privacy",
+      "accept_all": "Accept all",
+      "reject_all": "Reject all",
+      "preferences": "Cookie preferences",
+      "preferences_title": "Cookie preferences",
+      "preferences_intro": "Choose which cookies you allow. Necessary cookies are always on because the store needs them to work.",
+      "save_preferences": "Save preferences",
+      "back": "Back",
+      "settings": "Cookie settings",
+      "always_on": "Always on",
+      "necessary_title": "Necessary",
+      "necessary_desc": "Required for basic site functions like security, network management, and accessibility.",
+      "preferences_cat_title": "Preferences",
+      "preferences_cat_desc": "Remember choices such as language and region to give you a more personalized experience.",
+      "analytics_title": "Analytics",
+      "analytics_desc": "Help us understand how visitors use the store so we can improve performance and content.",
+      "marketing_title": "Marketing",
+      "marketing_desc": "Used to deliver relevant ads and measure campaign effectiveness across websites.",
+      "message_html": "We use cookies to enhance your browsing experience, serve personalized content, and analyze traffic. You can accept all, reject all, or manage your preferences. See our <a href=\"{{ privacy_url }}\">privacy policy</a> for details."
     }
   }
 }

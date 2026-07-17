@@ -1,0 +1,8 @@
+{
+  "git.enabled": true,
+  "git.autorefresh": true,
+  "git.confirmSync": false,
+  "git.showInlineOpenFileAction": true,
+  "scm.alwaysShowRepositories": true,
+  "git.openRepositoryInParentFolders": "always"
+}
