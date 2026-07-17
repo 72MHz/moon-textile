@@ -100,47 +100,20 @@
   </div>
 </li>
 
-{%- liquid
-  if collections['pose'] != blank
-    assign pose_url = collections['pose'].url
-  else
-    assign pose_url = '/collections/pose'
-  endif
-  if collections['underwidsix'] != blank
-    assign underwidsix_url = collections['underwidsix'].url
-  else
-    assign underwidsix_url = '/collections/underwidsix'
-  endif
-  if collections['millionaire'] != blank
-    assign millionaire_url = collections['millionaire'].url
-  else
-    assign millionaire_url = '/collections/millionaire'
-  endif
--%}
-
-{%- comment -%} POSE {%- endcomment -%}
+{%- comment -%} About us {%- endcomment -%}
 <li class="level0 single {{ nav_class }}">
   <menu-item class="relative static-1025 flex justify-between align-center border-bottom border-bottom-1025-0 header-color px-15">
-    <a class="no-underline py-10 relative lh-normal inline-flex min-h-55 min-h-1025-50 z-1 align-center{% if theme_st.menu_font == 'heading_font' %} heading-style{% endif %}{% if uppercase_first %} uppercase{% endif %}" href="{{ pose_url }}" aria-label="POSE">
-      <span>POSE</span>
+    <a class="no-underline py-10 relative lh-normal inline-flex min-h-55 min-h-1025-50 z-1 align-center{% if theme_st.menu_font == 'heading_font' %} heading-style{% endif %}{% if uppercase_first %} uppercase{% endif %}" href="/pages/about" aria-label="About us">
+      <span>About us</span>
     </a>
   </menu-item>
 </li>
 
-{%- comment -%} UNDERWIDSIX {%- endcomment -%}
+{%- comment -%} Contact {%- endcomment -%}
 <li class="level0 single {{ nav_class }}">
   <menu-item class="relative static-1025 flex justify-between align-center border-bottom border-bottom-1025-0 header-color px-15">
-    <a class="no-underline py-10 relative lh-normal inline-flex min-h-55 min-h-1025-50 z-1 align-center{% if theme_st.menu_font == 'heading_font' %} heading-style{% endif %}{% if uppercase_first %} uppercase{% endif %}" href="{{ underwidsix_url }}" aria-label="UNDERWIDSIX">
-      <span>UNDERWIDSIX</span>
-    </a>
-  </menu-item>
-</li>
-
-{%- comment -%} Millionaire {%- endcomment -%}
-<li class="level0 single {{ nav_class }}">
-  <menu-item class="relative static-1025 flex justify-between align-center border-bottom border-bottom-1025-0 header-color px-15">
-    <a class="no-underline py-10 relative lh-normal inline-flex min-h-55 min-h-1025-50 z-1 align-center{% if theme_st.menu_font == 'heading_font' %} heading-style{% endif %}{% if uppercase_first %} uppercase{% endif %}" href="{{ millionaire_url }}" aria-label="Millionaire">
-      <span>Millionaire</span>
+    <a class="no-underline py-10 relative lh-normal inline-flex min-h-55 min-h-1025-50 z-1 align-center{% if theme_st.menu_font == 'heading_font' %} heading-style{% endif %}{% if uppercase_first %} uppercase{% endif %}" href="/pages/contact-us" aria-label="Contact">
+      <span>Contact</span>
     </a>
   </menu-item>
 </li>
