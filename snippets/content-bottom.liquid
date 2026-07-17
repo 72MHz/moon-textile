@@ -47,35 +47,125 @@
   </div>
 {%- endif -%}
 {%- if theme_st.enable_cookies != blank -%}
+  {%- liquid
+    assign cookie_heading = 'unionbay.cookies.heading' | t
+    if theme_st.heading_cookies != blank
+      assign cookie_heading = theme_st.heading_cookies
+    endif
+    assign privacy_url = shop.privacy_policy.url | default: '/pages/privacy-policy'
+  -%}
   <cookie-bar
     id="cookie"
-    class="maxcookie hidden text-center gradient fixed shadow p-30 z-10 rounded-15 bottom-30{% if enable_rtl %} left-30{% else %} right-30{% endif %}"
+    class="unionbay-cookie-consent hidden"
+    role="region"
+    aria-labelledby="CookieConsentHeading"
+    aria-describedby="CookieConsentMessage"
+    hidden
   >
-    {% if theme_st.heading_cookies != blank or theme_st.content_cookies != blank %}
-      <div class="cookie-content">
-        {% if theme_st.heading_cookies != blank %}
-          <div class="cookie-heading h4 mt-0">
-            {{- theme_st.heading_cookies }}
+    <div class="unionbay-cookie-consent__panel">
+      <div class="unionbay-cookie-consent__view" data-cookie-view="main">
+        <div class="unionbay-cookie-consent__inner">
+          <div class="cookie-content unionbay-cookie-consent__content">
+            <h2 id="CookieConsentHeading" class="unionbay-cookie-consent__heading">
+              {{- cookie_heading -}}
+            </h2>
+            <div id="CookieConsentMessage" class="cookie-message unionbay-cookie-consent__message rich__text-m0">
+              {%- if theme_st.content_cookies != blank -%}
+                {{- theme_st.content_cookies -}}
+              {%- else -%}
+                <p>{{ 'unionbay.cookies.message_html' | t: privacy_url: privacy_url }}</p>
+              {%- endif -%}
+            </div>
           </div>
-        {% endif %}
-        {% if theme_st.content_cookies != blank %}
-          <div class="cookie-message rich__text-m0 fs-small-1">
-            {{- theme_st.content_cookies }}
+          <div class="cookie-compliance unionbay-cookie-consent__actions">
+            <button type="button" class="unionbay-cookie-consent__btn unionbay-cookie-consent__btn--secondary" data-cookie-action="reject">
+              {{ 'unionbay.cookies.reject_all' | t }}
+            </button>
+            <button type="button" class="unionbay-cookie-consent__btn unionbay-cookie-consent__btn--ghost" data-cookie-action="preferences">
+              {{ 'unionbay.cookies.preferences' | t }}
+            </button>
+            <button type="button" class="unionbay-cookie-consent__btn unionbay-cookie-consent__btn--primary" data-cookie-action="accept">
+              {{ 'unionbay.cookies.accept_all' | t }}
+            </button>
           </div>
-        {% endif %}
+        </div>
       </div>
-    {% endif %}
-    <div class="cookie-compliance w-full mt-20">
-      {%- if theme_st.label_allow != blank -%}
-        <button class="cookie-btn cookie-dismiss w-full btn-primary" id="cookie-dismiss">
-          {{ theme_st.label_allow }}
-        </button>
-      {%- endif -%}
-      {% if theme_st.label_refuse != blank %}
-        <button class="cookie-btn cookie-dismiss w-full btn-outline mt-15" id="cookie-refuse">
-          {{ theme_st.label_refuse }}
-        </button>
-      {% endif %}
+
+      <div class="unionbay-cookie-consent__view unionbay-cookie-consent__view--prefs hidden" data-cookie-view="preferences" hidden>
+        <div class="unionbay-cookie-consent__prefs">
+          <div class="unionbay-cookie-consent__prefs-header">
+            <h2 class="unionbay-cookie-consent__heading" id="CookiePrefsHeading">
+              {{ 'unionbay.cookies.preferences_title' | t }}
+            </h2>
+            <p class="unionbay-cookie-consent__message">
+              {{ 'unionbay.cookies.preferences_intro' | t }}
+            </p>
+          </div>
+
+          <ul class="unionbay-cookie-consent__categories list-unstyled">
+            <li class="unionbay-cookie-consent__category">
+              <div class="unionbay-cookie-consent__category-row">
+                <div>
+                  <h3 class="unionbay-cookie-consent__category-title">{{ 'unionbay.cookies.necessary_title' | t }}</h3>
+                  <p class="unionbay-cookie-consent__category-desc">{{ 'unionbay.cookies.necessary_desc' | t }}</p>
+                </div>
+                <span class="unionbay-cookie-consent__always-on">{{ 'unionbay.cookies.always_on' | t }}</span>
+              </div>
+            </li>
+            <li class="unionbay-cookie-consent__category">
+              <div class="unionbay-cookie-consent__category-row">
+                <div>
+                  <h3 class="unionbay-cookie-consent__category-title">{{ 'unionbay.cookies.preferences_cat_title' | t }}</h3>
+                  <p class="unionbay-cookie-consent__category-desc">{{ 'unionbay.cookies.preferences_cat_desc' | t }}</p>
+                </div>
+                <label class="unionbay-cookie-consent__switch">
+                  <input type="checkbox" name="cookie_preferences" data-cookie-cat="preferences" checked>
+                  <span class="unionbay-cookie-consent__switch-ui" aria-hidden="true"></span>
+                  <span class="visually-hidden">{{ 'unionbay.cookies.preferences_cat_title' | t }}</span>
+                </label>
+              </div>
+            </li>
+            <li class="unionbay-cookie-consent__category">
+              <div class="unionbay-cookie-consent__category-row">
+                <div>
+                  <h3 class="unionbay-cookie-consent__category-title">{{ 'unionbay.cookies.analytics_title' | t }}</h3>
+                  <p class="unionbay-cookie-consent__category-desc">{{ 'unionbay.cookies.analytics_desc' | t }}</p>
+                </div>
+                <label class="unionbay-cookie-consent__switch">
+                  <input type="checkbox" name="cookie_analytics" data-cookie-cat="analytics" checked>
+                  <span class="unionbay-cookie-consent__switch-ui" aria-hidden="true"></span>
+                  <span class="visually-hidden">{{ 'unionbay.cookies.analytics_title' | t }}</span>
+                </label>
+              </div>
+            </li>
+            <li class="unionbay-cookie-consent__category">
+              <div class="unionbay-cookie-consent__category-row">
+                <div>
+                  <h3 class="unionbay-cookie-consent__category-title">{{ 'unionbay.cookies.marketing_title' | t }}</h3>
+                  <p class="unionbay-cookie-consent__category-desc">{{ 'unionbay.cookies.marketing_desc' | t }}</p>
+                </div>
+                <label class="unionbay-cookie-consent__switch">
+                  <input type="checkbox" name="cookie_marketing" data-cookie-cat="marketing" checked>
+                  <span class="unionbay-cookie-consent__switch-ui" aria-hidden="true"></span>
+                  <span class="visually-hidden">{{ 'unionbay.cookies.marketing_title' | t }}</span>
+                </label>
+              </div>
+            </li>
+          </ul>
+
+          <div class="unionbay-cookie-consent__actions unionbay-cookie-consent__actions--prefs">
+            <button type="button" class="unionbay-cookie-consent__btn unionbay-cookie-consent__btn--secondary" data-cookie-action="reject">
+              {{ 'unionbay.cookies.reject_all' | t }}
+            </button>
+            <button type="button" class="unionbay-cookie-consent__btn unionbay-cookie-consent__btn--ghost" data-cookie-action="back">
+              {{ 'unionbay.cookies.back' | t }}
+            </button>
+            <button type="button" class="unionbay-cookie-consent__btn unionbay-cookie-consent__btn--primary" data-cookie-action="save">
+              {{ 'unionbay.cookies.save_preferences' | t }}
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </cookie-bar>
 {%- endif -%}
