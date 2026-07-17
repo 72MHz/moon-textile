@@ -1326,7 +1326,7 @@
 
 .theme-unionbay .unionbay-footer__logo img {
   display: block;
-  width: min(100%, 32rem);
+  width: min(100%, 18rem);
   height: auto;
 }
 
