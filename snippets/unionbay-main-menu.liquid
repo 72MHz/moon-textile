@@ -16,28 +16,12 @@
   if view == 'mobile'
     assign nav_class = 'block-1025'
   endif
-
-  if collections['womens-clothing-shop-all'] != blank
-    assign women_shop = collections['womens-clothing-shop-all'].url
-  elsif collections['dress'] != blank
-    assign women_shop = collections['dress'].url
-  else
-    assign women_shop = '/collections/womens-clothing-shop-all'
-  endif
-
-  if collections['mens-clothing-shop-all'] != blank
-    assign men_shop = collections['mens-clothing-shop-all'].url
-  elsif collections['t-shirts'] != blank
-    assign men_shop = collections['t-shirts'].url
-  else
-    assign men_shop = '/collections/mens-clothing-shop-all'
-  endif
 -%}
 
 {%- comment -%} Women {%- endcomment -%}
 <li class="level0 menu-parent menu-parent__horizontal mega-menu {{ nav_class }}">
   <menu-item class="relative static-1025 flex justify-between align-center border-bottom border-bottom-1025-0 header-color px-15">
-    <a class="no-underline py-10 relative lh-normal inline-flex min-h-55 min-h-1025-50 z-1 align-center{% if theme_st.menu_font == 'heading_font' %} heading-style{% endif %}{% if uppercase_first %} uppercase{% endif %}" href="{{ women_shop }}" aria-label="Women">
+    <a class="no-underline py-10 relative lh-normal inline-flex min-h-55 min-h-1025-50 z-1 align-center{% if theme_st.menu_font == 'heading_font' %} heading-style{% endif %}{% if uppercase_first %} uppercase{% endif %}" href="#" role="button" aria-haspopup="true" aria-label="Women" onclick="return false;">
       <span>Women</span>
       <open-children-toggle class="inline-flex flex-end align-center ms-5 touch-target-mb">
         <svg class="icon-down hidden block-1025" width="10" height="6"><use href="#icon-arrow-down" /></svg>
@@ -61,7 +45,7 @@
     </div>
     <div class="fluid_container">
       <div class="flex flex-column gap flex-1025-row" style="--col-mega-width: 0%; --col-gap: 30px">
-        <div class="menu-list" style="--row-gap: 40px; --col-desktop: 4;">
+        <div class="menu-list" style="--row-gap: 40px; --col-desktop: 3;">
           {%- render 'unionbay-mega-menu-women' -%}
         </div>
       </div>
@@ -72,7 +56,7 @@
 {%- comment -%} Men {%- endcomment -%}
 <li class="level0 menu-parent menu-parent__horizontal mega-menu {{ nav_class }}">
   <menu-item class="relative static-1025 flex justify-between align-center border-bottom border-bottom-1025-0 header-color px-15">
-    <a class="no-underline py-10 relative lh-normal inline-flex min-h-55 min-h-1025-50 z-1 align-center{% if theme_st.menu_font == 'heading_font' %} heading-style{% endif %}{% if uppercase_first %} uppercase{% endif %}" href="{{ men_shop }}" aria-label="Men">
+    <a class="no-underline py-10 relative lh-normal inline-flex min-h-55 min-h-1025-50 z-1 align-center{% if theme_st.menu_font == 'heading_font' %} heading-style{% endif %}{% if uppercase_first %} uppercase{% endif %}" href="#" role="button" aria-haspopup="true" aria-label="Men" onclick="return false;">
       <span>Men</span>
       <open-children-toggle class="inline-flex flex-end align-center ms-5 touch-target-mb">
         <svg class="icon-down hidden block-1025" width="10" height="6"><use href="#icon-arrow-down" /></svg>
@@ -92,7 +76,7 @@
     </div>
     <div class="fluid_container">
       <div class="flex flex-column gap flex-1025-row" style="--col-mega-width: 0%; --col-gap: 30px">
-        <div class="menu-list" style="--row-gap: 40px; --col-desktop: 4;">
+        <div class="menu-list" style="--row-gap: 40px; --col-desktop: 3;">
           {%- render 'unionbay-mega-menu-men' -%}
         </div>
       </div>

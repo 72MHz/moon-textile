@@ -1,65 +1,50 @@
 {% doc %}
-  Union Bay Men mega menu panel content.
+  Union Bay Men mega menu — Categories / Tops / Bottoms columns.
+  Links use /collections/men-{item} handles.
 {% enddoc %}
 
-{%- liquid
-  if collections['mens-clothing-shop-all'] != blank
-    assign men_shop = collections['mens-clothing-shop-all'].url
-  else
-    assign men_shop = collections['t-shirts'].url
-  endif
--%}
+<div class="unionbay-mega-menu__layout unionbay-mega-menu__layout--equal-cols flex flex-1025-row">
+  <ul class="unionbay-mega-menu__columns subchildmenu list-unstyled grid grid-cols gap" style="--col-desktop: 3; --row-gap: 2.5rem;">
+    <li class="menu-link level-1 unionbay-mega-menu__column">
+      <span class="unionbay-mega-menu__column-heading">Categories</span>
+      <ul class="unionbay-mega-menu__column-links list-unstyled">
+        <li class="menu-link level-2"><a href="/collections/men-new-arrivals" class="unionbay-mega-menu__column-link menu_item-link no-underline">New Arrivals</a></li>
+        <li class="menu-link level-2"><a href="/collections/men-tops" class="unionbay-mega-menu__column-link menu_item-link no-underline">Tops</a></li>
+        <li class="menu-link level-2"><a href="/collections/men-bottoms" class="unionbay-mega-menu__column-link menu_item-link no-underline">Bottoms</a></li>
+        <li class="menu-link level-2"><a href="/collections/men-graphics-shop" class="unionbay-mega-menu__column-link menu_item-link no-underline">Graphics Shop</a></li>
+        <li class="menu-link level-2"><a href="/collections/men-sweatshirts-sweatpants" class="unionbay-mega-menu__column-link menu_item-link no-underline">Sweatshirts &amp; Sweatpants</a></li>
+        <li class="menu-link level-2"><a href="/collections/men-swimwear" class="unionbay-mega-menu__column-link menu_item-link no-underline">Swimwear</a></li>
+        <li class="menu-link level-2"><a href="/collections/men-sleepwear" class="unionbay-mega-menu__column-link menu_item-link no-underline">Sleepwear</a></li>
+        <li class="menu-link level-2"><a href="/collections/men-jackets-coats" class="unionbay-mega-menu__column-link menu_item-link no-underline">Jackets &amp; Coats</a></li>
+        <li class="menu-link level-2"><a href="/collections/men-underwear-socks" class="unionbay-mega-menu__column-link menu_item-link no-underline">Underwear &amp; Socks</a></li>
+        <li class="menu-link level-2"><a href="/collections/men-accessories-shoes" class="unionbay-mega-menu__column-link menu_item-link no-underline">Accessories &amp; Shoes</a></li>
+        <li class="menu-link level-2"><a href="/collections/men-cologne" class="unionbay-mega-menu__column-link menu_item-link no-underline">Cologne</a></li>
+        <li class="menu-link level-2"><a href="/collections/men-clearance" class="unionbay-mega-menu__column-link menu_item-link no-underline unionbay-mega-menu__link--sale">Clearance</a></li>
+      </ul>
+    </li>
 
-<div class="unionbay-mega-menu__layout flex flex-1025-row">
-  <ul class="unionbay-mega-menu__sidebar list-unstyled">
-    <li class="unionbay-mega-menu__sidebar-item"><a href="{{ men_shop }}" class="unionbay-mega-menu__sidebar-link no-underline"><span>Shop all</span></a></li>
-    <li class="unionbay-mega-menu__sidebar-item"><a href="{{ men_shop }}?ub_cat=tops" class="unionbay-mega-menu__sidebar-link no-underline"><span>Shop all tops</span></a></li>
-    <li class="unionbay-mega-menu__sidebar-item"><a href="{{ men_shop }}?ub_cat=bottoms" class="unionbay-mega-menu__sidebar-link no-underline"><span>Shop all bottoms</span></a></li>
-    <li class="unionbay-mega-menu__sidebar-item"><a href="{{ men_shop }}?ub_cat=new-arrivals" class="unionbay-mega-menu__sidebar-link no-underline"><span>New arrivals</span></a></li>
-    <li class="unionbay-mega-menu__sidebar-item"><a href="{{ men_shop }}?ub_cat=bottoms" class="unionbay-mega-menu__sidebar-link no-underline"><span>Men's Bottoms</span></a></li>
-  </ul>
+    <li class="menu-link level-1 unionbay-mega-menu__column">
+      <span class="unionbay-mega-menu__column-heading">Tops</span>
+      <ul class="unionbay-mega-menu__column-links list-unstyled">
+        <li class="menu-link level-2"><a href="/collections/men-t-shirts" class="unionbay-mega-menu__column-link menu_item-link no-underline">T-Shirts</a></li>
+        <li class="menu-link level-2"><a href="/collections/men-graphic-tees" class="unionbay-mega-menu__column-link menu_item-link no-underline">Graphic Tees</a></li>
+        <li class="menu-link level-2"><a href="/collections/men-hoodies-sweatshirts" class="unionbay-mega-menu__column-link menu_item-link no-underline">Hoodies &amp; Sweatshirts</a></li>
+        <li class="menu-link level-2"><a href="/collections/men-polos" class="unionbay-mega-menu__column-link menu_item-link no-underline">Polos</a></li>
+        <li class="menu-link level-2"><a href="/collections/men-button-front-shirts" class="unionbay-mega-menu__column-link menu_item-link no-underline">Button Front Shirts</a></li>
+        <li class="menu-link level-2"><a href="/collections/men-sweaters" class="unionbay-mega-menu__column-link menu_item-link no-underline">Sweaters</a></li>
+        <li class="menu-link level-2"><a href="/collections/men-tops" class="unionbay-mega-menu__column-link menu_item-link no-underline">All Tops</a></li>
+      </ul>
+    </li>
 
-  <ul class="unionbay-mega-menu__columns subchildmenu list-unstyled grid grid-cols gap" style="--col-desktop: 4; --row-gap: 2.5rem;">
     <li class="menu-link level-1 unionbay-mega-menu__column">
-      <a href="{{ men_shop }}?ub_cat=tops" class="unionbay-mega-menu__column-heading menu_item-link no-underline">Tops</a>
+      <span class="unionbay-mega-menu__column-heading">Bottoms</span>
       <ul class="unionbay-mega-menu__column-links list-unstyled">
-        <li class="menu-link level-2"><a href="{{ men_shop }}?ub_cat=polo-shirt" class="unionbay-mega-menu__column-link menu_item-link no-underline">Polo shirt</a></li>
-        <li class="menu-link level-2"><a href="{{ men_shop }}?ub_cat=crewneck-short-sleeve" class="unionbay-mega-menu__column-link menu_item-link no-underline">Crewneck short sleeve</a></li>
-        <li class="menu-link level-2"><a href="{{ men_shop }}?ub_cat=long-sleeve-crewneck" class="unionbay-mega-menu__column-link menu_item-link no-underline">Long sleeve crewneck</a></li>
-        <li class="menu-link level-2"><a href="{{ men_shop }}?ub_cat=shirts" class="unionbay-mega-menu__column-link menu_item-link no-underline">Shirts</a></li>
-        <li class="menu-link level-2"><a href="{{ men_shop }}?ub_cat=sweaters" class="unionbay-mega-menu__column-link menu_item-link no-underline">Sweaters</a></li>
-        <li class="menu-link level-2"><a href="{{ men_shop }}?ub_cat=tops" class="unionbay-mega-menu__column-link menu_item-link no-underline">View all</a></li>
-      </ul>
-      <a href="{{ men_shop }}?ub_cat=jackets" class="unionbay-mega-menu__column-heading menu_item-link no-underline unionbay-mega-menu__column-heading--solo">Jackets</a>
-      <a href="{{ men_shop }}?ub_cat=interlock-jacket" class="unionbay-mega-menu__column-heading menu_item-link no-underline unionbay-mega-menu__column-heading--solo">Interlock jacket</a>
-    </li>
-    <li class="menu-link level-1 unionbay-mega-menu__column">
-      <a href="{{ men_shop }}?ub_cat=hoodies" class="unionbay-mega-menu__column-heading menu_item-link no-underline">Sweatshirts</a>
-      <ul class="unionbay-mega-menu__column-links list-unstyled">
-        <li class="menu-link level-2"><a href="{{ men_shop }}?ub_cat=thermal-waffle-ls-sweatshirt" class="unionbay-mega-menu__column-link menu_item-link no-underline">Thermal waffle L/S sweatshirt</a></li>
-        <li class="menu-link level-2"><a href="{{ men_shop }}?ub_cat=fleece-sweatshirt" class="unionbay-mega-menu__column-link menu_item-link no-underline">Fleece sweatshirt</a></li>
-        <li class="menu-link level-2"><a href="{{ men_shop }}?ub_cat=hoodies" class="unionbay-mega-menu__column-link menu_item-link no-underline">Sweatshirts &amp; hoodies</a></li>
-        <li class="menu-link level-2"><a href="{{ men_shop }}?ub_cat=fleece-tracksuit" class="unionbay-mega-menu__column-link menu_item-link no-underline">Fleece tracksuit</a></li>
-        <li class="menu-link level-2"><a href="{{ men_shop }}?ub_cat=sweatshirts" class="unionbay-mega-menu__column-link menu_item-link no-underline">View all</a></li>
-      </ul>
-    </li>
-    <li class="menu-link level-1 unionbay-mega-menu__column">
-      <a href="{{ men_shop }}?ub_cat=pants" class="unionbay-mega-menu__column-heading menu_item-link no-underline">Pants</a>
-      <ul class="unionbay-mega-menu__column-links list-unstyled">
-        <li class="menu-link level-2"><a href="{{ men_shop }}?ub_cat=trousers" class="unionbay-mega-menu__column-link menu_item-link no-underline">Trousers</a></li>
-        <li class="menu-link level-2"><a href="{{ men_shop }}?ub_cat=cargo-pants" class="unionbay-mega-menu__column-link menu_item-link no-underline">Cargo pants</a></li>
-        <li class="menu-link level-2"><a href="{{ men_shop }}?ub_cat=jogger-pants" class="unionbay-mega-menu__column-link menu_item-link no-underline">Jogger pants</a></li>
-        <li class="menu-link level-2"><a href="{{ men_shop }}?ub_cat=travel-pants" class="unionbay-mega-menu__column-link menu_item-link no-underline">Travel pants</a></li>
-        <li class="menu-link level-2"><a href="{{ men_shop }}?ub_cat=pants" class="unionbay-mega-menu__column-link menu_item-link no-underline">View all</a></li>
-      </ul>
-      <a href="{{ men_shop }}?ub_cat=bottoms" class="unionbay-mega-menu__column-heading menu_item-link no-underline unionbay-mega-menu__column-heading--solo">Big &amp; tall</a>
-    </li>
-    <li class="menu-link level-1 unionbay-mega-menu__column">
-      <a href="{{ men_shop }}?ub_cat=shorts" class="unionbay-mega-menu__column-heading menu_item-link no-underline">Shorts</a>
-      <ul class="unionbay-mega-menu__column-links list-unstyled">
-        <li class="menu-link level-2"><a href="{{ men_shop }}?ub_cat=cargo-shorts" class="unionbay-mega-menu__column-link menu_item-link no-underline">Cargo shorts</a></li>
-        <li class="menu-link level-2"><a href="{{ men_shop }}?ub_cat=pull-on-shorts" class="unionbay-mega-menu__column-link menu_item-link no-underline">Pull-on shorts</a></li>
-        <li class="menu-link level-2"><a href="{{ men_shop }}?ub_cat=shorts" class="unionbay-mega-menu__column-link menu_item-link no-underline">View all</a></li>
+        <li class="menu-link level-2"><a href="/collections/men-jeans" class="unionbay-mega-menu__column-link menu_item-link no-underline">Jeans</a></li>
+        <li class="menu-link level-2"><a href="/collections/men-shorts" class="unionbay-mega-menu__column-link menu_item-link no-underline">Shorts</a></li>
+        <li class="menu-link level-2"><a href="/collections/men-sweatpants" class="unionbay-mega-menu__column-link menu_item-link no-underline">Sweatpants</a></li>
+        <li class="menu-link level-2"><a href="/collections/men-pants" class="unionbay-mega-menu__column-link menu_item-link no-underline">Pants</a></li>
+        <li class="menu-link level-2"><a href="/collections/men-baggy-bottoms" class="unionbay-mega-menu__column-link menu_item-link no-underline">Baggy Bottoms</a></li>
+        <li class="menu-link level-2"><a href="/collections/men-bottoms" class="unionbay-mega-menu__column-link menu_item-link no-underline">All Bottoms</a></li>
       </ul>
     </li>
   </ul>
