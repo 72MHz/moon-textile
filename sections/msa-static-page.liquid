@@ -4,6 +4,20 @@
   endcapture
   assign msa_handle = msa_handle_raw | strip | downcase
 
+  # On 404, page.handle is blank — detect known pages from the requested path.
+  if msa_handle == blank or template.name == '404'
+    assign path_down = request.path | downcase
+    if path_down contains 'contact-us' or path_down contains '/pages/contact'
+      assign msa_handle = 'contact-us'
+    elsif path_down contains '/pages/about'
+      assign msa_handle = 'about'
+    elsif path_down contains '/pages/services'
+      assign msa_handle = 'services'
+    elsif path_down contains '/pages/vendors'
+      assign msa_handle = 'vendors'
+    endif
+  endif
+
   assign msa_title = ''
   assign msa_description = ''
   assign msa_known = false

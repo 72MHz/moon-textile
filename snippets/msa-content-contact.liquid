@@ -1,62 +1,115 @@
 {% doc %}
-  Contact page body with offices and contact form.
+  Contact page — accessible contact form.
 {% enddoc %}
 
 {{ 'page-contact.css' | asset_url | stylesheet_tag }}
 
-<div class="section msa-page" style="--section-pt: 8px; --section-pb: 0;">
+<div class="section msa-contact-section">
   <div class="fluid_container">
-    <div class="msa-page__offices grid grid-cols gap" style="--col-desktop: 2; --col-tablet: 2; --col-number: 1;">
-      <div class="msa-page__office">
-        <h3 class="msa-page__office-title">Pakistan office</h3>
-        <p class="msa-page__office-address">MashaAllah Center, 2nd Floor, Sunflower Housing Society, J-1, Johar Town, Lahore, Pakistan</p>
-      </div>
-      <div class="msa-page__office">
-        <h3 class="msa-page__office-title">Europe office</h3>
-        <p class="msa-page__office-address">Rainham, London, United Kingdom</p>
-      </div>
-    </div>
-  </div>
-</div>
+    <div class="msa-contact-card">
+      <header class="msa-contact-card__header">
+        <p class="msa-contact-card__eyebrow">{{ 'templates.contact.form.eyebrow' | t }}</p>
+        <h2 class="msa-contact-card__title">{{ 'templates.contact.form.title' | t }}</h2>
+        <p class="msa-contact-card__subtitle">{{ 'templates.contact.form.intro' | t }}</p>
+      </header>
 
-<div class="section sec__collection-list" style="--section-pt: 20px; --section-pb: 60px;">
-  <div class="fluid_container">
-    <div class="flex flex-wrap contact-container" style="--column_gap: 60px;">
-      <div class="support_customer flex-1">
-        <h3 class="section__header-heading h4 heading-letter-spacing mt-0">Get in touch</h3>
-        <div class="section__header-des rich__text-m0 mb-25">
-          <p>Reach out to Moon Style Apparel for sourcing, manufacturing partnerships, or general enquiries.</p>
-        </div>
-        <div class="rte">
-          <p><strong>Pakistan office</strong><br>MashaAllah Center, 2nd Floor<br>Sunflower Housing Society, J-1<br>Johar Town, Lahore, Pakistan</p>
-          <p><strong>Europe office</strong><br>Rainham, London<br>United Kingdom</p>
-        </div>
-      </div>
-      <div class="contact_form flex-1">
-        <h3 class="section__header-heading h4 heading-letter-spacing mt-0">Send message</h3>
-        <div class="section__header-des rich__text-m0 mb-25">
-          <p>Fill out the form and our team will get back to you shortly.</p>
-        </div>
-        {% form 'contact', id: 'MsaContactForm' %}
-          {% if form.posted_successfully? %}
-            <p class="success inline-flex gap-10 align-center lh-normal">{{ 'general.contact.success' | t }}</p>
-          {% else %}
-            {{ form.errors | default_errors }}
-            <div class="flex flex-cols flex-wrap gap-20" style="--col-number: 1;">
-              <div class="form-group w-full">
-                <input class="form-control" type="text" name="contact[name]" id="MsaContactName" placeholder="Your name" required>
-              </div>
-              <div class="form-group w-full">
-                <input class="form-control" type="email" name="contact[email]" id="MsaContactEmail" placeholder="Your email" required>
-              </div>
-              <div class="form-group w-full">
-                <textarea class="form-control" name="contact[body]" id="MsaContactBody" rows="6" placeholder="Your message" required></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+      {% form 'contact', id: 'MsaContactForm', class: 'msa-contact-form' %}
+        {% if form.posted_successfully? %}
+          <div class="msa-contact-form__success" role="status">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+              <circle cx="11" cy="11" r="10" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M6.5 11.2l2.8 2.8 6.2-6.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <p>{{ 'general.contact.success' | t }}</p>
+          </div>
+        {% else %}
+          {% if form.errors != blank %}
+            <div class="msa-contact-form__errors" role="alert">
+              {{ form.errors | default_errors }}
             </div>
           {% endif %}
-        {% endform %}
-      </div>
+
+          <p class="msa-contact-form__required-note">
+            {{ 'templates.contact.form.required_note' | t }}
+          </p>
+
+          <div class="msa-contact-form__grid">
+            <div class="msa-contact-form__field">
+              <label class="msa-contact-form__label" for="MsaContactName">
+                {{ 'templates.contact.form.name' | t }}
+                <span class="msa-contact-form__required" aria-hidden="true">*</span>
+              </label>
+              <input
+                class="msa-contact-form__input"
+                type="text"
+                name="contact[name]"
+                id="MsaContactName"
+                autocomplete="name"
+                required
+                aria-required="true"
+                placeholder="{{ 'templates.contact.form.name_placeholder' | t }}"
+              >
+            </div>
+
+            <div class="msa-contact-form__field">
+              <label class="msa-contact-form__label" for="MsaContactEmail">
+                {{ 'templates.contact.form.email' | t }}
+                <span class="msa-contact-form__required" aria-hidden="true">*</span>
+              </label>
+              <input
+                class="msa-contact-form__input"
+                type="email"
+                name="contact[email]"
+                id="MsaContactEmail"
+                autocomplete="email"
+                required
+                aria-required="true"
+                placeholder="{{ 'templates.contact.form.email_placeholder' | t }}"
+              >
+            </div>
+
+            <div class="msa-contact-form__field">
+              <label class="msa-contact-form__label" for="MsaContactPhone">
+                {{ 'templates.contact.form.phone' | t }}
+                <span class="msa-contact-form__optional">{{ 'templates.contact.form.optional' | t }}</span>
+              </label>
+              <input
+                class="msa-contact-form__input"
+                type="tel"
+                name="contact[phone]"
+                id="MsaContactPhone"
+                autocomplete="tel"
+                placeholder="{{ 'templates.contact.form.phone_placeholder' | t }}"
+              >
+            </div>
+
+            <div class="msa-contact-form__field msa-contact-form__field--full">
+              <label class="msa-contact-form__label" for="MsaContactBody">
+                {{ 'templates.contact.form.comment' | t }}
+                <span class="msa-contact-form__required" aria-hidden="true">*</span>
+              </label>
+              <textarea
+                class="msa-contact-form__input msa-contact-form__textarea"
+                name="contact[body]"
+                id="MsaContactBody"
+                rows="6"
+                required
+                aria-required="true"
+                placeholder="{{ 'templates.contact.form.comment_placeholder' | t }}"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="msa-contact-form__actions">
+            <button type="submit" class="msa-contact-form__submit">
+              {{ 'templates.contact.form.send_contact' | t }}
+            </button>
+            <p class="msa-contact-form__privacy">
+              {{ 'templates.contact.form.privacy_note_html' | t }}
+            </p>
+          </div>
+        {% endif %}
+      {% endform %}
     </div>
   </div>
 </div>

@@ -1,86 +1,9 @@
 {
   "sections": {
-    "page-heading": {
-      "type": "page-heading",
-      "blocks": {
-        "breadcrumb": { "type": "breadcrumb", "settings": {} },
-        "heading": {
-          "type": "heading",
-          "settings": { "page_title": "Contact us", "header_size": "default" }
-        },
-        "description": {
-          "type": "description",
-          "settings": {
-            "description": "<p>Whether you're looking to partner with us, have questions about our services, or simply want to learn more, fill out the form below. Our team will contact you as soon as possible.</p>"
-          }
-        }
-      },
-      "block_order": ["breadcrumb", "heading", "description"],
-      "settings": {
-        "section_width": "fluid_container",
-        "color_scheme": "",
-        "alignment": "center",
-        "overlay_opacity": 0,
-        "height": "based_on_content",
-        "padding_top": 40,
-        "padding_bottom": 10
-      }
-    },
-    "offices": {
-      "type": "msa-info-page",
-      "blocks": {
-        "locations": {
-          "type": "offices",
-          "settings": {
-            "office_1_title": "Pakistan office",
-            "office_1_address": "MashaAllah Center, 2nd Floor, Sunflower Housing Society, J-1, Johar Town, Lahore, Pakistan",
-            "office_2_title": "Europe office",
-            "office_2_address": "Rainham, London, United Kingdom"
-          }
-        }
-      },
-      "block_order": ["locations"],
-      "settings": {
-        "section_width": "fluid_container",
-        "padding_top": 8,
-        "padding_bottom": 0
-      }
-    },
     "main": {
-      "type": "page-contact",
-      "blocks": {
-        "text_block": {
-          "type": "text_block",
-          "settings": {
-            "heading_text_block": "Get in touch",
-            "description_text_block": "<p>Reach out to Moon Style Apparel for sourcing, manufacturing partnerships, or general enquiries.</p>",
-            "content": "<p><strong>Pakistan office</strong><br>MashaAllah Center, 2nd Floor<br>Sunflower Housing Society, J-1<br>Johar Town, Lahore, Pakistan</p><p><strong>Europe office</strong><br>Rainham, London<br>United Kingdom</p>"
-          }
-        },
-        "contact": {
-          "type": "contact",
-          "settings": {
-            "heading": "Send message",
-            "description": "<p>Fill out the form and our team will get back to you shortly.</p>",
-            "show_privacy": true,
-            "name": "Your name",
-            "email": "Your email",
-            "your_comment": "Your message",
-            "button_label": "Submit"
-          }
-        }
-      },
-      "block_order": ["text_block", "contact"],
-      "settings": {
-        "section_width": "fluid_container",
-        "color_scheme": "",
-        "iframe": "",
-        "column_gap": 60,
-        "padding_top": 20,
-        "padding_bottom": 60,
-        "reset_spacing": false
-      }
+      "type": "msa-static-page",
+      "settings": {}
     }
   },
-  "order": ["page-heading", "offices", "main"]
+  "order": ["main"]
 }

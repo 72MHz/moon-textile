@@ -65,7 +65,14 @@
                 </h1>
               </motion-element>
             {%- when 'description' -%}
-              {% if block_st.description != blank or page.content != blank %}
+              {%- liquid
+                assign page_handle = page.handle | downcase
+                assign skip_page_content = false
+                if page_handle == 'contact-us' or page_handle == 'contact'
+                  assign skip_page_content = true
+                endif
+              -%}
+              {% if block_st.description != blank or page.content != blank and skip_page_content == false %}
                 <motion-element
                   data-motion="fade-up-lg"
                   {% if scroll_animation != 'slide_in' %}
@@ -76,7 +83,7 @@
                 >
                   {% if block_st.description != blank -%}
                     {{- block_st.description -}}
-                  {%- else %}
+                  {%- elsif skip_page_content == false %}
                     {{ page.content -}}
                   {%- endif %}
                 </motion-element>

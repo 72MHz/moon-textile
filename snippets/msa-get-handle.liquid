@@ -15,15 +15,19 @@
   if msa_handle == blank
     assign path_down = request.path | downcase
     if path_down contains '/pages/'
-      assign path_parts = path_down | split: '/'
-      for part in path_parts
-        if part != blank
-          if part != 'pages'
-            assign msa_handle = part
-          endif
-        endif
-      endfor
+      assign after_pages = path_down | split: '/pages/' | last
+      assign msa_handle = after_pages | split: '/' | first | split: '?' | first | strip
     endif
+  endif
+
+  if msa_handle == blank
+    assign path_down = request.path | downcase
+    assign path_parts = path_down | split: '/'
+    for part in path_parts
+      if part != blank
+        assign msa_handle = part
+      endif
+    endfor
   endif
 
   if msa_handle == blank
@@ -31,11 +35,17 @@
       echo content_for_header
     endcapture
     assign page_url = content_for_query_string | split: '"pageurl":"' | last | split: '"' | first | replace: '\/', '/'
-    if page_url contains '?p='
-      assign msa_handle = page_url | split: '?p=' | last | split: '&' | first | url_decode | downcase
+    if page_url contains '/pages/'
+      assign after_pages = page_url | split: '/pages/' | last
+      assign msa_handle = after_pages | split: '/' | first | split: '?' | first | split: '&' | first | url_decode | downcase | strip
     endif
-    if page_url contains '&p='
-      assign msa_handle = page_url | split: '&p=' | last | split: '&' | first | url_decode | downcase
+    if msa_handle == blank
+      if page_url contains '?p='
+        assign msa_handle = page_url | split: '?p=' | last | split: '&' | first | url_decode | downcase
+      endif
+      if page_url contains '&p='
+        assign msa_handle = page_url | split: '&p=' | last | split: '&' | first | url_decode | downcase
+      endif
     endif
   endif
 -%}

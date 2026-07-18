@@ -2,21 +2,241 @@
   opacity: 0.4;
   pointer-events: none;
 }
+
 #contact_form {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
+
 .contact-container {
   gap: clamp(3rem, 4vw, var(--column_gap));
 }
+
 .map iframe {
   width: 100%;
   border-radius: var(--rounded-radius);
 }
+
 @media (min-width: 768px) {
   .support_customer {
     width: 35%;
     max-width: 40rem;
+  }
+}
+
+/* MSA contact form */
+.msa-contact-section {
+  padding: 2.4rem 0 6rem;
+}
+
+.msa-contact-card {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 3.2rem 2.4rem;
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 1.2rem;
+  box-shadow: 0 8px 28px rgba(17, 17, 17, 0.04);
+}
+
+.msa-contact-card__header {
+  margin-bottom: 2.8rem;
+}
+
+.msa-contact-card__eyebrow {
+  margin: 0 0 0.8rem;
+  color: #666;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.msa-contact-card__title {
+  margin: 0 0 1rem;
+  color: #111;
+  font-size: clamp(2.4rem, 3vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+  text-transform: none;
+}
+
+.msa-contact-card__subtitle {
+  margin: 0;
+  max-width: 48rem;
+  color: #555;
+  font-size: 1.5rem;
+  line-height: 1.55;
+}
+
+.msa-contact-form__required-note {
+  margin: 0 0 2rem;
+  color: #777;
+  font-size: 1.25rem;
+}
+
+.msa-contact-form__required {
+  color: #b42318;
+  margin-left: 0.2rem;
+}
+
+.msa-contact-form__optional {
+  margin-left: 0.4rem;
+  color: #888;
+  font-size: 1.2rem;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.msa-contact-form__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.8rem;
+}
+
+@media (min-width: 768px) {
+  .msa-contact-card {
+    padding: 4rem 4.4rem;
+  }
+
+  .msa-contact-form__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 1.6rem;
+  }
+
+  .msa-contact-form__field--full {
+    grid-column: 1 / -1;
+  }
+}
+
+.msa-contact-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.msa-contact-form__label {
+  color: #222;
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.msa-contact-form__input {
+  width: 100%;
+  min-height: 4.8rem;
+  padding: 1.2rem 1.4rem;
+  border: 1px solid #d0d0d0;
+  border-radius: 0.8rem;
+  background: #fafafa;
+  color: #111;
+  font-size: 1.5rem;
+  line-height: 1.4;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.msa-contact-form__input::placeholder {
+  color: #9a9a9a;
+}
+
+.msa-contact-form__input:hover {
+  border-color: #b5b5b5;
+  background: #fff;
+}
+
+.msa-contact-form__input:focus {
+  outline: none;
+  border-color: #111;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.08);
+}
+
+.msa-contact-form__textarea {
+  min-height: 14rem;
+  resize: vertical;
+}
+
+.msa-contact-form__actions {
+  margin-top: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: stretch;
+}
+
+.msa-contact-form__submit {
+  appearance: none;
+  border: 0;
+  border-radius: 0.8rem;
+  min-height: 5rem;
+  padding: 1.2rem 2rem;
+  background: #111;
+  color: #fff;
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.msa-contact-form__submit:hover {
+  background: #333;
+}
+
+.msa-contact-form__submit:active {
+  transform: translateY(1px);
+}
+
+.msa-contact-form__submit:focus-visible {
+  outline: 2px solid #111;
+  outline-offset: 3px;
+}
+
+.msa-contact-form__privacy {
+  margin: 0;
+  color: #777;
+  font-size: 1.25rem;
+  line-height: 1.45;
+}
+
+.msa-contact-form__success {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+  padding: 1.6rem 1.8rem;
+  border-radius: 0.8rem;
+  background: #f0faf2;
+  border: 1px solid #b7e0c0;
+  color: #1f6b35;
+}
+
+.msa-contact-form__success p {
+  margin: 0;
+  font-size: 1.45rem;
+  line-height: 1.5;
+}
+
+.msa-contact-form__errors {
+  margin-bottom: 1.6rem;
+  padding: 1.4rem 1.6rem;
+  border-radius: 0.8rem;
+  background: #fff5f5;
+  border: 1px solid #f0b4b4;
+  color: #8a1f1f;
+  font-size: 1.35rem;
+}
+
+@media (max-width: 767px) {
+  .msa-contact-card {
+    padding: 2.4rem 1.6rem;
+    border-radius: 1rem;
+  }
+
+  .msa-contact-form__submit {
+    width: 100%;
   }
 }

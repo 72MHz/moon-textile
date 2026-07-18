@@ -1,23 +1,33 @@
 {%- liquid
   assign section_st = section.settings
   assign section_width = section_st.section_width
+  assign page_handle = page.handle | downcase
 -%}
-{%- capture style -%}
-  --section-pt: {{ section_st.padding_top }}; --section-pb: {{ section_st.padding_bottom }};--max-width: 50rem;
-{%- endcapture -%}
-<div
-  class="section{% if section_st.padding_top < 30 %} pt-min{% endif %}{% if section_st.padding_bottom < 30 %} pb-min{% endif %} page-default"
-  style="{{ style | strip | strip_newlines }}"
->
-  <div class="{{ section_width }}">
-    <div class="page-title text-center">
-      <h1>{{ page.title | escape }}</h1>
-    </div>
-    <div class="rte">
-      {{ page.content }}
+
+{%- if page_handle == 'contact-us' or page_handle == 'contact' -%}
+  {% render 'msa-page-heading',
+    title: 'Contact us',
+    description: '<p>Whether you are looking to partner with us, have questions about our services, or simply want to learn more, fill out the form below. Our team will contact you as soon as possible.</p>'
+  %}
+  {% render 'msa-content-contact' %}
+{%- else -%}
+  {%- capture style -%}
+    --section-pt: {{ section_st.padding_top }}; --section-pb: {{ section_st.padding_bottom }};--max-width: 50rem;
+  {%- endcapture -%}
+  <div
+    class="section{% if section_st.padding_top < 30 %} pt-min{% endif %}{% if section_st.padding_bottom < 30 %} pb-min{% endif %} page-default"
+    style="{{ style | strip | strip_newlines }}"
+  >
+    <div class="{{ section_width }}">
+      <div class="page-title text-center">
+        <h1>{{ page.title | escape }}</h1>
+      </div>
+      <div class="rte">
+        {{ page.content }}
+      </div>
     </div>
   </div>
-</div>
+{%- endif -%}
 
 {% schema %}
 {
