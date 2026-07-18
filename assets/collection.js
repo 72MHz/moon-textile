@@ -139,16 +139,24 @@ class FilterItem extends HTMLElement {
     super();
     this.addEventListener('click', this.filterItem.bind(this), false);
   }
-  filterItem() {
+  filterItem(event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    if (this.classList.contains('option-disabled') || this.closest('.option-disabled')) {
+      return;
+    }
     if (this.querySelector('.tooltip')) {
       this.querySelector('.tooltip').classList.toggle('current-filter');
-    } else {
-      if (this.closest('li')) {
-        this.closest('li').classList.toggle('current-filter');
-      }
+    } else if (this.closest('li')) {
+      this.closest('li').classList.toggle('current-filter');
     }
-    const url = this.getAttribute('data-href');
-    eventCollectionShopify.renderSectionFilter(url);
+    const href = this.getAttribute('data-href');
+    if (!href || href === '#' || href === '') {
+      return;
+    }
+    eventCollectionShopify.applyFilterUrl(href);
   }
 }
 customElements.define('filter-item', FilterItem);
@@ -158,9 +166,16 @@ class FacetClearAll extends CloseFilter {
     super();
     this.addEventListener('click', this.filterItem.bind(this), false);
   }
-  filterItem() {
-    const url = this.getAttribute('data-href');
-    eventCollectionShopify.renderSectionFilter(url);
+  filterItem(event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    const href = this.getAttribute('data-href');
+    if (!href || href === '#' || href === '') {
+      return;
+    }
+    eventCollectionShopify.applyFilterUrl(href);
     this.onClose();
   }
 }
@@ -171,11 +186,19 @@ class FilterSort extends HTMLElement {
     super();
     this.addEventListener('click', this.filterSort.bind(this), false);
   }
-  filterSort() {
+  filterSort(event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
     const value = this.getAttribute('value');
+    if (!value) return;
     let queryString = window.location.search;
     queryString = eventCollectionShopify.removeParam('sort_by', queryString);
-    const searchParams = queryString.replace('?', '') + '&sort_by=' + value;
+    const searchParams =
+      (queryString.replace(/^\?/, '') ? queryString.replace(/^\?/, '') + '&' : '') +
+      'sort_by=' +
+      encodeURIComponent(value);
     const url = eventCollectionShopify.renderUrl(searchParams);
     eventCollectionShopify.renderSectionFilter(url, searchParams);
   }
@@ -388,16 +411,40 @@ var eventCollectionShopify = (function () {
     },
 
     renderUrl: function (searchParams) {
-      const sectionId = document.querySelector(options_collection.section)
-        .dataset.sectionId;
-      const url = `${window.location.pathname}?section_id=${sectionId}&${searchParams}`;
-      return url;
+      const section = document.querySelector(options_collection.section);
+      if (!section) {
+        return `${window.location.pathname}?${searchParams}`;
+      }
+      const sectionId = section.dataset.sectionId;
+      const params = (searchParams || '').replace(/^\?/, '').replace(/^&/, '');
+      return `${window.location.pathname}?section_id=${sectionId}${params ? '&' + params : ''}`;
+    },
+
+    applyFilterUrl: function (href) {
+      try {
+        const urlObj = new URL(href, window.location.origin);
+        const searchParams = urlObj.searchParams.toString();
+        const section = document.querySelector(options_collection.section);
+        if (!section || !section.dataset.sectionId) {
+          window.location.href = href;
+          return;
+        }
+        const sectionId = section.dataset.sectionId;
+        const fetchUrl = `${urlObj.pathname}?section_id=${sectionId}${
+          searchParams ? '&' + searchParams : ''
+        }`;
+        this.renderSectionFilter(fetchUrl, searchParams);
+      } catch (error) {
+        window.location.href = href;
+      }
     },
 
     renderSectionFilter: function (url, searchParams) {
       this.toggleLoading(document.body, true);
-      const grid_list = document.querySelector('grid-list')
-      grid_list.hideGridItems();
+      const grid_list = document.querySelector('grid-list');
+      if (grid_list && typeof grid_list.hideGridItems === 'function') {
+        grid_list.hideGridItems();
+      }
       fetch(`${url}`)
         .then((response) => {
           if (!response.ok) {
@@ -411,35 +458,54 @@ var eventCollectionShopify = (function () {
             const collectionFilterBlocks = new DOMParser()
               .parseFromString(responseText, 'text/html')
               .querySelector(options_collection.collectionFilterBlocks);
-            document.querySelector(
-              options_collection.collectionFilterBlocks
-            ).innerHTML = collectionFilterBlocks.innerHTML;
+            if (
+              collectionFilterBlocks &&
+              document.querySelector(options_collection.collectionFilterBlocks)
+            ) {
+              document.querySelector(
+                options_collection.collectionFilterBlocks
+              ).innerHTML = collectionFilterBlocks.innerHTML;
+            }
             const productgridcontainer = new DOMParser()
               .parseFromString(responseText, 'text/html')
               .querySelector(options_collection.productgridcontainer);
-            document.querySelector(
-              options_collection.productgridcontainer
-            ).innerHTML = productgridcontainer.innerHTML;
+            if (
+              productgridcontainer &&
+              document.querySelector(options_collection.productgridcontainer)
+            ) {
+              document.querySelector(
+                options_collection.productgridcontainer
+              ).innerHTML = productgridcontainer.innerHTML;
+            }
             if (
               document
                 .querySelector(options_collection.collectionSidebar)
-                .classList.contains('open')
+                ?.classList.contains('open')
             ) {
-              document.querySelector(options_collection.collectionSidebar).classList.remove('open')
+              document
+                .querySelector(options_collection.collectionSidebar)
+                .classList.remove('open');
             }
           } else {
             const newSection = new DOMParser()
               .parseFromString(responseText, 'text/html')
               .querySelector(options_collection.section);
-            document
-              .querySelector(options_collection.section)
-              .replaceWith(newSection);
+            const currentSection = document.querySelector(
+              options_collection.section
+            );
+            if (newSection && currentSection) {
+              currentSection.replaceWith(newSection);
+            }
           }
-          document.documentElement.classList.remove('hside_opened', 'open-drawer', 'open-sidebar');
+          document.documentElement.classList.remove(
+            'hside_opened',
+            'open-drawer',
+            'open-sidebar'
+          );
           const sectionElement = document.querySelector(
             '#productgridcontainer'
           );
-          
+
           if (sectionElement) {
             const elementPosition = sectionElement.getBoundingClientRect().top;
             const offsetPosition = window.pageYOffset;
@@ -452,15 +518,21 @@ var eventCollectionShopify = (function () {
             });
           }
           this.toggleLoading(document.body, false);
-          
         })
         .catch((error) => {
-          throw error;
+          this.toggleLoading(document.body, false);
+          console.error(error);
         })
         .finally(() => {
-          grid_list?.showGridItems();
-          initLazyloadItem();
-          BlsLazyloadImg.init();
+          if (grid_list && typeof grid_list.showGridItems === 'function') {
+            grid_list.showGridItems();
+          }
+          if (typeof initLazyloadItem === 'function') {
+            initLazyloadItem();
+          }
+          if (typeof BlsLazyloadImg !== 'undefined') {
+            BlsLazyloadImg.init();
+          }
           eventCollectionShopify.ionRangeSlider();
         });
       this.updateUrl(url, searchParams);
@@ -480,11 +552,25 @@ var eventCollectionShopify = (function () {
     },
 
     updateUrl: function (url, searchParams = false) {
-      if (searchParams) {
-        const urlUpdate = `${window.location.pathname}?${searchParams}`;
+      if (searchParams !== false && searchParams !== undefined) {
+        const cleanParams = String(searchParams).replace(/^\?/, '').replace(/^&/, '');
+        const urlUpdate = cleanParams
+          ? `${window.location.pathname}?${cleanParams}`
+          : window.location.pathname;
         window.history.pushState({ url: urlUpdate }, '', urlUpdate);
-      } else {
-        window.history.pushState({ url: url }, '', url);
+      } else if (url) {
+        try {
+          const urlObj = new URL(url, window.location.origin);
+          urlObj.searchParams.delete('section_id');
+          const clean =
+            urlObj.pathname +
+            (urlObj.searchParams.toString()
+              ? '?' + urlObj.searchParams.toString()
+              : '');
+          window.history.pushState({ url: clean }, '', clean);
+        } catch (error) {
+          window.history.pushState({ url: url }, '', url);
+        }
       }
     },
   };

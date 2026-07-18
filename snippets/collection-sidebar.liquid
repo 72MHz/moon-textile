@@ -90,14 +90,18 @@
             </h3>
             <div class="collapsible-content filter-content custom-scrollbar absolute-1025 z-5 color-default left-0" style="display: none">
               <ul class="list-unstyled m-0 p-0">
+                {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
                 {%- for option in collection.sort_options -%}
                   <li class="pb-8">
-                    <a
-                      href="{{ option.url }}"
-                      class="no-underline word-break{% if option.value == collection.sort_by %} heading-color subheading_weight{% endif %}"
+                    <filter-sort
+                      value="{{ option.value | escape }}"
+                      class="block pointer text-color hover-heading-color transition body_weight{% if option.value == sort_by %} heading-color subheading_weight{% endif %}"
+                      {% if option.value == sort_by %}
+                        selected="selected"
+                      {% endif %}
                     >
                       {{ option.name | escape }}
-                    </a>
+                    </filter-sort>
                   </li>
                 {%- endfor -%}
               </ul>
