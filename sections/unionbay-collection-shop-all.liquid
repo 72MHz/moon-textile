@@ -51,20 +51,20 @@
 
   if shop_type == 'men'
     assign breadcrumb_parent = 'unionbay.shop_all.men' | t
-    assign breadcrumb_parent_url = '/collections/mens-clothing-shop-all'
+    assign breadcrumb_parent_url = '/collections/men-shop-all'
     assign breadcrumb_current = 'unionbay.shop_all.mens_clothing_shop_all' | t
     assign default_heading = 'unionbay.shop_all.mens_heading' | t
-    assign shop_all_handle = 'mens-clothing-shop-all'
-    assign shop_all_fallback = 't-shirts'
+    assign shop_all_handle = 'men-shop-all'
+    assign shop_all_fallback = 'men-shop-all'
     assign dept_prefix = 'mens'
     assign dept_prefix_alt = 'men'
   else
     assign breadcrumb_parent = 'unionbay.shop_all.women' | t
-    assign breadcrumb_parent_url = '/collections/womens-clothing-shop-all'
+    assign breadcrumb_parent_url = '/collections/women-shop-all'
     assign breadcrumb_current = 'unionbay.shop_all.womens_clothing_shop_all' | t
     assign default_heading = 'unionbay.shop_all.womens_heading' | t
-    assign shop_all_handle = 'womens-clothing-shop-all'
-    assign shop_all_fallback = 'dress'
+    assign shop_all_handle = 'women-shop-all'
+    assign shop_all_fallback = 'women-shop-all'
   endif
 
   if collection.handle == shop_all_handle

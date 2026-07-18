@@ -6,20 +6,16 @@
   assign image = section_st.image
   assign image_mobile = section_st.image_mobile | default: image
 
-  if collections['womens-clothing-shop-all'] != blank
-    assign women_shop = collections['womens-clothing-shop-all'].url
-  elsif collections['dress'] != blank
-    assign women_shop = collections['dress'].url
+  if collections['women-shop-all'] != blank
+    assign women_shop = collections['women-shop-all'].url
   else
-    assign women_shop = '/collections/womens-clothing-shop-all'
+    assign women_shop = '/collections/women-shop-all'
   endif
 
-  if collections['mens-clothing-shop-all'] != blank
-    assign men_shop = collections['mens-clothing-shop-all'].url
-  elsif collections['t-shirts'] != blank
-    assign men_shop = collections['t-shirts'].url
+  if collections['men-shop-all'] != blank
+    assign men_shop = collections['men-shop-all'].url
   else
-    assign men_shop = '/collections/mens-clothing-shop-all'
+    assign men_shop = '/collections/men-shop-all'
   endif
 
   assign first_button_href = women_shop
@@ -28,12 +24,16 @@
   assign custom_women_link = section_st.first_button_link | default: ''
   assign custom_men_link = section_st.second_button_link | default: ''
 
-  if custom_women_link contains 'womens-clothing-shop-all' and collections['womens-clothing-shop-all'] != blank
-    assign first_button_href = collections['womens-clothing-shop-all'].url
+  if custom_women_link contains 'women-shop-all' or custom_women_link contains 'womens-clothing-shop-all'
+    if collections['women-shop-all'] != blank
+      assign first_button_href = collections['women-shop-all'].url
+    endif
   endif
 
-  if custom_men_link contains 'mens-clothing-shop-all' and collections['mens-clothing-shop-all'] != blank
-    assign second_button_href = collections['mens-clothing-shop-all'].url
+  if custom_men_link contains 'men-shop-all' or custom_men_link contains 'mens-clothing-shop-all'
+    if collections['men-shop-all'] != blank
+      assign second_button_href = collections['men-shop-all'].url
+    endif
   endif
 -%}
 {%- capture style -%}

@@ -12,7 +12,7 @@
   assign base = base_url | default: collection.url
   assign handle = active_handle | default: collection.handle
 
-  if active == blank and handle != 'womens-clothing-shop-all' and handle != 'mens-clothing-shop-all' and handle != 'dress' and handle != 't-shirts'
+  if active == blank and handle != 'women-shop-all' and handle != 'men-shop-all' and handle != 'womens-clothing-shop-all' and handle != 'mens-clothing-shop-all' and handle != 'dress' and handle != 't-shirts'
     assign active = handle
   endif
 -%}

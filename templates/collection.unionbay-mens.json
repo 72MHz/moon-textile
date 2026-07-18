@@ -11,7 +11,7 @@
             "filter_tag": "men-tops",
             "match_keywords": "",
             "child_category_ids": "polo-shirt,crewneck-short-sleeve,long-sleeve-crewneck,shirts,sweaters",
-            "collection": "t-shirts"
+            "collection": "men-shop-all"
           }
         },
         "cat_polo": {
@@ -21,7 +21,7 @@
             "title": "Polo shirt",
             "filter_tag": "men-polo-shirt",
             "match_keywords": "polo",
-            "collection": "t-shirts"
+            "collection": "men-shop-all"
           }
         },
         "cat_crewneck_ss": {
@@ -31,7 +31,7 @@
             "title": "Crewneck short sleeve",
             "filter_tag": "men-crewneck-short-sleeve",
             "match_keywords": "crewneck,crew neck,s/s,short sleeve tee",
-            "collection": "t-shirts"
+            "collection": "men-shop-all"
           }
         },
         "cat_crewneck_ls": {
@@ -41,7 +41,7 @@
             "title": "Long sleeve crewneck",
             "filter_tag": "men-long-sleeve-crewneck",
             "match_keywords": "long sleeve,l/s,crewneck,crew neck",
-            "collection": "t-shirts"
+            "collection": "men-shop-all"
           }
         },
         "cat_shirts": {
@@ -51,7 +51,7 @@
             "title": "Shirts",
             "filter_tag": "men-shirts",
             "match_keywords": "shirt,button-down,button down,oxford,flannel,rayon shirt,henley,tee",
-            "collection": "t-shirts"
+            "collection": "men-shop-all"
           }
         },
         "cat_sweaters": {

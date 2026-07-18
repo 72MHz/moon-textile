@@ -23,7 +23,7 @@
           "type": "content",
           "settings": {
             "title": "Wear your style",
-            "body": "<p>Explore the latest Moon Style Apparel collections — from everyday essentials to seasonal favourites.</p><p><a href=\"/collections/mens-clothing-shop-all\">Shop men's</a> &nbsp;·&nbsp; <a href=\"/collections/womens-clothing-shop-all\">Shop women's</a></p>"
+            "body": "<p>Explore the latest Moon Style Apparel collections — from everyday essentials to seasonal favourites.</p><p><a href=\"/collections/men-shop-all\">Shop men's</a> &nbsp;·&nbsp; <a href=\"/collections/women-shop-all\">Shop women's</a></p>"
           }
         }
       },

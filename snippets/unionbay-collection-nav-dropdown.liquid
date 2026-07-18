@@ -13,8 +13,11 @@
       assign dept = 'men'
     endunless
   endif
-  if handle == 'mens-clothing-shop-all' or handle contains 'mens-'
+  if handle == 'men-shop-all' or handle == 'mens-clothing-shop-all' or handle contains 'mens-'
     assign dept = 'men'
+  endif
+  if handle == 'women-shop-all' or handle == 'womens-clothing-shop-all'
+    assign dept = 'women'
   endif
 -%}
 

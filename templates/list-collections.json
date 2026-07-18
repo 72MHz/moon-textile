@@ -53,7 +53,7 @@
         "collection_k6UJWD": {
           "type": "collection",
           "settings": {
-            "collection": "t-shirts",
+            "collection": "men-shop-all",
             "collection_title": ""
           }
         },
@@ -114,7 +114,7 @@
         "collection_HLUY4E": {
           "type": "collection",
           "settings": {
-            "collection": "dress",
+            "collection": "women-shop-all",
             "collection_image": "shopify://shop_images/collection-2.jpg",
             "collection_title": ""
           }

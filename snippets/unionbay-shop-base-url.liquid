@@ -1,5 +1,5 @@
 {% doc %}
-  Resolves a working Union Bay shop-all base URL with fallbacks.
+  Resolves a working shop-all base URL with fallbacks.
 
   @param {string} shop_type - women or men
 {% enddoc %}
@@ -9,16 +9,16 @@
   assign shop_type = shop_type | strip | downcase
 
   if shop_type == 'men'
-    if collections['mens-clothing-shop-all'] != blank
-      assign resolved_url = collections['mens-clothing-shop-all'].url
-    elsif collections['t-shirts'] != blank
-      assign resolved_url = collections['t-shirts'].url
+    if collections['men-shop-all'] != blank
+      assign resolved_url = collections['men-shop-all'].url
+    else
+      assign resolved_url = '/collections/men-shop-all'
     endif
   else
-    if collections['womens-clothing-shop-all'] != blank
-      assign resolved_url = collections['womens-clothing-shop-all'].url
-    elsif collections['dress'] != blank
-      assign resolved_url = collections['dress'].url
+    if collections['women-shop-all'] != blank
+      assign resolved_url = collections['women-shop-all'].url
+    else
+      assign resolved_url = '/collections/women-shop-all'
     endif
   endif
 -%}

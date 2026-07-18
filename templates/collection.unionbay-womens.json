@@ -21,7 +21,7 @@
             "title": "Shirts",
             "filter_tag": "women-shirts",
             "match_keywords": "shirt,blouse,button-down,button down,tee",
-            "collection": "t-shirts"
+            "collection": "women-shop-all"
           }
         },
         "cat_tank_tops": {
@@ -123,7 +123,7 @@
             "title": "Jeans",
             "filter_tag": "women-jeans",
             "match_keywords": "jean,denim",
-            "collection": "dress"
+            "collection": "women-shop-all"
           }
         },
         "cat_shorts": {

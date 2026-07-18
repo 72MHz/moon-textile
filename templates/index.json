@@ -43,9 +43,9 @@
         "mobile_height": 420,
         "heading": "The Summer Drop",
         "first_button_label": "SHOP WOMENS",
-        "first_button_link": "shopify://collections/womens-clothing-shop-all",
+        "first_button_link": "shopify://collections/women-shop-all",
         "second_button_label": "SHOP MENS",
-        "second_button_link": "shopify://collections/mens-clothing-shop-all",
+        "second_button_link": "shopify://collections/men-shop-all",
         "padding_top": 0,
         "padding_bottom": 0
       }
@@ -94,11 +94,11 @@
       "settings": {
         "section_width": "full_width",
         "color_scheme": "default",
-        "collection": "dress",
+        "collection": "women-shop-all",
         "department": "women",
         "heading": "Shop All Womens",
         "shop_all_label": "SHOP ALL",
-        "shop_all_link": "shopify://collections/womens-clothing-shop-all",
+        "shop_all_link": "shopify://collections/women-shop-all",
         "sort_by": "newest",
         "items_to_show": 24,
         "items_per_row": 4,
@@ -115,7 +115,7 @@
         "cat_tops": {
           "type": "category",
           "settings": {
-            "collection": "t-shirts",
+            "collection": "men-shop-all",
             "title": "Men's Tops",
             "fallback_image": "mens-tops"
           }
@@ -153,11 +153,11 @@
       "settings": {
         "section_width": "full_width",
         "color_scheme": "default",
-        "collection": "t-shirts",
+        "collection": "men-shop-all",
         "department": "men",
         "heading": "Shop All Mens",
         "shop_all_label": "SHOP ALL",
-        "shop_all_link": "shopify://collections/mens-clothing-shop-all",
+        "shop_all_link": "shopify://collections/men-shop-all",
         "filter_tag": "",
         "sort_by": "newest",
         "items_to_show": 24,
@@ -178,7 +178,7 @@
             "collection": "crop-top",
             "title": "Women's Shirts",
             "department": "women",
-            "category_filter": "shirts",
+            "category_filter": "tops",
             "fallback_image": "womens-shirts"
           }
         },
@@ -208,7 +208,7 @@
             "collection": "hoodies",
             "title": "Men's Shirts",
             "department": "men",
-            "category_filter": "shirts",
+            "category_filter": "tops",
             "fallback_image": "mens-shirts"
           }
         },
@@ -251,7 +251,7 @@
             "image": "",
             "more_info": "",
             "instagram_post_name": "moonstyleapparel",
-            "link": "#",
+            "link": "https://www.instagram.com/moonstyleapparel/",
             "product__1": "",
             "offset_top__1": 50,
             "offset_left__1": 50,
@@ -275,7 +275,7 @@
             "image": "",
             "more_info": "",
             "instagram_post_name": "moonstyleapparel",
-            "link": "#",
+            "link": "https://www.instagram.com/moonstyleapparel/",
             "product__1": "",
             "offset_top__1": 50,
             "offset_left__1": 50,
@@ -299,7 +299,7 @@
             "image": "",
             "more_info": "",
             "instagram_post_name": "moonstyleapparel",
-            "link": "#",
+            "link": "https://www.instagram.com/moonstyleapparel/",
             "product__1": "",
             "offset_top__1": 50,
             "offset_left__1": 50,
@@ -323,7 +323,7 @@
             "image": "",
             "more_info": "",
             "instagram_post_name": "moonstyleapparel",
-            "link": "#",
+            "link": "https://www.instagram.com/moonstyleapparel/",
             "product__1": "",
             "offset_top__1": 50,
             "offset_left__1": 50,

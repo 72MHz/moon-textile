@@ -21,9 +21,9 @@
 
   assign carousel_department = 'women'
 
-  if section_st.collection == 't-shirts'
+  if section_st.collection == 'men-shop-all' or section_st.collection == 't-shirts'
     assign carousel_department = 'men'
-  elsif section_st.collection == 'dress'
+  elsif section_st.collection == 'women-shop-all' or section_st.collection == 'dress'
     assign carousel_department = 'women'
   elsif section_st.department == 'men'
     assign carousel_department = 'men'
@@ -39,20 +39,16 @@
   endif
 
   if carousel_department == 'men'
-    if collections['mens-clothing-shop-all'] != blank
-      assign shop_all_href = collections['mens-clothing-shop-all'].url
-    elsif collections['t-shirts'] != blank
-      assign shop_all_href = collections['t-shirts'].url
+    if collections['men-shop-all'] != blank
+      assign shop_all_href = collections['men-shop-all'].url
     else
-      assign shop_all_href = '/collections/t-shirts'
+      assign shop_all_href = '/collections/men-shop-all'
     endif
   else
-    if collections['womens-clothing-shop-all'] != blank
-      assign shop_all_href = collections['womens-clothing-shop-all'].url
-    elsif collections['dress'] != blank
-      assign shop_all_href = collections['dress'].url
+    if collections['women-shop-all'] != blank
+      assign shop_all_href = collections['women-shop-all'].url
     else
-      assign shop_all_href = '/collections/dress'
+      assign shop_all_href = '/collections/women-shop-all'
     endif
   endif
 -%}
