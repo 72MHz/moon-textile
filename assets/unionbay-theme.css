@@ -1178,9 +1178,12 @@
   text-align: left;
 }
 
-.theme-unionbay .unionbay-product-card .unionbay-quick-shop,
-.theme-unionbay .unionbay-product-card .morden-style {
+.theme-unionbay .unionbay-product-card .unionbay-quick-shop {
   display: none !important;
+}
+
+.theme-unionbay .unionbay-product-card .morden-style {
+  display: inline-flex !important;
 }
 
 .theme-unionbay .unionbay-product-card .unionbay-badge {

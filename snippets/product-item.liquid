@@ -722,22 +722,21 @@
         {% else %}
           {% if product_style == 'morden' %}
             {% if template_enable_add_cart == true and show_add_cart and theme_st.enable_catalog_mode == false %}
-              {%- unless unionbay_mode -%}
-                {%- liquid
-                  assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id
-                  assign qty_rules = false
-                  if card_product.selected_or_first_available_variant.quantity_rule.template > 1 or card_product.selected_or_first_available_variant.quantity_rule.max != null or card_product.selected_or_first_available_variant.quantity_rule.increment > 1
-                    assign qty_rules = true
-                  endif
-                -%}
-                {%- if card_product.variants.size > 1 or qty_rules -%}
+              {%- liquid
+                assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id
+                assign qty_rules = false
+                if card_product.selected_or_first_available_variant.quantity_rule.template > 1 or card_product.selected_or_first_available_variant.quantity_rule.max != null or card_product.selected_or_first_available_variant.quantity_rule.increment > 1
+                  assign qty_rules = true
+                endif
+              -%}
+              {%- if card_product.variants.size > 1 or qty_rules -%}
                   {% comment %} Case select options {% endcomment %}
                   <select-option
                     tabindex="0"
                     data-custom-class="quickview"
                     data-item="overlay-quickbuy"
                     data-url="/products/{{ card_product.handle }}?section_id=product-quickview&ajax=1"
-                    class="w-full product__add-cart product-item__select-options transition btn-outline text-center{% if settings.show_action_on_mobile == false %} inline-flex{% else %} hidden inline-flex-1025{% endif %} content-center relative mt-20 morden-style"
+                    class="w-full product__add-cart product-item__select-options transition btn-outline text-center inline-flex content-center relative mt-20 morden-style"
                   >
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="spin opacity-0 icon-load">
                       <use href="#icon-load"></use>
@@ -749,7 +748,7 @@
                   <noscript>
                     <a
                       href="{{ card_product.url }}"
-                      class="w-full product__add-cart product-item__select-options transition btn-outline text-center{% if settings.show_action_on_mobile == false %} inline-flex{% else %} hidden inline-flex-1025{% endif %} content-center relative mt-20 morden-style"
+                      class="w-full product__add-cart product-item__select-options transition btn-outline text-center inline-flex content-center relative mt-20 morden-style"
                       aria-label="{{- 'products.product.actions.select_options.label' | t -}}"
                     >
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="spin opacity-0 icon-load">
@@ -762,7 +761,7 @@
                   </noscript>
                 {%- else -%}
                   {% comment %} Case add cart directly {% endcomment %}
-                  <product-form class="product-item__product-form{% if settings.show_action_on_mobile != true %} hidden block-1025{% endif %}">
+                  <product-form class="product-item__product-form">
                     {%- form 'product',
                       card_product,
                       id: product_form_id,
@@ -815,7 +814,6 @@
                     {%- endform -%}
                   </product-form>
                 {%- endif -%}
-              {%- endunless -%}
             {% endif %}
           {% endif %}
         {% endif %}

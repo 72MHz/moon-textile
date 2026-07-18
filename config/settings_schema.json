@@ -46,6 +46,45 @@
     ]
   },
   {
+    "name": "Featured discount",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Shopify themes cannot read codes from Admin → Discounts. Create your discount there, then enter the same code here (or set shop metafields theme.promo_code and theme.promo_message)."
+      },
+      {
+        "type": "checkbox",
+        "id": "show_featured_discount",
+        "label": "Show featured discount on storefront",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "featured_discount_code",
+        "label": "Discount code",
+        "info": "Must match a code created under Admin → Discounts"
+      },
+      {
+        "type": "text",
+        "id": "featured_discount_message",
+        "label": "Banner message",
+        "info": "Use [code] where the discount code should appear, or leave blank to append CODE: automatically"
+      },
+      {
+        "type": "checkbox",
+        "id": "featured_discount_in_marquee",
+        "label": "Use in homepage red scrolling banner",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "featured_discount_in_utility_bar",
+        "label": "Use in top announcement bar",
+        "default": true
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.logo_favicon.name",
     "settings": [
       {

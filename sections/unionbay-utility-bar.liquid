@@ -37,18 +37,27 @@
         {%- if section.blocks.size > 0 -%}
           {%- for block in section.blocks -%}
             {%- if block.type == 'announcement' -%}
-              {%- liquid
-                assign message_count = 0
-                if block.settings.text1 != blank
-                  assign message_count = message_count | plus: 1
-                endif
-                if block.settings.text2 != blank
-                  assign message_count = message_count | plus: 1
-                endif
-                if block.settings.text3 != blank
-                  assign message_count = message_count | plus: 1
-                endif
-              -%}
+              {%- assign message_count = 0 -%}
+              {%- assign announce_1_preview = block.settings.text1 -%}
+              {%- if settings.featured_discount_in_utility_bar -%}
+                {%- capture featured_announce_preview -%}
+                  {%- render 'featured-discount' -%}
+                {%- endcapture -%}
+                {%- assign featured_announce_preview = featured_announce_preview | strip -%}
+                {%- if featured_announce_preview != blank -%}
+                  {%- assign announce_1_preview = featured_announce_preview -%}
+                {%- endif -%}
+              {%- endif -%}
+              {%- if announce_1_preview != blank -%}
+                {%- assign message_count = message_count | plus: 1 -%}
+              {%- endif -%}
+              {%- if block.settings.text2 != blank -%}
+                {%- assign message_count = message_count | plus: 1 -%}
+              {%- endif -%}
+              {%- if block.settings.text3 != blank -%}
+                {%- assign message_count = message_count | plus: 1 -%}
+              {%- endif -%}
+              {%- if message_count > 0 -%}
               <unionbay-announcement
                 class="unionbay-utility-bar__rotator{% if message_count > 1 %} unionbay-utility-bar__rotator--multi{% endif %}"
                 data-interval="{{ block.settings.change_every | times: 1000 }}"
@@ -68,25 +77,35 @@
 
                 <div class="unionbay-utility-bar__stage">
                   <div class="unionbay-utility-bar__messages" role="status" aria-live="polite">
-                    {%- if block.settings.text1 != blank -%}
+                    {%- assign announce_1 = block.settings.text1 -%}
+                    {%- if settings.featured_discount_in_utility_bar -%}
+                      {%- capture featured_announce -%}
+                        {%- render 'featured-discount' -%}
+                      {%- endcapture -%}
+                      {%- assign featured_announce = featured_announce | strip -%}
+                      {%- if featured_announce != blank -%}
+                        {%- assign announce_1 = featured_announce -%}
+                      {%- endif -%}
+                    {%- endif -%}
+                    {%- if announce_1 != blank -%}
                       {%- if block.settings.link1 != blank -%}
-                        <a href="{{ block.settings.link1 }}" class="unionbay-utility-bar__message is-active no-underline">{{ block.settings.text1 }}</a>
+                        <a href="{{ block.settings.link1 }}" class="unionbay-utility-bar__message is-active no-underline">{{ announce_1 | escape }}</a>
                       {%- else -%}
-                        <p class="unionbay-utility-bar__message is-active">{{ block.settings.text1 }}</p>
+                        <p class="unionbay-utility-bar__message is-active">{{ announce_1 | escape }}</p>
                       {%- endif -%}
                     {%- endif -%}
                     {%- if block.settings.text2 != blank -%}
                       {%- if block.settings.link2 != blank -%}
-                        <a href="{{ block.settings.link2 }}" class="unionbay-utility-bar__message no-underline">{{ block.settings.text2 }}</a>
+                        <a href="{{ block.settings.link2 }}" class="unionbay-utility-bar__message{% if announce_1 == blank %} is-active{% endif %} no-underline">{{ block.settings.text2 }}</a>
                       {%- else -%}
-                        <p class="unionbay-utility-bar__message">{{ block.settings.text2 }}</p>
+                        <p class="unionbay-utility-bar__message{% if announce_1 == blank %} is-active{% endif %}">{{ block.settings.text2 }}</p>
                       {%- endif -%}
                     {%- endif -%}
                     {%- if block.settings.text3 != blank -%}
                       {%- if block.settings.link3 != blank -%}
-                        <a href="{{ block.settings.link3 }}" class="unionbay-utility-bar__message no-underline">{{ block.settings.text3 }}</a>
+                        <a href="{{ block.settings.link3 }}" class="unionbay-utility-bar__message{% if announce_1 == blank and block.settings.text2 == blank %} is-active{% endif %} no-underline">{{ block.settings.text3 }}</a>
                       {%- else -%}
-                        <p class="unionbay-utility-bar__message">{{ block.settings.text3 }}</p>
+                        <p class="unionbay-utility-bar__message{% if announce_1 == blank and block.settings.text2 == blank %} is-active{% endif %}">{{ block.settings.text3 }}</p>
                       {%- endif -%}
                     {%- endif -%}
                   </div>
@@ -121,10 +140,13 @@
                   </button>
                 {%- endif -%}
               </unionbay-announcement>
+              {%- endif -%}
             {%- endif -%}
           {%- endfor -%}
         {%- else -%}
-          <p class="unionbay-utility-bar__message my-0 text-center">{{ section_st.fallback_message }}</p>
+          {%- if section_st.fallback_message != blank -%}
+            <p class="unionbay-utility-bar__message my-0 text-center">{{ section_st.fallback_message }}</p>
+          {%- endif -%}
         {%- endif -%}
       </div>
 
@@ -612,8 +634,7 @@
     {
       "type": "text",
       "id": "fallback_message",
-      "label": "Fallback message",
-      "default": "Extra 20% Off Sitewide! Use Code: JULY2026"
+      "label": "Fallback message"
     },
     {
       "type": "range",
@@ -645,8 +666,7 @@
         {
           "type": "inline_richtext",
           "id": "text1",
-          "label": "Message 1",
-          "default": "Extra 20% Off Sitewide! Use Code: JULY2026"
+          "label": "Message 1"
         },
         {
           "type": "url",
@@ -656,8 +676,7 @@
         {
           "type": "inline_richtext",
           "id": "text2",
-          "label": "Message 2",
-          "default": "Free Shipping on Orders $75+!"
+          "label": "Message 2"
         },
         {
           "type": "url",
@@ -667,8 +686,7 @@
         {
           "type": "inline_richtext",
           "id": "text3",
-          "label": "Message 3",
-          "default": "Join Moon SA Rewards and earn points when you shop."
+          "label": "Message 3"
         },
         {
           "type": "url",

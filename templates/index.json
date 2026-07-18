@@ -6,18 +6,19 @@
         "marquee_1": {
           "type": "scrolling_text",
           "settings": {
-            "content": "4TH OF JULY SALE! EXTRA 20% OFF ➡ CODE: JULY2026"
+            "content": ""
           }
         },
         "marquee_2": {
           "type": "scrolling_text",
           "settings": {
-            "content": "4TH OF JULY SALE! EXTRA 20% OFF ➡ CODE: JULY2026"
+            "content": ""
           }
         }
       },
       "block_order": ["marquee_1", "marquee_2"],
       "settings": {
+        "use_featured_discount": true,
         "section_width": "full_width",
         "color_scheme": "scheme-unionbay-red",
         "direction": "left",

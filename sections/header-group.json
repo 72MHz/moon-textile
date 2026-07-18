@@ -8,9 +8,9 @@
         "announcement": {
           "type": "announcement",
           "settings": {
-            "text1": "Extra 20% Off Sitewide! Use Code: JULY2026",
-            "text2": "Free Shipping on Orders $75+!",
-            "text3": "Join Moon SA Rewards and earn points when you shop.",
+            "text1": "",
+            "text2": "",
+            "text3": "",
             "change_every": 5
           }
         }
@@ -22,7 +22,7 @@
         "brand_link_1": "/",
         "brand_label_2": "",
         "brand_link_2": "",
-        "fallback_message": "Extra 20% Off Sitewide! Use Code: JULY2026",
+        "fallback_message": "",
         "padding_top": 10,
         "padding_bottom": 10
       }

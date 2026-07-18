@@ -1,0 +1,47 @@
+{% doc %}
+  Builds featured promo text from shop metafields or theme settings.
+  Shopify themes cannot list Admin → Discounts codes. Create the discount
+  in Admin, then set the same code in Theme settings → Featured discount
+  (or shop metafields theme.promo_code / theme.promo_message).
+
+  @example
+  {% render 'featured-discount' %}
+{% enddoc %}
+
+{%- liquid
+  assign promo_code = ''
+  assign promo_message = ''
+  assign promo_enabled = settings.show_featured_discount
+
+  if shop.metafields.theme.promo_code != blank
+    assign promo_code = shop.metafields.theme.promo_code.value | default: shop.metafields.theme.promo_code | strip
+  endif
+  if promo_code == blank
+    assign promo_code = settings.featured_discount_code | strip
+  endif
+
+  if shop.metafields.theme.promo_message != blank
+    assign promo_message = shop.metafields.theme.promo_message.value | default: shop.metafields.theme.promo_message | strip
+  endif
+  if promo_message == blank
+    assign promo_message = settings.featured_discount_message | strip
+  endif
+
+  if shop.metafields.theme.promo_code != blank
+    assign promo_enabled = true
+  endif
+
+  assign promo_text = ''
+  if promo_enabled and promo_code != blank
+    if promo_message != blank
+      if promo_message contains '[code]'
+        assign promo_text = promo_message | replace: '[code]', promo_code
+      else
+        assign promo_text = promo_message | append: ' ➡ CODE: ' | append: promo_code
+      endif
+    else
+      assign promo_text = 'CODE: ' | append: promo_code
+    endif
+  endif
+-%}
+{{- promo_text -}}

@@ -832,7 +832,7 @@
     "add_to_cart": "Add to cart",
     "quick_shop_details": "The details",
     "quick_shop_shipping": "Shipping & returns",
-    "quick_shop_shipping_content": "Free shipping on orders over $75. Easy returns within 30 days.",
+    "quick_shop_shipping_content": "Free shipping on orders over £75. Easy returns within 30 days.",
     "quick_shop_rewards": "Rewards",
     "quick_shop_rewards_content": "Earn points on every purchase with Moon SA Rewards.",
     "quick_shop_at_a_glance": "At a glance",
@@ -843,7 +843,7 @@
       "preset": "Link preset"
     },
     "rewards_bar_title": "Join Moon SA Rewards",
-    "rewards_bar_text": "Earn up to 10 points for every $1 spent!",
+    "rewards_bar_text": "Earn up to 10 points for every £1 spent!",
     "rewards_bar_join": "Join now",
     "rewards_bar_join_sub": "Earn 300 points when you sign up!",
     "rewards_bar_member": "Already a member?",

@@ -750,7 +750,7 @@
         },
         "show_currency_code": {
           "label": "Show currency code",
-          "info": "Cart and checkout prices always show currency codes. Example: $1.00 USD."
+          "info": "Cart and checkout prices always show currency codes. Example: £1.00 GBP."
         }
       }
     },

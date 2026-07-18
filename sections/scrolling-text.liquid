@@ -6,7 +6,33 @@
   if section_st.reset_spacing
     assign reset_spacing = ' remove_spacing'
   endif
+
+  assign use_featured = false
+  assign featured_text = ''
 -%}
+{%- if settings.featured_discount_in_marquee -%}
+  {%- if section_st.use_featured_discount != false -%}
+    {%- capture featured_text -%}
+      {%- render 'featured-discount' -%}
+    {%- endcapture -%}
+    {%- assign featured_text = featured_text | strip -%}
+    {%- if featured_text != blank -%}
+      {%- assign use_featured = true -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endif -%}
+{%- liquid
+  assign has_block_content = false
+  unless use_featured
+    for block in section.blocks
+      if block.settings.content != blank
+        assign has_block_content = true
+        break
+      endif
+    endfor
+  endunless
+-%}
+{%- if use_featured or has_block_content -%}
 {%- capture style -%}
   --section-pt: {{ section_st.padding_top }}; --section-pb: {{ section_st.padding_bottom }};--speed: {{ section_st.speed }}s; --font-size: {{ section_st.font_size }};
 {%- endcapture -%}
@@ -24,47 +50,57 @@
     >
       {%- for i in (0..5) -%}
         <div class="flex animation-marquee {{ section_st.direction }}">
-          {%- for block in section.blocks -%}
-            {% assign block_st = block.settings %}
-            <div class="flex{% if section_st.icon_between_item != 'none' %} gap{% endif %} align-center whitespace-nowrap rich__text-m0">
-              {{ block.settings.content }}
-
-              {% if section_st.icon_between_item == 'dot' %}
-                {% render 'icon-dot' %}
-              {% elsif section_st.icon_between_item == 'star' %}
-                {% render 'icon-star' %}
-              {% elsif section_st.icon_between_item == 'flower' %}
-                {% render 'icon-flower' %}
-              {% elsif section_st.icon_between_item == 'petal' %}
-                {% render 'icon-petal' %}
-              {% elsif section_st.icon_between_item == 'wireless' %}
-                {% render 'icon-wireless' %}
-              {% elsif section_st.icon_between_item == 'image' %}
-                <div class="image_icon_scroll rounded-50" style="--aspect-ratio: 1 / 1;">
-                  {% if block_st.image != blank %}
-                    {% render 'responsive-image',
-                      type: 'other',
-                      container: section_width,
-                      image: block_st.image,
-                      custom_widths: '185, 120, 100, 50',
-                      image_alt: block_st.image.alt,
-                      custom_zoom: "zoom-out-lg"
-                    %}
-                  {% else %}
-                    {%- render 'placeholder-render', class: 'block' -%}
-                  {% endif %}
-                </div>
-
-              {% else %}
+          {%- if use_featured -%}
+            {%- for j in (1..2) -%}
+              <div class="flex{% if section_st.icon_between_item != 'none' %} gap{% endif %} align-center whitespace-nowrap rich__text-m0">
+                {{ featured_text | escape }}
                 <span class="spacing"></span>
-              {% endif %}
-            </div>
-          {%- endfor -%}
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for block in section.blocks -%}
+              {% assign block_st = block.settings %}
+              <div class="flex{% if section_st.icon_between_item != 'none' %} gap{% endif %} align-center whitespace-nowrap rich__text-m0">
+                {{ block.settings.content }}
+
+                {% if section_st.icon_between_item == 'dot' %}
+                  {% render 'icon-dot' %}
+                {% elsif section_st.icon_between_item == 'star' %}
+                  {% render 'icon-star' %}
+                {% elsif section_st.icon_between_item == 'flower' %}
+                  {% render 'icon-flower' %}
+                {% elsif section_st.icon_between_item == 'petal' %}
+                  {% render 'icon-petal' %}
+                {% elsif section_st.icon_between_item == 'wireless' %}
+                  {% render 'icon-wireless' %}
+                {% elsif section_st.icon_between_item == 'image' %}
+                  <div class="image_icon_scroll rounded-50" style="--aspect-ratio: 1 / 1;">
+                    {% if block_st.image != blank %}
+                      {% render 'responsive-image',
+                        type: 'other',
+                        container: section_width,
+                        image: block_st.image,
+                        custom_widths: '185, 120, 100, 50',
+                        image_alt: block_st.image.alt,
+                        custom_zoom: "zoom-out-lg"
+                      %}
+                    {% else %}
+                      {%- render 'placeholder-render', class: 'block' -%}
+                    {% endif %}
+                  </div>
+
+                {% else %}
+                  <span class="spacing"></span>
+                {% endif %}
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
         </div>
       {%- endfor -%}
     </div>
   </div>
 </div>
+{%- endif -%}
 
 {% schema %}
 {
@@ -74,6 +110,13 @@
     "groups": ["header", "footer", "custom.overlay"]
   },
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "use_featured_discount",
+      "label": "Use featured discount from theme settings",
+      "default": true,
+      "info": "When enabled, banner text comes from Theme settings → Featured discount (not the blocks below)"
+    },
     {
       "type": "select",
       "id": "section_width",
@@ -271,7 +314,7 @@
           "type": "inline_richtext",
           "id": "content",
           "label": "t:sections.all.contents.label",
-          "default": "Free delivery and returns from $120"
+          "default": "Free delivery and returns from £120"
         }
       ]
     }
