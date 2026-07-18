@@ -150,6 +150,11 @@
               assign image = block_st.image
               assign local_video = block_st.local_video
               assign link = block_st.link
+              assign demo_index = forloop.index | modulo: 4
+              if demo_index == 0
+                assign demo_index = 4
+              endif
+              assign demo_image = 'instagram-demo-' | append: demo_index | append: '.jpg'
               assign ratio = ''
               if image_ratio != 'adapt'
                 case image_ratio
@@ -171,7 +176,7 @@
                   assign ratio = image.aspect_ratio
                   assign video_ratio = local_video.aspect_ratio
                 else
-                  assign ratio = '3/4'
+                  assign ratio = '1/1'
                 endif
               endif
             %}
@@ -262,7 +267,15 @@
                     padding: column_gap
                   %}
                 {% else %}
-                  {% render 'placeholder-render', class: 'rounded', image_alt: image_alt %}
+                  <img
+                    class="rounded w-full h-full object-fit-cover"
+                    src="{{ demo_image | asset_url }}"
+                    alt="{{ 'sections.instagram.label' | t }}"
+                    width="800"
+                    height="800"
+                    loading="lazy"
+                    decoding="async"
+                  >
                 {% endif %}
                 <svg
                   width="30"
@@ -303,7 +316,15 @@
                         {% assign image_alt = image.alt | default: 'Instagram shop' %}
                         {% render 'responsive-image', image: image, image_alt: image_alt, sizes: '100vw' %}
                       {% else %}
-                        {% render 'placeholder-render', image_alt: image_alt %}
+                        <img
+                          class="rounded w-full h-full object-fit-cover"
+                          src="{{ demo_image | asset_url }}"
+                          alt="{{ 'sections.instagram.label' | t }}"
+                          width="800"
+                          height="800"
+                          loading="lazy"
+                          decoding="async"
+                        >
                       {% endif %}
                       {%- for i in (1..5) -%}
                         {% liquid

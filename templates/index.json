@@ -248,7 +248,7 @@
         "insta_1": {
           "type": "instagram_manual_upload",
           "settings": {
-            "image": "shopify://shop_images/h1-in-1.jpg",
+            "image": "",
             "more_info": "",
             "instagram_post_name": "moonstyleapparel",
             "link": "#",
@@ -272,7 +272,7 @@
         "insta_2": {
           "type": "instagram_manual_upload",
           "settings": {
-            "image": "shopify://shop_images/h1-in-2.jpg",
+            "image": "",
             "more_info": "",
             "instagram_post_name": "moonstyleapparel",
             "link": "#",
@@ -296,7 +296,7 @@
         "insta_3": {
           "type": "instagram_manual_upload",
           "settings": {
-            "image": "shopify://shop_images/h1-in-3.jpg",
+            "image": "",
             "more_info": "",
             "instagram_post_name": "moonstyleapparel",
             "link": "#",
@@ -320,7 +320,7 @@
         "insta_4": {
           "type": "instagram_manual_upload",
           "settings": {
-            "image": "shopify://shop_images/h1-in-4.jpg",
+            "image": "",
             "more_info": "",
             "instagram_post_name": "moonstyleapparel",
             "link": "#",
