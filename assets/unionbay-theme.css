@@ -52,7 +52,7 @@
 .theme-unionbay .header__logo .text-logo {
   color: #1a3a6b !important;
   font-weight: 800;
-  font-size: 1.8rem;
+  font-size: 1.45rem;
   letter-spacing: 0.02em;
   text-transform: none;
   line-height: 1.2;
@@ -60,16 +60,16 @@
 
 .theme-unionbay .header__normal-logo img {
   width: auto;
-  max-width: var(--header-logo-width, 280px);
+  max-width: var(--header-logo-width, 180px);
   height: auto;
-  max-height: 110px;
+  max-height: 64px;
   object-fit: contain;
 }
 
 @media (max-width: 767px) {
   .theme-unionbay .header__normal-logo img {
-    max-width: var(--header-logo-width-mobile, 180px);
-    max-height: 80px;
+    max-width: var(--header-logo-width-mobile, 130px);
+    max-height: 48px;
   }
 }
 
@@ -1834,7 +1834,7 @@
 
 @media (max-width: 767px) {
   .theme-unionbay .moon-sa-logo-text {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   .theme-unionbay .unionbay-hero__heading {
