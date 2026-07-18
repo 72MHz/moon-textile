@@ -379,6 +379,9 @@
     },
     "language": {
       "title": "Language"
+    },
+    "country": {
+      "visiting_from": "Browsing from {{ country }}"
     }
   },
   "customer": {

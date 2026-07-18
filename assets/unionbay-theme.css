@@ -315,6 +315,27 @@
   gap: 1rem;
 }
 
+.theme-unionbay .visitor-country-flag {
+  flex-shrink: 0;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  background: #fff;
+}
+
+.theme-unionbay .visitor-country-flag__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.theme-unionbay .header__action .header_search {
+  margin-inline-start: 0.2rem;
+}
+
 .theme-unionbay .header__action .header-icon,
 .theme-unionbay .header__action .header__icon-account,
 .theme-unionbay .unionbay-rewards-icon {

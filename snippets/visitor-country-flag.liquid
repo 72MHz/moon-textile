@@ -1,0 +1,69 @@
+{% doc %}
+  Shows the visitor's country flag based on IP geolocation
+  (Shopify browsing_context_suggestions), not the selected market.
+{% enddoc %}
+
+<span
+  class="visitor-country-flag inline-flex align-center"
+  data-visitor-country-flag
+  hidden
+  aria-hidden="true"
+>
+  <img
+    class="visitor-country-flag__img"
+    src=""
+    alt=""
+    width="22"
+    height="22"
+    loading="lazy"
+    decoding="async"
+  >
+</span>
+
+<script>
+  (function () {
+    var el = document.querySelector('[data-visitor-country-flag]');
+    if (!el || el.dataset.initialized === 'true') return;
+    el.dataset.initialized = 'true';
+
+    var img = el.querySelector('img');
+    var root =
+      (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) ||
+      '/';
+
+    function showFlag(code, name) {
+      if (!code || !img) return;
+      var iso = String(code).toLowerCase();
+      var label = name || code;
+      img.src = 'https://cdn.shopify.com/static/images/flags/' + iso + '.svg';
+      img.alt = label;
+      el.removeAttribute('hidden');
+      el.removeAttribute('aria-hidden');
+      el.setAttribute('title', label);
+      el.setAttribute('aria-label', 'Browsing from ' + label);
+    }
+
+    function fallback() {
+      var code =
+        (window.Shopify && window.Shopify.country) ||
+        {{ localization.country.iso_code | default: '' | json }};
+      var name = {{ localization.country.name | default: '' | json }};
+      showFlag(code, name);
+    }
+
+    fetch(root + 'browsing_context_suggestions.json?country[enabled]=true')
+      .then(function (res) {
+        if (!res.ok) throw new Error('geo failed');
+        return res.json();
+      })
+      .then(function (data) {
+        var detected = data && data.detected_values && data.detected_values.country;
+        if (detected && detected.handle) {
+          showFlag(detected.handle, detected.name);
+          return;
+        }
+        fallback();
+      })
+      .catch(fallback);
+  })();
+</script>
