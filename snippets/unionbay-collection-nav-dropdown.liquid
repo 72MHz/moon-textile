@@ -1,0 +1,102 @@
+{% doc %}
+  Collection page category dropdown — parent Categories + Tops/Bottoms submenus.
+  Uses women or men mega-menu links based on the current collection handle.
+
+  @param {object} collection - Current collection
+{% enddoc %}
+
+{%- liquid
+  assign handle = collection.handle | default: ''
+  assign dept = 'women'
+  if handle contains 'men-'
+    unless handle contains 'women-'
+      assign dept = 'men'
+    endunless
+  endif
+  if handle == 'mens-clothing-shop-all' or handle contains 'mens-'
+    assign dept = 'men'
+  endif
+-%}
+
+{%- if dept == 'men' -%}
+  <div class="hollister-nav-dropdown">
+    <div class="hollister-nav-dropdown__col">
+      <p class="hollister-nav-dropdown__heading">Categories</p>
+      <ul class="list-unstyled m-0 p-0">
+        <li><a href="/collections/men-new-arrivals" class="hollister-nav-dropdown__link no-underline{% if handle == 'men-new-arrivals' %} is-active{% endif %}">New Arrivals</a></li>
+        <li><a href="/collections/men-tops" class="hollister-nav-dropdown__link no-underline{% if handle == 'men-tops' %} is-active{% endif %}">Tops</a></li>
+        <li><a href="/collections/men-bottoms" class="hollister-nav-dropdown__link no-underline{% if handle == 'men-bottoms' %} is-active{% endif %}">Bottoms</a></li>
+        <li><a href="/collections/men-sweatshirts-sweatpants" class="hollister-nav-dropdown__link no-underline{% if handle == 'men-sweatshirts-sweatpants' %} is-active{% endif %}">Sweatshirts &amp; Sweatpants</a></li>
+        <li><a href="/collections/men-jackets-coats" class="hollister-nav-dropdown__link no-underline{% if handle == 'men-jackets-coats' %} is-active{% endif %}">Jackets &amp; Coats</a></li>
+        <li><a href="/collections/men-clearance" class="hollister-nav-dropdown__link no-underline hollister-nav-dropdown__link--sale{% if handle == 'men-clearance' %} is-active{% endif %}">Clearance</a></li>
+      </ul>
+    </div>
+    <div class="hollister-nav-dropdown__col">
+      <p class="hollister-nav-dropdown__heading">Tops</p>
+      <ul class="list-unstyled m-0 p-0">
+        <li><a href="/collections/men-t-shirts" class="hollister-nav-dropdown__link no-underline{% if handle == 'men-t-shirts' %} is-active{% endif %}">T-Shirts</a></li>
+        <li><a href="/collections/men-graphic-tees" class="hollister-nav-dropdown__link no-underline{% if handle == 'men-graphic-tees' %} is-active{% endif %}">Graphic Tees</a></li>
+        <li><a href="/collections/men-hoodies-sweatshirts" class="hollister-nav-dropdown__link no-underline{% if handle == 'men-hoodies-sweatshirts' %} is-active{% endif %}">Hoodies &amp; Sweatshirts</a></li>
+        <li><a href="/collections/men-polos" class="hollister-nav-dropdown__link no-underline{% if handle == 'men-polos' %} is-active{% endif %}">Polos</a></li>
+        <li><a href="/collections/men-button-front-shirts" class="hollister-nav-dropdown__link no-underline{% if handle == 'men-button-front-shirts' %} is-active{% endif %}">Button Front Shirts</a></li>
+        <li><a href="/collections/men-sweaters" class="hollister-nav-dropdown__link no-underline{% if handle == 'men-sweaters' %} is-active{% endif %}">Sweaters</a></li>
+        <li><a href="/collections/men-tops" class="hollister-nav-dropdown__link no-underline{% if handle == 'men-tops' %} is-active{% endif %}">All Tops</a></li>
+      </ul>
+    </div>
+    <div class="hollister-nav-dropdown__col">
+      <p class="hollister-nav-dropdown__heading">Bottoms</p>
+      <ul class="list-unstyled m-0 p-0">
+        <li><a href="/collections/men-jeans" class="hollister-nav-dropdown__link no-underline{% if handle == 'men-jeans' %} is-active{% endif %}">Jeans</a></li>
+        <li><a href="/collections/men-shorts" class="hollister-nav-dropdown__link no-underline{% if handle == 'men-shorts' %} is-active{% endif %}">Shorts</a></li>
+        <li><a href="/collections/men-sweatpants" class="hollister-nav-dropdown__link no-underline{% if handle == 'men-sweatpants' %} is-active{% endif %}">Sweatpants</a></li>
+        <li><a href="/collections/men-trousers" class="hollister-nav-dropdown__link no-underline{% if handle == 'men-trousers' %} is-active{% endif %}">Trousers</a></li>
+        <li><a href="/collections/men-baggy-bottoms" class="hollister-nav-dropdown__link no-underline{% if handle == 'men-baggy-bottoms' %} is-active{% endif %}">Baggy Bottoms</a></li>
+        <li><a href="/collections/men-bottoms" class="hollister-nav-dropdown__link no-underline{% if handle == 'men-bottoms' %} is-active{% endif %}">All Bottoms</a></li>
+      </ul>
+    </div>
+  </div>
+{%- else -%}
+  <div class="hollister-nav-dropdown">
+    <div class="hollister-nav-dropdown__col">
+      <p class="hollister-nav-dropdown__heading">Categories</p>
+      <ul class="list-unstyled m-0 p-0">
+        <li><a href="/collections/women-new-arrivals" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-new-arrivals' %} is-active{% endif %}">New Arrivals</a></li>
+        <li><a href="/collections/women-tops" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-tops' %} is-active{% endif %}">Tops</a></li>
+        <li><a href="/collections/women-bottoms" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-bottoms' %} is-active{% endif %}">Bottoms</a></li>
+        <li><a href="/collections/women-sweatshirts-sweatpants" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-sweatshirts-sweatpants' %} is-active{% endif %}">Sweatshirts &amp; Sweatpants</a></li>
+        <li><a href="/collections/women-jackets-coats" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-jackets-coats' %} is-active{% endif %}">Jackets &amp; Coats</a></li>
+      </ul>
+    </div>
+    <div class="hollister-nav-dropdown__col">
+      <p class="hollister-nav-dropdown__heading">Tops</p>
+      <ul class="list-unstyled m-0 p-0">
+        <li><a href="/collections/women-camis-tank-tops" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-camis-tank-tops' %} is-active{% endif %}">Camis &amp; Tank Tops</a></li>
+        <li><a href="/collections/women-t-shirts" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-t-shirts' %} is-active{% endif %}">T-Shirts</a></li>
+        <li><a href="/collections/women-button-front-shirts" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-button-front-shirts' %} is-active{% endif %}">Button Front Shirts</a></li>
+        <li><a href="/collections/women-hoodies-sweatshirts" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-hoodies-sweatshirts' %} is-active{% endif %}">Hoodies &amp; Sweatshirts</a></li>
+        <li><a href="/collections/women-babydoll-tops" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-babydoll-tops' %} is-active{% endif %}">Babydoll Tops</a></li>
+        <li><a href="/collections/women-tube-tops" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-tube-tops' %} is-active{% endif %}">Tube Tops</a></li>
+        <li><a href="/collections/women-short-sleeve-tops" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-short-sleeve-tops' %} is-active{% endif %}">Short-Sleeve Tops</a></li>
+        <li><a href="/collections/women-long-sleeve-tops" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-long-sleeve-tops' %} is-active{% endif %}">Long-Sleeve Tops</a></li>
+        <li><a href="/collections/women-sweaters-cardigans" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-sweaters-cardigans' %} is-active{% endif %}">Sweaters &amp; Cardigans</a></li>
+        <li><a href="/collections/women-thermals" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-thermals' %} is-active{% endif %}">Thermals</a></li>
+        <li><a href="/collections/women-roll-necks" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-roll-necks' %} is-active{% endif %}">Roll Necks</a></li>
+        <li><a href="/collections/women-polos" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-polos' %} is-active{% endif %}">Polos</a></li>
+        <li><a href="/collections/women-terry-fleece-tops" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-terry-fleece-tops' %} is-active{% endif %}">Terry Fleece Tops</a></li>
+        <li><a href="/collections/women-tops" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-tops' %} is-active{% endif %}">All Tops</a></li>
+      </ul>
+    </div>
+    <div class="hollister-nav-dropdown__col">
+      <p class="hollister-nav-dropdown__heading">Bottoms</p>
+      <ul class="list-unstyled m-0 p-0">
+        <li><a href="/collections/women-jeans" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-jeans' %} is-active{% endif %}">Jeans</a></li>
+        <li><a href="/collections/women-shorts" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-shorts' %} is-active{% endif %}">Shorts</a></li>
+        <li><a href="/collections/women-skirts-skorts" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-skirts-skorts' %} is-active{% endif %}">Skirts &amp; Skorts</a></li>
+        <li><a href="/collections/women-sweatpants" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-sweatpants' %} is-active{% endif %}">Sweatpants</a></li>
+        <li><a href="/collections/women-pants" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-pants' %} is-active{% endif %}">Pants</a></li>
+        <li><a href="/collections/women-leggings-flares" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-leggings-flares' %} is-active{% endif %}">Leggings &amp; Flares</a></li>
+        <li><a href="/collections/women-bottoms" class="hollister-nav-dropdown__link no-underline{% if handle == 'women-bottoms' %} is-active{% endif %}">All Bottoms</a></li>
+      </ul>
+    </div>
+  </div>
+{%- endif -%}

@@ -39,7 +39,7 @@
   class="custom-scrollbar collection-filter transition-popup {{ filter_layout }} w-full{% if enable_filtering and filter_layout == 'drawer' %} color-default bls__drawer fixed z-16 inset-y-0 h-full{% if enable_rtl %} left right-0{% else %} right left-0{% endif %}{% else %} fixed static-1025 z-3 visible-1025 inset-0{% endif %}{% if enable_filtering and filter_layout == 'vertical' %} col-1025-w-custom{% endif %}"
   style="--drawer-width: 33rem"
 >
-  <div class="collection-sidebar{% if enable_filtering and filter_layout == 'drawer' %} overflow-auto custom-scrollbar{% endif %}{% if enable_filtering and filter_layout == 'vertical' %} sticky-1025 top-30{% endif %}{% if enable_filtering and filter_layout == 'horizontal' %} horizontal-filter mb-1025-25 flex-1025 flex-wrap gap-10{% endif %} {{ sidebar_canvas }}">
+  <div class="collection-sidebar{% if enable_filtering and filter_layout == 'drawer' %} overflow-auto custom-scrollbar{% endif %}{% if enable_filtering and filter_layout == 'vertical' %} sticky-1025 top-30{% endif %}{% if enable_filtering and filter_layout == 'horizontal' %} horizontal-filter hollister-filter-bar mb-1025-25 flex-1025 flex-wrap gap-10{% endif %} {{ sidebar_canvas }}">
     <div class="sidebar-header flex gap-15 align-center border-bottom px-30 py-20{% if enable_filtering and filter_layout != 'drawer' %} hidden-1025{% endif %}">
       <h3 class="h5 my-0 lh-normal grow-1">{{ 'collections.toolbar.filter' | t }}</h3>
       <close-filter
@@ -52,6 +52,67 @@
       </close-filter>
     </div>
     <div class="filter-blocks pb-30 pb-1025-0{% if filter_layout == 'horizontal' %} flex flex-wrap w-full gap-10{% endif %}">
+      {%- if filter_layout == 'horizontal' -%}
+        <div class="filter-item hollister-filter-bar__collection px-30 px-1025-0">
+          <collapsible-block class="collection relative border-1025-bottom-0 pb-1025-0">
+            <h3 class="collapsible-heading hollister-filter-bar__pill hollister-filter-bar__pill--primary heading-style my-0 text-size py-15 px-25 inline-flex gap-10 align-center justify-between border pointer transition">
+              <span>{{ collection.title | escape }}</span>
+              <svg class="icon-down active-rotated transition hidden block-1025" width="10" height="6" aria-hidden="true">
+                <use href="#icon-arrow-down"></use>
+              </svg>
+              <span class="open-children-toggle absolute inset-0 flex flex-end pointer hidden-1025">
+                <span class="icon_plus-animation"></span>
+              </span>
+            </h3>
+            <div class="collapsible-content filter-content custom-scrollbar absolute-1025 z-5 color-default left-0 hollister-nav-dropdown-panel" style="display: none">
+              {%- render 'unionbay-collection-nav-dropdown', collection: collection -%}
+            </div>
+          </collapsible-block>
+        </div>
+        <div class="filter-item hollister-filter-bar__sort-btn px-30 px-1025-0">
+          <collapsible-block class="collection relative border-1025-bottom-0 pb-1025-0">
+            <h3 class="collapsible-heading hollister-filter-bar__pill hollister-filter-bar__pill--action heading-style my-0 text-size py-15 px-25 inline-flex gap-10 align-center justify-between border pointer transition">
+              <span class="inline-flex gap-10 align-center">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M2 4.5h12M4 8h8M6 11.5h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+                  <circle cx="5" cy="4.5" r="1.4" fill="currentColor"/>
+                  <circle cx="11" cy="8" r="1.4" fill="currentColor"/>
+                  <circle cx="8" cy="11.5" r="1.4" fill="currentColor"/>
+                </svg>
+                {{ 'collections.toolbar.filter_and_sort' | t }}
+              </span>
+              <svg class="icon-down active-rotated transition hidden block-1025" width="10" height="6" aria-hidden="true">
+                <use href="#icon-arrow-down"></use>
+              </svg>
+              <span class="open-children-toggle absolute inset-0 flex flex-end pointer hidden-1025">
+                <span class="icon_plus-animation"></span>
+              </span>
+            </h3>
+            <div class="collapsible-content filter-content custom-scrollbar absolute-1025 z-5 color-default left-0" style="display: none">
+              <ul class="list-unstyled m-0 p-0">
+                {%- for option in collection.sort_options -%}
+                  <li class="pb-8">
+                    <a
+                      href="{{ option.url }}"
+                      class="no-underline word-break{% if option.value == collection.sort_by %} heading-color subheading_weight{% endif %}"
+                    >
+                      {{ option.name | escape }}
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          </collapsible-block>
+        </div>
+        {%- render 'unionbay-most-used-filter-pills',
+          collection: collection,
+          filter_layout: filter_layout,
+          enable_rtl: enable_rtl,
+          show_filter_counts: show_filter_counts,
+          color_options: theme_st.color_swatch_trigger,
+          size_options: theme_st.size_trigger
+        -%}
+      {%- endif -%}
       {%- for block in section.blocks -%}
         {%- liquid
           assign block_st = block.settings
@@ -114,11 +175,18 @@
           {%- when 'filter' -%}
             {%- assign filters = collection.filters -%}
             {%- assign total_active_values = 0 -%}
+            {%- assign most_used_keys = 'size,color,style,material,details' -%}
             {%- for filter in filters -%}
               {%- assign total_active_values = total_active_values | plus: filter.active_values.size -%}
+              {%- assign label_key = filter.label | downcase | strip -%}
+              {%- if filter_layout == 'horizontal' -%}
+                {%- if most_used_keys contains label_key -%}
+                  {%- continue -%}
+                {%- endif -%}
+              {%- endif -%}
               <div
                 {{ block.shopify_attributes }}
-                class="filter-item{% if enable_filtering and filter_layout == 'drawer' %} px-30{% else %} px-30 px-1025-0{% endif %}"
+                class="filter-item hollister-filter-bar__extra{% if enable_filtering and filter_layout == 'drawer' %} px-30{% else %} px-30 px-1025-0{% endif %}"
               >
                 <collapsible-block class=" collection {% if first_block and forloop.first and active_filter contains "active" and filter_layout != 'horizontal' %} active {% endif %} {% if enable_filtering and filter_layout != 'horizontal' and default_filter != "first_open" %} {{ active_filter }} {% endif %}  border-bottom block pb-5{% if enable_filtering and filter_layout == 'horizontal' %} relative border-1025-bottom-0 pb-1025-0{% endif %}">
                   <h3 class="collapsible-heading w-full relative my-0{% if enable_filtering and  filter_layout != 'horizontal' %} heading-letter-spacing h6 pt-25 pb-20{% else %} heading-style pt-25 pb-20 text-size py-1025-15 px-1025-25 inline-flex gap-10 align-center justify-between border-1025 pointer transition rounded-3{% endif %}">

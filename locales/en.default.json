@@ -266,6 +266,7 @@
     },
     "toolbar": {
       "filter": "Filter",
+      "filter_and_sort": "Filter & Sort",
       "progress_bar": {
         "list": "List",
         "grid": "Grid",

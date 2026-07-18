@@ -1,0 +1,140 @@
+{% doc %}
+  Hollister-style most-used filter pills for collection pages.
+  Renders Size, Color, Style, Material, Details when present in collection.filters.
+
+  @param {object} collection - Current collection
+  @param {string} filter_layout
+  @param {boolean} enable_rtl
+  @param {boolean} show_filter_counts
+  @param {string} color_options - Comma-separated color filter labels
+  @param {string} size_options - Comma-separated size filter labels
+{% enddoc %}
+
+{%- liquid
+  assign most_used = 'Size,Color,Style,Material,Details' | split: ','
+  assign color_labels = color_options | default: 'Color' | split: ','
+  assign size_labels = size_options | default: 'Size' | split: ','
+-%}
+
+{%- for wanted in most_used -%}
+  {%- assign wanted_key = wanted | downcase | strip -%}
+  {%- assign matched = false -%}
+  {%- for filter in collection.filters -%}
+    {%- assign label_key = filter.label | downcase | strip -%}
+    {%- if label_key == wanted_key -%}
+      {%- assign matched = true -%}
+      {%- assign matched_filter = filter -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- if matched -%}
+    {%- assign filter = matched_filter -%}
+    {%- liquid
+      assign iscolor = false
+      assign is_size = false
+      assign fname = filter.label
+      if color_labels contains fname
+        assign iscolor = true
+      endif
+      if size_labels contains fname
+        assign is_size = true
+      endif
+      if wanted_key == 'color'
+        assign iscolor = true
+      endif
+      if wanted_key == 'size'
+        assign is_size = true
+      endif
+    -%}
+    <div class="filter-item hollister-filter-bar__most-used px-30 px-1025-0">
+      <collapsible-block class="collection relative border-1025-bottom-0 pb-1025-0">
+        <h3 class="collapsible-heading hollister-filter-bar__pill heading-style my-0 text-size py-15 px-25 inline-flex gap-10 align-center justify-between border pointer transition">
+          <span class="inline-flex gap-10 align-center lh-normal">
+            {{- filter.label | escape -}}
+            {%- if filter.active_values.size > 0 -%}
+              <span class="total_filter rounded-50 grey-bg w-20 h-20 inline-flex content-center fs-10">
+                {{ filter.active_values.size }}
+              </span>
+            {%- endif -%}
+          </span>
+          <svg class="icon-down active-rotated transition hidden block-1025" width="10" height="6" aria-hidden="true">
+            <use href="#icon-arrow-down"></use>
+          </svg>
+          <span class="open-children-toggle absolute inset-0 flex flex-end pointer hidden-1025">
+            <span class="icon_plus-animation"></span>
+          </span>
+        </h3>
+        <div
+          class="collapsible-content filter-content custom-scrollbar pb-20 absolute-1025 z-5 color-default{% if enable_rtl %} right-0{% else %} left-0{% endif %}"
+          style="display: none"
+        >
+          {%- if filter.active_values.size > 0 -%}
+            <div class="total-filter-select border-bottom pb-15 mb-25 inline-flex gap-10 align-center w-full">
+              <span class="total_filter grow-1">
+                {{ filter.active_values.size }}
+                {{ 'collections.sidebar.selected' | t }}
+              </span>
+              <filter-item
+                data-href="{{ filter.url_to_remove }}"
+                class="link-filter pointer inline-flex lh-normal gap-10 hover-heading-color transition"
+              >
+                {{ 'collections.sidebar.clear' | t }}
+              </filter-item>
+            </div>
+          {%- endif -%}
+
+          {%- if filter.type == 'list' -%}
+            {%- if iscolor or is_size -%}
+              <ul
+                class="items list-none p-0 m-0 flex flex-wrap gap-custom"
+                style="{% if iscolor %}--gap: 12{% else %}--gap: 10{% endif %}"
+              >
+                {%- for value in filter.values -%}
+                  <li class="item last-0 mb-0">
+                    <filter-item
+                      data-href="{% if value.active %}{{ value.url_to_remove }}{% else %}{{ value.url_to_add }}{% endif %}"
+                      class="link-filter{% if value.count == 0 and value.active == false %} option-disabled relative pointer-none light-dark-grey{% endif %}"
+                    >
+                      <div class="tooltip swatch-option pointer{% if iscolor %} color{% endif %}{% if is_size %} size rounded-3 border px-15 py-10 lh-1 text-center btn-hover transition{% endif %}{% if value.active %} current-filter{% endif %}{% if iscolor %} relative{% endif %}">
+                        {%- if iscolor -%}
+                          <span
+                            class="product__color-swatches--js custom__color-swatches--{{ value.label | handleize }} {{ value.value | handleize }} clrbox product__color-swatch relative block rounded-50"
+                            data-color="{{ value.label | downcase }}"
+                            style="background-color:{{ value.value | downcase }};"
+                          ></span>
+                          <span class="tooltip-content invisible rounded-3 absolute pointer-none">{{ value.value }}</span>
+                        {%- else -%}
+                          <span class="relative z-2">{{ value.label | escape }}</span>
+                        {%- endif -%}
+                      </div>
+                    </filter-item>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- else -%}
+              <ul class="items list-none p-0 m-0 custom-scrollbar">
+                {%- for value in filter.values -%}
+                  <li class="item mb-10 last-0{% if value.count == 0 and value.active == false %} disabled pointer-none light-dark-grey{% endif %}{% if value.active %} current-filter{% endif %}">
+                    <filter-item
+                      data-href="{% if value.active %}{{ value.url_to_remove }}{% else %}{{ value.url_to_add }}{% endif %}"
+                      class="link-filter pointer inline-flex lh-normal gap-10 hover-heading-color transition"
+                    >
+                      <span class="checkbox border rounded-2 bg-white inline-flex content-center transition relative{% if value.active %} checked{% endif %}">
+                        <svg width="10" height="7" fill="none" class="invisible absolute inset-0 z-0 m-auto">
+                          <path fill="currentColor" d="M8.645.645a.503.503 0 0 1 .351-.141.496.496 0 0 1 .504.504c0 .133-.05.246-.152.34L3.852 6.855a.477.477 0 0 1-.352.141.477.477 0 0 1-.352-.14L.652 4.347a.446.446 0 0 1-.152-.34c0-.14.05-.262.152-.363a.463.463 0 0 1 .34-.141c.14 0 .262.047.363.14L3.5 5.79 8.645.645Z"/>
+                        </svg>
+                      </span>
+                      {{ value.label | escape }}
+                      {%- if show_filter_counts -%}({{ value.count }}){%- endif -%}
+                    </filter-item>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+      </collapsible-block>
+    </div>
+  {%- endif -%}
+{%- endfor -%}

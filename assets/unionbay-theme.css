@@ -2847,3 +2847,144 @@
     align-items: center;
   }
 }
+
+/* Hollister-style horizontal collection filters */
+.theme-unionbay .hollister-filter-bar.filter-blocks,
+.theme-unionbay .hollister-filter-bar .filter-blocks {
+  align-items: center;
+  gap: 0.8rem !important;
+}
+
+.theme-unionbay .hollister-filter-bar.horizontal-filter {
+  margin-bottom: 1.6rem !important;
+  padding: 1.2rem 0 0;
+}
+
+.theme-unionbay .hollister-filter-bar .filter-item {
+  min-width: 0 !important;
+  flex: 0 0 auto;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.theme-unionbay .hollister-filter-bar .collapsible-heading,
+.theme-unionbay .hollister-filter-bar__pill {
+  margin: 0 !important;
+  padding: 0.85rem 1.4rem !important;
+  min-height: 3.8rem;
+  border: 1px solid #cfcfcf !important;
+  border-radius: 999px !important;
+  background: #fff;
+  color: #333 !important;
+  font-size: 1.3rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.01em;
+  text-transform: none !important;
+  white-space: nowrap;
+  box-shadow: none !important;
+}
+
+.theme-unionbay .hollister-filter-bar .collapsible-heading:hover,
+.theme-unionbay .hollister-filter-bar__pill:hover {
+  border-color: #999 !important;
+  color: #111 !important;
+}
+
+.theme-unionbay .hollister-filter-bar__pill--primary,
+.theme-unionbay .hollister-filter-bar__collection .collapsible-heading {
+  border: 1.5px solid #111 !important;
+  color: #111 !important;
+  font-weight: 600 !important;
+  cursor: pointer;
+}
+
+.theme-unionbay .hollister-filter-bar .collapsible-block.active .collapsible-heading {
+  border-color: #111 !important;
+  color: #111 !important;
+}
+
+.theme-unionbay .hollister-filter-bar .collapsible-content {
+  border-radius: 1.2rem !important;
+  top: calc(100% + 0.8rem) !important;
+  min-width: 22rem;
+}
+
+.theme-unionbay .hollister-filter-bar__collection .hollister-nav-dropdown-panel {
+  width: min(72rem, calc(100vw - 4rem)) !important;
+  min-width: 48rem !important;
+  padding: 2rem !important;
+}
+
+.theme-unionbay .hollister-nav-dropdown {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.4rem;
+}
+
+.theme-unionbay .hollister-nav-dropdown__heading {
+  margin: 0 0 1.2rem;
+  color: #111;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.theme-unionbay .hollister-nav-dropdown__link {
+  display: block;
+  padding: 0.45rem 0;
+  color: #555;
+  font-size: 1.35rem;
+  line-height: 1.4;
+}
+
+.theme-unionbay .hollister-nav-dropdown__link:hover,
+.theme-unionbay .hollister-nav-dropdown__link.is-active {
+  color: #111;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.theme-unionbay .hollister-nav-dropdown__link--sale {
+  color: var(--ub-red, #c00) !important;
+}
+
+.theme-unionbay .hollister-collection-toolbar {
+  margin-top: 0 !important;
+  margin-bottom: 1.2rem !important;
+}
+
+.theme-unionbay .hollister-collection-toolbar .btn-filter {
+  display: none !important;
+}
+
+@media (min-width: 1025px) {
+  .theme-unionbay .hollister-filter-bar .hollister-filter-bar__extra {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .theme-unionbay .hollister-filter-bar.horizontal-filter {
+    padding: 0;
+  }
+
+  .theme-unionbay .hollister-filter-bar .filter-item {
+    width: 100%;
+  }
+
+  .theme-unionbay .hollister-filter-bar .collapsible-heading,
+  .theme-unionbay .hollister-filter-bar__pill {
+    width: 100%;
+    border-radius: 0.8rem !important;
+    justify-content: space-between;
+  }
+
+  .theme-unionbay .hollister-filter-bar__collection,
+  .theme-unionbay .hollister-filter-bar__sort-btn,
+  .theme-unionbay .hollister-filter-bar__most-used {
+    display: none;
+  }
+
+  .theme-unionbay .hollister-collection-toolbar .btn-filter {
+    display: inline-flex !important;
+  }
+}

@@ -55,6 +55,8 @@
                           assign mobile_heading = block_st.heading
                         else
                           case block_st.preset
+                            when 'brands'
+                              assign mobile_heading = 'Our Brands'
                             when 'about'
                               assign mobile_heading = 'About'
                             when 'help'
@@ -265,12 +267,12 @@
       "unit": "px"
     }
   ],
-  "max_blocks": 7,
+  "max_blocks": 9,
   "blocks": [
     {
       "type": "link_list",
       "name": "t:sections.footer.blocks.link_list.name",
-      "limit": 6,
+      "limit": 8,
       "settings": [
         {
           "type": "text",
@@ -283,6 +285,7 @@
           "label": "t:unionbay.footer.preset",
           "default": "about",
           "options": [
+            { "value": "brands", "label": "Our Brands" },
             { "value": "about", "label": "About" },
             { "value": "help", "label": "Help" },
             { "value": "privacy", "label": "Privacy Notices" },

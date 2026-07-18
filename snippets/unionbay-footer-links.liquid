@@ -11,6 +11,8 @@
 -%}
 
 {%- case preset -%}
+  {%- when 'brands' -%}
+    {%- assign column_heading = column_heading | default: 'Our Brands' -%}
   {%- when 'about' -%}
     {%- assign column_heading = column_heading | default: 'About' -%}
   {%- when 'help' -%}
@@ -31,6 +33,10 @@
   </h3>
   <ul class="list-unstyled unionbay-footer__links-list">
     {%- case preset -%}
+      {%- when 'brands' -%}
+        <li><a href="/collections/pose" class="unionbay-footer__link">POSE</a></li>
+        <li><a href="/collections/underwidsix" class="unionbay-footer__link">UNDERWIDSIX</a></li>
+        <li><a href="/collections/millionaire" class="unionbay-footer__link">Millionaire</a></li>
       {%- when 'about' -%}
         <li><a href="/pages/about" class="unionbay-footer__link">About us</a></li>
         <li><a href="/pages/services" class="unionbay-footer__link">Services</a></li>

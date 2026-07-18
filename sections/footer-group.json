@@ -5,6 +5,13 @@
     "unionbay_footer": {
       "type": "unionbay-footer",
       "blocks": {
+        "link_list_brands": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Our Brands",
+            "preset": "brands"
+          }
+        },
         "link_list_about": {
           "type": "link_list",
           "settings": {
@@ -40,13 +47,6 @@
             "preset": "blog"
           }
         },
-        "link_list_shop": {
-          "type": "link_list",
-          "settings": {
-            "heading": "Shop by Category",
-            "preset": "shop"
-          }
-        },
         "newsletter_signup": {
           "type": "newsletter",
           "settings": {
@@ -59,12 +59,12 @@
         }
       },
       "block_order": [
+        "link_list_brands",
         "link_list_about",
         "link_list_help",
         "link_list_privacy",
         "link_list_affiliates",
         "link_list_blog",
-        "link_list_shop",
         "newsletter_signup"
       ],
       "settings": {
