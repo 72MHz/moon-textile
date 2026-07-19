@@ -86,7 +86,7 @@
         "color_scheme": "",
         "department": "women",
         "column_gap": 10,
-        "padding_top": 0,
+        "padding_top": 12,
         "padding_bottom": 0
       }
     },
@@ -106,8 +106,8 @@
         "items_per_row_mobile": 1,
         "column_gap": 10,
         "show_arrow": true,
-        "padding_top": 43,
-        "padding_bottom": 37
+        "padding_top": 20,
+        "padding_bottom": 16
       }
     },
     "mens_category_row": {
@@ -166,8 +166,8 @@
         "items_per_row_mobile": 1,
         "column_gap": 10,
         "show_arrow": true,
-        "padding_top": 43,
-        "padding_bottom": 37
+        "padding_top": 20,
+        "padding_bottom": 16
       }
     },
     "category_grid": {
@@ -239,8 +239,8 @@
         "section_width": "full_width",
         "color_scheme": "",
         "column_gap": 15,
-        "padding_top": 43,
-        "padding_bottom": 58
+        "padding_top": 20,
+        "padding_bottom": 24
       }
     },
     "instagram_section": {
@@ -351,8 +351,8 @@
         "description": "<p><strong>@moonstyleapparel</strong></p>",
         "header_size": "medium",
         "header_alignment": "center",
-        "image_ratio": "square",
-        "custom_ratio": "",
+        "image_ratio": "custom",
+        "custom_ratio": "3:2",
         "hotspot_style": "dot",
         "items_per_row": 4,
         "column_gap": 10,
@@ -363,9 +363,9 @@
         "autorotate_speed": 5,
         "reveal": false,
         "items_per_row_mobile": 2,
-        "padding_top": 50,
-        "padding_bottom": 50,
-        "reset_spacing": false
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "reset_spacing": true
       }
     }
   },

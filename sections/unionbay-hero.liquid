@@ -44,7 +44,7 @@
   --height-desktop: {{ section_st.desktop_height }}px;
 {%- endcapture -%}
 <section
-  class="section{% if section_st.padding_top < 30 %} pt-min{% endif %}{% if section_st.padding_bottom < 30 %} pb-min{% endif %} unionbay-hero sec__iwto color-{{ color_scheme }} gradient"
+  class="section remove_spacing{% if section_st.padding_top < 30 %} pt-min{% endif %}{% if section_st.padding_bottom < 30 %} pb-min{% endif %} unionbay-hero sec__iwto color-{{ color_scheme }} gradient"
   style="{{ style | strip | strip_newlines }}"
 >
   <div class="{{ section_width }}">

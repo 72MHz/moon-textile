@@ -886,6 +886,7 @@
       "shop_type": "Department",
       "women": "Women",
       "men": "Men",
+      "unisex": "Unisex",
       "department": "Department",
       "heading": "Page heading",
       "heading_info": "Leave blank to use the default department heading.",

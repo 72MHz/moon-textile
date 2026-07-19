@@ -10,6 +10,11 @@
   --ub-sale: #e31b23;
 }
 
+/* Tighter gaps between homepage sections */
+body.theme-unionbay.index #MainContent section:not(:last-child) .section:not(.remove_spacing) {
+  margin-bottom: 0;
+}
+
 .theme-unionbay {
   --btn-radius: 0;
   --rounded-radius: 0;
@@ -551,7 +556,7 @@
 .theme-unionbay .unionbay-category-row__media {
   position: relative;
   width: 100%;
-  aspect-ratio: 2 / 3;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   background: var(--ub-light-gray);
 }
