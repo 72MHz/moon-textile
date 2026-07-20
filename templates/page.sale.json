@@ -95,6 +95,7 @@
         "scrolling_text_6iNFmi"
       ],
       "settings": {
+        "use_featured_discount": false,
         "section_width": "full_width",
         "color_scheme": "scheme-4faf0e4d-27f4-4d02-bc51-617383bab1a9",
         "direction": "left",

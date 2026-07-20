@@ -296,6 +296,7 @@
       ],
       "custom_css": [],
       "settings": {
+        "use_featured_discount": false,
         "section_width": "full_width",
         "color_scheme": "scheme-c78bfb21-5aff-497b-be68-98f01962f564",
         "direction": "left",

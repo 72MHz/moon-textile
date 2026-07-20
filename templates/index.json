@@ -6,13 +6,13 @@
         "marquee_1": {
           "type": "scrolling_text",
           "settings": {
-            "content": ""
+            "content": "Take 15% off your order — use code SUMMER15"
           }
         },
         "marquee_2": {
           "type": "scrolling_text",
           "settings": {
-            "content": ""
+            "content": "Free shipping on orders over $75"
           }
         }
       },
@@ -22,7 +22,7 @@
         "section_width": "full_width",
         "color_scheme": "scheme-unionbay-red",
         "direction": "left",
-        "icon_between_item": "none",
+        "icon_between_item": "unset",
         "speed": 30,
         "space_between_text": 50,
         "font_size": 13,

@@ -408,14 +408,16 @@ body.theme-unionbay.index #MainContent section:not(:last-child) .section:not(.re
   border: none;
 }
 
-.theme-unionbay .sec__scrolling-text .marquee {
+.theme-unionbay .sec__scrolling-text.color-scheme-unionbay-red .marquee,
+.theme-unionbay .sec__scrolling-text[class*="scheme-unionbay-red"] .marquee {
   color: #fff;
   font-weight: 700;
   letter-spacing: 0.1em;
   font-size: 1rem;
 }
 
-.theme-unionbay .sec__scrolling-text .rich__text-m0 {
+.theme-unionbay .sec__scrolling-text.color-scheme-unionbay-red .rich__text-m0,
+.theme-unionbay .sec__scrolling-text[class*="scheme-unionbay-red"] .rich__text-m0 {
   color: #fff;
 }
 
