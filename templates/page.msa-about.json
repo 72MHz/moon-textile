@@ -21,55 +21,133 @@
       }
     },
     "main": {
-      "type": "msa-info-page",
+      "type": "msa-about-page",
       "blocks": {
-        "intro": {
-          "type": "intro",
+        "hero": {
+          "type": "hero",
           "settings": {
-            "subheading": "Est. 2012",
-            "heading": "About MSA (Moon Style Apparel)",
-            "text": "<p>Established in 2012, MSA Sourcing is a trusted buying and sourcing agency based in Pakistan, offering comprehensive solutions for international buyers seeking high-quality garments, textiles, apparel, and accessories. As a leading private-sector Textile Export Promotion House, we specialise in promoting and facilitating the global export of Pakistani textile products, especially in knitwear, denim and leather.</p><p>With an integrated and total-solution approach, MSA Sourcing connects global buyers with reliable manufacturers, ensuring product quality, timely delivery, and smooth transactions. Our extensive network across Pakistan allows us to source a diverse range of textiles and apparel tailored to meet our clients' specific requirements.</p><p>As experienced buying agents, our team ensures our clients receive premium products within competitive timelines and at the best market prices. We offer access to a wide selection of original and up-to-date designs, supported by efficient logistics and stringent quality control through our collaboration with other companies.</p><p>At MSA Sourcing, our goal is to be your reliable partner in accessing the finest textile solutions Pakistan has to offer, efficiently, affordably, and with uncompromising quality.</p>"
+            "subheading": "Est. 2012 — UK based",
+            "heading": "About Moon Style Apparel",
+            "text": "<p>Established in 2012, Moon Style Apparel is a UK-based online fashion retailer dedicated to delivering stylish, comfortable, and high-quality clothing for everyday living. We believe fashion should be accessible, responsibly made, and designed to inspire confidence in every customer.</p><p>From wardrobe essentials to seasonal favourites, our collections combine timeless style with modern trends, offering versatile pieces for every occasion.</p>",
+            "image_url": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
+            "image_alt": "Clothing rails inside a modern apparel store"
           }
         },
-        "services_list": {
-          "type": "list",
+        "story": {
+          "type": "image_text",
           "settings": {
-            "title": "Our services include",
-            "items": "Product sourcing\nQuality assurance and inspection\nSupply chain coordination\nBridging communication between buyers and manufacturers"
+            "title": "Our story",
+            "body": "<p>Moon Style Apparel was founded with a simple vision: to create clothing that looks great, feels comfortable, and offers exceptional value without compromising on quality or responsibility.</p><p>Over the years, we have built long-term relationships with trusted manufacturing partners and suppliers, allowing us to maintain consistent quality while continually expanding our collections to meet the evolving needs of our customers.</p><p>Whether you're shopping for everyday basics, statement pieces, or seasonal essentials, our goal is to provide clothing you'll enjoy wearing for years to come.</p>",
+            "image_url": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=1200&q=80",
+            "image_alt": "Fashion designer working with fabric swatches",
+            "image_position": "right"
           }
         },
-        "testimonial_1": {
-          "type": "testimonial",
+        "quality_chips": {
+          "type": "chips",
           "settings": {
-            "quote": "MSA helped us streamline production with top-quality denim and knitwear, always on time and on budget.",
-            "author": "Excellent quality and communication"
+            "title": "Designed with quality in mind",
+            "intro": "<p>Every garment is carefully selected and produced with attention to detail, comfort, and durability. Our collections include:</p>",
+            "items": "T-Shirts & Graphic Tees\nCamis & Tank Tops\nHoodies & Sweatshirts\nButton Front Shirts\nPolos\nSweaters & Cardigans\nJeans\nTrousers\nShorts\nJackets & Coats\nSweatpants\nSeasonal Collections\nNew Arrivals",
+            "note": "We continuously update our range to bring fresh styles while maintaining the quality our customers expect."
           }
         },
-        "testimonial_2": {
-          "type": "testimonial",
+        "manufacturing": {
+          "type": "image_text",
           "settings": {
-            "quote": "Their team ensured every detail was perfect. From samples to final delivery, everything was handled professionally.",
-            "author": "Trusted supplier network"
+            "title": "Our manufacturing",
+            "body": "<p>Quality begins long before a product reaches our customers. Our garments are produced through our experienced manufacturing partner, <strong>Moon Style Textile</strong>, where skilled teams combine modern production techniques with strict quality control standards.</p><p>With years of expertise in garment manufacturing, we oversee every stage of production to ensure consistency, craftsmanship, and reliability. By working closely with our manufacturing operations, we maintain greater control over product quality, ethical production, and customer satisfaction.</p>",
+            "image_url": "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?auto=format&fit=crop&w=1200&q=80",
+            "image_alt": "Spools of thread at a garment manufacturing facility",
+            "image_position": "left"
           }
         },
-        "testimonial_3": {
-          "type": "testimonial",
+        "sustainability_heading": {
+          "type": "cards_heading",
           "settings": {
-            "quote": "Their manufacturing partners deliver consistently. We source bed sheets and curtains, always satisfied.",
-            "author": "Great experience with MSA"
+            "title": "Sustainability",
+            "subtitle": "<p>We understand that the future of fashion depends on making responsible choices. Sustainability is an ongoing journey, and we continue to improve our practices across every part of our business.</p>"
           }
         },
-        "charity": {
-          "type": "content",
+        "card_organic": {
+          "type": "card",
           "settings": {
-            "title": "Charitable partner — MSA with SAVE DC",
-            "body": "<p>At <strong>MSA</strong>, we believe that true business success is measured not just by profit but by leaving a positive impact on society. In partnership with <strong>Save the Deserving Children (SAVE DC)</strong>, we sponsor orphaned and underprivileged children across Pakistan, providing completely free education including school fees, textbooks, uniforms, and regular health checkups.</p><p>This initiative supports the UN Sustainable Development Goals, particularly Quality Education (SDG 4) and Reduced Inequalities (SDG 10). Through SAVE DC's Sponsor a Child programme, companies and individuals can make a lasting difference — even a one-time sponsorship can secure a child's education for an entire year.</p><p><strong>MSA &amp; SAVE DC:</strong> Empowering tomorrow's leaders, today.</p>"
+            "title": "Organic cotton",
+            "text": "<p>Where possible, we incorporate organic cotton into our collections. Organic cotton is grown using farming practices that reduce the use of synthetic chemicals while supporting healthier ecosystems and producing naturally soft, comfortable fabrics.</p>"
+          }
+        },
+        "card_recycled": {
+          "type": "card",
+          "settings": {
+            "title": "Recycled polyester",
+            "text": "<p>We increasingly use recycled polyester to help reduce waste and conserve valuable natural resources. Giving existing materials a second life contributes to a more sustainable fashion industry.</p>"
+          }
+        },
+        "card_sourcing": {
+          "type": "card",
+          "settings": {
+            "title": "Responsible sourcing",
+            "text": "<p>We work with suppliers and manufacturing partners who share our commitment to ethical business practices, quality workmanship, safe working conditions, and responsible production standards.</p>"
+          }
+        },
+        "card_waste": {
+          "type": "card",
+          "settings": {
+            "title": "Less waste",
+            "text": "<p>We continually review our production and packaging processes to reduce unnecessary waste — from improving operational efficiency to using more sustainable materials where possible.</p>"
+          }
+        },
+        "ethics": {
+          "type": "image_text",
+          "settings": {
+            "title": "Ethics",
+            "body": "<p>Respect, fairness, and integrity guide every decision we make.</p><p>We support ethical manufacturing practices and believe everyone involved in creating our products deserves safe working conditions, fair treatment, and respect. We are committed to building long-term relationships with partners who share these values.</p>",
+            "image_url": "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=80",
+            "image_alt": "Team members working together around a table",
+            "image_position": "right"
+          }
+        },
+        "commitment": {
+          "type": "highlight",
+          "settings": {
+            "subheading": "Our commitment",
+            "title": "Charitable partner — SAVE DC",
+            "body": "<p>At Moon Style Apparel, we believe businesses should create a positive impact beyond fashion. Supporting communities and investing in brighter futures is an important part of who we are.</p><p>We are proud to support <strong>SAVE DC</strong>, an organisation dedicated to transforming lives through education. Their mission focuses on expanding educational opportunities, empowering individuals, and helping communities build a stronger future.</p><p>By partnering with SAVE DC, we are honoured to contribute to initiatives that create meaningful and lasting change through the power of education.</p>"
+          }
+        },
+        "why_us": {
+          "type": "checklist",
+          "settings": {
+            "title": "Why choose Moon Style Apparel?",
+            "items": "Established in 2012\nUK-based online fashion retailer\nHigh-quality garments at competitive prices\nTrusted manufacturing expertise\nNew collections added regularly\nCommitment to ethical and responsible sourcing\nFocus on sustainability and reducing waste\nSecure online shopping and reliable customer service\nProud supporter of educational and community initiatives"
+          }
+        },
+        "closing": {
+          "type": "closing",
+          "settings": {
+            "title": "Looking ahead",
+            "body": "<p>As we continue to grow, our commitment remains the same: creating quality clothing, embracing responsible business practices, and providing an exceptional shopping experience for every customer.</p><p>Thank you for choosing Moon Style Apparel. We're proud to be part of your wardrobe and look forward to serving you for many years to come.</p>"
           }
         }
       },
-      "block_order": ["intro", "services_list", "testimonial_1", "testimonial_2", "testimonial_3", "charity"],
+      "block_order": [
+        "hero",
+        "story",
+        "quality_chips",
+        "manufacturing",
+        "sustainability_heading",
+        "card_organic",
+        "card_recycled",
+        "card_sourcing",
+        "card_waste",
+        "ethics",
+        "commitment",
+        "why_us",
+        "closing"
+      ],
       "settings": {
         "section_width": "fluid_container",
+        "cards_per_row": 4,
         "padding_top": 20,
         "padding_bottom": 60
       }
