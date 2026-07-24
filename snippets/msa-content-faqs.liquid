@@ -1,0 +1,411 @@
+{% doc %}
+  Attractive full-width FAQ page for Moon Apparel with accordion answers.
+{% enddoc %}
+
+{% render 'msa-brand-page-styles' %}
+
+<div class="section moon-bp moon-faq" style="--section-pt: 0; --section-pb: 0;">
+  <section class="moon-bp__hero moon-faq__hero">
+    <div class="moon-bp__hero-media">
+      <img
+        src="{{ 'moon-page-faq.jpg' | asset_url }}"
+        alt="Moon Apparel customer service and shopping help"
+        loading="eager"
+        width="1600"
+        height="900"
+      >
+      <div class="moon-bp__hero-overlay"></div>
+    </div>
+    <div class="moon-bp__hero-content fluid_container">
+      <p class="moon-bp__eyebrow">Help centre</p>
+      <h1 class="moon-bp__hero-title">Frequently asked questions</h1>
+      <p class="moon-bp__hero-text">
+        Quick answers about orders, shipping, returns, sizing, payments, and shopping with Moon Apparel.
+      </p>
+      <a href="/pages/contact-us" class="moon-bp__btn moon-bp__btn--light">Still need help? Contact us</a>
+    </div>
+  </section>
+
+  <section class="moon-bp__section fluid_container">
+    <div class="moon-bp__section-head">
+      <h2 class="moon-bp__heading">Browse by topic</h2>
+      <p class="moon-bp__lead">Jump to the section you need — or scroll through all common questions below.</p>
+    </div>
+    <div class="moon-faq__topics">
+      <a class="moon-faq__topic" href="#faq-orders">Orders</a>
+      <a class="moon-faq__topic" href="#faq-shipping">Shipping</a>
+      <a class="moon-faq__topic" href="#faq-returns">Returns</a>
+      <a class="moon-faq__topic" href="#faq-sizing">Sizing</a>
+      <a class="moon-faq__topic" href="#faq-payments">Payments</a>
+      <a class="moon-faq__topic" href="#faq-account">Account</a>
+      <a class="moon-faq__topic" href="#faq-products">Products</a>
+    </div>
+  </section>
+
+  <section class="moon-bp__section moon-bp__section--soft" id="faq-orders">
+    <div class="fluid_container moon-faq__wrap">
+      <div class="moon-faq__group-head">
+        <p class="moon-bp__eyebrow">Shopping</p>
+        <h2 class="moon-bp__heading">Orders</h2>
+      </div>
+      <div class="moon-faq__list">
+        <details class="moon-faq__item" open>
+          <summary class="moon-faq__question">How do I place an order?</summary>
+          <div class="moon-faq__answer">
+            <p>Browse our collections, choose your size and colour, then click <strong>Add to cart</strong>. When you are ready, open your cart and continue to checkout. You can pay securely online and will receive an order confirmation by email.</p>
+          </div>
+        </details>
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">Can I change or cancel my order?</summary>
+          <div class="moon-faq__answer">
+            <p>We start preparing orders quickly. If you need to change or cancel, contact us as soon as possible via our <a href="/pages/contact-us">contact page</a> with your order number. If the order has not yet shipped, we will do our best to help.</p>
+          </div>
+        </details>
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">How do I track my order?</summary>
+          <div class="moon-faq__answer">
+            <p>Once your order ships, you will receive a shipping confirmation email with tracking details (when available from the carrier). You can also check your order status by logging into your account.</p>
+          </div>
+        </details>
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">I did not receive a confirmation email. What should I do?</summary>
+          <div class="moon-faq__answer">
+            <p>Please check your spam or junk folder first. If you still cannot find it, contact us with the email address used at checkout and we will confirm whether the order went through.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="moon-bp__section" id="faq-shipping">
+    <div class="fluid_container moon-faq__wrap">
+      <div class="moon-faq__group-head">
+        <p class="moon-bp__eyebrow">Delivery</p>
+        <h2 class="moon-bp__heading">Shipping</h2>
+      </div>
+      <div class="moon-faq__list">
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">How long does shipping take?</summary>
+          <div class="moon-faq__answer">
+            <p>Orders are typically processed within <strong>1–3 business days</strong>. Standard domestic delivery usually arrives within <strong>5–7 business days</strong> after dispatch. International orders may take <strong>10–21 business days</strong>, depending on the carrier and customs.</p>
+            <p>See full details on our <a href="/pages/shipping">shipping page</a>.</p>
+          </div>
+        </details>
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">Do you ship internationally?</summary>
+          <div class="moon-faq__answer">
+            <p>Yes. We ship to selected international destinations. Delivery times and duties or taxes (if applicable) can vary by country. Any customs fees are the responsibility of the customer unless otherwise stated.</p>
+          </div>
+        </details>
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">How much does shipping cost?</summary>
+          <div class="moon-faq__answer">
+            <p>Shipping costs are calculated at checkout based on your delivery address and order details. Promotional free-shipping offers may apply from time to time and will be shown clearly at checkout when available.</p>
+          </div>
+        </details>
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">My package is delayed or missing. What next?</summary>
+          <div class="moon-faq__answer">
+            <p>Please wait until the estimated delivery window has passed, then check your tracking link. If tracking has stopped updating or the package is marked delivered but not received, contact us with your order number and we will help investigate with the carrier.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="moon-bp__section moon-bp__section--soft" id="faq-returns">
+    <div class="fluid_container moon-faq__wrap">
+      <div class="moon-faq__group-head">
+        <p class="moon-bp__eyebrow">Aftercare</p>
+        <h2 class="moon-bp__heading">Returns &amp; exchanges</h2>
+      </div>
+      <div class="moon-faq__list">
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">What is your return policy?</summary>
+          <div class="moon-faq__answer">
+            <p>Items may be returned within <strong>30 days of delivery</strong> in unused condition with original tags attached. Please review our full <a href="/pages/returns">returns &amp; exchanges</a> page for eligibility details.</p>
+          </div>
+        </details>
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">How do I start a return?</summary>
+          <div class="moon-faq__answer">
+            <p>Contact our team through the <a href="/pages/contact-us">contact page</a> with your order number and the items you wish to return. We will guide you through the next steps.</p>
+          </div>
+        </details>
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">Can I exchange an item for a different size?</summary>
+          <div class="moon-faq__answer">
+            <p>Yes, where stock is available. The easiest option is often to return the original item and place a new order for the correct size. Contact us if you need help choosing the right fit.</p>
+          </div>
+        </details>
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">When will I receive my refund?</summary>
+          <div class="moon-faq__answer">
+            <p>Once we receive and inspect your return, refunds are typically processed within a few business days. Your bank or card provider may take additional time to show the credit on your statement.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="moon-bp__section" id="faq-sizing">
+    <div class="fluid_container moon-faq__wrap">
+      <div class="moon-faq__group-head">
+        <p class="moon-bp__eyebrow">Fit</p>
+        <h2 class="moon-bp__heading">Sizing &amp; fit</h2>
+      </div>
+      <div class="moon-faq__list">
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">How do I find my size?</summary>
+          <div class="moon-faq__answer">
+            <p>Use the size chart on each product page for the most accurate measurements. If you are between sizes, we usually recommend sizing up for a more relaxed fit. Visit our <a href="/pages/size-charts">size charts</a> page for more guidance.</p>
+          </div>
+        </details>
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">Do your clothes run true to size?</summary>
+          <div class="moon-faq__answer">
+            <p>Most Moon Apparel styles are designed to fit true to size. Fit notes on individual product pages will highlight any styles that run larger, smaller, or oversized.</p>
+          </div>
+        </details>
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">What if my item does not fit?</summary>
+          <div class="moon-faq__answer">
+            <p>If an item does not fit as expected, you can return eligible items within 30 days. See our <a href="/pages/returns">returns page</a> or contact us for help with an exchange.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="moon-bp__section moon-bp__section--soft" id="faq-payments">
+    <div class="fluid_container moon-faq__wrap">
+      <div class="moon-faq__group-head">
+        <p class="moon-bp__eyebrow">Checkout</p>
+        <h2 class="moon-bp__heading">Payments &amp; discounts</h2>
+      </div>
+      <div class="moon-faq__list">
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">What payment methods do you accept?</summary>
+          <div class="moon-faq__answer">
+            <p>We accept major credit and debit cards and other secure payment options shown at checkout (such as Shop Pay, where available). All payments are processed through Shopify’s secure checkout.</p>
+          </div>
+        </details>
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">Is checkout secure?</summary>
+          <div class="moon-faq__answer">
+            <p>Yes. Your payment details are encrypted and processed securely. Moon Apparel does not store full card numbers on our servers.</p>
+          </div>
+        </details>
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">How do I use a discount code?</summary>
+          <div class="moon-faq__answer">
+            <p>Enter your code in the discount field at checkout and apply it before completing payment. Only one discount code can usually be used per order unless a promotion states otherwise.</p>
+          </div>
+        </details>
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">Why was my payment declined?</summary>
+          <div class="moon-faq__answer">
+            <p>This can happen due to incorrect card details, insufficient funds, or bank security checks. Double-check your details, try another payment method, or contact your bank. If the issue continues, reach out through our <a href="/pages/contact-us">contact page</a>.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="moon-bp__section" id="faq-account">
+    <div class="fluid_container moon-faq__wrap">
+      <div class="moon-faq__group-head">
+        <p class="moon-bp__eyebrow">Your profile</p>
+        <h2 class="moon-bp__heading">Account</h2>
+      </div>
+      <div class="moon-faq__list">
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">Do I need an account to shop?</summary>
+          <div class="moon-faq__answer">
+            <p>No — you can checkout as a guest. Creating an account makes it easier to track orders, save addresses, and shop faster next time. <a href="/account/register">Create an account</a> or <a href="/account/login">log in</a>.</p>
+          </div>
+        </details>
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">I forgot my password. How do I reset it?</summary>
+          <div class="moon-faq__answer">
+            <p>On the login page, choose the password recovery option and enter your email. You will receive a reset link if an account exists for that address.</p>
+          </div>
+        </details>
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">How do I update my email or address?</summary>
+          <div class="moon-faq__answer">
+            <p>Log in to your account to update your details and saved addresses. For help with an existing order’s delivery address, contact us as soon as possible after placing the order.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="moon-bp__section moon-bp__section--soft" id="faq-products">
+    <div class="fluid_container moon-faq__wrap">
+      <div class="moon-faq__group-head">
+        <p class="moon-bp__eyebrow">Our clothing</p>
+        <h2 class="moon-bp__heading">Products &amp; care</h2>
+      </div>
+      <div class="moon-faq__list">
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">Are your products made ethically?</summary>
+          <div class="moon-faq__answer">
+            <p>Yes — ethical manufacturing and responsible sourcing are core to Moon Apparel. Learn more on our <a href="/pages/ethics">ethics</a>, <a href="/pages/responsible-sourcing">responsible sourcing</a>, and <a href="/pages/beliefs">our beliefs</a> pages.</p>
+          </div>
+        </details>
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">Do you use organic or recycled materials?</summary>
+          <div class="moon-faq__answer">
+            <p>Where possible, we use preferred materials such as <a href="/pages/organic-cotton">organic cotton</a> and <a href="/pages/recycled-polyester">recycled polyester</a>. Product pages note material details when they apply.</p>
+          </div>
+        </details>
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">How should I care for my garments?</summary>
+          <div class="moon-faq__answer">
+            <p>Always follow the care label inside each garment. In general, wash similar colours together, avoid overheating, and hang or lay flat to dry when recommended to help clothes last longer and reduce waste.</p>
+          </div>
+        </details>
+        <details class="moon-faq__item">
+          <summary class="moon-faq__question">An item is sold out. Will it come back?</summary>
+          <div class="moon-faq__answer">
+            <p>Popular styles may return in future drops, but stock can be limited. Follow Moon Apparel updates and check new arrivals regularly, or contact us to ask about a specific style.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="moon-bp__cta">
+    <div class="fluid_container moon-bp__cta-inner">
+      <h2 class="moon-bp__heading moon-bp__heading--light">Still have a question?</h2>
+      <p class="moon-bp__lead moon-bp__lead--light">
+        Our team is happy to help with orders, sizing, returns, or anything else about Moon Apparel.
+      </p>
+      <a href="/pages/contact-us" class="moon-bp__btn moon-bp__btn--light">Contact Moon Apparel</a>
+    </div>
+  </section>
+</div>
+
+{% stylesheet %}
+  .moon-faq__hero {
+    min-height: clamp(36rem, 58vh, 52rem);
+  }
+
+  .moon-faq__topics {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .moon-faq__topic {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 4.2rem;
+    padding: 0 1.8rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: #1a3a6b;
+    background: #fff;
+    border: 1px solid #d8e0ec;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .moon-faq__topic:hover {
+    color: #fff;
+    background: #1a3a6b;
+    border-color: #1a3a6b;
+  }
+
+  .moon-faq__wrap {
+    max-width: 92rem;
+    margin: 0 auto;
+  }
+
+  .moon-faq__group-head {
+    margin-bottom: 2.4rem;
+  }
+
+  .moon-faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .moon-faq__item {
+    background: #fff;
+    border: 1px solid #e6ebf2;
+    border-left: 4px solid #e85d04;
+  }
+
+  .moon-faq__question {
+    position: relative;
+    list-style: none;
+    cursor: pointer;
+    padding: 2rem 5.2rem 2rem 2.2rem;
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #1a3a6b;
+  }
+
+  .moon-faq__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .moon-faq__question::after {
+    content: '+';
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2.8rem;
+    height: 2.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    font-weight: 400;
+    line-height: 1;
+    color: #e85d04;
+    border: 1px solid #ffd2b3;
+    background: #fff7f1;
+  }
+
+  .moon-faq__item[open] .moon-faq__question::after {
+    content: '–';
+    color: #1a3a6b;
+    border-color: #c9d4e8;
+    background: #f4f7fb;
+  }
+
+  .moon-faq__answer {
+    padding: 0 2.2rem 2.2rem;
+    font-size: 1.55rem;
+    line-height: 1.7;
+    color: #444;
+  }
+
+  .moon-faq__answer p {
+    margin: 0 0 1em;
+  }
+
+  .moon-faq__answer p:last-child {
+    margin-bottom: 0;
+  }
+
+  .moon-faq__answer a {
+    color: #e85d04;
+    font-weight: 700;
+  }
+
+  @media (max-width: 767px) {
+    .moon-faq__question {
+      font-size: 1.55rem;
+      padding-right: 4.8rem;
+    }
+  }
+{% endstylesheet %}

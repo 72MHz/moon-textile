@@ -135,7 +135,7 @@
 
 {%- if msa_known -%}
   {%- assign msa_fullbleed = false -%}
-  {%- if msa_handle == 'careers' or msa_handle == 'about' or msa_handle == 'beliefs' or msa_handle == 'commitment' or msa_handle == 'ethics' or msa_handle == 'organic-cotton' or msa_handle == 'recycled-polyester' or msa_handle == 'responsible-sourcing' or msa_handle == 'less-waste' -%}
+  {%- if msa_handle == 'careers' or msa_handle == 'about' or msa_handle == 'beliefs' or msa_handle == 'commitment' or msa_handle == 'ethics' or msa_handle == 'organic-cotton' or msa_handle == 'recycled-polyester' or msa_handle == 'responsible-sourcing' or msa_handle == 'less-waste' or msa_handle == 'faqs' -%}
     {%- assign msa_fullbleed = true -%}
   {%- endif -%}
   {%- unless msa_fullbleed -%}
@@ -261,10 +261,7 @@
         body: '<p>Earn points on every purchase and unlock exclusive perks as a Moon Apparel rewards member.</p><p><strong>How it works:</strong> Create an account, shop your favourite styles, and earn points for every pound spent.</p><p><a href="/account/register">Join now</a> or <a href="/account/login">log in</a> to your existing account.</p>'
       %}
     {%- when 'faqs' -%}
-      {% render 'msa-content-simple',
-        title: 'Frequently asked questions',
-        body: '<p><strong>How do I place an order?</strong><br>Browse our collections, add items to cart, and checkout securely online.</p><p><strong>What is your return policy?</strong><br>See our <a href="/pages/returns">returns page</a> for full details.</p><p><strong>How can I contact Moon Apparel?</strong><br>Visit our <a href="/pages/contact-us">contact page</a> or use the form to send a message.</p>'
-      %}
+      {% render 'msa-content-faqs' %}
     {%- when 'size-charts' -%}
       {% render 'msa-content-simple',
         title: 'Find your fit',
