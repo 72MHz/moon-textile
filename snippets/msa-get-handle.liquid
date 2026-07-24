@@ -24,10 +24,14 @@
     assign path_down = request.path | downcase
     assign path_parts = path_down | split: '/'
     for part in path_parts
-      if part != blank
+      if part != blank and part != '404' and part != 'not-found'
         assign msa_handle = part
       endif
     endfor
+  endif
+
+  if msa_handle == '404' or msa_handle == 'not-found'
+    assign msa_handle = ''
   endif
 
   if msa_handle == blank

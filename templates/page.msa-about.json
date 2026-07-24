@@ -29,7 +29,7 @@
             "subheading": "Est. 2012 — UK based",
             "heading": "About Moon Style Apparel",
             "text": "<p>Established in 2012, Moon Style Apparel is a UK-based online fashion retailer dedicated to delivering stylish, comfortable, and high-quality clothing for everyday living. We believe fashion should be accessible, responsibly made, and designed to inspire confidence in every customer.</p><p>From wardrobe essentials to seasonal favourites, our collections combine timeless style with modern trends, offering versatile pieces for every occasion.</p>",
-            "image_url": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
+            "image_url": "moon-page-store.jpg",
             "image_alt": "Clothing rails inside a modern apparel store"
           }
         },
@@ -38,7 +38,7 @@
           "settings": {
             "title": "Our story",
             "body": "<p>Moon Style Apparel was founded with a simple vision: to create clothing that looks great, feels comfortable, and offers exceptional value without compromising on quality or responsibility.</p><p>Over the years, we have built long-term relationships with trusted manufacturing partners and suppliers, allowing us to maintain consistent quality while continually expanding our collections to meet the evolving needs of our customers.</p><p>Whether you're shopping for everyday basics, statement pieces, or seasonal essentials, our goal is to provide clothing you'll enjoy wearing for years to come.</p>",
-            "image_url": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=1200&q=80",
+            "image_url": "moon-page-design.jpg",
             "image_alt": "Fashion designer working with fabric swatches",
             "image_position": "right"
           }
@@ -57,7 +57,7 @@
           "settings": {
             "title": "Our manufacturing",
             "body": "<p>Quality begins long before a product reaches our customers. Our garments are produced through our experienced manufacturing partner, <strong>Moon Style Textile</strong>, where skilled teams combine modern production techniques with strict quality control standards.</p><p>With years of expertise in garment manufacturing, we oversee every stage of production to ensure consistency, craftsmanship, and reliability. By working closely with our manufacturing operations, we maintain greater control over product quality, ethical production, and customer satisfaction.</p>",
-            "image_url": "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?auto=format&fit=crop&w=1200&q=80",
+            "image_url": "moon-page-manufacturing.jpg",
             "image_alt": "Spools of thread at a garment manufacturing facility",
             "image_position": "left"
           }
@@ -102,7 +102,7 @@
           "settings": {
             "title": "Ethics",
             "body": "<p>Respect, fairness, and integrity guide every decision we make.</p><p>We support ethical manufacturing practices and believe everyone involved in creating our products deserves safe working conditions, fair treatment, and respect. We are committed to building long-term relationships with partners who share these values.</p>",
-            "image_url": "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=80",
+            "image_url": "moon-page-team.jpg",
             "image_alt": "Team members working together around a table",
             "image_position": "right"
           }
