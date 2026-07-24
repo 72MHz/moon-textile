@@ -1,0 +1,348 @@
+/* Shared full-width brand pages (About, Beliefs, Commitment, Ethics, Sustainability) */
+.moon-bp {
+  color: #1a1a1a;
+}
+
+.moon-bp__eyebrow {
+  margin: 0 0 1.2rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #e85d04;
+}
+
+.moon-bp__eyebrow--light {
+  color: #ffb98a;
+}
+
+.moon-bp__heading {
+  margin: 0 0 1.6rem;
+  font-size: clamp(2.6rem, 4vw, 4.2rem);
+  line-height: 1.1;
+  font-weight: 800;
+  color: #1a3a6b;
+}
+
+.moon-bp__heading--light {
+  color: #fff;
+}
+
+.moon-bp__lead {
+  margin: 0 auto;
+  max-width: 72rem;
+  font-size: 1.6rem;
+  line-height: 1.7;
+  color: #444;
+}
+
+.moon-bp__lead--left {
+  margin-left: 0;
+}
+
+.moon-bp__lead--light {
+  color: #d9e2f2;
+}
+
+.moon-bp__section {
+  padding: 7rem 0;
+}
+
+.moon-bp__section--soft {
+  background: #f8f9fb;
+}
+
+.moon-bp__section-head {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.moon-bp__section-head--left {
+  text-align: left;
+}
+
+.moon-bp__hero {
+  position: relative;
+  min-height: clamp(42rem, 70vh, 62rem);
+  display: flex;
+  align-items: flex-end;
+  color: #fff;
+  overflow: hidden;
+}
+
+.moon-bp__hero-media {
+  position: absolute;
+  inset: 0;
+}
+
+.moon-bp__hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.moon-bp__hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10, 20, 40, 0.25) 0%, rgba(10, 20, 40, 0.78) 100%);
+}
+
+.moon-bp__hero-content {
+  position: relative;
+  z-index: 1;
+  padding-bottom: clamp(3.5rem, 8vw, 7rem);
+  max-width: 80rem;
+}
+
+.moon-bp__hero-title {
+  margin: 0 0 1.6rem;
+  font-size: clamp(3.4rem, 7vw, 6.4rem);
+  line-height: 1.02;
+  font-weight: 800;
+  color: #fff;
+}
+
+.moon-bp__hero-text {
+  margin: 0 0 2.4rem;
+  max-width: 62rem;
+  font-size: 1.7rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.moon-bp__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 4.8rem;
+  padding: 0 2.4rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+
+.moon-bp__btn--light {
+  background: #fff;
+  color: #1a3a6b;
+}
+
+.moon-bp__btn--light:hover {
+  background: #f2f2f2;
+}
+
+.moon-bp__btn--dark {
+  background: #e85d04;
+  color: #fff;
+}
+
+.moon-bp__prose {
+  max-width: 82rem;
+  margin: 0 auto;
+  font-size: 1.6rem;
+  line-height: 1.75;
+  color: #333;
+}
+
+.moon-bp__prose p {
+  margin: 0 0 1.4em;
+}
+
+.moon-bp__prose a {
+  color: #e85d04;
+  font-weight: 700;
+}
+
+.moon-bp__split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 4rem;
+  align-items: center;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.moon-bp__split--reverse .moon-bp__split-media {
+  order: 2;
+}
+
+.moon-bp__split-media {
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.moon-bp__split-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+}
+
+.moon-bp__cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+.moon-bp__cards--4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.moon-bp__card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 2.8rem 2.4rem;
+  text-decoration: none;
+  background: #fff;
+  border: 1px solid #e8ecf2;
+  border-top: 3px solid #e85d04;
+  color: inherit;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.moon-bp__card:hover {
+  border-color: #1a3a6b;
+  transform: translateY(-2px);
+}
+
+.moon-bp__card-label {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #e85d04;
+}
+
+.moon-bp__card-title {
+  margin: 0 0 1rem;
+  font-size: 2rem;
+  color: #1a3a6b;
+}
+
+.moon-bp__card-text {
+  margin: 0 0 2rem;
+  flex: 1;
+  font-size: 1.45rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+.moon-bp__card-cta {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1a3a6b;
+}
+
+.moon-bp__highlight {
+  background: #1a3a6b;
+  color: #fff;
+  padding: 7rem 0;
+}
+
+.moon-bp__highlight-inner {
+  max-width: 90rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.moon-bp__highlight-text {
+  margin: 0 auto 2.4rem;
+  max-width: 78rem;
+  font-size: 1.6rem;
+  line-height: 1.75;
+  color: #d9e2f2;
+}
+
+.moon-bp__highlight-text p {
+  margin: 0 0 1.2em;
+}
+
+.moon-bp__highlight-text p:last-child {
+  margin-bottom: 0;
+}
+
+.moon-bp__cta {
+  background: #111827;
+  padding: 7rem 0;
+  text-align: center;
+}
+
+.moon-bp__cta-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.moon-bp__cta .moon-bp__lead {
+  margin-bottom: 2.4rem;
+}
+
+.moon-bp__checklist {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.4rem 3rem;
+  margin: 2.8rem auto 0;
+  padding: 0;
+  max-width: 860px;
+  list-style: none;
+}
+
+.moon-bp__check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  font-size: 1.45rem;
+  line-height: 1.55;
+  color: #333;
+}
+
+.moon-bp__check-icon {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin-top: 0.3em;
+  border-radius: 50%;
+  background: #e85d04;
+  position: relative;
+}
+
+.moon-bp__check-icon::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 4px;
+  width: 4px;
+  height: 8px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+@media (max-width: 1024px) {
+  .moon-bp__cards,
+  .moon-bp__cards--4,
+  .moon-bp__split,
+  .moon-bp__checklist {
+    grid-template-columns: 1fr;
+  }
+
+  .moon-bp__split--reverse .moon-bp__split-media {
+    order: -1;
+  }
+}
+
+@media (max-width: 767px) {
+  .moon-bp__section,
+  .moon-bp__highlight,
+  .moon-bp__cta {
+    padding: 4.5rem 0;
+  }
+
+  .moon-bp__hero {
+    min-height: 48rem;
+  }
+}

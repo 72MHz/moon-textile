@@ -37,6 +37,18 @@
       assign msa_handle = 'careers'
     elsif detect_source contains '/pages/beliefs' or detect_source contains '/beliefs'
       assign msa_handle = 'beliefs'
+    elsif detect_source contains '/pages/commitment' or detect_source contains '/commitment'
+      assign msa_handle = 'commitment'
+    elsif detect_source contains '/pages/ethics' or detect_source contains '/ethics'
+      assign msa_handle = 'ethics'
+    elsif detect_source contains 'organic-cotton'
+      assign msa_handle = 'organic-cotton'
+    elsif detect_source contains 'recycled-polyester'
+      assign msa_handle = 'recycled-polyester'
+    elsif detect_source contains 'responsible-sourcing'
+      assign msa_handle = 'responsible-sourcing'
+    elsif detect_source contains 'less-waste'
+      assign msa_handle = 'less-waste'
     elsif detect_source contains '/pages/rewards' or detect_source contains '/rewards'
       assign msa_handle = 'rewards'
     elsif detect_source contains '/pages/faqs' or detect_source contains '/faqs'
@@ -122,7 +134,11 @@
 -%}
 
 {%- if msa_known -%}
-  {%- unless msa_handle == 'careers' -%}
+  {%- assign msa_fullbleed = false -%}
+  {%- if msa_handle == 'careers' or msa_handle == 'about' or msa_handle == 'beliefs' or msa_handle == 'commitment' or msa_handle == 'ethics' or msa_handle == 'organic-cotton' or msa_handle == 'recycled-polyester' or msa_handle == 'responsible-sourcing' or msa_handle == 'less-waste' -%}
+    {%- assign msa_fullbleed = true -%}
+  {%- endif -%}
+  {%- unless msa_fullbleed -%}
     {% render 'msa-page-heading', title: msa_title, description: msa_description %}
   {%- endunless -%}
 
@@ -136,21 +152,118 @@
     {%- when 'contact', 'contact-us' -%}
       {% render 'msa-content-contact' %}
     {%- when 'beliefs' -%}
-      {% render 'msa-content-simple',
-        title: 'What we stand for',
-        body: '<p>At Moon Style Apparel, we believe in quality craftsmanship, ethical manufacturing, and building lasting partnerships with buyers and vendors worldwide.</p><p>We are committed to fair labor practices, sustainable sourcing where possible, and giving back to our community through education initiatives with SAVE DC.</p><p><a href="/pages/about">Learn more about us</a>.</p>'
-      %}
+      {% render 'msa-content-beliefs' %}
     {%- when 'careers' -%}
       {% render 'msa-content-careers' %}
+    {%- when 'commitment' -%}
+      {% render 'msa-content-brand-topic',
+        eyebrow: 'Our commitment',
+        title: 'Commitment',
+        intro: 'At Moon Apparel, we believe businesses should create a positive impact beyond fashion. Supporting communities and investing in brighter futures is an important part of who we are.',
+        hero_image: 'moon-page-commitment.jpg',
+        hero_alt: 'Education and community impact supported by Moon Apparel',
+        body_html: '<p>Supporting communities and investing in brighter futures is an important part of who we are. We partner with organisations that create lasting opportunity through education.</p>',
+        split_image: 'moon-page-team.jpg',
+        split_alt: 'Moon Apparel community partnership',
+        split_title: 'Charitable partner — SAVE DC',
+        split_html: '<p>We are proud to support <strong>SAVE DC</strong>, an organisation dedicated to transforming lives through education. Their mission focuses on expanding educational opportunities, empowering individuals, and helping communities build a stronger future.</p><p>By partnering with SAVE DC, we are honoured to contribute to initiatives that create meaningful and lasting change through the power of education.</p>',
+        highlight_eyebrow: 'Impact beyond fashion',
+        highlight_title: 'Why this matters',
+        highlight_html: '<p>True business success is measured not only by products sold, but by the positive difference we help create for people and communities.</p>',
+        cta_title: 'Learn more about our values',
+        cta_text: 'Explore ethics, responsible sourcing, and the materials we choose.',
+        cta_label: 'Our beliefs',
+        cta_link: '/pages/beliefs'
+      %}
+    {%- when 'ethics' -%}
+      {% render 'msa-content-brand-topic',
+        eyebrow: 'Standards',
+        title: 'Ethics',
+        intro: 'Respect, fairness, and integrity guide every decision we make at Moon Apparel.',
+        hero_image: 'moon-page-ethics.jpg',
+        hero_alt: 'Ethical manufacturing and teamwork at Moon Apparel',
+        body_html: '<p>We support ethical manufacturing practices and believe everyone involved in creating our products deserves safe working conditions, fair treatment, and respect.</p><p>We are committed to building long-term relationships with partners who share these values — from product development to delivery.</p>',
+        split_image: 'moon-page-manufacturing.jpg',
+        split_alt: 'Quality controlled garment production',
+        split_title: 'How we work',
+        split_html: '<p>From product development to delivery, we work to ensure dignity and respect for everyone involved in bringing Moon Apparel to life. Our teams oversee quality, accountability, and transparent partnerships.</p>',
+        highlight_eyebrow: 'Our promise',
+        highlight_title: 'Fairness at every stage',
+        highlight_html: '<p>Ethical standards are not a campaign — they are part of how Moon Apparel operates every day with manufacturing partners and suppliers.</p>'
+      %}
+    {%- when 'organic-cotton' -%}
+      {% render 'msa-content-brand-topic',
+        eyebrow: 'Materials',
+        title: 'Organic cotton',
+        intro: 'Where possible, we incorporate organic cotton into Moon Apparel collections for naturally soft, comfortable fabrics.',
+        hero_image: 'moon-page-cotton.jpg',
+        hero_alt: 'Organic cotton fabric and apparel materials',
+        body_html: '<p>Organic cotton is grown using farming practices that reduce the use of synthetic chemicals while supporting healthier ecosystems.</p><p>Choosing organic cotton where it makes sense helps us deliver quality clothing with a more responsible material footprint.</p>',
+        split_image: 'moon-page-design.jpg',
+        split_alt: 'Soft cotton apparel design',
+        split_title: 'Better for wear and for farming',
+        split_html: '<p>Customers feel the difference in comfort. Farms benefit from practices that support healthier soil and reduced chemical reliance. Look for organic cotton details on product pages as we expand preferred fibres.</p>',
+        highlight_eyebrow: 'Related',
+        highlight_title: 'Part of responsible materials',
+        highlight_html: '<p>Organic cotton sits alongside recycled polyester, responsible sourcing, and our less-waste approach. Explore the full set of Moon Apparel material and sourcing pages.</p>'
+      %}
+    {%- when 'recycled-polyester' -%}
+      {% render 'msa-content-brand-topic',
+        eyebrow: 'Materials',
+        title: 'Recycled polyester',
+        intro: 'We increasingly use recycled polyester to help reduce waste and conserve valuable natural resources.',
+        hero_image: 'moon-page-recycled.jpg',
+        hero_alt: 'Recycled materials used in apparel',
+        body_html: '<p>Giving existing materials a second life contributes to a more sustainable fashion industry and can reduce reliance on virgin plastics in apparel production.</p><p>We continue expanding preferred fibres across key Moon Apparel styles.</p>',
+        split_image: 'moon-page-waste.jpg',
+        split_alt: 'Reducing waste through better materials',
+        split_title: 'A second life for materials',
+        split_html: '<p>Recycled polyester helps turn existing resources into durable clothing. Combined with thoughtful design, it supports our goal of quality garments with a lighter impact.</p>',
+        highlight_eyebrow: 'Keep exploring',
+        highlight_title: 'Connected to less waste',
+        highlight_html: '<p>Material choices and waste reduction work together. See also our pages on organic cotton, responsible sourcing, and less waste.</p>'
+      %}
+    {%- when 'responsible-sourcing' -%}
+      {% render 'msa-content-brand-topic',
+        eyebrow: 'Supply chain',
+        title: 'Responsible sourcing',
+        intro: 'Responsible sourcing is central to Moon Apparel. We work with suppliers and manufacturing partners who share our commitment to ethical business practices.',
+        hero_image: 'moon-page-sourcing.jpg',
+        hero_alt: 'Responsible sourcing and partner collaboration',
+        body_html: '<p>We prioritise quality workmanship, safe working conditions, and responsible production standards across our supply relationships.</p><p>Long-term partnerships help us maintain consistency while improving standards over time.</p>',
+        split_image: 'moon-page-ethics.jpg',
+        split_alt: 'Working with trusted manufacturing partners',
+        split_title: 'Partners who share our standards',
+        split_html: '<p>From cotton and recycled fibres to finished garments, our teams work closely with vendors to improve quality, accountability, and reliability for every Moon Apparel order.</p>',
+        highlight_eyebrow: 'Connected values',
+        highlight_title: 'Sourcing with integrity',
+        highlight_html: '<p>Responsible sourcing links directly to our ethics, materials choices, and commitment to communities through SAVE DC.</p>'
+      %}
+    {%- when 'less-waste' -%}
+      {% render 'msa-content-brand-topic',
+        eyebrow: 'Planet',
+        title: 'Less waste',
+        intro: 'We continually review production and packaging processes to reduce unnecessary waste across the Moon Apparel business.',
+        hero_image: 'moon-page-waste.jpg',
+        hero_alt: 'Reducing waste in apparel production',
+        body_html: '<p>From improving operational efficiency to using more sustainable materials where possible, we are committed to meaningful improvements that benefit both our customers and the environment.</p>',
+        split_image: 'moon-page-recycled.jpg',
+        split_alt: 'Smarter material utilisation',
+        split_title: 'Designing for longevity',
+        split_html: '<p>Thoughtful product design, better material utilisation, and longer-lasting garments help reduce waste season after season. Small changes in cut, fabric choice, and production planning add up.</p>',
+        highlight_eyebrow: 'Keep learning',
+        highlight_title: 'Materials and methods',
+        highlight_html: '<p>Explore organic cotton, recycled polyester, and responsible sourcing to see how Moon Apparel approaches waste reduction end to end.</p>'
+      %}
     {%- when 'rewards' -%}
       {% render 'msa-content-simple',
         title: 'Moon SA rewards',
-        body: '<p>Earn points on every purchase and unlock exclusive perks as a Moon Style Apparel rewards member.</p><p><strong>How it works:</strong> Create an account, shop your favourite styles, and earn points for every pound spent.</p><p><a href="/account/register">Join now</a> or <a href="/account/login">log in</a> to your existing account.</p>'
+        body: '<p>Earn points on every purchase and unlock exclusive perks as a Moon Apparel rewards member.</p><p><strong>How it works:</strong> Create an account, shop your favourite styles, and earn points for every pound spent.</p><p><a href="/account/register">Join now</a> or <a href="/account/login">log in</a> to your existing account.</p>'
       %}
     {%- when 'faqs' -%}
       {% render 'msa-content-simple',
         title: 'Frequently asked questions',
-        body: '<p><strong>How do I place an order?</strong><br>Browse our collections, add items to cart, and checkout securely online.</p><p><strong>What is your return policy?</strong><br>See our <a href="/pages/returns">returns page</a> for full details.</p><p><strong>How can I contact MSA?</strong><br>Visit our <a href="/pages/contact-us">contact page</a> or use the form to send a message.</p>'
+        body: '<p><strong>How do I place an order?</strong><br>Browse our collections, add items to cart, and checkout securely online.</p><p><strong>What is your return policy?</strong><br>See our <a href="/pages/returns">returns page</a> for full details.</p><p><strong>How can I contact Moon Apparel?</strong><br>Visit our <a href="/pages/contact-us">contact page</a> or use the form to send a message.</p>'
       %}
     {%- when 'size-charts' -%}
       {% render 'msa-content-simple',
@@ -170,57 +283,27 @@
     {%- when 'accessibility-statement' -%}
       {% render 'msa-content-simple',
         title: 'Accessibility statement',
-        body: '<p>Moon Style Apparel is committed to ensuring digital accessibility for people with disabilities. We continually improve the user experience and apply relevant accessibility standards.</p><p>If you experience difficulty accessing any part of our website, please <a href="/pages/contact-us">contact us</a>.</p>'
+        body: '<p>Moon Apparel is committed to ensuring digital accessibility for people with disabilities. We continually improve the user experience and apply relevant accessibility standards.</p><p>If you experience difficulty accessing any part of our website, please <a href="/pages/contact-us">contact us</a>.</p>'
       %}
     {%- when 'privacy-policy' -%}
       {% render 'msa-content-simple',
         title: 'Your privacy matters',
-        body: '<p>Moon Style Apparel (MSA) respects your privacy and is committed to protecting your personal information.</p><p>We collect information you provide when placing orders, creating an account, or contacting us. We use this information to process orders, communicate with you, and improve our services. We do not sell your personal data to third parties.</p>'
+        body: '<p>Moon Apparel respects your privacy and is committed to protecting your personal information.</p><p>We collect information you provide when placing orders, creating an account, or contacting us. We use this information to process orders, communicate with you, and improve our services. We do not sell your personal data to third parties.</p>'
       %}
     {%- when 'terms-and-conditions' -%}
       {% render 'msa-content-simple',
         title: 'Terms of use',
-        body: '<p>By using the Moon Style Apparel website, you agree to these terms and conditions.</p><p>All products, prices, and availability are subject to change without notice. Content on this site is owned by Moon Style Apparel and may not be reproduced without permission.</p>'
+        body: '<p>By using the Moon Apparel website, you agree to these terms and conditions.</p><p>All products, prices, and availability are subject to change without notice. Content on this site is owned by Moon Apparel and may not be reproduced without permission.</p>'
       %}
     {%- when 'affiliate-program' -%}
       {% render 'msa-content-simple',
-        title: 'Partner with Moon Style Apparel',
-        body: '<p>Join our affiliate program and earn commission by sharing Moon Style Apparel with your audience.</p><p>Apply through our <a href="/pages/contact-us">contact form</a> with details about your platform and audience.</p>'
+        title: 'Partner with Moon Apparel',
+        body: '<p>Join our affiliate program and earn commission by sharing Moon Apparel with your audience.</p><p>Apply through our <a href="/pages/contact-us">contact form</a> with details about your platform and audience.</p>'
       %}
     {%- when 'lookbook' -%}
       {% render 'msa-content-simple',
         title: 'Wear your style',
-        body: '<p>Explore the latest Moon Style Apparel collections — from everyday essentials to seasonal favourites.</p><p><a href="/collections/men-shop-all">Shop mens</a> · <a href="/collections/women-shop-all">Shop womens</a></p>'
-      %}
-    {%- when 'commitment' -%}
-      {% render 'msa-content-simple',
-        title: 'Our commitment',
-        body: '<p>Moon Style Apparel is committed to making a positive impact beyond fashion. We partner with educational and community organisations to support learning opportunities for young people.</p><p><strong>Charitable partner — SAVE DC</strong><br>We are proud to support <strong>SAVE DC</strong>, helping create pathways for education, confidence, and opportunity.</p><p>Learn more about our approach to <a href="/pages/ethics">ethics</a>, <a href="/pages/responsible-sourcing">responsible sourcing</a>, and <a href="/pages/less-waste">less waste</a>.</p>'
-      %}
-    {%- when 'ethics' -%}
-      {% render 'msa-content-simple',
-        title: 'Ethics',
-        body: '<p>We hold ourselves and our manufacturing partners to high ethical standards — fair labour practices, safe working conditions, and transparent partnerships.</p><p>From product development to delivery, we work to ensure dignity and respect for everyone involved in bringing Moon Style Apparel to life.</p>'
-      %}
-    {%- when 'organic-cotton' -%}
-      {% render 'msa-content-simple',
-        title: 'Organic cotton',
-        body: '<p>Where possible, we use organic cotton grown with practices that reduce chemical impact and support healthier soil and communities.</p><p>Look for organic cotton details on product pages, and explore more of our <a href="/pages/responsible-sourcing">responsible sourcing</a> approach.</p>'
-      %}
-    {%- when 'recycled-polyester' -%}
-      {% render 'msa-content-simple',
-        title: 'Recycled polyester',
-        body: '<p>Recycled polyester helps give new life to existing materials and can reduce reliance on virgin plastics in apparel production.</p><p>We continue expanding the use of preferred fibres across key styles. See also our work toward <a href="/pages/less-waste">less waste</a>.</p>'
-      %}
-    {%- when 'responsible-sourcing' -%}
-      {% render 'msa-content-simple',
-        title: 'Responsible sourcing',
-        body: '<p>Responsible sourcing means choosing materials and partners carefully — prioritising quality, longevity, and accountable supply relationships.</p><p>Our teams work closely with vendors to improve standards over time across cotton, recycled fibres, and manufacturing practices.</p>'
-      %}
-    {%- when 'less-waste' -%}
-      {% render 'msa-content-simple',
-        title: 'Less waste',
-        body: '<p>We aim to reduce waste through thoughtful product design, better material utilisation, and longer-lasting garments you can wear season after season.</p><p>Small changes in cut, fabric choice, and production planning add up. Explore related pages on <a href="/pages/organic-cotton">organic cotton</a> and <a href="/pages/recycled-polyester">recycled polyester</a>.</p>'
+        body: '<p>Explore the latest Moon Apparel collections — from everyday essentials to seasonal favourites.</p><p><a href="/collections/men-shop-all">Shop mens</a> · <a href="/collections/women-shop-all">Shop womens</a></p>'
       %}
   {%- endcase -%}
 {%- elsif template.name == '404' -%}

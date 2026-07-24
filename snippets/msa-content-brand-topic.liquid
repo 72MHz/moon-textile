@@ -1,0 +1,137 @@
+{% doc %}
+  Full-width Moon Apparel topic page (Careers-style).
+
+  @param {string} eyebrow
+  @param {string} title
+  @param {string} intro
+  @param {string} hero_image - theme asset filename
+  @param {string} hero_alt
+  @param {string} body_html
+  @param {string} [split_image]
+  @param {string} [split_alt]
+  @param {string} [split_title]
+  @param {string} [split_html]
+  @param {boolean} [split_reverse]
+  @param {string} [highlight_eyebrow]
+  @param {string} [highlight_title]
+  @param {string} [highlight_html]
+  @param {string} [cta_title]
+  @param {string} [cta_text]
+  @param {string} [cta_label]
+  @param {string} [cta_link]
+{% enddoc %}
+
+{% render 'msa-brand-page-styles' %}
+
+<div class="section moon-bp" style="--section-pt: 0; --section-pb: 0;">
+  <section class="moon-bp__hero">
+    <div class="moon-bp__hero-media">
+      <img
+        src="{{ hero_image | asset_url }}"
+        alt="{{ hero_alt | escape }}"
+        loading="eager"
+        width="1600"
+        height="900"
+      >
+      <div class="moon-bp__hero-overlay"></div>
+    </div>
+    <div class="moon-bp__hero-content fluid_container">
+      {%- if eyebrow != blank -%}
+        <p class="moon-bp__eyebrow">{{ eyebrow | escape }}</p>
+      {%- endif -%}
+      <h1 class="moon-bp__hero-title">{{ title | escape }}</h1>
+      {%- if intro != blank -%}
+        <p class="moon-bp__hero-text">{{ intro | escape }}</p>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- if body_html != blank -%}
+    <section class="moon-bp__section fluid_container">
+      <div class="moon-bp__prose">{{ body_html }}</div>
+    </section>
+  {%- endif -%}
+
+  {%- if split_image != blank and split_html != blank -%}
+    <section class="moon-bp__section moon-bp__section--soft">
+      <div class="fluid_container">
+        <div class="moon-bp__split{% if split_reverse %} moon-bp__split--reverse{% endif %}">
+          <div class="moon-bp__split-media">
+            <img
+              src="{{ split_image | asset_url }}"
+              alt="{{ split_alt | default: title | escape }}"
+              loading="lazy"
+              width="800"
+              height="600"
+            >
+          </div>
+          <div>
+            {%- if split_title != blank -%}
+              <h2 class="moon-bp__heading">{{ split_title | escape }}</h2>
+            {%- endif -%}
+            <div class="moon-bp__prose">{{ split_html }}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- if highlight_html != blank -%}
+    <section class="moon-bp__highlight">
+      <div class="fluid_container moon-bp__highlight-inner">
+        {%- if highlight_eyebrow != blank -%}
+          <p class="moon-bp__eyebrow moon-bp__eyebrow--light">{{ highlight_eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if highlight_title != blank -%}
+          <h2 class="moon-bp__heading moon-bp__heading--light">{{ highlight_title | escape }}</h2>
+        {%- endif -%}
+        <div class="moon-bp__highlight-text">{{ highlight_html }}</div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  <section class="moon-bp__section fluid_container">
+    <div class="moon-bp__section-head">
+      <h2 class="moon-bp__heading">Explore more</h2>
+      <p class="moon-bp__lead">Learn how Moon Apparel approaches quality, responsibility, and community.</p>
+    </div>
+    <div class="moon-bp__cards moon-bp__cards--4">
+      <a class="moon-bp__card" href="/pages/beliefs">
+        <span class="moon-bp__card-label">Values</span>
+        <h3 class="moon-bp__card-title">Our beliefs</h3>
+        <p class="moon-bp__card-text">What Moon Apparel stands for.</p>
+        <span class="moon-bp__card-cta">Read more</span>
+      </a>
+      <a class="moon-bp__card" href="/pages/commitment">
+        <span class="moon-bp__card-label">Community</span>
+        <h3 class="moon-bp__card-title">Commitment</h3>
+        <p class="moon-bp__card-text">Charitable partner — SAVE DC.</p>
+        <span class="moon-bp__card-cta">Read more</span>
+      </a>
+      <a class="moon-bp__card" href="/pages/ethics">
+        <span class="moon-bp__card-label">Standards</span>
+        <h3 class="moon-bp__card-title">Ethics</h3>
+        <p class="moon-bp__card-text">Respect, fairness, and integrity.</p>
+        <span class="moon-bp__card-cta">Read more</span>
+      </a>
+      <a class="moon-bp__card" href="/pages/responsible-sourcing">
+        <span class="moon-bp__card-label">Sourcing</span>
+        <h3 class="moon-bp__card-title">Responsible sourcing</h3>
+        <p class="moon-bp__card-text">Partners who share our standards.</p>
+        <span class="moon-bp__card-cta">Read more</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="moon-bp__cta">
+    <div class="fluid_container moon-bp__cta-inner">
+      <h2 class="moon-bp__heading moon-bp__heading--light">{{ cta_title | default: 'Questions about Moon Apparel?' }}</h2>
+      <p class="moon-bp__lead moon-bp__lead--light">
+        {{ cta_text | default: 'Our team is happy to help with product, partnership, or responsibility questions.' }}
+      </p>
+      <a href="{{ cta_link | default: '/pages/contact-us' }}" class="moon-bp__btn moon-bp__btn--light">
+        {{ cta_label | default: 'Contact Moon Apparel' }}
+      </a>
+    </div>
+  </section>
+</div>
