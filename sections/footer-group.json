@@ -15,7 +15,7 @@
         "link_list_about": {
           "type": "link_list",
           "settings": {
-            "heading": "About",
+            "heading": "About us",
             "preset": "about"
           }
         },
