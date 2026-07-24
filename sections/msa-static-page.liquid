@@ -94,7 +94,9 @@
 -%}
 
 {%- if msa_known -%}
-  {% render 'msa-page-heading', title: msa_title, description: msa_description %}
+  {%- unless msa_handle == 'careers' -%}
+    {% render 'msa-page-heading', title: msa_title, description: msa_description %}
+  {%- endunless -%}
 
   {%- case msa_handle -%}
     {%- when 'about' -%}
@@ -111,10 +113,7 @@
         body: '<p>At Moon Style Apparel, we believe in quality craftsmanship, ethical manufacturing, and building lasting partnerships with buyers and vendors worldwide.</p><p>We are committed to fair labor practices, sustainable sourcing where possible, and giving back to our community through education initiatives with SAVE DC.</p><p><a href="/pages/about">Learn more about us</a>.</p>'
       %}
     {%- when 'careers' -%}
-      {% render 'msa-content-simple',
-        title: 'Join our team',
-        body: '<p>Moon Style Apparel is always looking for talented people passionate about apparel, sourcing, and quality manufacturing.</p><p>We offer opportunities in merchandising, quality assurance, logistics, design development, and customer support across our Pakistan and UK operations.</p><p>To apply, send your CV and cover letter via our <a href="/pages/contact-us">contact form</a>.</p>'
-      %}
+      {% render 'msa-content-careers' %}
     {%- when 'rewards' -%}
       {% render 'msa-content-simple',
         title: 'Moon SA rewards',

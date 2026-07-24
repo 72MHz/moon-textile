@@ -1,35 +1,9 @@
 {
   "sections": {
-    "page-heading": {
-      "type": "page-heading",
-      "blocks": {
-        "breadcrumb": { "type": "breadcrumb", "settings": {} },
-        "heading": { "type": "heading", "settings": { "page_title": "Careers", "header_size": "default" } }
-      },
-      "block_order": ["breadcrumb", "heading"],
-      "settings": {
-        "section_width": "fluid_container",
-        "alignment": "center",
-        "overlay_opacity": 0,
-        "height": "based_on_content",
-        "padding_top": 40,
-        "padding_bottom": 20
-      }
-    },
     "main": {
-      "type": "msa-info-page",
-      "blocks": {
-        "content": {
-          "type": "content",
-          "settings": {
-            "title": "Join our team",
-            "body": "<p>Moon Style Apparel is always looking for talented people passionate about apparel, sourcing, and quality manufacturing.</p><p>We offer opportunities in merchandising, quality assurance, logistics, design development, and customer support across our Pakistan and UK operations.</p><p>To apply, send your CV and cover letter to us via our <a href=\"/pages/contact-us\">contact form</a>.</p>"
-          }
-        }
-      },
-      "block_order": ["content"],
-      "settings": { "section_width": "fluid_container", "padding_top": 20, "padding_bottom": 60 }
+      "type": "msa-static-page",
+      "settings": {}
     }
   },
-  "order": ["page-heading", "main"]
+  "order": ["main"]
 }
