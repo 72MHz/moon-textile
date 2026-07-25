@@ -384,8 +384,28 @@ body.theme-unionbay.index #MainContent section:not(:last-child) .section:not(.re
 }
 
 @media (max-width: 1024px) {
+  .theme-unionbay .header__layout-1 header-inner.logo-left,
+  .theme-unionbay .header__layout-1 header-inner.logo-position {
+    column-gap: 1.2rem;
+  }
+
+  .theme-unionbay .header__logo {
+    padding-inline: 0.8rem;
+    max-width: min(42vw, 14rem);
+    justify-self: center;
+  }
+
+  .theme-unionbay .header__normal-logo img {
+    max-width: 100%;
+  }
+
   .theme-unionbay .header__action {
-    gap: 0.6rem;
+    gap: 0.8rem;
+    padding-inline-start: 0.6rem;
+  }
+
+  .theme-unionbay .visitor-country-flag {
+    margin-inline-start: 0.4rem;
   }
 
   .theme-unionbay .header__account-link,

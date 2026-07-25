@@ -321,34 +321,37 @@
   }
 
   .moon-faq__wrap {
-    max-width: 92rem;
+    max-width: 1100px;
     margin: 0 auto;
   }
 
   .moon-faq__group-head {
     margin-bottom: 2.4rem;
+    max-width: 64rem;
   }
 
   .moon-faq__list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.6rem 2rem;
+    align-items: start;
   }
 
   .moon-faq__item {
     background: #fff;
     border: 1px solid #e6ebf2;
     border-left: 4px solid #e85d04;
+    min-width: 0;
   }
 
   .moon-faq__question {
     position: relative;
     list-style: none;
     cursor: pointer;
-    padding: 2rem 5.2rem 2rem 2.2rem;
-    font-size: 1.7rem;
+    padding: 1.8rem 5rem 1.8rem 2rem;
+    font-size: 1.55rem;
     font-weight: 700;
-    line-height: 1.4;
+    line-height: 1.45;
     color: #1a3a6b;
   }
 
@@ -359,15 +362,14 @@
   .moon-faq__question::after {
     content: '+';
     position: absolute;
-    right: 2rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 2.8rem;
-    height: 2.8rem;
+    right: 1.6rem;
+    top: 1.6rem;
+    width: 2.6rem;
+    height: 2.6rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: 400;
     line-height: 1;
     color: #e85d04;
@@ -383,10 +385,11 @@
   }
 
   .moon-faq__answer {
-    padding: 0 2.2rem 2.2rem;
-    font-size: 1.55rem;
+    padding: 0 2rem 2rem;
+    max-width: 52rem;
+    font-size: 1.45rem;
     line-height: 1.7;
-    color: #444;
+    color: #333;
   }
 
   .moon-faq__answer p {
@@ -402,9 +405,15 @@
     font-weight: 700;
   }
 
+  @media (max-width: 900px) {
+    .moon-faq__list {
+      grid-template-columns: 1fr;
+    }
+  }
+
   @media (max-width: 767px) {
     .moon-faq__question {
-      font-size: 1.55rem;
+      font-size: 1.5rem;
       padding-right: 4.8rem;
     }
   }

@@ -3,16 +3,61 @@
     render 'msa-get-handle'
   endcapture
   assign msa_handle = msa_handle_raw | strip | downcase
+  assign path_down = request.path | downcase
 
   # Never treat Shopify's 404 path segment as a page handle.
   if msa_handle == '404' or msa_handle == 'not-found'
     assign msa_handle = ''
   endif
 
+  # Hard-map known Admin page handles / URLs (must run before other logic).
+  if page.handle == 'our-beliefs' or page.handle == 'beliefs' or path_down contains 'our-beliefs' or path_down contains '/pages/beliefs' or msa_handle == 'our-beliefs' or msa_handle == 'beliefs'
+    assign msa_handle = 'beliefs'
+  elsif page.handle == 'faq' or page.handle == 'faqs' or path_down contains '/pages/faqs' or path_down contains '/pages/faq' or msa_handle == 'faq' or msa_handle == 'faqs'
+    assign msa_handle = 'faqs'
+  elsif path_down contains '/pages/about' or msa_handle == 'about'
+    assign msa_handle = 'about'
+  elsif path_down contains '/pages/careers' or msa_handle == 'careers'
+    assign msa_handle = 'careers'
+  elsif path_down contains '/pages/commitment' or msa_handle == 'commitment'
+    assign msa_handle = 'commitment'
+  elsif path_down contains '/pages/ethics' or msa_handle == 'ethics'
+    assign msa_handle = 'ethics'
+  elsif path_down contains 'organic-cotton' or msa_handle == 'organic-cotton'
+    assign msa_handle = 'organic-cotton'
+  elsif path_down contains 'recycled-polyester' or msa_handle == 'recycled-polyester'
+    assign msa_handle = 'recycled-polyester'
+  elsif path_down contains 'responsible-sourcing' or msa_handle == 'responsible-sourcing'
+    assign msa_handle = 'responsible-sourcing'
+  elsif path_down contains 'less-waste' or msa_handle == 'less-waste'
+    assign msa_handle = 'less-waste'
+  elsif path_down contains 'size-charts' or msa_handle == 'size-charts'
+    assign msa_handle = 'size-charts'
+  elsif path_down contains '/pages/shipping' or msa_handle == 'shipping'
+    assign msa_handle = 'shipping'
+  elsif path_down contains '/pages/returns' or msa_handle == 'returns'
+    assign msa_handle = 'returns'
+  elsif path_down contains 'accessibility' or msa_handle == 'accessibility-statement'
+    assign msa_handle = 'accessibility-statement'
+  elsif path_down contains 'privacy-policy' or msa_handle == 'privacy-policy'
+    assign msa_handle = 'privacy-policy'
+  elsif path_down contains 'terms-and-conditions' or msa_handle == 'terms-and-conditions'
+    assign msa_handle = 'terms-and-conditions'
+  elsif path_down contains 'do-not-sell' or msa_handle == 'do-not-sell-or-share'
+    assign msa_handle = 'do-not-sell-or-share'
+  elsif path_down contains 'cookie-policy' or path_down contains 'cookie-settings' or msa_handle == 'cookie-policy' or msa_handle == 'cookie-settings'
+    assign msa_handle = 'cookie-policy'
+  elsif path_down contains 'affiliate' or msa_handle == 'affiliate-program'
+    assign msa_handle = 'affiliate-program'
+  elsif path_down contains '/pages/vendors' or msa_handle == 'vendors'
+    assign msa_handle = 'vendors'
+  elsif path_down contains '/pages/services' or msa_handle == 'services'
+    assign msa_handle = 'services'
+  endif
+
   # On 404, page.handle is blank — detect known pages from the requested path,
   # and from content_for_header pageurl when Shopify rewrites the path to /404.
   if msa_handle == blank or template.name == '404'
-    assign path_down = request.path | downcase
     assign detect_source = path_down
 
     if detect_source == '/404' or detect_source == '404' or detect_source contains '/404'
@@ -23,10 +68,23 @@
       if page_url contains '/pages/'
         assign detect_source = page_url
       endif
+      if detect_source == '/404' or detect_source == '404' or detect_source contains '/404'
+        if content_for_query_string contains 'our-beliefs'
+          assign detect_source = '/pages/our-beliefs'
+        elsif content_for_query_string contains '/pages/beliefs'
+          assign detect_source = '/pages/beliefs'
+        elsif content_for_query_string contains '/pages/faqs'
+          assign detect_source = '/pages/faqs'
+        elsif content_for_query_string contains '/pages/faq'
+          assign detect_source = '/pages/faq'
+        endif
+      endif
     endif
 
     if detect_source contains 'contact-us' or detect_source contains '/pages/contact'
       assign msa_handle = 'contact-us'
+    elsif detect_source contains 'our-beliefs' or detect_source contains '/pages/beliefs' or detect_source contains '/beliefs'
+      assign msa_handle = 'beliefs'
     elsif detect_source contains '/pages/about' or detect_source contains '/about'
       assign msa_handle = 'about'
     elsif detect_source contains '/pages/services' or detect_source contains '/services'
@@ -35,8 +93,6 @@
       assign msa_handle = 'vendors'
     elsif detect_source contains '/pages/careers' or detect_source contains '/careers'
       assign msa_handle = 'careers'
-    elsif detect_source contains '/pages/beliefs' or detect_source contains '/beliefs'
-      assign msa_handle = 'beliefs'
     elsif detect_source contains '/pages/commitment' or detect_source contains '/commitment'
       assign msa_handle = 'commitment'
     elsif detect_source contains '/pages/ethics' or detect_source contains '/ethics'
@@ -53,6 +109,26 @@
       assign msa_handle = 'rewards'
     elsif detect_source contains '/pages/faqs' or detect_source contains '/faqs'
       assign msa_handle = 'faqs'
+    elsif detect_source contains '/pages/faq' or detect_source contains '/faq'
+      assign msa_handle = 'faqs'
+    elsif detect_source contains 'do-not-sell' or detect_source contains 'do_not_sell'
+      assign msa_handle = 'do-not-sell-or-share'
+    elsif detect_source contains 'cookie-policy' or detect_source contains 'cookie-settings'
+      assign msa_handle = 'cookie-policy'
+    elsif detect_source contains 'size-charts' or detect_source contains 'size-chart'
+      assign msa_handle = 'size-charts'
+    elsif detect_source contains '/pages/shipping'
+      assign msa_handle = 'shipping'
+    elsif detect_source contains '/pages/returns'
+      assign msa_handle = 'returns'
+    elsif detect_source contains 'accessibility'
+      assign msa_handle = 'accessibility-statement'
+    elsif detect_source contains 'privacy'
+      assign msa_handle = 'privacy-policy'
+    elsif detect_source contains 'terms'
+      assign msa_handle = 'terms-and-conditions'
+    elsif detect_source contains 'affiliate'
+      assign msa_handle = 'affiliate-program'
     endif
   endif
 -%}
@@ -76,9 +152,10 @@
       assign msa_known = true
       assign msa_title = 'Contact us'
       assign msa_description = '<p>Whether you are looking to partner with us, have questions about our services, or simply want to learn more, fill out the form below. Our team will contact you as soon as possible.</p>'
-    when 'beliefs'
+    when 'beliefs', 'our-beliefs'
       assign msa_known = true
       assign msa_title = 'Our beliefs'
+      assign msa_handle = 'beliefs'
     when 'careers'
       assign msa_known = true
       assign msa_title = 'Careers'
@@ -130,12 +207,18 @@
     when 'less-waste'
       assign msa_known = true
       assign msa_title = 'Less waste'
+    when 'do-not-sell-or-share'
+      assign msa_known = true
+      assign msa_title = 'Do not sell or share'
+    when 'cookie-policy', 'cookie-settings'
+      assign msa_known = true
+      assign msa_title = 'Cookie settings'
   endcase
 -%}
 
 {%- if msa_known -%}
   {%- assign msa_fullbleed = false -%}
-  {%- if msa_handle == 'careers' or msa_handle == 'about' or msa_handle == 'beliefs' or msa_handle == 'commitment' or msa_handle == 'ethics' or msa_handle == 'organic-cotton' or msa_handle == 'recycled-polyester' or msa_handle == 'responsible-sourcing' or msa_handle == 'less-waste' or msa_handle == 'faqs' -%}
+  {%- if msa_handle == 'careers' or msa_handle == 'about' or msa_handle == 'beliefs' or msa_handle == 'commitment' or msa_handle == 'ethics' or msa_handle == 'organic-cotton' or msa_handle == 'recycled-polyester' or msa_handle == 'responsible-sourcing' or msa_handle == 'less-waste' or msa_handle == 'faqs' or msa_handle == 'size-charts' or msa_handle == 'shipping' or msa_handle == 'returns' or msa_handle == 'accessibility-statement' or msa_handle == 'privacy-policy' or msa_handle == 'terms-and-conditions' or msa_handle == 'affiliate-program' or msa_handle == 'vendors' or msa_handle == 'services' or msa_handle == 'do-not-sell-or-share' or msa_handle == 'cookie-policy' or msa_handle == 'cookie-settings' -%}
     {%- assign msa_fullbleed = true -%}
   {%- endif -%}
   {%- unless msa_fullbleed -%}
@@ -146,9 +229,9 @@
     {%- when 'about' -%}
       {% render 'msa-content-about' %}
     {%- when 'services' -%}
-      {% render 'msa-content-services' %}
+      {% render 'msa-content-help', page_key: 'services' %}
     {%- when 'vendors' -%}
-      {% render 'msa-content-vendors' %}
+      {% render 'msa-content-help', page_key: 'vendors' %}
     {%- when 'contact', 'contact-us' -%}
       {% render 'msa-content-contact' %}
     {%- when 'beliefs' -%}
@@ -263,40 +346,23 @@
     {%- when 'faqs' -%}
       {% render 'msa-content-faqs' %}
     {%- when 'size-charts' -%}
-      {% render 'msa-content-simple',
-        title: 'Find your fit',
-        body: '<p>Use the size chart on each product page for the most accurate measurements. If you are between sizes, we recommend sizing up for a relaxed fit.</p><p>Need help? <a href="/pages/contact-us">Contact us</a> and our team will assist you.</p>'
-      %}
+      {% render 'msa-content-help', page_key: 'size-charts' %}
     {%- when 'shipping' -%}
-      {% render 'msa-content-simple',
-        title: 'Shipping information',
-        body: '<p>We work with trusted logistics partners to deliver your orders safely and on time.</p><p><strong>Processing time:</strong> Orders are typically processed within 1–3 business days.</p><p><strong>Domestic delivery:</strong> Standard shipping usually arrives within 5–7 business days.</p><p><strong>International delivery:</strong> International orders may take 10–21 business days depending on customs and carrier schedules.</p>'
-      %}
+      {% render 'msa-content-help', page_key: 'shipping' %}
     {%- when 'returns' -%}
-      {% render 'msa-content-simple',
-        title: 'Returns & exchanges',
-        body: '<p>We want you to be completely satisfied with your purchase.</p><p><strong>Return window:</strong> Items may be returned within 30 days of delivery in unused condition with original tags attached.</p><p><strong>How to start a return:</strong> Contact our team via the <a href="/pages/contact-us">contact page</a> with your order number.</p>'
-      %}
+      {% render 'msa-content-help', page_key: 'returns' %}
     {%- when 'accessibility-statement' -%}
-      {% render 'msa-content-simple',
-        title: 'Accessibility statement',
-        body: '<p>Moon Apparel is committed to ensuring digital accessibility for people with disabilities. We continually improve the user experience and apply relevant accessibility standards.</p><p>If you experience difficulty accessing any part of our website, please <a href="/pages/contact-us">contact us</a>.</p>'
-      %}
+      {% render 'msa-content-help', page_key: 'accessibility-statement' %}
     {%- when 'privacy-policy' -%}
-      {% render 'msa-content-simple',
-        title: 'Your privacy matters',
-        body: '<p>Moon Apparel respects your privacy and is committed to protecting your personal information.</p><p>We collect information you provide when placing orders, creating an account, or contacting us. We use this information to process orders, communicate with you, and improve our services. We do not sell your personal data to third parties.</p>'
-      %}
+      {% render 'msa-content-help', page_key: 'privacy-policy' %}
     {%- when 'terms-and-conditions' -%}
-      {% render 'msa-content-simple',
-        title: 'Terms of use',
-        body: '<p>By using the Moon Apparel website, you agree to these terms and conditions.</p><p>All products, prices, and availability are subject to change without notice. Content on this site is owned by Moon Apparel and may not be reproduced without permission.</p>'
-      %}
+      {% render 'msa-content-help', page_key: 'terms-and-conditions' %}
+    {%- when 'do-not-sell-or-share' -%}
+      {% render 'msa-content-help', page_key: 'do-not-sell-or-share' %}
+    {%- when 'cookie-policy', 'cookie-settings' -%}
+      {% render 'msa-content-help', page_key: 'cookie-policy' %}
     {%- when 'affiliate-program' -%}
-      {% render 'msa-content-simple',
-        title: 'Partner with Moon Apparel',
-        body: '<p>Join our affiliate program and earn commission by sharing Moon Apparel with your audience.</p><p>Apply through our <a href="/pages/contact-us">contact form</a> with details about your platform and audience.</p>'
-      %}
+      {% render 'msa-content-help', page_key: 'affiliate-program' %}
     {%- when 'lookbook' -%}
       {% render 'msa-content-simple',
         title: 'Wear your style',
