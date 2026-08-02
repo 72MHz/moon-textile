@@ -19,6 +19,13 @@
             "preset": "about"
           }
         },
+        "link_list_sustainability": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Sustainability",
+            "preset": "sustainability"
+          }
+        },
         "link_list_help": {
           "type": "link_list",
           "settings": {
@@ -61,6 +68,7 @@
       "block_order": [
         "link_list_brands",
         "link_list_about",
+        "link_list_sustainability",
         "link_list_help",
         "link_list_privacy",
         "link_list_affiliates",

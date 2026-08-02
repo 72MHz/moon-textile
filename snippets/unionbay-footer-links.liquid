@@ -15,6 +15,8 @@
     {%- assign column_heading = column_heading | default: 'Our Brands' -%}
   {%- when 'about' -%}
     {%- assign column_heading = column_heading | default: 'About us' -%}
+  {%- when 'sustainability' -%}
+    {%- assign column_heading = column_heading | default: 'Sustainability' -%}
   {%- when 'help' -%}
     {%- assign column_heading = column_heading | default: 'Help' -%}
   {%- when 'privacy' -%}
@@ -42,11 +44,12 @@
         <li><a href="/pages/beliefs" class="unionbay-footer__link">Our beliefs</a></li>
         <li><a href="/pages/commitment" class="unionbay-footer__link">Commitment</a></li>
         <li><a href="/pages/ethics" class="unionbay-footer__link">Ethics</a></li>
+        <li><a href="/pages/careers" class="unionbay-footer__link">Careers</a></li>
+      {%- when 'sustainability' -%}
         <li><a href="/pages/organic-cotton" class="unionbay-footer__link">Organic cotton</a></li>
         <li><a href="/pages/recycled-polyester" class="unionbay-footer__link">Recycled polyester</a></li>
         <li><a href="/pages/responsible-sourcing" class="unionbay-footer__link">Responsible sourcing</a></li>
         <li><a href="/pages/less-waste" class="unionbay-footer__link">Less waste</a></li>
-        <li><a href="/pages/careers" class="unionbay-footer__link">Careers</a></li>
       {%- when 'help' -%}
         <li><a href="/pages/contact-us" class="unionbay-footer__link">Contact us</a></li>
         <li><a href="/pages/faq" class="unionbay-footer__link">FAQ</a></li>
