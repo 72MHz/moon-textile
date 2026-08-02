@@ -1799,7 +1799,6 @@ body.theme-unionbay.index #MainContent section:not(:last-child) .section:not(.re
     display: block;
     flex: 1 1 28rem;
     max-width: 33.2rem;
-    margin-left: auto;
   }
 
   .theme-unionbay .unionbay-footer__column {

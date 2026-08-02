@@ -40,13 +40,6 @@
             "preset": "privacy"
           }
         },
-        "link_list_affiliates": {
-          "type": "link_list",
-          "settings": {
-            "heading": "Partners",
-            "preset": "affiliates"
-          }
-        },
         "link_list_blog": {
           "type": "link_list",
           "settings": {
@@ -71,7 +64,6 @@
         "link_list_sustainability",
         "link_list_help",
         "link_list_privacy",
-        "link_list_affiliates",
         "link_list_blog",
         "newsletter_signup"
       ],
