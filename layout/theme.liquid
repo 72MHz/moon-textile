@@ -19,9 +19,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
-    {%- if settings.favicon != blank -%}
-      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
-    {%- endif -%}
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ 'moon-favicon.png' | asset_url }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ 'moon-favicon.png' | asset_url }}">
+    <link rel="apple-touch-icon" href="{{ 'moon-favicon.png' | asset_url }}">
+    <link rel="shortcut icon" type="image/png" href="{{ 'moon-favicon.png' | asset_url }}">
     <title>
       {{ page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
