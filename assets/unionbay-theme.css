@@ -384,15 +384,27 @@ body.theme-unionbay.index #MainContent section:not(:last-child) .section:not(.re
 }
 
 @media (max-width: 1024px) {
+  /* Tablet/mobile: hamburger left, logo left (not centered), icons right */
   .theme-unionbay .header__layout-1 header-inner.logo-left,
   .theme-unionbay .header__layout-1 header-inner.logo-position {
+    grid-template-columns: auto 1fr auto !important;
+    grid-template-areas: 'menu logo icon' !important;
+    align-items: center;
     column-gap: 1.2rem;
   }
 
+  .theme-unionbay .header__menu {
+    justify-self: start;
+  }
+
+  .theme-unionbay .header__action {
+    justify-self: end;
+  }
+
   .theme-unionbay .header__logo {
-    padding-inline: 0.8rem;
-    max-width: min(42vw, 14rem);
-    justify-self: center;
+    padding-inline: 0;
+    max-width: min(52vw, 16rem);
+    justify-self: start;
   }
 
   .theme-unionbay .header__normal-logo img {
@@ -1795,10 +1807,36 @@ body.theme-unionbay.index #MainContent section:not(:last-child) .section:not(.re
     display: none;
   }
 
+  .theme-unionbay .unionbay-footer__grid {
+    align-items: flex-start;
+  }
+
+  /* Newsletter: full-width band below the link columns (never a stranded column) */
   .theme-unionbay .unionbay-footer__newsletter--desktop {
-    display: block;
-    flex: 1 1 28rem;
-    max-width: 33.2rem;
+    display: flex;
+    justify-content: center;
+    order: 9;
+    flex: 0 0 100%;
+    max-width: none;
+    margin-top: 0.8rem;
+    padding-top: 3.2rem;
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .theme-unionbay .unionbay-footer__newsletter--desktop .unionbay-footer-newsletter {
+    max-width: 60rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .theme-unionbay .unionbay-footer__newsletter--desktop .unionbay-footer-newsletter__form {
+    max-width: 42rem;
+    margin-inline: auto;
+  }
+
+  .theme-unionbay .unionbay-footer__newsletter--desktop .unionbay-footer-newsletter__extras {
+    justify-content: center;
+    margin-left: 0;
   }
 
   .theme-unionbay .unionbay-footer__column {
