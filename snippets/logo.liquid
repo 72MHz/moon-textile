@@ -54,9 +54,18 @@
           src="{{ logo_asset | asset_url }}"
           loading="lazy"
           fetchpriority="high"
-          class="header__normal-logo{% if isTransparent and request.page_type == 'index' and transparent != blank %} hidden{% endif %}"
+          class="header__normal-logo header__normal-logo--full{% if isTransparent and request.page_type == 'index' and transparent != blank %} hidden{% endif %}"
           width="{{ logo_width }}"
           height="auto"
+          alt="{{ shop.name | escape }}"
+        >
+        <img
+          src="{{ 'moon-logo-icon.png' | asset_url }}"
+          loading="lazy"
+          fetchpriority="high"
+          class="header__normal-logo header__normal-logo--icon{% if isTransparent and request.page_type == 'index' and transparent != blank %} hidden{% endif %}"
+          width="48"
+          height="44"
           alt="{{ shop.name | escape }}"
         >
       {%- else -%}

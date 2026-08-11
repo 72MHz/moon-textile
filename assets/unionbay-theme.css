@@ -78,6 +78,24 @@ body.theme-unionbay.index #MainContent section:not(:last-child) .section:not(.re
   }
 }
 
+/* Full wordmark logo on tablet/desktop, compact emblem on mobile */
+.theme-unionbay .header__normal-logo--icon {
+  display: none;
+}
+.theme-unionbay .header__normal-logo--full {
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .theme-unionbay .header__normal-logo--full {
+    display: none;
+  }
+  .theme-unionbay .header__normal-logo--icon {
+    display: block;
+    max-height: 46px;
+  }
+}
+
 .theme-unionbay .header__menu {
   justify-self: center;
 }
