@@ -40,13 +40,6 @@
             "preset": "privacy"
           }
         },
-        "link_list_blog": {
-          "type": "link_list",
-          "settings": {
-            "heading": "Quick links",
-            "preset": "blog"
-          }
-        },
         "newsletter_signup": {
           "type": "newsletter",
           "settings": {
@@ -64,7 +57,6 @@
         "link_list_sustainability",
         "link_list_help",
         "link_list_privacy",
-        "link_list_blog",
         "newsletter_signup"
       ],
       "settings": {
