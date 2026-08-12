@@ -1,30 +1,44 @@
 {% doc %}
-  Renders the Moon Style Apparel hero banner: a single desktop image and a
-  single mobile image, swapped by breakpoint.
+  Renders the Moon Style Apparel hero banner: two static side-by-side images on
+  desktop, and a single image on mobile. No animation.
 
   @param {string} heading - Hero heading for alt text
   @param {string} [class] - CSS class for the img elements
 {% enddoc %}
 
 <div class="unionbay-hero__split absolute inset-0 w-full h-full">
+  <div class="unionbay-hero__split-panel">
+    <img
+      src="{{ 'moon-style-banner.jpg' | asset_url }}"
+      alt="{{ heading | escape }}"
+      class="unionbay-hero__asset"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      width="1400"
+      height="933"
+    >
+  </div>
+  <div class="unionbay-hero__split-panel">
+    <img
+      src="{{ 'ub-hero.jpg' | asset_url }}"
+      alt="{{ heading | escape }}"
+      class="unionbay-hero__asset"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      width="1400"
+      height="933"
+    >
+  </div>
   <img
-    src="{{ 'ub-hero-desktop.jpg' | asset_url }}"
-    alt="{{ heading | escape }}"
-    class="unionbay-hero__asset unionbay-hero__asset--desktop"
-    loading="eager"
-    fetchpriority="high"
-    decoding="async"
-    width="1400"
-    height="1745"
-  >
-  <img
-    src="{{ 'ub-hero-mobile.jpg' | asset_url }}"
+    src="{{ 'ub-hero.jpg' | asset_url }}"
     alt="{{ heading | escape }}"
     class="unionbay-hero__asset unionbay-hero__asset--mobile"
     loading="eager"
     fetchpriority="high"
     decoding="async"
-    width="900"
-    height="1118"
+    width="1400"
+    height="933"
   >
 </div>

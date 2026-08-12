@@ -546,16 +546,6 @@ body.theme-unionbay.index #MainContent section:not(:last-child) .section:not(.re
   inset: 0;
 }
 
-.theme-unionbay .unionbay-hero__asset--desktop {
-  display: block;
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 22%;
-}
-
 .theme-unionbay .unionbay-hero__asset--mobile {
   display: none;
   position: absolute;
@@ -566,7 +556,7 @@ body.theme-unionbay.index #MainContent section:not(:last-child) .section:not(.re
 }
 
 @media (max-width: 767px) {
-  .theme-unionbay .unionbay-hero__asset--desktop {
+  .theme-unionbay .unionbay-hero__split-panel {
     display: none;
   }
 
