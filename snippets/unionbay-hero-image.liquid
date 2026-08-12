@@ -1,43 +1,30 @@
 {% doc %}
-  Renders the Union Bay hero banner with split winter lifestyle imagery.
+  Renders the Moon Style Apparel hero banner: a single desktop image and a
+  single mobile image, swapped by breakpoint.
 
   @param {string} heading - Hero heading for alt text
   @param {string} [class] - CSS class for the img elements
 {% enddoc %}
 
 <div class="unionbay-hero__split absolute inset-0 w-full h-full">
-  <div class="unionbay-hero__split-panel unionbay-hero__split-panel--women">
-    <img
-      src="{{ 'ub-hero-winter-women.jpg' | asset_url }}"
-      alt="{{ heading | escape }} — women's winter styles"
-      class="{{ class | default: 'unionbay-hero__asset' }}"
-      loading="eager"
-      fetchpriority="high"
-      decoding="async"
-      width="1400"
-      height="1200"
-    >
-  </div>
-  <div class="unionbay-hero__split-panel unionbay-hero__split-panel--men">
-    <img
-      src="{{ 'ub-hero-winter-men.jpg' | asset_url }}"
-      alt="{{ heading | escape }} — men's winter styles"
-      class="{{ class | default: 'unionbay-hero__asset' }}"
-      loading="eager"
-      fetchpriority="high"
-      decoding="async"
-      width="1400"
-      height="1200"
-    >
-  </div>
   <img
-    src="{{ 'ub-hero-winter-mobile.jpg' | asset_url }}"
+    src="{{ 'ub-hero-desktop.jpg' | asset_url }}"
+    alt="{{ heading | escape }}"
+    class="unionbay-hero__asset unionbay-hero__asset--desktop"
+    loading="eager"
+    fetchpriority="high"
+    decoding="async"
+    width="1400"
+    height="1745"
+  >
+  <img
+    src="{{ 'ub-hero-mobile.jpg' | asset_url }}"
     alt="{{ heading | escape }}"
     class="unionbay-hero__asset unionbay-hero__asset--mobile"
     loading="eager"
     fetchpriority="high"
     decoding="async"
-    width="800"
-    height="1000"
+    width="900"
+    height="1118"
   >
 </div>
