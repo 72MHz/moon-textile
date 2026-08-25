@@ -60,12 +60,12 @@
           alt="{{ shop.name | escape }}"
         >
         <img
-          src="{{ 'moon-logo-icon.png' | asset_url }}"
+          src="{{ 'moon-logo-mobile.png' | asset_url }}"
           loading="lazy"
           fetchpriority="high"
           class="header__normal-logo header__normal-logo--icon{% if isTransparent and request.page_type == 'index' and transparent != blank %} hidden{% endif %}"
-          width="48"
-          height="44"
+          width="96"
+          height="48"
           alt="{{ shop.name | escape }}"
         >
       {%- else -%}
