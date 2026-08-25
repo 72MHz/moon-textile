@@ -227,7 +227,11 @@
 
   {%- case msa_handle -%}
     {%- when 'about' -%}
-      {% render 'msa-content-about' %}
+      {% render 'msa-content-about',
+        hero_image: section.settings.about_hero_image,
+        design_image: section.settings.about_design_image,
+        manufacturing_image: section.settings.about_manufacturing_image
+      %}
     {%- when 'services' -%}
       {% render 'msa-content-help', page_key: 'services' %}
     {%- when 'vendors' -%}
@@ -384,7 +388,31 @@
   "name": "MSA static page",
   "tag": "section",
   "class": "section-msa-static-page",
-  "settings": [],
+  "settings": [
+    {
+      "type": "header",
+      "content": "About page images"
+    },
+    {
+      "type": "paragraph",
+      "content": "These only apply to the About us page. Leave empty to keep the default image."
+    },
+    {
+      "type": "image_picker",
+      "id": "about_hero_image",
+      "label": "About — top banner image"
+    },
+    {
+      "type": "image_picker",
+      "id": "about_design_image",
+      "label": "About — 'Our story' image"
+    },
+    {
+      "type": "image_picker",
+      "id": "about_manufacturing_image",
+      "label": "About — 'Our manufacturing' image"
+    }
+  ],
   "presets": [
     {
       "name": "MSA static page"

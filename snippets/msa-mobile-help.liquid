@@ -1,0 +1,174 @@
+{% comment %}
+  Mobile-only help chat widget. Floating bubble + panel with preset questions.
+  Included from layout/theme.liquid before </body>. Shows only on screens <= 767px.
+{% endcomment %}
+
+<div class="msa-help" data-msa-help>
+  <button type="button" class="msa-help__toggle" aria-label="Need help?" aria-expanded="false" data-msa-help-toggle>
+    <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="none">
+      <path d="M12 3c5 0 9 3.4 9 7.6 0 4.2-4 7.6-9 7.6-.9 0-1.8-.1-2.6-.3L4 20l1-3.4C3.7 15.2 3 13 3 10.6 3 6.4 7 3 12 3z" fill="#fff"/>
+      <circle cx="8.5" cy="10.6" r="1.1" fill="#14284f"/>
+      <circle cx="12" cy="10.6" r="1.1" fill="#14284f"/>
+      <circle cx="15.5" cy="10.6" r="1.1" fill="#14284f"/>
+    </svg>
+    <span class="msa-help__label">Help</span>
+  </button>
+
+  <div class="msa-help__panel" hidden data-msa-help-panel role="dialog" aria-label="Help chat">
+    <div class="msa-help__head">
+      <div class="msa-help__head-title">
+        <span class="msa-help__dot" aria-hidden="true"></span>
+        Moon Style Apparel
+      </div>
+      <button type="button" class="msa-help__close" aria-label="Close" data-msa-help-close>&times;</button>
+    </div>
+
+    <div class="msa-help__body" data-msa-help-body>
+      <div class="msa-help__msg msa-help__msg--bot">Hi! 👋 How can we help you today? Tap a question below.</div>
+
+      <div class="msa-help__chips" data-msa-help-chips>
+        <button type="button" class="msa-help__chip" data-a="shipping">How long is delivery?</button>
+        <button type="button" class="msa-help__chip" data-a="returns">How do I return an item?</button>
+        <button type="button" class="msa-help__chip" data-a="size">What size should I get?</button>
+        <button type="button" class="msa-help__chip" data-a="track">Where is my order?</button>
+        <button type="button" class="msa-help__chip" data-a="contact">Talk to a human</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="application/json" data-msa-help-answers>
+{
+  "shipping": { "q": "How long is delivery?", "a": "UK delivery is typically 3–5 working days. You'll get a tracking email once your order ships.", "link": "/pages/shipping", "label": "Shipping details" },
+  "returns":  { "q": "How do I return an item?", "a": "Easy — you have 30 days to return unworn items. Start your return from our returns page.", "link": "/pages/returns", "label": "Start a return" },
+  "size":     { "q": "What size should I get?", "a": "Check our size charts to find your perfect fit across tops, bottoms, and more.", "link": "/pages/size-charts", "label": "Size charts" },
+  "track":    { "q": "Where is my order?", "a": "Track it from your account, or check the tracking link in your shipping email.", "link": "/account", "label": "My account" },
+  "contact":  { "q": "Talk to a human", "a": "Our team is happy to help — send us a message and we'll get right back to you.", "link": "/pages/contact-us", "label": "Contact us" }
+}
+</script>
+
+{% style %}
+  .msa-help { display: none; }
+
+  @media (max-width: 767px) {
+    .msa-help { display: block; }
+
+    .msa-help__toggle {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 60;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px 10px 12px;
+      border: none;
+      border-radius: 999px;
+      background: #14284f;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      box-shadow: 0 6px 20px rgba(10, 22, 54, 0.35);
+      cursor: pointer;
+    }
+    .msa-help__label { line-height: 1; }
+
+    .msa-help__panel {
+      position: fixed;
+      right: 12px;
+      left: 12px;
+      bottom: 12px;
+      z-index: 61;
+      max-width: 380px;
+      margin-left: auto;
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(10, 22, 54, 0.35);
+      display: flex;
+      flex-direction: column;
+      max-height: 78vh;
+    }
+    .msa-help__panel[hidden] { display: none; }
+
+    .msa-help__head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      background: #14284f;
+      color: #fff;
+    }
+    .msa-help__head-title { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; }
+    .msa-help__dot { width: 9px; height: 9px; border-radius: 50%; background: #35d07f; box-shadow: 0 0 0 3px rgba(53,208,127,.25); }
+    .msa-help__close { background: none; border: none; color: #fff; font-size: 26px; line-height: 1; cursor: pointer; padding: 0 4px; }
+
+    .msa-help__body { padding: 16px; overflow-y: auto; -webkit-overflow-scrolling: touch; background: #f5f6f8; }
+
+    .msa-help__msg {
+      max-width: 85%;
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 14px;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+    .msa-help__msg--bot { background: #fff; color: #1b2540; border: 1px solid #e6e8ee; border-bottom-left-radius: 4px; }
+    .msa-help__msg--user { background: #14284f; color: #fff; margin-left: auto; border-bottom-right-radius: 4px; }
+    .msa-help__msg--bot a { color: #f2620c; font-weight: 700; text-decoration: none; display: inline-block; margin-top: 6px; }
+
+    .msa-help__chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+    .msa-help__chip {
+      border: 1px solid #14284f;
+      background: #fff;
+      color: #14284f;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+    .msa-help__chip:active { background: #14284f; color: #fff; }
+  }
+{% endstyle %}
+
+<script>
+  (function () {
+    var root = document.querySelector('[data-msa-help]');
+    if (!root) return;
+    var toggle = root.querySelector('[data-msa-help-toggle]');
+    var panel = root.querySelector('[data-msa-help-panel]');
+    var closeBtn = root.querySelector('[data-msa-help-close]');
+    var body = root.querySelector('[data-msa-help-body]');
+    var chips = root.querySelector('[data-msa-help-chips]');
+    var answers = {};
+    try { answers = JSON.parse(root.querySelector('[data-msa-help-answers]').textContent); } catch (e) {}
+
+    function setOpen(open) {
+      panel.hidden = !open;
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.style.display = open ? 'none' : '';
+    }
+    toggle.addEventListener('click', function () { setOpen(true); });
+    closeBtn.addEventListener('click', function () { setOpen(false); });
+
+    root.addEventListener('click', function (e) {
+      var chip = e.target.closest('.msa-help__chip');
+      if (!chip) return;
+      var data = answers[chip.getAttribute('data-a')];
+      if (!data) return;
+
+      var user = document.createElement('div');
+      user.className = 'msa-help__msg msa-help__msg--user';
+      user.textContent = data.q;
+      body.insertBefore(user, chips);
+
+      var bot = document.createElement('div');
+      bot.className = 'msa-help__msg msa-help__msg--bot';
+      bot.innerHTML = data.a + '<br><a href="' + data.link + '">' + data.label + ' &rarr;</a>';
+      body.insertBefore(bot, chips);
+
+      body.scrollTop = body.scrollHeight;
+    });
+  })();
+</script>

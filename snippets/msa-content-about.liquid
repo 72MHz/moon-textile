@@ -4,11 +4,29 @@
 
 {% render 'msa-brand-page-styles' %}
 
+{%- liquid
+  if hero_image != blank
+    assign about_hero_src = hero_image | image_url: width: 1600
+  else
+    assign about_hero_src = 'moon-page-store.jpg' | asset_url
+  endif
+  if design_image != blank
+    assign about_design_src = design_image | image_url: width: 800
+  else
+    assign about_design_src = 'moon-page-design.jpg' | asset_url
+  endif
+  if manufacturing_image != blank
+    assign about_mfg_src = manufacturing_image | image_url: width: 800
+  else
+    assign about_mfg_src = 'moon-page-manufacturing.jpg' | asset_url
+  endif
+-%}
+
 <div class="section moon-bp" style="--section-pt: 0; --section-pb: 0;">
   <section class="moon-bp__hero">
     <div class="moon-bp__hero-media">
       <img
-        src="{{ 'moon-page-store.jpg' | asset_url }}"
+        src="{{ about_hero_src }}"
         alt="Moon Apparel clothing and store atmosphere"
         loading="eager"
         width="1600"
@@ -38,7 +56,7 @@
     <div class="fluid_container">
       <div class="moon-bp__split moon-bp__split--reverse">
         <div class="moon-bp__split-media">
-          <img src="{{ 'moon-page-design.jpg' | asset_url }}" alt="Designing Moon Apparel collections" loading="lazy" width="800" height="600">
+          <img src="{{ about_design_src }}" alt="Designing Moon Apparel collections" loading="lazy" width="800" height="600">
         </div>
         <div>
           <h2 class="moon-bp__heading">Our story</h2>
@@ -55,7 +73,7 @@
   <section class="moon-bp__section fluid_container">
     <div class="moon-bp__split">
       <div class="moon-bp__split-media">
-        <img src="{{ 'moon-page-manufacturing.jpg' | asset_url }}" alt="Moon Apparel manufacturing quality" loading="lazy" width="800" height="600">
+        <img src="{{ about_mfg_src }}" alt="Moon Apparel manufacturing quality" loading="lazy" width="800" height="600">
       </div>
       <div>
         <h2 class="moon-bp__heading">Our manufacturing</h2>
