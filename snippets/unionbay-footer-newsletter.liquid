@@ -104,9 +104,9 @@
 
       {%- if payment_enable and shop.enabled_payment_types != empty -%}
         <div class="unionbay-footer-newsletter__payment">
-          <ul class="list-unstyled unionbay-footer-newsletter__payment-list">
+          <ul class="list-unstyled unionbay-footer-newsletter__payment-list" style="display: grid !important; grid-template-columns: repeat(6, auto) !important; gap: 10px !important; justify-content: flex-end !important; align-items: center !important; margin: 0 !important; padding: 0 !important; width: 100% !important;">
             {%- for type in shop.enabled_payment_types -%}
-              <li>{{ type | payment_type_svg_tag: class: 'icon icon--full-color unionbay-footer-newsletter__payment-icon' }}</li>
+              <li style="margin: 0 !important; padding: 0 !important; width: auto !important;">{{ type | payment_type_svg_tag: class: 'icon icon--full-color unionbay-footer-newsletter__payment-icon' }}</li>
             {%- endfor -%}
           </ul>
         </div>

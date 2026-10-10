@@ -43,7 +43,7 @@
         "newsletter_signup": {
           "type": "newsletter",
           "settings": {
-            "heading": "Take 15% off your order when you signup!",
+            "heading": "Take 10% off your order when you signup!",
             "description": "Promo code will be emailed to you.",
             "email_placeholder": "Email address",
             "button_label": "Submit",

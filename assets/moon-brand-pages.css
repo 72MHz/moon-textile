@@ -3,6 +3,11 @@
   color: #1a1a1a;
 }
 
+/* Images never overflow their container on any screen */
+.moon-bp img {
+  max-width: 100%;
+}
+
 .moon-bp__eyebrow {
   margin: 0 0 1.2rem;
   font-size: 1.2rem;
@@ -192,35 +197,45 @@
 }
 
 .moon-bp__card {
+  position: relative;
   display: flex;
   flex-direction: column;
   min-height: 100%;
-  padding: 2.8rem 2.4rem;
+  padding: 3rem 2.6rem;
   text-decoration: none;
-  background: #fff;
-  border: 1px solid #e8ecf2;
-  border-top: 3px solid #e85d04;
+  background: #eefaf3;
+  border: 1px solid #d5efe0;
+  border-radius: 16px;
   color: inherit;
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(20, 40, 79, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .moon-bp__card:hover {
-  border-color: #1a3a6b;
-  transform: translateY(-2px);
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(20, 40, 79, 0.12);
 }
 
 .moon-bp__card-label {
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
+  align-self: flex-start;
+  margin-bottom: 1.4rem;
+  padding: 0.5rem 1.1rem;
+  font-size: 1.1rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #e85d04;
+  background: #fff;
+  border-radius: 999px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .moon-bp__card-title {
   margin: 0 0 1rem;
   font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.25;
   color: #1a3a6b;
 }
 
@@ -229,13 +244,25 @@
   flex: 1;
   font-size: 1.45rem;
   line-height: 1.6;
-  color: #555;
+  color: #5a6377;
 }
 
 .moon-bp__card-cta {
-  font-size: 1.3rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.35rem;
   font-weight: 700;
-  color: #1a3a6b;
+  color: #e85d04;
+}
+
+.moon-bp__card-cta::after {
+  content: "\2192";
+  transition: transform 0.2s ease;
+}
+
+.moon-bp__card:hover .moon-bp__card-cta::after {
+  transform: translateX(4px);
 }
 
 .moon-bp__highlight {
@@ -344,5 +371,12 @@
 
   .moon-bp__hero {
     min-height: 48rem;
+  }
+
+  /* Side padding so text is never cut off / flush against the screen edge */
+  .moon-bp__hero-content,
+  .moon-bp .fluid_container {
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 }
