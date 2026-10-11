@@ -56,7 +56,7 @@
             "delivery_content_icon": "truck",
             "delivery_content": "",
             "discount_content_icon": "discount",
-            "discount_content": "<p>Use code \"<strong>WELCOMEMOON</strong>\" for discount 15% on your first order.</p>",
+            "discount_content": "<p>Use code \"<strong>WELCOMEMOON</strong>\" for discount 10% on your first order.</p>",
             "return_content_icon": "free_shipping",
             "return_content": ""
           }
