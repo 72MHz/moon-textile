@@ -12,8 +12,10 @@
 <script src="{{ 'tingle.min.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'theme.js' | asset_url }}"  defer="defer" type="module"></script>
 {%- case t -%}
-  {%- when 'collection' and collection.handle -%}
-    <script src="{{ 'collection.js' | asset_url }}" defer="defer"></script>
+  {%- when 'collection' -%}
+    {%- if collection.handle -%}
+      <script src="{{ 'collection.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
   {%- when 'product' -%}
     <script src="{{ 'main-product.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'size-recommender.js' | asset_url }}" defer="defer"></script>
@@ -49,14 +51,10 @@
 {%- endcase -%}
 <script defer="defer">
   var glozin_app = {
-  shop: '{{ shop.permanent_domain }}',
-  domain: '{{ shop.domain }}',
-  {%- if admin_vi == true -%}
+    shop: '{{ shop.permanent_domain }}',
+    domain: '{{ shop.domain }}',
     lic: '{{ settings.purchase_code }}',
-    action: '{{ settings.purchase_code_action }}',
-    _e: '{{ encoded_ }}',
-    _s: '{{ salt }}',
-  {%- endif -%}
-  mode: '{%- if admin_vi == true -%}admin{% else %}front{%- endif -%}',
+    action: 'active',
+    mode: 'front',
   };
 </script>
