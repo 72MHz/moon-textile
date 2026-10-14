@@ -345,6 +345,7 @@
       },
       "block_order": ["insta_1", "insta_2", "insta_3", "insta_4"],
       "settings": {
+        "use_instafeed": true,
         "section_width": "fluid_container",
         "color_scheme": "",
         "heading": "Show us how you wear it",
