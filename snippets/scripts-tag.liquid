@@ -51,12 +51,14 @@
 {%- endcase -%}
 <script defer="defer">
   var glozin_app = {
-    shop: '{{ shop.permanent_domain }}',
-    domain: '{{ shop.domain }}',
+  shop: '{{ shop.permanent_domain }}',
+  domain: '{{ shop.domain }}',
+  {%- if admin_vi == true -%}
     lic: '{{ settings.purchase_code }}',
-    action: 'active',
+    action: '{{ settings.purchase_code_action }}',
     _e: '{{ encoded_ }}',
     _s: '{{ salt }}',
-    mode: 'front',
+  {%- endif -%}
+  mode: '{%- if admin_vi == true -%}admin{% else %}front{%- endif -%}',
   };
 </script>

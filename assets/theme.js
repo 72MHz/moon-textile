@@ -4964,14 +4964,36 @@ customElements.define("terms-conditions", TermsConditions);
 var BlsGlozinAdminLi = (function () {
   return {
     init: function () {
-      const el = document.getElementById("bls__not-active");
-      if (el) el.remove();
+      this.BlsCheckLi();
     },
-    BlsCheckLi: function () {},
-    BlsRenderHtml: function () {},
-    BlsActive: function () {},
-    setCookie: function () {},
-    checkCookie: function () {
+    BlsCheckLi: function () {
+      const _this = this;
+      if (typeof glozin_app === "object") {
+        if (glozin_app.mode === "admin") {
+          if (glozin_app.action === "active") {
+            if (_this.checkCookie(glozin_app.lic) === false) {
+              let encrypted = "";
+              if (glozin_app._e) {
+                encrypted = glozin_app._e;
+              }
+              _this.BlsActive(encrypted);
+            }
+          }
+        }
+      }
+    },
+    BlsRenderHtml: function (cs) {
+      return;
+    },
+    BlsActive: function (encrypted) {
+      return;
+    },
+    setCookie: function (cvalue, d) {
+      const v = btoa(cvalue);
+      document.cookie =
+        "UHVyY2hhc2VDb2Rl" + "=" + v + ";expires=" + d + ";path=/";
+    },
+    checkCookie: function (val) {
       return true;
     },
   };
