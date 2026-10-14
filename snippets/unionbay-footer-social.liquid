@@ -5,8 +5,13 @@
 {% enddoc %}
 
 {%- liquid
+  assign pinterest_url = settings.pinterest
+  if pinterest_url == blank or pinterest_url == '#'
+    assign pinterest_url = 'https://www.pinterest.com/moonstyleapparel/'
+  endif
+
   assign has_social = false
-  if settings.facebook != blank or settings.instagram != blank or settings.twitter != blank
+  if settings.facebook != blank or settings.instagram != blank or pinterest_url != blank
     assign has_social = true
   endif
 -%}
@@ -34,11 +39,11 @@
         </a>
       </li>
     {%- endif -%}
-    {%- if settings.twitter != blank -%}
+    {%- if pinterest_url != blank -%}
       <li>
-        <a href="{{ settings.twitter }}" target="_blank" rel="noopener" aria-label="{{ 'general.social.links.twitter' | t }}">
-          <svg width="17" height="16" viewBox="0 0 17 16" fill="none" aria-hidden="true">
-            <path d="M12.6 1.5h2.2l-4.8 5.5L16 14.5h-4.4L9.2 10.2 4.5 14.5H2.3l5.1-5.9L2 1.5h4.5l3.4 4.5L12.6 1.5zm-.8 11.7h1.2L5.4 2.8H4.1l7.7 10.4z" fill="currentColor"/>
+        <a href="{{ pinterest_url }}" target="_blank" rel="noopener" aria-label="{{ 'general.social.links.pinterest' | t }}">
+          <svg width="12" height="16" viewBox="0 0 384 512" fill="none" aria-hidden="true">
+            <path fill="currentColor" d="M204 6.5C101.4 6.5 0 74.9 0 185.6 0 256 39.6 296 63.6 296c9.9 0 15.6-27.6 15.6-35.4 0-9.3-23.7-29.1-23.7-67.8 0-80.4 61.2-137.4 140.4-137.4 68.1 0 118.5 38.7 118.5 109.8 0 53.1-21.3 152.7-90.3 152.7-24.9 0-46.2-18-46.2-43.8 0-38.1 24.9-75 24.9-114.3 0-68.7-97.8-56.1-97.8 27 0 17.7 2.4 36.6 10.8 51.6L52.5 491.7c8.1 7.2 16.8 13.8 25.8 19.8 4.8 3.3 9.9 2.1 12.3-2.7l39.3-152.7c11.7 6.6 24.9 10.8 38.7 10.8 126 0 177.9-122.4 177.9-223.8C346.5 64.7 274.5 6.5 204 6.5z"/>
           </svg>
         </a>
       </li>
