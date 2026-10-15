@@ -537,7 +537,7 @@
               >
                 {% comment %} {{- 'products.product.loading' | t -}} {% endcomment %}
                 <script type="application/json" class="product-review-json">
-                  {%- render 'review' | product: card_product -%}
+                  {%- render 'review', product: card_product -%}
                 </script>
               </review-product>
             {%- endif -%}
@@ -562,7 +562,7 @@
         {% if template_enable_color_swatches == true %}
           {%- if show_variant -%}
             {%- unless unionbay_mode -%}
-              {%- render 'color-swatches' | product: card_product | type: "item" -%}
+              {%- render 'color-swatches', product: card_product, type: "item" -%}
             {%- endunless -%}
           {%- endif -%}
         {% endif %}
@@ -952,7 +952,7 @@
           class="product-item__price mt-5 {% if type != 'list' %}justify-content-{{ settings.product_alignment }}{% endif %} fs-custom flex"
           style="--font-size: {{ settings.price_size }}"
         >
-          {%- render 'price' | scope: 'item', show_badges: false, class: priceclass -%}
+          {%- render 'price', scope: 'item', show_badges: false, class: priceclass -%}
         </div>
       </div>
     {% if unionbay_mode %}
