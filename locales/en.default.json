@@ -283,7 +283,7 @@
   },
   "newsletter": {
     "label": "Email",
-    "success": "Thanks for subscribing! Use code WELCOMEMOON for 10% off your order.",
+    "success": "Thanks for subscribing! Enjoy Free Shipping on your order.",
     "error": "Invalid email or already subscribed",
     "button_label": "Subscribe"
   },

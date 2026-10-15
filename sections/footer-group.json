@@ -43,8 +43,8 @@
         "newsletter_signup": {
           "type": "newsletter",
           "settings": {
-            "heading": "Take 10% off your order when you signup!",
-            "description": "Promo code will be emailed to you.",
+            "heading": "Enjoy Free Shipping On Your Order!",
+            "description": "Sign up for updates, new arrivals, and special offers.",
             "email_placeholder": "Email address",
             "button_label": "Submit",
             "note": "By submitting your email address, you agree to receive email marketing notifications from us. You may opt out anytime."

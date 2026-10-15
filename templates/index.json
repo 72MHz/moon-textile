@@ -6,19 +6,19 @@
         "marquee_1": {
           "type": "scrolling_text",
           "settings": {
-            "content": "Take 10% off your order — use code WELCOMEMOON"
+            "content": "FREE SHIPPING ON ALL ORDERS"
           }
         },
         "marquee_2": {
           "type": "scrolling_text",
           "settings": {
-            "content": "Free shipping on orders over $75"
+            "content": "FREE SHIPPING ON ALL ORDERS"
           }
         }
       },
       "block_order": ["marquee_1", "marquee_2"],
       "settings": {
-        "use_featured_discount": true,
+        "use_featured_discount": false,
         "section_width": "full_width",
         "color_scheme": "scheme-unionbay-red",
         "direction": "left",
