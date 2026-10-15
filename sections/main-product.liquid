@@ -273,6 +273,49 @@
                 {{ block.shopify_attributes }}
               >
                 {%- render 'price', scope: 'detail', product: product, class: 'price-large', show_badges: false -%}
+                {%- liquid
+                  assign product_has_free_shipping = false
+                  for tag in product.tags
+                    assign tag_clean = tag | downcase | strip
+                    if tag_clean contains 'free' and tag_clean contains 'ship'
+                      assign product_has_free_shipping = true
+                      break
+                    endif
+                    if tag_clean contains 'free' and tag_clean contains 'deliver'
+                      assign product_has_free_shipping = true
+                      break
+                    endif
+                    if tag_clean == 'free' or tag_clean == 'free-shipping' or tag_clean == 'free shipping' or tag_clean == 'freeshipping'
+                      assign product_has_free_shipping = true
+                      break
+                    endif
+                  endfor
+                  if product_has_free_shipping == false
+                    for c in product.collections
+                      assign c_clean = c.handle | downcase
+                      if c_clean contains 'free' and c_clean contains 'ship'
+                        assign product_has_free_shipping = true
+                        break
+                      endif
+                    endfor
+                  endif
+                  if product.metafields.custom.free_shipping
+                    assign product_has_free_shipping = true
+                  endif
+                  if product.metafields.custom.custom_product_badge != blank
+                    assign badge_clean = product.metafields.custom.custom_product_badge | downcase
+                    if badge_clean contains 'free' and badge_clean contains 'ship'
+                      assign product_has_free_shipping = true
+                    endif
+                  endif
+                -%}
+                {%- if product_has_free_shipping -%}
+                  <div class="product-detail__free-shipping-tag mt-10">
+                    <span class="product__badges-free-shipping unionbay-badge unionbay-badge--free-shipping">
+                      FREE SHIPPING
+                    </span>
+                  </div>
+                {%- endif -%}
               </div>
             {%- when 'buy_buttons' -%}
               {% comment %} Buy button {% endcomment %}

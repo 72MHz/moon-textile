@@ -169,14 +169,37 @@
   endif
   assign has_free_shipping = false
   for tag in card_product.tags
-    assign tag_clean = tag | downcase | strip | replace: '_', '-' | replace: ' ', '-'
-    if tag_clean == 'free-shipping' or tag_clean == 'freeshipping' or tag_clean == 'free-delivery' or tag_clean == 'freedelivery'
+    assign tag_clean = tag | downcase | strip
+    if tag_clean contains 'free' and tag_clean contains 'ship'
+      assign has_free_shipping = true
+      break
+    endif
+    if tag_clean contains 'free' and tag_clean contains 'deliver'
+      assign has_free_shipping = true
+      break
+    endif
+    if tag_clean == 'free' or tag_clean == 'free-shipping' or tag_clean == 'free shipping' or tag_clean == 'freeshipping'
       assign has_free_shipping = true
       break
     endif
   endfor
+  if has_free_shipping == false
+    for c in card_product.collections
+      assign c_clean = c.handle | downcase
+      if c_clean contains 'free' and c_clean contains 'ship'
+        assign has_free_shipping = true
+        break
+      endif
+    endfor
+  endif
   if card_product.metafields.custom.free_shipping
     assign has_free_shipping = true
+  endif
+  if card_product.metafields.custom.custom_product_badge != blank
+    assign badge_clean = card_product.metafields.custom.custom_product_badge | downcase
+    if badge_clean contains 'free' and badge_clean contains 'ship'
+      assign has_free_shipping = true
+    endif
   endif
 -%}
 {%- if sale

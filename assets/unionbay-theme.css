@@ -897,6 +897,12 @@ body.theme-unionbay.index #MainContent section:not(:last-child) .section:not(.re
   margin-bottom: 0.8rem;
 }
 
+.product-detail__free-shipping-tag {
+  display: inline-flex !important;
+  margin-top: 0.6rem !important;
+  margin-bottom: 0.6rem !important;
+}
+
 /* Product tabs section (legacy) */
 .theme-unionbay .unionbay-product-tabs .collection-tab__ta {
   border-bottom: 1px solid var(--ub-border);

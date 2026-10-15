@@ -271,7 +271,7 @@
             {% render 'placeholder-render', class: 'rounded' %}
           </a>
         {%- endif -%}
-        {% if template_enable_product_badges == true %}
+        {% if template_enable_product_badges != false %}
           {% render 'product-badges',
             card_product: card_product,
             type: 'product_item',
