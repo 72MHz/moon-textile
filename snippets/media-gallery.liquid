@@ -60,9 +60,46 @@
   {% endif %}
 {% endif %}
 <media-gallery
-  class="block{% if enable_sticky_content_on_desktop %} sticky top-30{% endif %}"
+  class="block relative{% if enable_sticky_content_on_desktop %} sticky top-30{% endif %}"
   data-layout="{{ layout }}"
 >
+  {%- liquid
+    assign media_has_free_shipping = false
+    for tag in product.tags
+      assign tag_clean = tag | downcase | strip
+      if tag_clean contains 'free' and tag_clean contains 'ship'
+        assign media_has_free_shipping = true
+        break
+      endif
+      if tag_clean contains 'free' and tag_clean contains 'deliver'
+        assign media_has_free_shipping = true
+        break
+      endif
+      if tag_clean == 'free' or tag_clean == 'free-shipping' or tag_clean == 'free shipping' or tag_clean == 'freeshipping'
+        assign media_has_free_shipping = true
+        break
+      endif
+    endfor
+    if media_has_free_shipping == false
+      for c in product.collections
+        assign c_clean = c.handle | downcase
+        if c_clean contains 'free' and c_clean contains 'ship'
+          assign media_has_free_shipping = true
+          break
+        endif
+      endfor
+    endif
+    if product.metafields.custom.free_shipping
+      assign media_has_free_shipping = true
+    endif
+  -%}
+  {%- if media_has_free_shipping -%}
+    <div class="product-gallery__free-shipping-badge absolute top-15 left-15 z-5 pointer-none">
+      <span class="product__badges-free-shipping unionbay-badge unionbay-badge--free-shipping">
+        FREE SHIPPING
+      </span>
+    </div>
+  {%- endif -%}
   {% if type != 'single' and type != 'quickview' and type != 'unionbay-quick-shop' %}
     <zoom-action
       class="block"

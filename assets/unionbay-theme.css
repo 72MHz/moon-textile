@@ -1277,7 +1277,7 @@ body.theme-unionbay.index #MainContent section:not(:last-child) .section:not(.re
   display: inline-flex !important;
 }
 
-.theme-unionbay .unionbay-product-card .unionbay-badge {
+.theme-unionbay .unionbay-product-card .unionbay-badge:not(.unionbay-badge--free-shipping):not(.product__badges-free-shipping):not(.unionbay-badge--exclusive) {
   background: var(--ub-white) !important;
   color: var(--ub-black) !important;
   border-radius: 0;
@@ -1286,6 +1286,30 @@ body.theme-unionbay.index #MainContent section:not(:last-child) .section:not(.re
   letter-spacing: 0.06em;
   font-weight: 600;
   padding: 0.4rem 0.8rem !important;
+}
+
+.theme-unionbay .unionbay-product-card .unionbay-badge.unionbay-badge--free-shipping,
+.theme-unionbay .unionbay-product-card .product__badges-free-shipping,
+.theme-unionbay .unionbay-product-card .product__badges .product__badges-free-shipping,
+.theme-unionbay .product__badges-free-shipping,
+.unionbay-badge--free-shipping,
+.product__badges-free-shipping,
+.product-detail__free-shipping-tag span {
+  background-color: #1e7e34 !important;
+  background: #1e7e34 !important;
+  color: #ffffff !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  padding: 0.35rem 0.85rem !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  border-radius: 3px !important;
+  line-height: normal !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) !important;
+  z-index: 10 !important;
 }
 
 .theme-unionbay .unionbay-product-card .product__badges-sale {
