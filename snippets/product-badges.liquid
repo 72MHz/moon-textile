@@ -167,6 +167,17 @@
   if sticky == 'sticky'
     assign show_product_badges = false
   endif
+  assign has_free_shipping = false
+  for tag in card_product.tags
+    assign tag_clean = tag | downcase | strip | replace: '_', '-' | replace: ' ', '-'
+    if tag_clean == 'free-shipping' or tag_clean == 'freeshipping' or tag_clean == 'free-delivery' or tag_clean == 'freedelivery'
+      assign has_free_shipping = true
+      break
+    endif
+  endfor
+  if card_product.metafields.custom.free_shipping
+    assign has_free_shipping = true
+  endif
 -%}
 {%- if sale
   or sold_out
@@ -174,6 +185,7 @@
   or card_product.metafields.custom.custom_product_badge
   or show_new
   or subscription > 0
+  or has_free_shipping
 -%}
   {% if show_product_badges %}
     <div
@@ -274,6 +286,14 @@
           {{- 'products.product.label.subscription' | t -}}
         </div>
       {% endif %}
+      {%- if has_free_shipping -%}
+        <div
+          class="product__badges-free-shipping product__badges-inner unionbay-badge unionbay-badge--free-shipping align-self-start px-15 inline-flex content-center subheading_weight text-center lh-normal"
+          style="--badges-color: {{ settings.free_shipping_badge_color | default: '#ffffff' }};--badges-bg: {{ settings.free_shipping_badge_background | default: '#1e7e34' }};"
+        >
+          FREE SHIPPING
+        </div>
+      {%- endif -%}
     </div>
     {% if type == 'product_item' %}
       {% if sale and sale_badge_addons == 'countdown' and card_product.metafields.custom.countdown_timer %}

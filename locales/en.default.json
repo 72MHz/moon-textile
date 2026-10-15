@@ -556,7 +556,8 @@
       "label": {
         "sale_label": "Sale",
         "new_label": "New",
-        "subscription": "Subscription"
+        "subscription": "Subscription",
+        "free_shipping": "Free Shipping"
       },
       "price": {
         "from_price_html": "From {{ price }}",
@@ -827,6 +828,7 @@
     "current_price": "Current price:",
     "web_exclusive": "WEB EXCLUSIVE",
     "bestseller": "BESTSELLER",
+    "free_shipping": "FREE SHIPPING",
     "view_all_product_info": "View all product information",
     "select_size": "Select size",
     "add_to_cart": "Add to cart",

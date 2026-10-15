@@ -168,6 +168,13 @@ review-product.inline-loading:after {
   padding-block: 6.5px;
   border-radius: var(--bages-radius);
 }
+.product__badges-free-shipping {
+  background-color: var(--badges-bg, #1e7e34) !important;
+  color: var(--badges-color, #ffffff) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
 .shopify-payment-button {
   width: 100%;
 }

@@ -869,6 +869,34 @@ body.theme-unionbay.index #MainContent section:not(:last-child) .section:not(.re
   bottom: auto !important;
 }
 
+.theme-unionbay .unionbay-product-card .unionbay-badge--free-shipping,
+.theme-unionbay .unionbay-product-card .product__badges-free-shipping,
+.theme-unionbay .product__badges-free-shipping,
+.unionbay-badge--free-shipping,
+.product__badges-free-shipping {
+  background-color: #1e7e34 !important;
+  background: #1e7e34 !important;
+  color: #ffffff !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  padding: 0.3rem 0.8rem !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  border-radius: 2px !important;
+  line-height: normal !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.sale_badge .product__badges,
+.product-detail__information .product__badges {
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin-bottom: 0.8rem;
+}
+
 /* Product tabs section (legacy) */
 .theme-unionbay .unionbay-product-tabs .collection-tab__ta {
   border-bottom: 1px solid var(--ub-border);

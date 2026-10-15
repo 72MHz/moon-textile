@@ -864,6 +864,22 @@
         "id": "custom_badge_background",
         "label": "t:settings_schema.badges.settings.background_color.label",
         "default": "#D0473E"
+      },
+      {
+        "type": "header",
+        "content": "Free shipping badge"
+      },
+      {
+        "type": "color",
+        "id": "free_shipping_badge_color",
+        "label": "t:settings_schema.badges.settings.color.label",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "free_shipping_badge_background",
+        "label": "t:settings_schema.badges.settings.background_color.label",
+        "default": "#1e7e34"
       }
     ]
   },
@@ -1162,7 +1178,7 @@
             "value": "6",
             "label": "t:settings_schema.color_swatches.settings.limit_color.6"
           }
-        ],
+        ]
       },
       {
         "type": "select",
@@ -1548,7 +1564,7 @@
           {
             "value": "background",
             "label": "t:settings_schema.colors.settings.header.background"
-          },
+          }
         ]
       }
     ]

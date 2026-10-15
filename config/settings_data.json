@@ -36,6 +36,8 @@
     "pre_order_background": "#666666",
     "sold_out_background": "#999999",
     "custom_badge_background": "#000000",
+    "free_shipping_badge_color": "#ffffff",
+    "free_shipping_badge_background": "#1e7e34",
     "product_alignment": "left",
     "product_size": 15,
     "price_size": 15,
