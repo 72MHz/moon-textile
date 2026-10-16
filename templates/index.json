@@ -6,13 +6,13 @@
         "marquee_1": {
           "type": "scrolling_text",
           "settings": {
-            "content": "FREE SHIPPING ON ALL ORDERS"
+            "content": "FREE SHIPPING ON SELECTED PRODUCTS"
           }
         },
         "marquee_2": {
           "type": "scrolling_text",
           "settings": {
-            "content": "FREE SHIPPING ON ALL ORDERS"
+            "content": "FREE SHIPPING ON SELECTED PRODUCTS"
           }
         }
       },

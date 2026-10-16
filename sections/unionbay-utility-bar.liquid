@@ -1,7 +1,27 @@
 {%- liquid
   assign section_st = section.settings
   assign section_width = section_st.section_width
+
+  assign total_messages = 0
+  for block in section.blocks
+    if block.type == 'announcement'
+      if block.settings.text1 != blank
+        assign total_messages = total_messages | plus: 1
+      endif
+      if block.settings.text2 != blank
+        assign total_messages = total_messages | plus: 1
+      endif
+      if block.settings.text3 != blank
+        assign total_messages = total_messages | plus: 1
+      endif
+    endif
+  endfor
+  assign has_brands = false
+  if section_st.brand_label_1 != blank or section_st.brand_label_2 != blank
+    assign has_brands = true
+  endif
 -%}
+{%- if total_messages > 0 or has_brands -%}
 <div
   id="unionbay-utility-bar"
   class="unionbay-utility-bar section remove_spacing"
@@ -153,6 +173,7 @@
     </div>
   </div>
 </div>
+{%- endif -%}
 
 {% stylesheet %}
   .unionbay-utility-bar {

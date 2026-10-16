@@ -386,7 +386,19 @@
             {% endif %}
           {%- when 'delivery_return' -%}
             {% comment %} delivery return {% endcomment %}
-            {% if block_st.delivery_content != blank
+            {%- liquid
+              assign show_delivery_col = false
+              if block_st.delivery_content != blank
+                assign show_delivery_col = true
+                assign delivery_text_lower = block_st.delivery_content | downcase
+                if delivery_text_lower contains 'free' and delivery_text_lower contains 'ship'
+                  if product_has_free_shipping == false
+                    assign show_delivery_col = false
+                  endif
+                endif
+              endif
+            -%}
+            {% if show_delivery_col
               or block_st.return_content != blank
               or block_st.discount_content != blank
             %}
@@ -403,7 +415,7 @@
                 class="delivery-return {{  block_st.delivery_design }} flex flex-wrap flex-md-nowrap px-20 {% if block_st.delivery_design == 'horizontal' %}px-md-0{% endif %} py-0 py-md-20 border text-center mb-20 rounded-5{% if enable_skeleton_loading %} skeleton-loading{% endif %}"
                 {{ block.shopify_attributes }}
               >
-                {% if block_st.delivery_content != blank %}
+                {% if block_st.delivery_content != blank and show_delivery_col %}
                   <div class="delivery {{ class }} flex-1 rich__text-m0">
                     {%- if block_st.delivery_content_icon != 'none' -%}
                       {% render 'icon_svg_list', icon: block_st.delivery_content_icon, custom_width: 25 %}

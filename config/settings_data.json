@@ -61,7 +61,7 @@
     "enable_discount_code": true,
     "show_featured_discount": false,
     "featured_discount_code": "",
-    "featured_discount_message": "FREE SHIPPING ON ALL ORDERS",
+    "featured_discount_message": "FREE SHIPPING ON SELECTED PRODUCTS",
     "featured_discount_in_marquee": false,
     "featured_discount_in_utility_bar": false,
     "enable_gift_wrap": true,

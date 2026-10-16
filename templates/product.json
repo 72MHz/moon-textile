@@ -54,7 +54,7 @@
           "settings": {
             "delivery_design": "vertical",
             "delivery_content_icon": "free_shipping",
-            "delivery_content": "<p><strong>FREE SHIPPING</strong> ON ALL ORDERS</p>",
+            "delivery_content": "<p><strong>FREE SHIPPING</strong> ON THIS ITEM</p>",
             "discount_content_icon": "none",
             "discount_content": "",
             "return_content_icon": "free_shipping",
