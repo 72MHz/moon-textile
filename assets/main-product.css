@@ -400,6 +400,7 @@ sticky-add-cart variant-group-sticky select {
     position: absolute;
     right: 15px;
     top: 15px;
+    z-index: 10;
   }
   .product-detail__information:not(.product-featured) button-wishlist {
     display: none;
