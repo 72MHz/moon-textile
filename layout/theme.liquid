@@ -29,10 +29,15 @@
       {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
       {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
     </title>
-    {% if page_description %}
-      <meta name="description" content="{{ page_description | escape }}">
-    {% endif %}
+    {%- assign seo_description = page_description | default: shop.description -%}
+    {%- if seo_description == blank and template.name == 'index' -%}
+      {%- assign seo_description = 'Discover contemporary apparel and fashion collections at Moon Style Apparel. High-quality women’s and men’s clothing with fast UK delivery.' -%}
+    {%- endif -%}
+    {%- if seo_description != blank -%}
+      <meta name="description" content="{{ seo_description | escape }}">
+    {%- endif -%}
     {% render 'meta-tags' %}
+    {% render 'structured-data' %}
     {{ content_for_header }}
     {{ 'critical.css' | asset_url | stylesheet_tag }}
     {% if settings.scroll_animation != 'none' %}

@@ -1,0 +1,62 @@
+{% doc %}
+  Renders JSON-LD structured data for Google Rich Snippets:
+  - WebSite schema (with Sitelinks Searchbox)
+  - Organization schema (with social profiles, logo, and contact)
+{% enddoc %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": {{ shop.name | json }},
+  "url": {{ shop.url | json }},
+  {%- if settings.logo != blank -%}
+    "logo": {{ settings.logo | image_url: width: 600 | prepend: 'https:' | json }},
+  {%- else -%}
+    "logo": {{ 'moon-logo-full.png' | asset_url | prepend: 'https:' | json }},
+  {%- endif -%}
+  "email": {{ settings.store_email | default: 'sales@moonstyleapparel.co.uk' | json }},
+  {%- if settings.store_phone != blank -%}
+    "telephone": {{ settings.store_phone | json }},
+  {%- endif -%}
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Unit 1, Blackacre Road",
+    "addressLocality": "Ipswich",
+    "postalCode": "IP6 0FL",
+    "addressCountry": "GB"
+  },
+  "sameAs": [
+    {%- assign socials = '' -%}
+    {%- if settings.facebook != blank -%}{%- assign socials = socials | append: settings.facebook | append: ',' -%}{%- endif -%}
+    {%- if settings.instagram != blank -%}{%- assign socials = socials | append: settings.instagram | append: ',' -%}{%- endif -%}
+    {%- if settings.pinterest != blank -%}{%- assign socials = socials | append: settings.pinterest | append: ',' -%}{%- endif -%}
+    {%- if settings.twitter != blank -%}{%- assign socials = socials | append: settings.twitter | append: ',' -%}{%- endif -%}
+    {%- if settings.tiktok != blank and settings.tiktok != '#' -%}{%- assign socials = socials | append: settings.tiktok | append: ',' -%}{%- endif -%}
+    {%- if settings.youtube != blank and settings.youtube != '#' -%}{%- assign socials = socials | append: settings.youtube | append: ',' -%}{%- endif -%}
+    {%- assign social_array = socials | split: ',' -%}
+    {%- for link in social_array -%}
+      {%- if link != blank -%}
+        {{ link | json }}{%- unless forloop.last -%},{%- endunless -%}
+      {%- endif -%}
+    {%- endfor -%}
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ shop.name | json }},
+  "url": {{ canonical_url | json }},
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "{{ shop.url }}/search?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
