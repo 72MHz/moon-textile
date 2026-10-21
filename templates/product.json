@@ -172,7 +172,7 @@
           "type": "collapsible_row",
           "settings": {
             "heading": "Shipping and Returns",
-            "content": "<p>We offer fast and reliable shipping for all our clothing items. Orders are processed within <strong>1-2 business days</strong> and shipped via standard delivery, which typically takes 3-5 business days.</p><p>Express shipping options are also available at checkout for an additional fee, ensuring your fashion essentials arrive even sooner. Enjoy <strong>free shipping</strong> on orders<strong> over £150</strong>. For any questions regarding your order, please contact our customer service team for assistance.</p>",
+            "content": "<p>We offer fast and reliable shipping for all our clothing items. Orders are processed within <strong>1-2 business days</strong> and shipped via standard delivery, which typically takes 3-5 business days.</p><p>Express shipping options are also available at checkout for an additional fee, ensuring your fashion essentials arrive even sooner. Enjoy <strong>free shipping</strong> on <strong>selected products</strong>. For any questions regarding your order, please contact our customer service team for assistance.</p>",
             "use_product_description": false,
             "open": false
           }
