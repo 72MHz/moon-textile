@@ -440,7 +440,7 @@
                         {% render 'icon_svg_list', icon: block_st.return_content_icon, custom_width: 25 %}
                       {% endif %}
                       <div class="rich__text-m0 {{ block_content }}">
-                        {{ block_st.return_content }}
+                        {{ block_st.return_content | replace: 'orders over £150', 'selected products' | replace: 'over £150', 'selected products' }}
                       </div>
                     </div>
                   {% endif %}
@@ -496,12 +496,12 @@
                   <div class="collapsible-content_inner mb-12 rich__text-mt-0{% if block_st.use_product_description == true %} product_description{% endif %}">
                     {% if block_st.use_product_description == true %}
                       {%- if product != blank -%}
-                        {{ product.description }}
+                        {{ product.description | replace: 'orders over £150', 'selected products' | replace: 'over £150', 'selected products' }}
                       {%- else -%}
                         {{ 'onboarding.default_description' | t }}
                       {% endif %}
                     {% else %}
-                      {{ block_st.content }}
+                      {{ block_st.content | replace: 'orders over £150', 'selected products' | replace: 'over £150', 'selected products' }}
                     {% endif %}
                   </div>
                 </div>

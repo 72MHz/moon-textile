@@ -237,5 +237,27 @@
     {%- render 'sprite-svg' -%}
     {%- render 'content-bottom' -%}
     {%- render 'msa-mobile-help' -%}
+    <script>
+      (function() {
+        function sanitizeShippingTerms() {
+          var els = document.querySelectorAll('.collapsible-content_inner, .product__accordion-content, .return, .delivery-return, .bls-toggle');
+          els.forEach(function(el) {
+            if (el.innerHTML && el.innerHTML.indexOf('£150') !== -1) {
+              el.innerHTML = el.innerHTML.replace(/orders\s*over\s*£150/gi, 'selected products').replace(/over\s*£150/gi, 'selected products');
+            }
+          });
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', sanitizeShippingTerms);
+        } else {
+          sanitizeShippingTerms();
+        }
+        document.addEventListener('click', function(e) {
+          if (e.target && e.target.closest && e.target.closest('.collapsible-heading, collapsible-block, .bls-toggle')) {
+            setTimeout(sanitizeShippingTerms, 30);
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
