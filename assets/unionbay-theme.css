@@ -1477,8 +1477,14 @@ body.theme-unionbay.index #MainContent section:not(:last-child) .section:not(.re
 .theme-unionbay .unionbay-footer {
   background: #f2f2f2 !important;
   border-top: none;
-  margin-top: 0 !important;
+  margin-top: 70px !important;
   color: #000;
+}
+
+@media (max-width: 767.98px) {
+  .theme-unionbay .unionbay-footer {
+    margin-top: 45px !important;
+  }
 }
 
 .theme-unionbay .unionbay-footer.gradient,

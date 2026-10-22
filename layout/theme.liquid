@@ -21,9 +21,9 @@
     <link rel="canonical" href="{{ canonical_url }}">
     {%- assign favicon_url = 'moon-favicon.png' | asset_url -%}
     {%- if favicon_url contains '?' -%}
-      {%- assign favicon_url = favicon_url | append: '&v=20261021' -%}
+      {%- assign favicon_url = favicon_url | append: '&v=20261022' -%}
     {%- else -%}
-      {%- assign favicon_url = favicon_url | append: '?v=20261021' -%}
+      {%- assign favicon_url = favicon_url | append: '?v=20261022' -%}
     {%- endif -%}
     <link rel="icon" type="image/png" sizes="32x32" href="{{ favicon_url }}">
     <link rel="icon" type="image/png" sizes="192x192" href="{{ favicon_url }}">
@@ -240,10 +240,13 @@
     <script>
       (function() {
         function sanitizeShippingTerms() {
-          var els = document.querySelectorAll('.collapsible-content_inner, .product__accordion-content, .return, .delivery-return, .bls-toggle');
+          var els = document.querySelectorAll('.collapsible-content_inner, .product__accordion-content, .return, .delivery-return, .bls-toggle, .sec__scrolling-text, .marquee');
           els.forEach(function(el) {
             if (el.innerHTML && el.innerHTML.indexOf('£150') !== -1) {
               el.innerHTML = el.innerHTML.replace(/orders\s*over\s*£150/gi, 'selected products').replace(/over\s*£150/gi, 'selected products');
+            }
+            if (el.innerHTML && el.innerHTML.indexOf('£175') !== -1) {
+              el.innerHTML = el.innerHTML.replace(/Unlimited\s*delivery\s*for\s*only\s*£175/gi, 'Free shipping on selected products & new arrivals').replace(/only\s*£175/gi, 'selected products');
             }
           });
         }

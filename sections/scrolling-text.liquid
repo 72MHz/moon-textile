@@ -61,7 +61,7 @@
             {%- for block in section.blocks -%}
               {% assign block_st = block.settings %}
               <div class="flex{% if section_st.icon_between_item != 'none' %} gap{% endif %} align-center whitespace-nowrap rich__text-m0">
-                {{ block.settings.content }}
+                {{ block.settings.content | replace: 'Unlimited delivery for only £175', 'Free shipping on selected products & new arrivals' | replace: 'only £175', 'selected products' | replace: '£175', 'selected products' }}
 
                 {% if section_st.icon_between_item == 'dot' %}
                   {% render 'icon-dot' %}
